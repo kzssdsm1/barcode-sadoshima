@@ -8,7 +8,22 @@
 import SwiftUI
 import AVFoundation
 
+enum ScanError {
+    case invalidDeviceInput, invalidScannedValue
+}
+
+protocol BarcodeScannerViewDelegate {
+    func didFind(barcode: String)
+    func didSurface(error: ScanError)
+}
+
 struct BarcodeScannerView: UIViewControllerRepresentable {
+    
+    var scannerViewDelegate: BarcodeScannerViewDelegate?
+    
+    init(scannerViewDelegate: BarcodeScannerViewDelegate) {
+        self.scannerViewDelegate = scannerViewDelegate
+    }
     
     private let captureSession = AVCaptureSession()
     
@@ -23,11 +38,18 @@ struct BarcodeScannerView: UIViewControllerRepresentable {
         func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
             parent.captureSession.stopRunning()
             if let metadataObject = metadataObjects.first {
-                guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
-                guard let stringValue = readableObject.stringValue else { return }
-                guard let isbn = parent.convertISBN(value: stringValue) else { return }
+                guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else {
+                    return
+                }
+                guard let stringValue = readableObject.stringValue else {
+                    return
+                }
+                guard let isbn = parent.convertISBN(value: stringValue) else {
+                    return
+                }
                 
                 AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+                parent.scannerViewDelegate?.didFind(barcode: isbn)
             }
         }
     }
@@ -49,7 +71,7 @@ struct BarcodeScannerView: UIViewControllerRepresentable {
                 if captureSession.canAddInput(videoInput) {
                     captureSession.addInput(videoInput)
                 } else {
-                    
+
                 }
                 
                 let metadataOutput = AVCaptureMetadataOutput()
@@ -60,7 +82,7 @@ struct BarcodeScannerView: UIViewControllerRepresentable {
                     metadataOutput.setMetadataObjectsDelegate(context.coordinator, queue: .main)
                     metadataOutput.metadataObjectTypes = [.ean8, .ean13]
                 } else {
-                    
+
                 }
                 
                 DispatchQueue.global().async {

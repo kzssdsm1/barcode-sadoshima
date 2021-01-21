@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EB422DEB25B93D4200B9755D /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB422DEA25B93D4200B9755D /* Alert.swift */; };
 		EBA72B9325B88AA5002FAC79 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA72B9225B88AA5002FAC79 /* AppDelegate.swift */; };
 		EBA72B9525B88AA5002FAC79 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA72B9425B88AA5002FAC79 /* SceneDelegate.swift */; };
 		EBA72B9725B88AA5002FAC79 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA72B9625B88AA5002FAC79 /* ContentView.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EB422DEA25B93D4200B9755D /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		EBA72B8F25B88AA5002FAC79 /* barcode-sadoshima.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "barcode-sadoshima.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBA72B9225B88AA5002FAC79 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EBA72B9425B88AA5002FAC79 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 				EBA72BA025B88AA8002FAC79 /* Info.plist */,
 				EBA72B9A25B88AA8002FAC79 /* Preview Content */,
 				EBA72BA725B88AC2002FAC79 /* BarcodeScannerView.swift */,
+				EB422DEA25B93D4200B9755D /* Alert.swift */,
 			);
 			path = "barcode-sadoshima";
 			sourceTree = "<group>";
@@ -151,6 +154,7 @@
 				EBA72BA825B88AC2002FAC79 /* BarcodeScannerView.swift in Sources */,
 				EBA72B9325B88AA5002FAC79 /* AppDelegate.swift in Sources */,
 				EBA72B9525B88AA5002FAC79 /* SceneDelegate.swift in Sources */,
+				EB422DEB25B93D4200B9755D /* Alert.swift in Sources */,
 				EBA72B9725B88AA5002FAC79 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

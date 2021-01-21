@@ -7,14 +7,30 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct ContentView: View, BarcodeScannerViewDelegate {
+    
+    @State var scannedCode: String
+    @State var alertItem: AlertItem?
+    
     var body: some View {
-        BarcodeScannerView()
+        NavigationView {
+            BarcodeScannerView(scannerViewDelegate: self)
+        }
+        .alert(item: $alertItem) { alertItem in
+            Alert.init(title: Text(alertItem.title), message: Text(alertItem.message), dismissButton: alertItem.dismissButton)
+        }
     }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        BarcodeScannerView()
+    
+    func didFind(barcode: String) {
+        self.scannedCode = barcode
+    }
+    
+    func didSurface(error: ScanError) {
+        switch error {
+        case .invalidDeviceInput:
+            alertItem = AlertContext.invalidDeviceInput
+        case .invalidScannedValue:
+            alertItem = AlertContext.invalidScannedType
+        }
     }
 }
