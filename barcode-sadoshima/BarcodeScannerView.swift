@@ -21,10 +21,6 @@ struct BarcodeScannerView: UIViewControllerRepresentable {
     
     var scannerViewDelegate: BarcodeScannerViewDelegate?
     
-    init(scannerViewDelegate: BarcodeScannerViewDelegate) {
-        self.scannerViewDelegate = scannerViewDelegate
-    }
-    
     private let captureSession = AVCaptureSession()
     
     final class Coordinator: NSObject, AVCaptureMetadataOutputObjectsDelegate {
@@ -39,12 +35,15 @@ struct BarcodeScannerView: UIViewControllerRepresentable {
             parent.captureSession.stopRunning()
             if let metadataObject = metadataObjects.first {
                 guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else {
+                    parent.scannerViewDelegate?.didSurface(error: .invalidScannedValue)
                     return
                 }
                 guard let stringValue = readableObject.stringValue else {
+                    parent.scannerViewDelegate?.didSurface(error: .invalidScannedValue)
                     return
                 }
                 guard let isbn = parent.convertISBN(value: stringValue) else {
+                    parent.scannerViewDelegate?.didSurface(error: .invalidScannedValue)
                     return
                 }
                 
@@ -71,7 +70,7 @@ struct BarcodeScannerView: UIViewControllerRepresentable {
                 if captureSession.canAddInput(videoInput) {
                     captureSession.addInput(videoInput)
                 } else {
-
+                    scannerViewDelegate?.didSurface(error: .invalidDeviceInput)
                 }
                 
                 let metadataOutput = AVCaptureMetadataOutput()
@@ -82,7 +81,7 @@ struct BarcodeScannerView: UIViewControllerRepresentable {
                     metadataOutput.setMetadataObjectsDelegate(context.coordinator, queue: .main)
                     metadataOutput.metadataObjectTypes = [.ean8, .ean13]
                 } else {
-
+                    scannerViewDelegate?.didSurface(error: .invalidDeviceInput)
                 }
                 
                 DispatchQueue.global().async {
