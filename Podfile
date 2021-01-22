@@ -8,6 +8,5 @@ target 'barcode-sadoshima' do
   # Pods for barcode-sadoshima
 
   pod 'Alamofire'
-  pod 'SwiftyJSON', '~> 5.0'
 
 end

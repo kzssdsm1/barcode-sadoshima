@@ -3,13 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		BE78AF575233594C929C8A66 /* Pods_barcode_sadoshima.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CEB3E2A1AAA988BE23EDF05 /* Pods_barcode_sadoshima.framework */; };
 		EB422DEB25B93D4200B9755D /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB422DEA25B93D4200B9755D /* Alert.swift */; };
 		EB422DF225B99BB000B9755D /* RakutenAPIDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB422DF125B99BB000B9755D /* RakutenAPIDataModel.swift */; };
+		EB49469825BA984900426142 /* AppID.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB49469725BA984900426142 /* AppID.plist */; };
 		EBA72B9325B88AA5002FAC79 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA72B9225B88AA5002FAC79 /* AppDelegate.swift */; };
 		EBA72B9525B88AA5002FAC79 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA72B9425B88AA5002FAC79 /* SceneDelegate.swift */; };
 		EBA72B9725B88AA5002FAC79 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA72B9625B88AA5002FAC79 /* ContentView.swift */; };
@@ -25,6 +26,7 @@
 		3CEB3E2A1AAA988BE23EDF05 /* Pods_barcode_sadoshima.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_barcode_sadoshima.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB422DEA25B93D4200B9755D /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		EB422DF125B99BB000B9755D /* RakutenAPIDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RakutenAPIDataModel.swift; sourceTree = "<group>"; };
+		EB49469725BA984900426142 /* AppID.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AppID.plist; sourceTree = "<group>"; };
 		EBA72B8F25B88AA5002FAC79 /* barcode-sadoshima.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "barcode-sadoshima.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBA72B9225B88AA5002FAC79 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EBA72B9425B88AA5002FAC79 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -54,7 +56,6 @@
 				0DE96D4399BEBC160B7AE356 /* Pods-barcode-sadoshima.debug.xcconfig */,
 				2FA83D996EA9832506A01ED7 /* Pods-barcode-sadoshima.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -97,6 +98,7 @@
 				EBA72BA725B88AC2002FAC79 /* BarcodeScannerView.swift */,
 				EB422DEA25B93D4200B9755D /* Alert.swift */,
 				EB422DF125B99BB000B9755D /* RakutenAPIDataModel.swift */,
+				EB49469725BA984900426142 /* AppID.plist */,
 			);
 			path = "barcode-sadoshima";
 			sourceTree = "<group>";
@@ -171,6 +173,7 @@
 				EBA72B9F25B88AA8002FAC79 /* LaunchScreen.storyboard in Resources */,
 				EBA72B9C25B88AA8002FAC79 /* Preview Assets.xcassets in Resources */,
 				EBA72B9925B88AA8002FAC79 /* Assets.xcassets in Resources */,
+				EB49469825BA984900426142 /* AppID.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

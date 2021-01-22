@@ -23,6 +23,7 @@ struct ContentView: View, BarcodeScannerViewDelegate {
     
     func didFind(barcode: String) {
         self.scannedCode = barcode
+        print("ISBN-\(scannedCode)")
     }
     
     func didSurface(error: ScanError) {
