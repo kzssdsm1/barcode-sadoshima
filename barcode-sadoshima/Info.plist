@@ -59,6 +59,6 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>NSCameraUsageDescription</key>
-	<string>アプリがカメラの使用の許可を求めています</string>
+	<string>test</string>
 </dict>
 </plist>

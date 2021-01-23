@@ -6,7 +6,6 @@ target 'barcode-sadoshima' do
   use_frameworks!
 
   # Pods for barcode-sadoshima
-
   pod 'Alamofire'
 
 end

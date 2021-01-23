@@ -2,29 +2,50 @@
 //  BarcodeScannerView.swift
 //  barcode-sadoshima
 //
-//  Created by 佐渡島和志 on 2021/01/21.
+//  Created by 佐渡島和志 on 2021/01/22.
 //
 
 import SwiftUI
 import AVFoundation
 
-enum ScanError {
-    case invalidDeviceInput, invalidScannedValue
-}
-
-protocol BarcodeScannerViewDelegate {
-    func didFind(barcode: String)
-    func didSurface(error: ScanError)
-}
-
 struct BarcodeScannerView: UIViewControllerRepresentable {
+    @ObservedObject (initialValue: RakutenAPIDataModel()) private var rakutenAPIDataModel
     
-    var scannerViewDelegate: BarcodeScannerViewDelegate?
+    private enum ScanError {
+        case invalidDeviceInput, invalidSacnnedValue
+    }
+    
+    private struct AlertItem: Identifiable {
+        let id = UUID()
+        let title: String
+        let message: String
+        let dismissTitle: String
+    }
+    
+    private struct AlertContext {
+        static let validScannedValue = AlertItem(
+            title: "バーコードの読み取りに成功",
+            message: "楽天ブックスで書籍の検索を行います",
+            dismissTitle: "Cancel"
+        )
+        
+        static let invalidDeviceInput = AlertItem(
+            title: "無効なデバイス入力",
+            message: "不明なエラーによりバーコードが読み取れませんでした",
+            dismissTitle: "OK"
+        )
+        
+        static let invalidScannedValue = AlertItem(
+            title: "無効なバーコード形式",
+            message: "このアプリはEAN-8、EAN-13以外のバーコード形式には対応しておりません",
+            dismissTitle: "OK"
+        )
+    }
     
     private let captureSession = AVCaptureSession()
+    private let viewController = UIViewController()
     
     final class Coordinator: NSObject, AVCaptureMetadataOutputObjectsDelegate {
-        
         var parent: BarcodeScannerView
         
         init(parent: BarcodeScannerView) {
@@ -35,20 +56,19 @@ struct BarcodeScannerView: UIViewControllerRepresentable {
             parent.captureSession.stopRunning()
             if let metadataObject = metadataObjects.first {
                 guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else {
-                    parent.scannerViewDelegate?.didSurface(error: .invalidScannedValue)
+                    parent.didSurface(error: .invalidSacnnedValue)
                     return
                 }
                 guard let stringValue = readableObject.stringValue else {
-                    parent.scannerViewDelegate?.didSurface(error: .invalidScannedValue)
+                    parent.didSurface(error: .invalidSacnnedValue)
                     return
                 }
                 guard let isbn = parent.convertISBN(value: stringValue) else {
-                    parent.scannerViewDelegate?.didSurface(error: .invalidScannedValue)
+                    parent.didSurface(error: .invalidSacnnedValue)
                     return
                 }
                 
-                AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-                parent.scannerViewDelegate?.didFind(barcode: isbn)
+                parent.didFind(barcode: isbn)
             }
         }
     }
@@ -58,7 +78,6 @@ struct BarcodeScannerView: UIViewControllerRepresentable {
     }
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<BarcodeScannerView>) -> UIViewController {
-        let viewController = UIViewController()
         
         viewController.view.frame = UIScreen.main.bounds
         
@@ -70,7 +89,7 @@ struct BarcodeScannerView: UIViewControllerRepresentable {
                 if captureSession.canAddInput(videoInput) {
                     captureSession.addInput(videoInput)
                 } else {
-                    scannerViewDelegate?.didSurface(error: .invalidDeviceInput)
+                    didSurface(error: .invalidDeviceInput)
                 }
                 
                 let metadataOutput = AVCaptureMetadataOutput()
@@ -81,7 +100,7 @@ struct BarcodeScannerView: UIViewControllerRepresentable {
                     metadataOutput.setMetadataObjectsDelegate(context.coordinator, queue: .main)
                     metadataOutput.metadataObjectTypes = [.ean8, .ean13]
                 } else {
-                    scannerViewDelegate?.didSurface(error: .invalidDeviceInput)
+                    didSurface(error: .invalidDeviceInput)
                 }
                 
                 DispatchQueue.global().async {
@@ -104,17 +123,51 @@ struct BarcodeScannerView: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<BarcodeScannerView>) {
     }
     
+    private func didFind(barcode: String) {
+        AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+        rakutenAPIDataModel.scannedCode = barcode
+        showAlert(alertItem: AlertContext.validScannedValue)
+    }
+    
+    private func didSurface(error: ScanError) {
+        switch error {
+        case .invalidDeviceInput:
+            showAlert(alertItem: AlertContext.invalidDeviceInput)
+        case .invalidSacnnedValue:
+            showAlert(alertItem: AlertContext.invalidScannedValue)
+        }
+    }
+    
     private func makeBorderline() -> UIView {
         let screenWidth = CGFloat(UIScreen.main.bounds.width)
         let screenHeight = CGFloat(UIScreen.main.bounds.height)
         let borderline = UIView()
         borderline.frame = CGRect(x: screenWidth * 0.1, y: screenHeight * 0.3,
-                                width: screenWidth * 0.8, height: screenHeight * 0.2)
+                                  width: screenWidth * 0.8, height: screenHeight * 0.2)
         
         borderline.layer.borderColor = Color(.red).cgColor
         borderline.layer.borderWidth = 3
         
         return borderline
+    }
+    
+    private func showAlert(alertItem: AlertItem) {
+        let alert = UIAlertController(title: alertItem.title, message: alertItem.message, preferredStyle: .alert)
+        let cancel = UIAlertAction(title: alertItem.dismissTitle, style: .cancel, handler: {_ in
+            captureSession.startRunning()
+        })
+        let search = UIAlertAction(title: "OK", style: .default, handler: {_ in
+            rakutenAPIDataModel.fetchItem()
+        })
+        
+        if alertItem.dismissTitle == "Cancel" {
+            alert.addAction(cancel)
+            alert.addAction(search)
+        } else {
+            alert.addAction(cancel)
+        }
+        
+        viewController.present(alert, animated: true, completion: nil)
     }
     
     private func convertISBN(value: String) -> String? {
@@ -136,5 +189,4 @@ struct BarcodeScannerView: UIViewControllerRepresentable {
         let checkdigit = 11 - (sum % 11)
         return String(format: "%lld%@", isbn9, (checkdigit == 10) ? "X" : String(format: "%lld", checkdigit % 11))
     }
-    
 }
