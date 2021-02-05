@@ -7,5 +7,4 @@ target 'barcode-sadoshima' do
 
   # Pods for barcode-sadoshima
   pod 'Alamofire'
-
 end
