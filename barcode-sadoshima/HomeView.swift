@@ -10,6 +10,9 @@ import Alamofire
 
 struct HomeView: View {
     @StateObject var viewModel = HomeViewModel()
+    
+    @State var productData = (title: "", author: "", price: "", link: "", image: "")
+    @State var imageData: Data? = nil
     @State var isShowSheet = false
     
     var body: some View {
@@ -37,18 +40,29 @@ struct HomeView: View {
             .alert(item: $viewModel.alertItem) { alertItem in
                 Alert.init(title: Text(alertItem.title), message: Text(alertItem.message), dismissButton: alertItem.dismissButton)
             }
+            .sheet(isPresented: $isShowSheet, content: {
+                ProductView(title: $productData.title, author: $productData.author, price: $productData.price, link: $productData.link, imageData: $imageData)
+            })
         }
     }
-    
     private func fetchItem() {
         
         struct ItemsJSON: Codable {
-            let items: [Items]
-            struct Items: Codable {
-                let title: String
-                let mediumImageUrl: String
-                let itemPrice: Int
-                let itemUrl: String
+            let Items: [Items]
+        }
+        
+        struct Items: Codable {
+            let title: String
+            let author: String
+            let itemPrice: Int
+            let itemUrl: String
+            let mediumImageUrl: String
+            enum CodingKeys: String, CodingKey {
+                case title
+                case author
+                case itemPrice
+                case itemUrl
+                case mediumImageUrl
             }
         }
         
@@ -60,11 +74,12 @@ struct HomeView: View {
         
         let params = [
             "applicationId": appID,
-            "elements": "title,mediumImageUrl,itemPrice,itemUrl",
+            "elements": "title,author,itemPrice,itemUrl,mediumImageUrl",
             "formatVersion": "2",
             "isbn": viewModel.scannedCode,
             "hits": "1"
         ]
+        
         
         AF.request(baseURL, method: .get, parameters: params, encoding: URLEncoding.default).response {
             response in
@@ -74,9 +89,15 @@ struct HomeView: View {
                 
                 let decoder = JSONDecoder()
                 let itemsData = try! decoder.decode(ItemsJSON.self, from: data)
+                let price = itemsData.Items[0].itemPrice
                 
-                let url = URL(string: itemsData.items[0].itemUrl)
-                UIApplication.shared.open(url!)
+                productData.title = itemsData.Items[0].title
+                productData.author = itemsData.Items[0].author
+                productData.price = String(price)
+                productData.link = itemsData.Items[0].itemUrl
+                productData.image = itemsData.Items[0].mediumImageUrl
+                
+                downloadImage(url: productData.image)
                 
             case .failure(let error):
                 print(error)
@@ -84,6 +105,15 @@ struct HomeView: View {
         }
         
         isShowSheet = true
+    }
+    
+    private func downloadImage(url: String) {
+        guard let imageURL = URL(string: url) else { return }
+        
+        DispatchQueue.global().async {
+            let data = try? Data(contentsOf: imageURL)
+            imageData = data
+        }
     }
 }
 
