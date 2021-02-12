@@ -42,7 +42,7 @@ struct HomeView: View {
                 Alert.init(title: Text(alertItem.title), message: Text(alertItem.message), dismissButton: alertItem.dismissButton)
             }
             .sheet(isPresented: $isShowSheet, content: {
-                ProductView(imageData: $imageData, productData: $productData)
+                ProductView(imageData: imageData, productData: productData)
             })
         }
     }

@@ -10,8 +10,8 @@ import Alamofire
 
 struct ProductView: View {
     
-    @Binding var imageData: Data?
-    @Binding var productData: (title: String, author: String, price: String, link: String)
+    var imageData: Data?
+    var productData: (title: String, author: String, price: String, link: String)
     
     private let screenWidth = CGFloat(UIScreen.main.bounds.width)
     private let screenHeight = CGFloat(UIScreen.main.bounds.height)
@@ -48,6 +48,7 @@ struct ProductView: View {
                     Text("Safariで商品ページを開く")
                 })
             }
+            .navigationTitle("検索結果")
         }
     }
 }

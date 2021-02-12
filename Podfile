@@ -7,4 +7,9 @@ target 'barcode-sadoshima' do
 
   # Pods for barcode-sadoshima
   pod 'Alamofire'
+
+  pod 'Firebase/Auth'
+  pod 'Firebase/Firestore'
+  pod 'FirebaseUI/Auth'
+  pod 'FirebaseUI/Google'
 end

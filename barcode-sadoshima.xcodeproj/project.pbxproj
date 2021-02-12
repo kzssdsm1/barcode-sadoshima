@@ -8,8 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		E83788D4CD3C8B140FED7AF2 /* Pods_barcode_sadoshima.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C042FF5205A77CDEB4E01293 /* Pods_barcode_sadoshima.framework */; };
+		EB3FD77125D63E8200DEB25C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB3FD77025D63E8200DEB25C /* GoogleService-Info.plist */; };
 		EB4D65AE25D57DA600395F9F /* ProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D65AD25D57DA600395F9F /* ProductView.swift */; };
 		EB4D65BA25D594FF00395F9F /* AppID.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB4D65B925D594FF00395F9F /* AppID.plist */; };
+		EBD3851725D6451900DA432E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD3851625D6451900DA432E /* LoginViewController.swift */; };
 		EBEA1AE925CD08D900213D15 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBEA1AE825CD08D900213D15 /* ContentView.swift */; };
 		EBEA1AEB25CD08DB00213D15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBEA1AEA25CD08DB00213D15 /* Assets.xcassets */; };
 		EBEA1AEE25CD08DB00213D15 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBEA1AED25CD08DB00213D15 /* Preview Assets.xcassets */; };
@@ -25,8 +27,10 @@
 		179DC9275F1093459CE86327 /* Pods-barcode-sadoshima.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-barcode-sadoshima.release.xcconfig"; path = "Target Support Files/Pods-barcode-sadoshima/Pods-barcode-sadoshima.release.xcconfig"; sourceTree = "<group>"; };
 		37F9F7078526783298DDB608 /* Pods-barcode-sadoshima.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-barcode-sadoshima.debug.xcconfig"; path = "Target Support Files/Pods-barcode-sadoshima/Pods-barcode-sadoshima.debug.xcconfig"; sourceTree = "<group>"; };
 		C042FF5205A77CDEB4E01293 /* Pods_barcode_sadoshima.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_barcode_sadoshima.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB3FD77025D63E8200DEB25C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EB4D65AD25D57DA600395F9F /* ProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductView.swift; sourceTree = "<group>"; };
 		EB4D65B925D594FF00395F9F /* AppID.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AppID.plist; sourceTree = "<group>"; };
+		EBD3851625D6451900DA432E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		EBEA1AE125CD08D900213D15 /* barcode-sadoshima.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "barcode-sadoshima.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBEA1AE825CD08D900213D15 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		EBEA1AEA25CD08DB00213D15 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -102,6 +106,8 @@
 				EBEA1B0525CD0A4E00213D15 /* BarcodeScannerViewController.swift */,
 				EB4D65AD25D57DA600395F9F /* ProductView.swift */,
 				EB4D65B925D594FF00395F9F /* AppID.plist */,
+				EB3FD77025D63E8200DEB25C /* GoogleService-Info.plist */,
+				EBD3851625D6451900DA432E /* LoginViewController.swift */,
 			);
 			path = "barcode-sadoshima";
 			sourceTree = "<group>";
@@ -126,6 +132,7 @@
 				EBEA1ADE25CD08D900213D15 /* Frameworks */,
 				EBEA1ADF25CD08D900213D15 /* Resources */,
 				2F151659B6531C0387841EC6 /* [CP] Embed Pods Frameworks */,
+				74DB8A6368B351A8164BA2EB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -175,6 +182,7 @@
 			files = (
 				EBEA1AF125CD08DB00213D15 /* LaunchScreen.storyboard in Resources */,
 				EBEA1AEE25CD08DB00213D15 /* Preview Assets.xcassets in Resources */,
+				EB3FD77125D63E8200DEB25C /* GoogleService-Info.plist in Resources */,
 				EBEA1AEB25CD08DB00213D15 /* Assets.xcassets in Resources */,
 				EB4D65BA25D594FF00395F9F /* AppID.plist in Resources */,
 			);
@@ -198,6 +206,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-barcode-sadoshima/Pods-barcode-sadoshima-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		74DB8A6368B351A8164BA2EB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-barcode-sadoshima/Pods-barcode-sadoshima-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-barcode-sadoshima/Pods-barcode-sadoshima-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-barcode-sadoshima/Pods-barcode-sadoshima-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BCB72E79CC6B879293ADAF1C /* [CP] Check Pods Manifest.lock */ = {
@@ -233,6 +258,7 @@
 				EBEA1AFA25CD093000213D15 /* HomeView.swift in Sources */,
 				EBEA1B0325CD0A0D00213D15 /* BarcodeScannerView.swift in Sources */,
 				EBEA1AFD25CD094200213D15 /* HomeViewModel.swift in Sources */,
+				EBD3851725D6451900DA432E /* LoginViewController.swift in Sources */,
 				EB4D65AE25D57DA600395F9F /* ProductView.swift in Sources */,
 				EBEA1B0625CD0A4E00213D15 /* BarcodeScannerViewController.swift in Sources */,
 				EBEA1AE925CD08D900213D15 /* ContentView.swift in Sources */,
