@@ -20,9 +20,9 @@ protocol BarcodeScannerViewControllerDelegate: class {
 
 final class BarcodeScannerViewController: UIViewController {
     
-    let captureSession = AVCaptureSession()
-    var previewLayer: AVCaptureVideoPreviewLayer?
-    weak var scannerDelegate: BarcodeScannerViewControllerDelegate?
+    private let captureSession = AVCaptureSession()
+    private var previewLayer: AVCaptureVideoPreviewLayer?
+    private weak var scannerDelegate: BarcodeScannerViewControllerDelegate?
     
     init(scannerDelegate: BarcodeScannerViewControllerDelegate) {
         super.init(nibName: nil, bundle: nil)
@@ -47,6 +47,11 @@ final class BarcodeScannerViewController: UIViewController {
         }
         
         previewLayer.frame = view.layer.bounds
+    }
+    
+    private func startCaptureSession() {
+        guard !captureSession.isRunning else { return }
+        captureSession.startRunning()
     }
     
     private func setupCaptureSession() {
@@ -86,7 +91,7 @@ final class BarcodeScannerViewController: UIViewController {
         previewLayer!.videoGravity = .resizeAspectFill
         view.layer.addSublayer(previewLayer!)
         
-        captureSession.startRunning()
+        startCaptureSession()
     }
     
     private func convertISBN(value: String) -> String? {
@@ -115,12 +120,12 @@ extension BarcodeScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
     
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         
-        guard let object = metadataObjects.first else {
+        guard let metadataObject = metadataObjects.first else {
             scannerDelegate?.didSurface(error: .invalidScannedValue)
             return
         }
         
-        guard let machineReadableObject = object as? AVMetadataMachineReadableCodeObject else {
+        guard let machineReadableObject = metadataObject as? AVMetadataMachineReadableCodeObject else {
             scannerDelegate?.didSurface(error: .invalidScannedValue)
             return
         }

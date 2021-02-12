@@ -11,7 +11,7 @@ import Alamofire
 struct HomeView: View {
     @StateObject var viewModel = HomeViewModel()
     
-    @State var productData = (title: "", author: "", price: "", link: "", image: "")
+    @State var productData = (title: "", author: "", price: "", link: "")
     @State var imageData: Data? = nil
     @State var isShowSheet = false
     
@@ -21,7 +21,8 @@ struct HomeView: View {
                 BarcodeScannerView(scannedCode: $viewModel.scannedCode, alertItem: $viewModel.alertItem)
                     .frame(maxWidth: .infinity, maxHeight: 300)
                 
-                Spacer().frame(height: 60)
+                Spacer()
+                    .frame(height: 60)
                 
                 Label("バーコード", systemImage: "barcode.viewfinder")
                 
@@ -41,7 +42,7 @@ struct HomeView: View {
                 Alert.init(title: Text(alertItem.title), message: Text(alertItem.message), dismissButton: alertItem.dismissButton)
             }
             .sheet(isPresented: $isShowSheet, content: {
-                ProductView(title: $productData.title, author: $productData.author, price: $productData.price, link: $productData.link, imageData: $imageData)
+                ProductView(imageData: $imageData, productData: $productData)
             })
         }
     }
@@ -56,13 +57,13 @@ struct HomeView: View {
             let author: String
             let itemPrice: Int
             let itemUrl: String
-            let mediumImageUrl: String
+            let largeImageUrl: String
             enum CodingKeys: String, CodingKey {
                 case title
                 case author
                 case itemPrice
                 case itemUrl
-                case mediumImageUrl
+                case largeImageUrl
             }
         }
         
@@ -74,7 +75,7 @@ struct HomeView: View {
         
         let params = [
             "applicationId": appID,
-            "elements": "title,author,itemPrice,itemUrl,mediumImageUrl",
+            "elements": "title,author,itemPrice,itemUrl,largeImageUrl",
             "formatVersion": "2",
             "isbn": viewModel.scannedCode,
             "hits": "1"
@@ -95,9 +96,8 @@ struct HomeView: View {
                 productData.author = itemsData.Items[0].author
                 productData.price = String(price)
                 productData.link = itemsData.Items[0].itemUrl
-                productData.image = itemsData.Items[0].mediumImageUrl
                 
-                downloadImage(url: productData.image)
+                downloadImage(url: itemsData.Items[0].largeImageUrl)
                 
             case .failure(let error):
                 print(error)

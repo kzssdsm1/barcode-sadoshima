@@ -10,11 +10,8 @@ import Alamofire
 
 struct ProductView: View {
     
-    @Binding var title: String
-    @Binding var author: String
-    @Binding var price: String
-    @Binding var link: String
     @Binding var imageData: Data?
+    @Binding var productData: (title: String, author: String, price: String, link: String)
     
     private let screenWidth = CGFloat(UIScreen.main.bounds.width)
     private let screenHeight = CGFloat(UIScreen.main.bounds.height)
@@ -35,17 +32,17 @@ struct ProductView: View {
                                    alignment: .center)
                     }
                 }
-                Text(title)
+                Text(productData.title)
                     .padding()
                 
-                Text("著者: \(author)")
+                Text("著者: \(productData.author)")
                     .padding()
                 
-                Text("値段: \(price)円")
+                Text("値段: \(productData.price)円")
                     .padding()
                 
                 Button(action: {
-                    let url = URL(string: link)
+                    let url = URL(string: productData.link)
                     UIApplication.shared.open(url!)
                 }, label: {
                     Text("Safariで商品ページを開く")
