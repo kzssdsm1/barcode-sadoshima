@@ -10,6 +10,8 @@ target 'barcode-sadoshima' do
 
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
+
   pod 'FirebaseUI/Auth'
   pod 'FirebaseUI/Google'
+
 end

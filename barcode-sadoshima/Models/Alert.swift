@@ -2,7 +2,7 @@
 //  Alert.swift
 //  barcode-sadoshima
 //
-//  Created by 佐渡島和志 on 2021/02/05.
+//  Created by 佐渡島和志 on 2021/02/18.
 //
 
 import SwiftUI
@@ -26,4 +26,11 @@ struct AlertContext {
         message: "このアプリはEAN-8、EAN-13以外のバーコード形式には対応しておりません",
         dismissButton: .default(Text("OK"))
     )
+    
+    static let invalidURLSession = AlertItem(
+        title: "API通信エラー",
+        message: "通信の際にエラーが発生しました",
+        dismissButton: .default(Text("OK"))
+    )
 }
+
