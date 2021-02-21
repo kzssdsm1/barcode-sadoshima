@@ -2,9 +2,10 @@
 //  Alert.swift
 //  barcode-sadoshima
 //
-//  Created by 佐渡島和志 on 2021/02/18.
+//  Created by 佐渡島和志 on 2021/02/19.
 //
 
+import Foundation
 import SwiftUI
 
 struct AlertItem: Identifiable {

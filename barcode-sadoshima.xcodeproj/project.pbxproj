@@ -3,203 +3,150 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E76E76181E8E451FA8FFF36 /* Pods_barcode_sadoshima.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82130744B8357BDA0767EEEC /* Pods_barcode_sadoshima.framework */; };
-		EB0FFBF525DD84BF0064B9DD /* ItemsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0FFBF425DD84BF0064B9DD /* ItemsResponse.swift */; };
-		EB0FFBF925DD86020064B9DD /* APIProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0FFBF825DD86020064B9DD /* APIProtocols.swift */; };
-		EB0FFBFC25DD86470064B9DD /* NetworkPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0FFBFB25DD86470064B9DD /* NetworkPublisher.swift */; };
-		EB0FFBFF25DD86A60064B9DD /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0FFBFE25DD86A60064B9DD /* NetworkConstants.swift */; };
-		EB0FFC0225DD871B0064B9DD /* ItemsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0FFC0125DD871B0064B9DD /* ItemsRequest.swift */; };
-		EB0FFC0525DD891F0064B9DD /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0FFC0425DD891F0064B9DD /* APIError.swift */; };
-		EB32E74625DE2D77007AACB2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB32E74525DE2D77007AACB2 /* LoginView.swift */; };
-		EB32E74E25DE31D6007AACB2 /* FirebaseUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB32E74D25DE31D6007AACB2 /* FirebaseUser.swift */; };
-		EB32E75125DE32CB007AACB2 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB32E75025DE32CB007AACB2 /* FirebaseService.swift */; };
-		EB32E75525DE7F5E007AACB2 /* FirebaseDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB32E75425DE7F5E007AACB2 /* FirebaseDocument.swift */; };
-		EB32E75825DE8852007AACB2 /* FavoriteListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB32E75725DE8852007AACB2 /* FavoriteListViewModel.swift */; };
-		EB32E75C25DEA180007AACB2 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB32E75B25DEA180007AACB2 /* Alert.swift */; };
-		EBCC44B725DD5E120098590B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCC44B625DD5E120098590B /* AppDelegate.swift */; };
-		EBCC44B925DD5E120098590B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCC44B825DD5E120098590B /* SceneDelegate.swift */; };
-		EBCC44BB25DD5E120098590B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCC44BA25DD5E120098590B /* ContentView.swift */; };
-		EBCC44BD25DD5E150098590B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBCC44BC25DD5E150098590B /* Assets.xcassets */; };
-		EBCC44C025DD5E150098590B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBCC44BF25DD5E150098590B /* Preview Assets.xcassets */; };
-		EBCC44C325DD5E150098590B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBCC44C125DD5E150098590B /* LaunchScreen.storyboard */; };
-		EBCC44D125DD5F160098590B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCC44D025DD5F160098590B /* HomeView.swift */; };
-		EBCC44D625DD5FC10098590B /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCC44D525DD5FC10098590B /* HomeViewModel.swift */; };
-		EBCC44DA25DD626E0098590B /* BarcodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCC44D925DD626E0098590B /* BarcodeScannerView.swift */; };
-		EBCC44DD25DD62860098590B /* FavoriteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCC44DC25DD62860098590B /* FavoriteListView.swift */; };
+		EB1AB53D25DF9A5400ABA665 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1AB53C25DF9A5400ABA665 /* Alert.swift */; };
+		EB1AB54125DF9D9A00ABA665 /* BarcodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1AB54025DF9D9A00ABA665 /* BarcodeScannerView.swift */; };
+		EB1AB54525DF9E6500ABA665 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1AB54425DF9E6500ABA665 /* HomeView.swift */; };
+		EB1AB54D25DF9F8400ABA665 /* ProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1AB54C25DF9F8400ABA665 /* ProductView.swift */; };
+		EB1AB55025DFA73D00ABA665 /* AppID.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB1AB54F25DFA73D00ABA665 /* AppID.plist */; };
+		EBCC6C9B25DF7188003DF7D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCC6C9A25DF7188003DF7D9 /* AppDelegate.swift */; };
+		EBCC6C9D25DF7188003DF7D9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCC6C9C25DF7188003DF7D9 /* SceneDelegate.swift */; };
+		EBCC6C9F25DF7188003DF7D9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCC6C9E25DF7188003DF7D9 /* ContentView.swift */; };
+		EBCC6CA125DF7189003DF7D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBCC6CA025DF7189003DF7D9 /* Assets.xcassets */; };
+		EBCC6CA425DF7189003DF7D9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBCC6CA325DF7189003DF7D9 /* Preview Assets.xcassets */; };
+		EBCC6CA725DF7189003DF7D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBCC6CA525DF7189003DF7D9 /* LaunchScreen.storyboard */; };
+		EBCC6CB525DF73A7003DF7D9 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCC6CB425DF73A7003DF7D9 /* APIService.swift */; };
+		EBCC6CBB25DF73D9003DF7D9 /* ItemsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCC6CBA25DF73D9003DF7D9 /* ItemsResponse.swift */; };
+		EBCC6CBF25DF74AC003DF7D9 /* APIServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCC6CBE25DF74AC003DF7D9 /* APIServiceError.swift */; };
+		EBCC6CC225DF859E003DF7D9 /* ItemsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCC6CC125DF859E003DF7D9 /* ItemsRequest.swift */; };
+		EBCC6CC625DF8801003DF7D9 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCC6CC525DF8801003DF7D9 /* HomeViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1A8E637A3279E2407B79031F /* Pods-barcode-sadoshima.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-barcode-sadoshima.debug.xcconfig"; path = "Target Support Files/Pods-barcode-sadoshima/Pods-barcode-sadoshima.debug.xcconfig"; sourceTree = "<group>"; };
-		82130744B8357BDA0767EEEC /* Pods_barcode_sadoshima.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_barcode_sadoshima.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9F08B760F4670B4223DED279 /* Pods-barcode-sadoshima.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-barcode-sadoshima.release.xcconfig"; path = "Target Support Files/Pods-barcode-sadoshima/Pods-barcode-sadoshima.release.xcconfig"; sourceTree = "<group>"; };
-		EB0FFBF425DD84BF0064B9DD /* ItemsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsResponse.swift; sourceTree = "<group>"; };
-		EB0FFBF825DD86020064B9DD /* APIProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIProtocols.swift; sourceTree = "<group>"; };
-		EB0FFBFB25DD86470064B9DD /* NetworkPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkPublisher.swift; sourceTree = "<group>"; };
-		EB0FFBFE25DD86A60064B9DD /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
-		EB0FFC0125DD871B0064B9DD /* ItemsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsRequest.swift; sourceTree = "<group>"; };
-		EB0FFC0425DD891F0064B9DD /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
-		EB32E74525DE2D77007AACB2 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		EB32E74D25DE31D6007AACB2 /* FirebaseUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUser.swift; sourceTree = "<group>"; };
-		EB32E75025DE32CB007AACB2 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
-		EB32E75425DE7F5E007AACB2 /* FirebaseDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDocument.swift; sourceTree = "<group>"; };
-		EB32E75725DE8852007AACB2 /* FavoriteListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListViewModel.swift; sourceTree = "<group>"; };
-		EB32E75B25DEA180007AACB2 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
-		EBCC44B325DD5E120098590B /* barcode-sadoshima.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "barcode-sadoshima.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		EBCC44B625DD5E120098590B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EBCC44B825DD5E120098590B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		EBCC44BA25DD5E120098590B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		EBCC44BC25DD5E150098590B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		EBCC44BF25DD5E150098590B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		EBCC44C225DD5E150098590B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		EBCC44C425DD5E150098590B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EBCC44D025DD5F160098590B /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		EBCC44D525DD5FC10098590B /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		EBCC44D925DD626E0098590B /* BarcodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScannerView.swift; sourceTree = "<group>"; };
-		EBCC44DC25DD62860098590B /* FavoriteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListView.swift; sourceTree = "<group>"; };
+		EB1AB53C25DF9A5400ABA665 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		EB1AB54025DF9D9A00ABA665 /* BarcodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScannerView.swift; sourceTree = "<group>"; };
+		EB1AB54425DF9E6500ABA665 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		EB1AB54C25DF9F8400ABA665 /* ProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductView.swift; sourceTree = "<group>"; };
+		EB1AB54F25DFA73D00ABA665 /* AppID.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AppID.plist; sourceTree = "<group>"; };
+		EBCC6C9725DF7188003DF7D9 /* barcode-sadoshima.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "barcode-sadoshima.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EBCC6C9A25DF7188003DF7D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		EBCC6C9C25DF7188003DF7D9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		EBCC6C9E25DF7188003DF7D9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		EBCC6CA025DF7189003DF7D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EBCC6CA325DF7189003DF7D9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		EBCC6CA625DF7189003DF7D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		EBCC6CA825DF7189003DF7D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EBCC6CB425DF73A7003DF7D9 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		EBCC6CBA25DF73D9003DF7D9 /* ItemsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsResponse.swift; sourceTree = "<group>"; };
+		EBCC6CBE25DF74AC003DF7D9 /* APIServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceError.swift; sourceTree = "<group>"; };
+		EBCC6CC125DF859E003DF7D9 /* ItemsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsRequest.swift; sourceTree = "<group>"; };
+		EBCC6CC525DF8801003DF7D9 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		EBCC44B025DD5E120098590B /* Frameworks */ = {
+		EBCC6C9425DF7188003DF7D9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E76E76181E8E451FA8FFF36 /* Pods_barcode_sadoshima.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		30230C2715492B5BD05093F9 /* Pods */ = {
+		EB1AB53F25DF9D6F00ABA665 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				1A8E637A3279E2407B79031F /* Pods-barcode-sadoshima.debug.xcconfig */,
-				9F08B760F4670B4223DED279 /* Pods-barcode-sadoshima.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
-		316933B94E4E11E310A573BB /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				82130744B8357BDA0767EEEC /* Pods_barcode_sadoshima.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		EB0FFBF325DD84990064B9DD /* APIService */ = {
-			isa = PBXGroup;
-			children = (
-				EB0FFC0425DD891F0064B9DD /* APIError.swift */,
-				EB0FFBF825DD86020064B9DD /* APIProtocols.swift */,
-				EB0FFC0125DD871B0064B9DD /* ItemsRequest.swift */,
-				EB0FFBFE25DD86A60064B9DD /* NetworkConstants.swift */,
-				EB0FFBFB25DD86470064B9DD /* NetworkPublisher.swift */,
-			);
-			path = APIService;
-			sourceTree = "<group>";
-		};
-		EB32E74825DE30E3007AACB2 /* FirebaseService */ = {
-			isa = PBXGroup;
-			children = (
-				EB32E75025DE32CB007AACB2 /* FirebaseService.swift */,
-			);
-			path = FirebaseService;
-			sourceTree = "<group>";
-		};
-		EBCC44AA25DD5E120098590B = {
-			isa = PBXGroup;
-			children = (
-				EBCC44B525DD5E120098590B /* barcode-sadoshima */,
-				EBCC44B425DD5E120098590B /* Products */,
-				30230C2715492B5BD05093F9 /* Pods */,
-				316933B94E4E11E310A573BB /* Frameworks */,
-			);
-			sourceTree = "<group>";
-		};
-		EBCC44B425DD5E120098590B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				EBCC44B325DD5E120098590B /* barcode-sadoshima.app */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		EBCC44B525DD5E120098590B /* barcode-sadoshima */ = {
-			isa = PBXGroup;
-			children = (
-				EB32E74825DE30E3007AACB2 /* FirebaseService */,
-				EB0FFBF325DD84990064B9DD /* APIService */,
-				EBCC44E125DD82C50098590B /* Models */,
-				EBCC44D425DD5FAD0098590B /* ViewModels */,
-				EBCC44CF25DD5F050098590B /* Views */,
-				EBCC44B625DD5E120098590B /* AppDelegate.swift */,
-				EBCC44B825DD5E120098590B /* SceneDelegate.swift */,
-				EBCC44BA25DD5E120098590B /* ContentView.swift */,
-				EBCC44BC25DD5E150098590B /* Assets.xcassets */,
-				EBCC44C125DD5E150098590B /* LaunchScreen.storyboard */,
-				EBCC44C425DD5E150098590B /* Info.plist */,
-				EBCC44BE25DD5E150098590B /* Preview Content */,
-			);
-			path = "barcode-sadoshima";
-			sourceTree = "<group>";
-		};
-		EBCC44BE25DD5E150098590B /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				EBCC44BF25DD5E150098590B /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		EBCC44CF25DD5F050098590B /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				EBCC44D925DD626E0098590B /* BarcodeScannerView.swift */,
-				EBCC44DC25DD62860098590B /* FavoriteListView.swift */,
-				EBCC44D025DD5F160098590B /* HomeView.swift */,
-				EB32E74525DE2D77007AACB2 /* LoginView.swift */,
+				EB1AB54025DF9D9A00ABA665 /* BarcodeScannerView.swift */,
+				EB1AB54425DF9E6500ABA665 /* HomeView.swift */,
+				EB1AB54C25DF9F8400ABA665 /* ProductView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		EBCC44D425DD5FAD0098590B /* ViewModels */ = {
+		EBCC6C8E25DF7188003DF7D9 = {
 			isa = PBXGroup;
 			children = (
-				EB32E75725DE8852007AACB2 /* FavoriteListViewModel.swift */,
-				EBCC44D525DD5FC10098590B /* HomeViewModel.swift */,
+				EBCC6C9925DF7188003DF7D9 /* barcode-sadoshima */,
+				EBCC6C9825DF7188003DF7D9 /* Products */,
 			);
-			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		EBCC44E125DD82C50098590B /* Models */ = {
+		EBCC6C9825DF7188003DF7D9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EB32E75B25DEA180007AACB2 /* Alert.swift */,
-				EB32E75425DE7F5E007AACB2 /* FirebaseDocument.swift */,
-				EB32E74D25DE31D6007AACB2 /* FirebaseUser.swift */,
-				EB0FFBF425DD84BF0064B9DD /* ItemsResponse.swift */,
+				EBCC6C9725DF7188003DF7D9 /* barcode-sadoshima.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EBCC6C9925DF7188003DF7D9 /* barcode-sadoshima */ = {
+			isa = PBXGroup;
+			children = (
+				EBCC6CAF25DF7194003DF7D9 /* APIService */,
+				EBCC6CB925DF73C9003DF7D9 /* Models */,
+				EBCC6CC425DF87E8003DF7D9 /* ViewModels */,
+				EB1AB53F25DF9D6F00ABA665 /* Views */,
+				EBCC6C9A25DF7188003DF7D9 /* AppDelegate.swift */,
+				EBCC6C9C25DF7188003DF7D9 /* SceneDelegate.swift */,
+				EBCC6C9E25DF7188003DF7D9 /* ContentView.swift */,
+				EBCC6CA025DF7189003DF7D9 /* Assets.xcassets */,
+				EBCC6CA525DF7189003DF7D9 /* LaunchScreen.storyboard */,
+				EBCC6CA825DF7189003DF7D9 /* Info.plist */,
+				EBCC6CA225DF7189003DF7D9 /* Preview Content */,
+				EB1AB54F25DFA73D00ABA665 /* AppID.plist */,
+			);
+			path = "barcode-sadoshima";
+			sourceTree = "<group>";
+		};
+		EBCC6CA225DF7189003DF7D9 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				EBCC6CA325DF7189003DF7D9 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		EBCC6CAF25DF7194003DF7D9 /* APIService */ = {
+			isa = PBXGroup;
+			children = (
+				EBCC6CB425DF73A7003DF7D9 /* APIService.swift */,
+				EBCC6CBE25DF74AC003DF7D9 /* APIServiceError.swift */,
+				EBCC6CC125DF859E003DF7D9 /* ItemsRequest.swift */,
+			);
+			path = APIService;
+			sourceTree = "<group>";
+		};
+		EBCC6CB925DF73C9003DF7D9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EB1AB53C25DF9A5400ABA665 /* Alert.swift */,
+				EBCC6CBA25DF73D9003DF7D9 /* ItemsResponse.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		EBCC6CC425DF87E8003DF7D9 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				EBCC6CC525DF8801003DF7D9 /* HomeViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		EBCC44B225DD5E120098590B /* barcode-sadoshima */ = {
+		EBCC6C9625DF7188003DF7D9 /* barcode-sadoshima */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EBCC44C725DD5E150098590B /* Build configuration list for PBXNativeTarget "barcode-sadoshima" */;
+			buildConfigurationList = EBCC6CAB25DF7189003DF7D9 /* Build configuration list for PBXNativeTarget "barcode-sadoshima" */;
 			buildPhases = (
-				547C01A4A921EFCD1148AEC6 /* [CP] Check Pods Manifest.lock */,
-				EBCC44AF25DD5E120098590B /* Sources */,
-				EBCC44B025DD5E120098590B /* Frameworks */,
-				EBCC44B125DD5E120098590B /* Resources */,
-				ABB33D811AA487B3E4579094 /* [CP] Embed Pods Frameworks */,
-				5783D9198EC1696F22089E95 /* [CP] Copy Pods Resources */,
+				EBCC6C9325DF7188003DF7D9 /* Sources */,
+				EBCC6C9425DF7188003DF7D9 /* Frameworks */,
+				EBCC6C9525DF7188003DF7D9 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -207,24 +154,24 @@
 			);
 			name = "barcode-sadoshima";
 			productName = "barcode-sadoshima";
-			productReference = EBCC44B325DD5E120098590B /* barcode-sadoshima.app */;
+			productReference = EBCC6C9725DF7188003DF7D9 /* barcode-sadoshima.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		EBCC44AB25DD5E120098590B /* Project object */ = {
+		EBCC6C8F25DF7188003DF7D9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1230;
 				LastUpgradeCheck = 1230;
 				TargetAttributes = {
-					EBCC44B225DD5E120098590B = {
+					EBCC6C9625DF7188003DF7D9 = {
 						CreatedOnToolsVersion = 12.3;
 					};
 				};
 			};
-			buildConfigurationList = EBCC44AE25DD5E120098590B /* Build configuration list for PBXProject "barcode-sadoshima" */;
+			buildConfigurationList = EBCC6C9225DF7188003DF7D9 /* Build configuration list for PBXProject "barcode-sadoshima" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -232,122 +179,57 @@
 				en,
 				Base,
 			);
-			mainGroup = EBCC44AA25DD5E120098590B;
-			productRefGroup = EBCC44B425DD5E120098590B /* Products */;
+			mainGroup = EBCC6C8E25DF7188003DF7D9;
+			productRefGroup = EBCC6C9825DF7188003DF7D9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				EBCC44B225DD5E120098590B /* barcode-sadoshima */,
+				EBCC6C9625DF7188003DF7D9 /* barcode-sadoshima */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		EBCC44B125DD5E120098590B /* Resources */ = {
+		EBCC6C9525DF7188003DF7D9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EBCC44C325DD5E150098590B /* LaunchScreen.storyboard in Resources */,
-				EBCC44C025DD5E150098590B /* Preview Assets.xcassets in Resources */,
-				EBCC44BD25DD5E150098590B /* Assets.xcassets in Resources */,
+				EBCC6CA725DF7189003DF7D9 /* LaunchScreen.storyboard in Resources */,
+				EBCC6CA425DF7189003DF7D9 /* Preview Assets.xcassets in Resources */,
+				EBCC6CA125DF7189003DF7D9 /* Assets.xcassets in Resources */,
+				EB1AB55025DFA73D00ABA665 /* AppID.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		547C01A4A921EFCD1148AEC6 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-barcode-sadoshima-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5783D9198EC1696F22089E95 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-barcode-sadoshima/Pods-barcode-sadoshima-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-barcode-sadoshima/Pods-barcode-sadoshima-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-barcode-sadoshima/Pods-barcode-sadoshima-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		ABB33D811AA487B3E4579094 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-barcode-sadoshima/Pods-barcode-sadoshima-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-barcode-sadoshima/Pods-barcode-sadoshima-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-barcode-sadoshima/Pods-barcode-sadoshima-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		EBCC44AF25DD5E120098590B /* Sources */ = {
+		EBCC6C9325DF7188003DF7D9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EBCC44DA25DD626E0098590B /* BarcodeScannerView.swift in Sources */,
-				EBCC44B725DD5E120098590B /* AppDelegate.swift in Sources */,
-				EB32E75525DE7F5E007AACB2 /* FirebaseDocument.swift in Sources */,
-				EB0FFBFF25DD86A60064B9DD /* NetworkConstants.swift in Sources */,
-				EBCC44D125DD5F160098590B /* HomeView.swift in Sources */,
-				EB32E75C25DEA180007AACB2 /* Alert.swift in Sources */,
-				EB0FFC0225DD871B0064B9DD /* ItemsRequest.swift in Sources */,
-				EB32E75825DE8852007AACB2 /* FavoriteListViewModel.swift in Sources */,
-				EB0FFBFC25DD86470064B9DD /* NetworkPublisher.swift in Sources */,
-				EB0FFBF925DD86020064B9DD /* APIProtocols.swift in Sources */,
-				EBCC44DD25DD62860098590B /* FavoriteListView.swift in Sources */,
-				EB32E74625DE2D77007AACB2 /* LoginView.swift in Sources */,
-				EBCC44B925DD5E120098590B /* SceneDelegate.swift in Sources */,
-				EBCC44D625DD5FC10098590B /* HomeViewModel.swift in Sources */,
-				EB32E75125DE32CB007AACB2 /* FirebaseService.swift in Sources */,
-				EBCC44BB25DD5E120098590B /* ContentView.swift in Sources */,
-				EB32E74E25DE31D6007AACB2 /* FirebaseUser.swift in Sources */,
-				EB0FFBF525DD84BF0064B9DD /* ItemsResponse.swift in Sources */,
-				EB0FFC0525DD891F0064B9DD /* APIError.swift in Sources */,
+				EB1AB54125DF9D9A00ABA665 /* BarcodeScannerView.swift in Sources */,
+				EB1AB53D25DF9A5400ABA665 /* Alert.swift in Sources */,
+				EBCC6CBB25DF73D9003DF7D9 /* ItemsResponse.swift in Sources */,
+				EBCC6CC225DF859E003DF7D9 /* ItemsRequest.swift in Sources */,
+				EB1AB54D25DF9F8400ABA665 /* ProductView.swift in Sources */,
+				EBCC6CBF25DF74AC003DF7D9 /* APIServiceError.swift in Sources */,
+				EB1AB54525DF9E6500ABA665 /* HomeView.swift in Sources */,
+				EBCC6CC625DF8801003DF7D9 /* HomeViewModel.swift in Sources */,
+				EBCC6C9B25DF7188003DF7D9 /* AppDelegate.swift in Sources */,
+				EBCC6CB525DF73A7003DF7D9 /* APIService.swift in Sources */,
+				EBCC6C9D25DF7188003DF7D9 /* SceneDelegate.swift in Sources */,
+				EBCC6C9F25DF7188003DF7D9 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		EBCC44C125DD5E150098590B /* LaunchScreen.storyboard */ = {
+		EBCC6CA525DF7189003DF7D9 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				EBCC44C225DD5E150098590B /* Base */,
+				EBCC6CA625DF7189003DF7D9 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -355,7 +237,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		EBCC44C525DD5E150098590B /* Debug */ = {
+		EBCC6CA925DF7189003DF7D9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -416,7 +298,7 @@
 			};
 			name = Debug;
 		};
-		EBCC44C625DD5E150098590B /* Release */ = {
+		EBCC6CAA25DF7189003DF7D9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -471,9 +353,8 @@
 			};
 			name = Release;
 		};
-		EBCC44C825DD5E150098590B /* Debug */ = {
+		EBCC6CAC25DF7189003DF7D9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1A8E637A3279E2407B79031F /* Pods-barcode-sadoshima.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -493,9 +374,8 @@
 			};
 			name = Debug;
 		};
-		EBCC44C925DD5E150098590B /* Release */ = {
+		EBCC6CAD25DF7189003DF7D9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9F08B760F4670B4223DED279 /* Pods-barcode-sadoshima.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -518,25 +398,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		EBCC44AE25DD5E120098590B /* Build configuration list for PBXProject "barcode-sadoshima" */ = {
+		EBCC6C9225DF7188003DF7D9 /* Build configuration list for PBXProject "barcode-sadoshima" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				EBCC44C525DD5E150098590B /* Debug */,
-				EBCC44C625DD5E150098590B /* Release */,
+				EBCC6CA925DF7189003DF7D9 /* Debug */,
+				EBCC6CAA25DF7189003DF7D9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EBCC44C725DD5E150098590B /* Build configuration list for PBXNativeTarget "barcode-sadoshima" */ = {
+		EBCC6CAB25DF7189003DF7D9 /* Build configuration list for PBXNativeTarget "barcode-sadoshima" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				EBCC44C825DD5E150098590B /* Debug */,
-				EBCC44C925DD5E150098590B /* Release */,
+				EBCC6CAC25DF7189003DF7D9 /* Debug */,
+				EBCC6CAD25DF7189003DF7D9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = EBCC44AB25DD5E120098590B /* Project object */;
+	rootObject = EBCC6C8F25DF7188003DF7D9 /* Project object */;
 }

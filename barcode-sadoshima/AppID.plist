@@ -2,7 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>IDEDidComputeMac32BitWarning</key>
-	<true/>
+	<key>appID</key>
+	<string>1027019254902162229</string>
 </dict>
 </plist>

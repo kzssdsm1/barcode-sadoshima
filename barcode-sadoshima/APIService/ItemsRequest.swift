@@ -2,35 +2,31 @@
 //  ItemsRequest.swift
 //  barcode-sadoshima
 //
-//  Created by 佐渡島和志 on 2021/02/18.
+//  Created by 佐渡島和志 on 2021/02/19.
 //
 
 import Foundation
-import Alamofire
 
-class ItemsRequest: BaseRequestProtocol {
-    typealias ResponseType = [ItemsResponse]
+struct ItemsRequest: APIRequestType {
+    typealias ResponseType = ItemsResponse
     
-    var parameters: Parameters? {
+    var baseURLString: String {
+        return "https://app.rakuten.co.jp/"
+    }
+    
+    var pathString: String {
+        return "/services/api/BooksBook/Search/20170404"
+    }
+    
+    var queryItems: [URLQueryItem] {
         return [
-            "isbn": query,
-            "formatVersion": "2",
-            "hits": "1",
-            "elements": "author,title,largeImageUrl,itemPrice,itemUrl",
-            "applicationId": getAppID()
+            //.init(name: "format", value: "json"),
+            .init(name: "isbn", value: query),
+            .init(name: "elements", value: "author,title,largeImageUrl,itemPrice,itemUrl"),
+            .init(name: "formatVersion", value: "2"),
+            .init(name: "hits", value: "1"),
+            .init(name: "applicationId", value: getAppID())
         ]
-    }
-    
-    var method: HTTPMethod {
-        return .get
-    }
-    
-    var path: String {
-        return "/BooksBook/Search/20170404"
-    }
-    
-    var allowsConstrainedNetworkAccess: Bool {
-        return false
     }
     
     private let query: String
@@ -39,11 +35,11 @@ class ItemsRequest: BaseRequestProtocol {
         self.query = query
     }
     
-    private func getAppID() -> String{
-        let filePath = Bundle.main.path(forResource: "AppID", ofType: "plist")!
-        let plist = NSDictionary(contentsOfFile: filePath)!
-        let appID = String(describing:plist["appID"]!)
-        
-        return appID
-    }
+    private func getAppID() -> String {
+            let filePath = Bundle.main.path(forResource: "AppID", ofType: "plist")!
+            let plist = NSDictionary(contentsOfFile: filePath)!
+            let appID = String(describing:plist["appID"]!)
+            
+            return appID
+        }
 }

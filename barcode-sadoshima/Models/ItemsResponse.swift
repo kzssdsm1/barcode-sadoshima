@@ -2,7 +2,7 @@
 //  ItemsResponse.swift
 //  barcode-sadoshima
 //
-//  Created by 佐渡島和志 on 2021/02/18.
+//  Created by 佐渡島和志 on 2021/02/19.
 //
 
 import Foundation
@@ -10,7 +10,7 @@ import Foundation
 struct ItemsResponse: Codable {
     let items: [Items]
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case items = "Items"
     }
 }
