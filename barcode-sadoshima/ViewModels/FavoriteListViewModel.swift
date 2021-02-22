@@ -60,7 +60,9 @@ final class FavoriteListViewModel: ObservableObject {
     
     private func bind() {
         if let authState = self.authState {
-            self.listener(id: authState.userData?.uid ?? self.uid)
+            self.listener(id: authState.userData!.uid)
+        } else if self.uid != "" {
+            self.listener(id: self.uid)
         }
     }
     
