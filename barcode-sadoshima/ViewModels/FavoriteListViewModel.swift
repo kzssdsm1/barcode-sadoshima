@@ -27,7 +27,7 @@ final class FavoriteListViewModel: ObservableObject {
     }
     
     func get(id: String) {
-        if itemsData.isEmpty { itemsData = [] }
+        if !itemsData.isEmpty { itemsData = [] }
         
         db.collection("items").document("\(id)").collection("item").order(by: "createdAt", descending: false).getDocuments { (document, error) in
             if let err = error {
