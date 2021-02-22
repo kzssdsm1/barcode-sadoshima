@@ -24,7 +24,7 @@ final class APIService: APIServiceType {
     private let cachePolicy: NSURLRequest.CachePolicy = .useProtocolCachePolicy
     private let timeInterval: TimeInterval = 30
     
-    func request<T, V>(_ request: T) -> AnyPublisher<V, APIServiceError> where T : APIRequestType, V : Decodable, V : Encodable, V == T.ResponseType {
+    func request<T, V>(_ request: T) -> AnyPublisher<V, APIServiceError> where T: APIRequestType, V: Codable, V == T.ResponseType {
         guard let pathURL = URL(string: request.pathString, relativeTo: URL(string: request.baseURLString)) else {
             return Fail(error: APIServiceError.invalidURL)
                 .eraseToAnyPublisher()

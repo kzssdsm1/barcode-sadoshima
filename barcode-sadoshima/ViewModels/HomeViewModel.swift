@@ -14,20 +14,27 @@ final class HomeViewModel: ObservableObject {
     @Published var isSessionStart = true
     @Published var onCommitSubject = PassthroughSubject<String, Never>()
     @Published var productData = (author: "", title: "", image: "", price: "", link: "")
+    @Published var selection = 1
     
     private let apiService: APIServiceType
     private let errorSubject = PassthroughSubject<APIServiceError, Never>()
     
     private var cancellables: [AnyCancellable] = []
     
+    var titleString: String {
+        if self.selection == 1 {
+            return "バーコードスキャナー"
+        } else if self.selection == 3 {
+            return "アカウント"
+        } else {
+            return "バーコードスキャナー"
+        }
+    }
+    
     init(apiService: APIServiceType) {
         self.apiService = apiService
         
         bind()
-    }
-    
-    func apply() {
-        self.onCommitSubject.send("9784150312282")
     }
     
     private func bind() {

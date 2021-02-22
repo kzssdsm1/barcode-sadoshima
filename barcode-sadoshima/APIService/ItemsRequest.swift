@@ -20,7 +20,6 @@ struct ItemsRequest: APIRequestType {
     
     var queryItems: [URLQueryItem] {
         return [
-            //.init(name: "format", value: "json"),
             .init(name: "isbn", value: query),
             .init(name: "elements", value: "author,title,largeImageUrl,itemPrice,itemUrl"),
             .init(name: "formatVersion", value: "2"),
