@@ -28,8 +28,8 @@ final class LoginViewModel: NSObject, FUIAuthDelegate, ObservableObject {
             let uid = user.uid
             let name = user.displayName ?? "No Name"
             let photo = user.photoURL
-            let query = doc.whereField("uid", isEqualTo: uid)
             
+            let query = doc.whereField("uid", isEqualTo: uid)
             query.getDocuments() { (querySnapshot, error) in
                 guard let querySnapshot = querySnapshot else {
                     print("Error getting documents: \(String(describing: error))")

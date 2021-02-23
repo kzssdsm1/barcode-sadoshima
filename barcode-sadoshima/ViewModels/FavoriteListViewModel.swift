@@ -29,7 +29,7 @@ final class FavoriteListViewModel: ObservableObject {
     func get(id: String) {
         if !itemsData.isEmpty { itemsData = [] }
         
-        db.collection("items").document("\(id)").collection("item").order(by: "createdAt", descending: false).getDocuments { (document, error) in
+        db.collection("items").document("\(id)").collection("item").order(by: "createdAt", descending: true).getDocuments { (document, error) in
             if let err = error {
                 print(err.localizedDescription)
             } else {
@@ -67,7 +67,7 @@ final class FavoriteListViewModel: ObservableObject {
     }
     
     private func listener(id: String) {
-        db.collection("items").document("\(id)").collection("item").order(by: "createdAt", descending: false).addSnapshotListener() { (snapshot, error) in
+        db.collection("items").document("\(id)").collection("item").order(by: "createdAt", descending: true).addSnapshotListener() { (snapshot, error) in
             if let err = error {
                 print(err.localizedDescription)
             } else {

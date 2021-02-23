@@ -22,6 +22,7 @@
 		EB3A316D25E4012E0092A39C /* DocumentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3A316C25E4012E0092A39C /* DocumentModel.swift */; };
 		EB6940B825E3788D00F52177 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6940B725E3788D00F52177 /* LoginView.swift */; };
 		EB6940BB25E387BD00F52177 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB6940BA25E387BD00F52177 /* GoogleService-Info.plist */; };
+		EBB6E23125E4C6D2008BF9D7 /* ProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB6E23025E4C6D2008BF9D7 /* ProductViewModel.swift */; };
 		EBCC6C9B25DF7188003DF7D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCC6C9A25DF7188003DF7D9 /* AppDelegate.swift */; };
 		EBCC6C9D25DF7188003DF7D9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCC6C9C25DF7188003DF7D9 /* SceneDelegate.swift */; };
 		EBCC6CA125DF7189003DF7D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBCC6CA025DF7189003DF7D9 /* Assets.xcassets */; };
@@ -52,6 +53,7 @@
 		EB3A316C25E4012E0092A39C /* DocumentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentModel.swift; sourceTree = "<group>"; };
 		EB6940B725E3788D00F52177 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		EB6940BA25E387BD00F52177 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EBB6E23025E4C6D2008BF9D7 /* ProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewModel.swift; sourceTree = "<group>"; };
 		EBCC6C9725DF7188003DF7D9 /* barcode-sadoshima.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "barcode-sadoshima.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBCC6C9A25DF7188003DF7D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EBCC6C9C25DF7188003DF7D9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				EB3A316825E3FE430092A39C /* FavoriteListViewModel.swift */,
 				EBCC6CC525DF8801003DF7D9 /* HomeViewModel.swift */,
 				EB3A316125E3F68A0092A39C /* LoginViewModel.swift */,
+				EBB6E23025E4C6D2008BF9D7 /* ProductViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 				EB3A316925E3FE430092A39C /* FavoriteListViewModel.swift in Sources */,
 				EB3A315E25E3F2D70092A39C /* UserModel.swift in Sources */,
 				EB6940B825E3788D00F52177 /* LoginView.swift in Sources */,
+				EBB6E23125E4C6D2008BF9D7 /* ProductViewModel.swift in Sources */,
 				EBCC6CC625DF8801003DF7D9 /* HomeViewModel.swift in Sources */,
 				EBCC6C9B25DF7188003DF7D9 /* AppDelegate.swift in Sources */,
 				EB3A315225E3A92E0092A39C /* AccountSettingView.swift in Sources */,
