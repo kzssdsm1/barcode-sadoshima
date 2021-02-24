@@ -8,6 +8,7 @@
 import Foundation
 import Firebase
 
+// ログイン状態の監視とユーザー情報の保持を行うクラス
 final class FirebaseAuthStateObserver: ObservableObject {
     @Published var isLogin = false
     @Published var userData: UserModel?

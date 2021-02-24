@@ -26,8 +26,6 @@ struct LoginView: UIViewControllerRepresentable {
     }
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<LoginView>) -> UINavigationController {
-        viewModel.setAuthState(authState: authState)
-        
         let authUI = FUIAuth.defaultAuthUI()!
         authUI.delegate = self.viewModel
         let providers: [FUIAuthProvider] = [

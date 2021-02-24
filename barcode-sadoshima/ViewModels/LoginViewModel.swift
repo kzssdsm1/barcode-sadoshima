@@ -13,13 +13,8 @@ import FirebaseFirestore
 final class LoginViewModel: NSObject, FUIAuthDelegate, ObservableObject {
     private var ref: DocumentReference? = nil
     
-    private var authState: FirebaseAuthStateObserver?
     private let db = Firestore.firestore()
     private let currentUser = Auth.auth().currentUser
-    
-    func setAuthState(authState: FirebaseAuthStateObserver) {
-        self.authState = authState
-    }
     
     private func login(user: User?) {
         let doc = db.collection("users")
