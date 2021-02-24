@@ -11,7 +11,6 @@ import Combine
 import AVFoundation
 
 struct BarcodeScannerView: UIViewControllerRepresentable {
-    
     @Binding var isSessionStart: Bool
     @Binding var onCommitSubject: PassthroughSubject<String, Never>
     @Binding var alertItem: AlertItem?

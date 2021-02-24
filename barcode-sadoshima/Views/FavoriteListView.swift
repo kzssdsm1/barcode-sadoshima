@@ -9,6 +9,7 @@ import SwiftUI
 
 struct FavoriteListView: View {
     @EnvironmentObject var authState: FirebaseAuthStateObserver
+    
     @StateObject private var viewModel = FavoriteListViewModel()
     
     @State private var isShowSheet = false

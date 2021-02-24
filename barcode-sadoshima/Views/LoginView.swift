@@ -9,8 +9,6 @@ import SwiftUI
 import FirebaseUI
 
 struct LoginView: UIViewControllerRepresentable {
-    @EnvironmentObject var authState: FirebaseAuthStateObserver
-    
     @StateObject private var viewModel = LoginViewModel()
     
     final class Coordinator: NSObject, FUIAuthDelegate {

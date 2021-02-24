@@ -10,8 +10,6 @@ import Combine
 import FirebaseUI
 
 struct HomeView: View {
-    @EnvironmentObject var authState: FirebaseAuthStateObserver
-    
     @StateObject private var viewModel: HomeViewModel = .init(apiService: APIService())
     
     init() {
