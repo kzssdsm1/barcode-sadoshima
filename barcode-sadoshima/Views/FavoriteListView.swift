@@ -15,29 +15,60 @@ struct FavoriteListView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            ZStack(alignment: .center) {
-                ScrollView(showsIndicators: false) {
-                    ForEach(viewModel.itemsData) { input in
-                        Button(action: {
-                            showSheet(input: input)
-                        }) {
-                            CardView(input: input)
-                                .frame(width: geometry.size.width * 0.85, height: geometry.size.height * 0.24)
-                                .padding()
-                        }
+            if (authState.isLogin) {
+                if !(viewModel.itemsData.isEmpty) {
+                    ScrollView(.vertical, showsIndicators: false) {
+                        VStack(alignment: .center) {
+                            if (authState.isLogin) {
+                                ForEach(viewModel.itemsData) { input in
+                                    Button(action: {
+                                        showSheet(input: input)
+                                    }) {
+                                        CardView(input: input)
+                                            .frame(width: geometry.size.width * 0.85, height: geometry.size.height * 0.24)
+                                            .padding()
+                                    }
+                                }
+                            }
+                        } // VStack
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    } // ScrollView
+                    .background(Color.white.ignoresSafeArea(.all, edges: .all))
+                } else {
+                    VStack(alignment: .center) {
+                        Spacer()
+                        
+                        Text("お気に入りリストに登録された商品がありません")
+                            .foregroundColor(.black)
+                            .font(.system(size: geometry.size.height * 0.03, weight: .medium))
+                        
+                        Spacer()
                     }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(Color.white.ignoresSafeArea(.all, edges: .all))
                 }
+            } else {
+                VStack(alignment: .center) {
+                    Spacer()
+                    
+                    Text("お気に入りリストはログイン後に使用可能になります")
+                        .foregroundColor(.black)
+                        .font(.system(size: geometry.size.height * 0.03, weight: .medium))
+                    
+                    Spacer()
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color.white.ignoresSafeArea(.all, edges: .all))
             }
-            .background(Color.white.ignoresSafeArea(.all, edges: .all))
         }.onAppear() {
             // ログアウトを行った際にアプリが落ちるのを防ぐためのif節
             if (authState.isLogin) {
-                viewModel.listener(id: authState.userData?.uid ?? "")
+                viewModel.listener(id: authState.uid)
             }
         }
         .sheet(isPresented: $isShowSheet, onDismiss: {
-            isShowSheet = false }) {
-            ProductView(productData: viewModel.productData)
+                isShowSheet = false }) {
+            ProductView(titleString: "詳細" ,productData: viewModel.productData)
         }
     }
     

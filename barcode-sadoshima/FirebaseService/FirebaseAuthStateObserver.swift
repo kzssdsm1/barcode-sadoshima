@@ -11,19 +11,16 @@ import Firebase
 // ログイン状態の監視とユーザー情報の保持を行うクラス
 final class FirebaseAuthStateObserver: ObservableObject {
     @Published var isLogin = false
-    @Published var userData: UserModel?
+    @Published var uid: String!
     
     private var listener: AuthStateDidChangeListenerHandle!
     
     init() {
         listener = Auth.auth().addStateDidChangeListener { (auth, user) in
             if let user = user {
-                let data = try? Data(contentsOf: user.photoURL!)
-                self.userData = UserModel(name: user.displayName ?? "No Name", uid: user.uid, photo: data!)
+                self.uid = user.uid
                 self.isLogin = true
-                print(self.userData ?? "No data")
             } else {
-                self.userData = nil
                 self.isLogin = false
             }
         }

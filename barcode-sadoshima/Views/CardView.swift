@@ -25,6 +25,7 @@ struct CardView: View {
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: geometry.size.width * 0.23, height: geometry.size.height * 0.8)
+                                .shadow(color: .gray, radius: 1, x: 0, y: 0)
                         }
                     }
                 }
@@ -34,7 +35,7 @@ struct CardView: View {
                         .font(.system(size: geometry.size.height * 0.15, weight: .bold))
                     
                     Spacer()
-                        .frame(height: geometry.size.height * 0.05)
+                        .frame(height: geometry.size.height * 0.08)
                     
                     Text("登録日時: \(convertDateToString(date: input.createdAt))")
                         .foregroundColor(.black)
@@ -42,7 +43,7 @@ struct CardView: View {
                 }
             }
         }
-        .padding(20)
+        .padding(15)
         .overlay(
             RoundedRectangle(cornerRadius: 20)
                 .stroke(Color.gray, lineWidth: 1)

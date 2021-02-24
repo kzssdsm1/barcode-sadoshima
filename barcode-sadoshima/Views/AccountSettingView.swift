@@ -31,15 +31,15 @@ struct AccountSettingView: View {
         }
     }
     
-    private let screenWidth = CGFloat(UIScreen.main.bounds.width)
-    private let screenHeight = CGFloat(UIScreen.main.bounds.height)
-    
     var body: some View {
         GeometryReader { geometry in
-            VStack(spacing: 0) {
-                Text(stateDesc)
-                
+            VStack(alignment: .center) {
                 Spacer()
+                
+                Text(stateDesc)
+                    .foregroundColor(.black)
+                    .font(.system(size: geometry.size.height * 0.03, weight: .medium))
+                    .padding()
                 
                 Button(action: {
                     if (authState.isLogin) {
@@ -52,11 +52,16 @@ struct AccountSettingView: View {
                         .font(.title)
                         .fontWeight(.semibold)
                         .foregroundColor(Color.white)
-                        .frame(width: screenWidth * 0.4, height: screenHeight * 0.1)
+                        .frame(width: (geometry.size.width * 0.5), height: (geometry.size.height * 0.12))
                         .background(Color.blue)
                         .cornerRadius(25)
-                }
-            }
+                        .padding()
+                } // Button
+                
+                Spacer()
+            } // VStack
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.white.ignoresSafeArea(.all, edges: .all))
         }
         .sheet(isPresented: $isShowSheet, onDismiss: { isShowSheet = false }) {
             LoginView()

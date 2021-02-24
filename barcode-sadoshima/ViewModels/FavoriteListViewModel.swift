@@ -48,13 +48,16 @@ final class FavoriteListViewModel: ObservableObject {
                         }
                         
                         if diff.type == .removed {
-                            var removeIndex = 0
-                            for index in self.itemsData.indices {
-                                if self.itemsData[index].id == diff.document.documentID {
-                                    removeIndex = index
+                            // 重複削除を防ぐためのif節
+                            if (self.itemsData.contains(where: { $0.link == (diff.document.data()["link"] as! String)})) {
+                                var removeIndex = 0
+                                for index in self.itemsData.indices {
+                                    if self.itemsData[index].id == diff.document.documentID {
+                                        removeIndex = index
+                                    }
                                 }
+                                self.itemsData.remove(at: removeIndex)
                             }
-                            self.itemsData.remove(at: removeIndex)
                         }
                     }
                 }
