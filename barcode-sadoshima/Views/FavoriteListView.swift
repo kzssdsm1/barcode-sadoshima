@@ -8,13 +8,41 @@
 import SwiftUI
 
 struct FavoriteListView: View {
+    @EnvironmentObject var authState: FirebaseAuthStateObserver
+    @StateObject private var viewModel = FavoriteListViewModel()
+    
+    @State private var isShowSheet = false
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        GeometryReader { geometry in
+            ZStack(alignment: .center) {
+                ScrollView(showsIndicators: false) {
+                    ForEach(viewModel.itemsData) { input in
+                        Button(action: {
+                            showSheet(input: input)
+                        }) {
+                            CardView(input: input)
+                                .frame(width: geometry.size.width * 0.85, height: geometry.size.height * 0.24)
+                                .padding()
+                        }
+                    }
+                }
+            }
+            .background(Color.white.ignoresSafeArea(.all, edges: .all))
+        }.onAppear() {
+            // ログアウトを行った際にアプリが落ちるのを防ぐためのif節
+            if (authState.isLogin) {
+                viewModel.listener(id: authState.userData?.uid ?? "")
+            }
+        }
+        .sheet(isPresented: $isShowSheet, onDismiss: {
+            isShowSheet = false }) {
+            ProductView(productData: viewModel.productData)
+        }
     }
-}
-
-struct FavoriteListView_Previews: PreviewProvider {
-    static var previews: some View {
-        FavoriteListView()
+    
+    private func showSheet(input: DocumentModel) {
+        viewModel.productData = (author: input.author, title: input.title, image: input.image, price: input.price, link: input.link)
+        isShowSheet = true
     }
 }

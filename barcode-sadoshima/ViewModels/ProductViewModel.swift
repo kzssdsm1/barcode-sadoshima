@@ -14,10 +14,10 @@ final class ProductViewModel: ObservableObject {
     
     private var ref: DocumentReference? = nil
     
-    private let db = Firestore.firestore().collection("items")
+    private let db = Firestore.firestore()
         
     func stateChange(uid: String, link: String) {
-        let collection = db.document("\(uid)").collection("item")
+        let collection = db.collection("items").document("\(uid)").collection("item")
         let query = collection.whereField("link", isEqualTo: link)
         
         query.getDocuments() { (querySnapshot, error) in
@@ -36,7 +36,7 @@ final class ProductViewModel: ObservableObject {
     }
     
     func add(author: String, title: String, image: String, price: String, link: String, uid: String) {
-        let collection = db.document("\(uid)").collection("item")
+        let collection = db.collection("items").document("\(uid)").collection("item")
         ref = collection.addDocument(data: [
             "author": author,
             "title": title,
@@ -45,11 +45,11 @@ final class ProductViewModel: ObservableObject {
             "link": link,
             "createdAt": FieldValue.serverTimestamp()
         ])
-        stateChange(uid: uid, link: link)
+        self.isAddedData = true
     }
     
     func remove(uid: String, link: String) {
-        let collection = db.document("\(uid)").collection("item")
+        let collection = db.collection("items").document("\(uid)").collection("item")
         let query = collection.whereField("link", isEqualTo: link)
         
         query.getDocuments() { (querySnapshot, error) in

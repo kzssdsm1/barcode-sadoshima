@@ -52,34 +52,41 @@ struct ProductView: View {
             }, label: {
                 Text("Safariで商品ページを開く")
             })
+            .padding()
             
-            if (viewModel.isAddedData) {
-                Button(action: {
-                    isShowAlert = true
-                }, label: {
-                    Image(systemName: "star.fill")
-                        .renderingMode(.template)
-                        .foregroundColor(.yellow)
-                })
-            } else {
-                Button(action:{
-                    viewModel.add(
-                        author: productData.author,
-                        title: productData.title,
-                        image: productData.image,
-                        price: productData.price,
-                        link: productData.link,
-                        uid: authState.userData!.uid
-                    )
-                }, label: {
-                    Image(systemName: "star.fill")
-                        .renderingMode(.template)
-                        .foregroundColor(.white)
-                })
+            if (authState.isLogin) {
+                if (viewModel.isAddedData) {
+                    Button(action: {
+                        isShowAlert = true
+                    }, label: {
+                        Image(systemName: "star.fill")
+                            .renderingMode(.template)
+                            .foregroundColor(.yellow)
+                    })
+                } else {
+                    Button(action:{
+                        viewModel.add(
+                            author: productData.author,
+                            title: productData.title,
+                            image: productData.image,
+                            price: productData.price,
+                            link: productData.link,
+                            uid: authState.userData!.uid
+                        )
+                    }, label: {
+                        Image(systemName: "star.fill")
+                            .renderingMode(.template)
+                            .foregroundColor(.white)
+                    })
+                }
             }
             
+            
         }.onAppear() {
-            viewModel.stateChange(uid: authState.userData!.uid, link: productData.link)
+            if (authState.isLogin) {
+                viewModel.stateChange(uid: authState.userData?.uid ?? "", link: productData.link)
+                print(productData)
+            }
         }
         .alert(isPresented: $isShowAlert) {
             Alert(
@@ -87,7 +94,7 @@ struct ProductView: View {
                 message: Text("お気に入りリストからこの商品を削除しますか？"),
                 primaryButton: .cancel(Text("キャンセル")),
                 secondaryButton: .destructive(Text("削除")) {
-                    viewModel.remove(uid: authState.userData!.uid, link: productData.link)
+                    viewModel.remove(uid: authState.userData?.uid ?? "", link: productData.link)
                 })
         }
     }

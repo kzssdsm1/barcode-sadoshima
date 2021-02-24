@@ -13,16 +13,17 @@
 		EB1AB54525DF9E6500ABA665 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1AB54425DF9E6500ABA665 /* HomeView.swift */; };
 		EB1AB54D25DF9F8400ABA665 /* ProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1AB54C25DF9F8400ABA665 /* ProductView.swift */; };
 		EB1AB55025DFA73D00ABA665 /* AppID.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB1AB54F25DFA73D00ABA665 /* AppID.plist */; };
+		EB38780C25E5F97000A6188F /* DocumentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB38780B25E5F97000A6188F /* DocumentModel.swift */; };
 		EB3A315225E3A92E0092A39C /* AccountSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3A315125E3A92E0092A39C /* AccountSettingView.swift */; };
 		EB3A315B25E3F29C0092A39C /* FirebaseAuthStateObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3A315A25E3F29C0092A39C /* FirebaseAuthStateObserver.swift */; };
 		EB3A315E25E3F2D70092A39C /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3A315D25E3F2D70092A39C /* UserModel.swift */; };
 		EB3A316225E3F68A0092A39C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3A316125E3F68A0092A39C /* LoginViewModel.swift */; };
 		EB3A316625E3FE2E0092A39C /* FavoriteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3A316525E3FE2E0092A39C /* FavoriteListView.swift */; };
 		EB3A316925E3FE430092A39C /* FavoriteListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3A316825E3FE430092A39C /* FavoriteListViewModel.swift */; };
-		EB3A316D25E4012E0092A39C /* DocumentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3A316C25E4012E0092A39C /* DocumentModel.swift */; };
 		EB6940B825E3788D00F52177 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6940B725E3788D00F52177 /* LoginView.swift */; };
 		EB6940BB25E387BD00F52177 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB6940BA25E387BD00F52177 /* GoogleService-Info.plist */; };
 		EBB6E23125E4C6D2008BF9D7 /* ProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB6E23025E4C6D2008BF9D7 /* ProductViewModel.swift */; };
+		EBB6E23425E55872008BF9D7 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB6E23325E55872008BF9D7 /* CardView.swift */; };
 		EBCC6C9B25DF7188003DF7D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCC6C9A25DF7188003DF7D9 /* AppDelegate.swift */; };
 		EBCC6C9D25DF7188003DF7D9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCC6C9C25DF7188003DF7D9 /* SceneDelegate.swift */; };
 		EBCC6CA125DF7189003DF7D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBCC6CA025DF7189003DF7D9 /* Assets.xcassets */; };
@@ -44,16 +45,17 @@
 		EB1AB54425DF9E6500ABA665 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		EB1AB54C25DF9F8400ABA665 /* ProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductView.swift; sourceTree = "<group>"; };
 		EB1AB54F25DFA73D00ABA665 /* AppID.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AppID.plist; sourceTree = "<group>"; };
+		EB38780B25E5F97000A6188F /* DocumentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentModel.swift; sourceTree = "<group>"; };
 		EB3A315125E3A92E0092A39C /* AccountSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingView.swift; sourceTree = "<group>"; };
 		EB3A315A25E3F29C0092A39C /* FirebaseAuthStateObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthStateObserver.swift; sourceTree = "<group>"; };
 		EB3A315D25E3F2D70092A39C /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		EB3A316125E3F68A0092A39C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		EB3A316525E3FE2E0092A39C /* FavoriteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListView.swift; sourceTree = "<group>"; };
 		EB3A316825E3FE430092A39C /* FavoriteListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListViewModel.swift; sourceTree = "<group>"; };
-		EB3A316C25E4012E0092A39C /* DocumentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentModel.swift; sourceTree = "<group>"; };
 		EB6940B725E3788D00F52177 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		EB6940BA25E387BD00F52177 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EBB6E23025E4C6D2008BF9D7 /* ProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewModel.swift; sourceTree = "<group>"; };
+		EBB6E23325E55872008BF9D7 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		EBCC6C9725DF7188003DF7D9 /* barcode-sadoshima.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "barcode-sadoshima.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBCC6C9A25DF7188003DF7D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EBCC6C9C25DF7188003DF7D9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				EB1AB54425DF9E6500ABA665 /* HomeView.swift */,
 				EB1AB54C25DF9F8400ABA665 /* ProductView.swift */,
 				EB6940B725E3788D00F52177 /* LoginView.swift */,
+				EBB6E23325E55872008BF9D7 /* CardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -180,7 +183,7 @@
 				EB1AB53C25DF9A5400ABA665 /* Alert.swift */,
 				EBCC6CBA25DF73D9003DF7D9 /* ItemsResponse.swift */,
 				EB3A315D25E3F2D70092A39C /* UserModel.swift */,
-				EB3A316C25E4012E0092A39C /* DocumentModel.swift */,
+				EB38780B25E5F97000A6188F /* DocumentModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -332,11 +335,11 @@
 			files = (
 				EB1AB54125DF9D9A00ABA665 /* BarcodeScannerView.swift in Sources */,
 				EB1AB53D25DF9A5400ABA665 /* Alert.swift in Sources */,
-				EB3A316D25E4012E0092A39C /* DocumentModel.swift in Sources */,
 				EB3A316625E3FE2E0092A39C /* FavoriteListView.swift in Sources */,
 				EBCC6CBB25DF73D9003DF7D9 /* ItemsResponse.swift in Sources */,
 				EBCC6CC225DF859E003DF7D9 /* ItemsRequest.swift in Sources */,
 				EB1AB54D25DF9F8400ABA665 /* ProductView.swift in Sources */,
+				EBB6E23425E55872008BF9D7 /* CardView.swift in Sources */,
 				EBCC6CBF25DF74AC003DF7D9 /* APIServiceError.swift in Sources */,
 				EB3A315B25E3F29C0092A39C /* FirebaseAuthStateObserver.swift in Sources */,
 				EB1AB54525DF9E6500ABA665 /* HomeView.swift in Sources */,
@@ -345,6 +348,7 @@
 				EB3A315E25E3F2D70092A39C /* UserModel.swift in Sources */,
 				EB6940B825E3788D00F52177 /* LoginView.swift in Sources */,
 				EBB6E23125E4C6D2008BF9D7 /* ProductViewModel.swift in Sources */,
+				EB38780C25E5F97000A6188F /* DocumentModel.swift in Sources */,
 				EBCC6CC625DF8801003DF7D9 /* HomeViewModel.swift in Sources */,
 				EBCC6C9B25DF7188003DF7D9 /* AppDelegate.swift in Sources */,
 				EB3A315225E3A92E0092A39C /* AccountSettingView.swift in Sources */,

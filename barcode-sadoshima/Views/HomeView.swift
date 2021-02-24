@@ -10,6 +10,7 @@ import Combine
 import FirebaseUI
 
 struct HomeView: View {
+    @EnvironmentObject var authState: FirebaseAuthStateObserver
     @StateObject private var viewModel: HomeViewModel = .init(apiService: APIService())
     
     var body: some View {
@@ -29,6 +30,7 @@ struct HomeView: View {
                                 Text("バーコードスキャナー")
                             }
                             .tag(1)
+                        // 強制的にViewの再描画を行いAVCaptureSessionを再開させる
                     } else if viewModel.isSessionStart == false {
                         Text("一時的にカメラは停止されます")
                             .tabItem {
@@ -37,6 +39,22 @@ struct HomeView: View {
                             }
                             .tag(1)
                     }
+                    if (authState.isLogin) {
+                        FavoriteListView()
+                            .tabItem{
+                                Image(systemName: "star.fill")
+                                Text("お気に入りリスト")
+                            }
+                            .tag(2)
+                    } else if !(authState.isLogin) {
+                        Text("お気に入りリストはログイン後に使用可能になります")
+                            .tabItem {
+                                Image(systemName: "star.fill")
+                                Text("お気に入りリスト")
+                            }
+                            .tag(2)
+                    }
+                    
                     AccountSettingView()
                         .tabItem {
                             Image(systemName: "person.crop.circle")
@@ -46,7 +64,10 @@ struct HomeView: View {
                 }
             }
         }
-        .sheet(isPresented: $viewModel.isShowSheet, onDismiss: { viewModel.isSessionStart = true }) {
+        .sheet(isPresented: $viewModel.isShowSheet, onDismiss: {
+            viewModel.isSessionStart = true
+            viewModel.isShowSheet = false
+        }) {
             ProductView(productData: viewModel.productData)
         }
     }
