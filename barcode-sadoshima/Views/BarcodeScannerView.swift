@@ -27,7 +27,7 @@ struct BarcodeScannerView: UIViewControllerRepresentable {
     }
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<BarcodeScannerView>) -> UIViewController {
-        if self.isSessionStart != true {
+        if !(self.isSessionStart) {
             self.isSessionStart = true
         }
         
@@ -57,6 +57,7 @@ struct BarcodeScannerView: UIViewControllerRepresentable {
                 startSession()
                 
                 DispatchQueue.main.async {
+                    // startRunningは処理に時間がかかり完了するまで画面がブロックされるためメインスレッドの方でUIの更新を行う
                     let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
                     previewLayer.frame = viewController.view.bounds
                     previewLayer.videoGravity = .resizeAspectFill
@@ -113,6 +114,7 @@ struct BarcodeScannerView: UIViewControllerRepresentable {
         return borderline
     }
     
+    // ean8及びean13をISBNに変換するメソッド
     private func convertISBN(value: String) -> String? {
         let v = NSString(string: value).longLongValue
         let prefix: Int64 = Int64(v / 10000000000)

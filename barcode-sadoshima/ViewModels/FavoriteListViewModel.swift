@@ -11,11 +11,11 @@ import FirebaseFirestore
 
 final class FavoriteListViewModel: ObservableObject {
     @Published var itemsData = [DocumentModel]()
+    // ProductViewに渡す商品情報を一時的に格納する変数
     @Published var productData = (author: "", title: "", image: "", price: "", link: "")
     
     private var ref: DocumentReference? = nil
     
-    private var authState: FirebaseAuthStateObserver?
     private let db = Firestore.firestore()
     
     func listener(id: String) {

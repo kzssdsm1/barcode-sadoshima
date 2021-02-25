@@ -10,13 +10,14 @@ import Firebase
 import FirebaseFirestore
 
 final class ProductViewModel: ObservableObject {
+    // Firestoreに既にデータが存在するかどうかを判定する変数
     @Published var isAddedData = false
     
     private var ref: DocumentReference? = nil
     
     private let db = Firestore.firestore()
         
-    func stateChange(uid: String, link: String) {
+    func setState(uid: String, link: String) {
         let collection = db.collection("items").document("\(uid)").collection("item")
         let query = collection.whereField("link", isEqualTo: link)
         
@@ -36,6 +37,9 @@ final class ProductViewModel: ObservableObject {
     }
     
     func add(author: String, title: String, image: String, price: String, link: String, uid: String) {
+        guard !(self.isAddedData) else {
+            return
+        }
         let collection = db.collection("items").document("\(uid)").collection("item")
         ref = collection.addDocument(data: [
             "author": author,
@@ -49,6 +53,9 @@ final class ProductViewModel: ObservableObject {
     }
     
     func remove(uid: String, link: String) {
+        guard (self.isAddedData) else {
+            return
+        }
         let collection = db.collection("items").document("\(uid)").collection("item")
         let query = collection.whereField("link", isEqualTo: link)
         

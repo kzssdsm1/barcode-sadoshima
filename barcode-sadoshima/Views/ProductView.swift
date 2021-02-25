@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct ProductView: View {
-    @EnvironmentObject var authState: FirebaseAuthStateObserver
     
-    @StateObject var viewModel = ProductViewModel()
+    @EnvironmentObject private var authState: FirebaseAuthStateObserver
     
-    @State var isShowAlert = false
+    @StateObject private var viewModel = ProductViewModel()
+    
+    @State private var isShowAlert = false
     
     var titleString: String
     var productData: (author: String, title: String, image: String, price: String, link: String)
@@ -23,7 +24,7 @@ struct ProductView: View {
                 Text(titleString)
                     .font(.system(size: (geometry.size.height * 0.04), weight: .heavy))
                     .foregroundColor(.black)
-                    .padding()
+                    .padding((geometry.size.height * 0.02))
                 
                 if let url = URL(string: productData.image) {
                     if let data = try? Data(contentsOf: url) {
@@ -33,7 +34,7 @@ struct ProductView: View {
                                 .scaledToFill()
                                 .frame(width: (geometry.size.width * 0.6), height: (geometry.size.height * 0.45))
                                 .shadow(color: .gray, radius: 1, x: 0, y: 0)
-                                .padding()
+                                .padding((geometry.size.height * 0.02))
                         }
                     }
                 }
@@ -64,10 +65,14 @@ struct ProductView: View {
                     Text("Safariで商品ページを開く")
                         .font(.system(size: (geometry.size.height * 0.02), weight: .medium))
                         .foregroundColor(.white)
-                        .frame(width: (geometry.size.width * 0.45), height:(geometry.size.height * 0.08))
+                        .frame(width: (geometry.size.width * 0.5), height:(geometry.size.height * 0.08))
                         .background(Color.blue)
                         .cornerRadius(12)
-                        .padding((geometry.size.height * 0.012))
+                        .padding(EdgeInsets(
+                                    top: (geometry.size.height * 0.012),
+                                    leading: (geometry.size.height * 0.012),
+                                    bottom: (geometry.size.height * 0),
+                                    trailing: (geometry.size.height * 0.012)))
                 })
                 
                 if (authState.isLogin) {
@@ -95,7 +100,11 @@ struct ProductView: View {
                                 .frame(width: (geometry.size.width * 0.13), height: (geometry.size.height * 0.15))
                                 .foregroundColor((viewModel.isAddedData) ? .yellow : .gray)
                                 .opacity((viewModel.isAddedData) ? 1.0 : 0.7)
-                                .padding((geometry.size.height * 0.015))
+                                .padding(EdgeInsets(
+                                            top: (geometry.size.height * 0.005),
+                                            leading: (geometry.size.height * 0.015),
+                                            bottom: (geometry.size.height * 0.015),
+                                            trailing: (geometry.size.height * 0.037)))
                         })
                     } // HStack
                 }
@@ -104,8 +113,10 @@ struct ProductView: View {
             .background(Color.white.ignoresSafeArea(.all, edges: .all))
         } // GeometryReader
         .onAppear() {
+            // アプリが落ちるのを防ぐためのif節
             if (authState.isLogin) {
-                viewModel.stateChange(uid: authState.uid, link: productData.link)
+                // Firestoreに既にデータが存在するかどうかを判定する
+                viewModel.setState(uid: authState.uid, link: productData.link)
             }
         }
         .alert(isPresented: $isShowAlert) {

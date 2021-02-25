@@ -8,9 +8,9 @@
 import Foundation
 import Firebase
 
-// ログイン状態の監視とユーザー情報の保持を行うクラス
 final class FirebaseAuthStateObserver: ObservableObject {
     @Published var isLogin = false
+    // 値が存在しないタイミングでは読み込まない保証があるため強制アンラップ
     @Published var uid: String!
     
     private var listener: AuthStateDidChangeListenerHandle!

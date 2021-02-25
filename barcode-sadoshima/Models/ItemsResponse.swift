@@ -10,7 +10,6 @@ import Foundation
 struct ItemsResponse: Codable {
     let items: [Items]
     
-    // 命名規則(キャメルケース)とレスポンスキー(アッパーキャメルケース)が違うためCodingKeysで対応させる
     private enum CodingKeys: String, CodingKey {
         case items = "Items"
     }

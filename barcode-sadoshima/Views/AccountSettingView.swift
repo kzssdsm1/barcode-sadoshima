@@ -9,9 +9,9 @@ import SwiftUI
 import FirebaseUI
 
 struct AccountSettingView: View {
-    @EnvironmentObject var authState: FirebaseAuthStateObserver
+    @EnvironmentObject private var authState: FirebaseAuthStateObserver
     
-    @State var isShowSheet = false
+    @State private var isShowSheet = false
     
     private var stateDesc: String {
         switch authState.isLogin {
@@ -62,7 +62,7 @@ struct AccountSettingView: View {
             } // VStack
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.white.ignoresSafeArea(.all, edges: .all))
-        }
+        } // GeometryReader
         .sheet(isPresented: $isShowSheet, onDismiss: { isShowSheet = false }) {
             LoginView()
         }

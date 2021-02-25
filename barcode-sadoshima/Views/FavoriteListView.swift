@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FavoriteListView: View {
-    @EnvironmentObject var authState: FirebaseAuthStateObserver
+    @EnvironmentObject private var authState: FirebaseAuthStateObserver
     
     @StateObject private var viewModel = FavoriteListViewModel()
     
@@ -28,8 +28,8 @@ struct FavoriteListView: View {
                                         CardView(input: input)
                                             .frame(width: geometry.size.width * 0.85, height: geometry.size.height * 0.24)
                                             .padding()
-                                    }
-                                }
+                                    } // Button
+                                } // ForEach
                             }
                         } // VStack
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -44,7 +44,7 @@ struct FavoriteListView: View {
                             .font(.system(size: geometry.size.height * 0.03, weight: .medium))
                         
                         Spacer()
-                    }
+                    } // VStack
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(Color.white.ignoresSafeArea(.all, edges: .all))
                 }
@@ -57,12 +57,12 @@ struct FavoriteListView: View {
                         .font(.system(size: geometry.size.height * 0.03, weight: .medium))
                     
                     Spacer()
-                }
+                } // VStack
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color.white.ignoresSafeArea(.all, edges: .all))
             }
         }.onAppear() {
-            // ログアウトを行った際にアプリが落ちるのを防ぐためのif節
+            // アプリが落ちるのを防ぐためのif節
             if (authState.isLogin) {
                 viewModel.listener(id: authState.uid)
             }

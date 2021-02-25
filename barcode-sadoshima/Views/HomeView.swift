@@ -23,9 +23,12 @@ struct HomeView: View {
                 Text(viewModel.titleString)
                     .foregroundColor(.black)
                     .font(.system(size: geometry.size.height * 0.04, weight: .heavy))
-                    .padding()
+                    .padding((geometry.size.height * 0.02))
+                
                 TabView(selection: $viewModel.selection) {
                     if (viewModel.isSessionStart) {
+                        // シミュレーター用
+//                        Text("一時的にカメラは停止されます")
                         BarcodeScannerView(isSessionStart: $viewModel.isSessionStart, onCommitSubject: $viewModel.onCommitSubject, alertItem: $viewModel.alertItem)
                             .tabItem {
                                 Image(systemName: "camera")

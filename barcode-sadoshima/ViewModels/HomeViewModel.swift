@@ -11,6 +11,7 @@ import Combine
 final class HomeViewModel: ObservableObject {
     @Published var alertItem: AlertItem?
     @Published var isShowSheet = false
+    // BarcodeScannerViewを表示するかを管理する変数
     @Published var isSessionStart = true
     // 読み取られたISBNコードをキャッチしてストリームを流す変数
     @Published var onCommitSubject = PassthroughSubject<String, Never>()

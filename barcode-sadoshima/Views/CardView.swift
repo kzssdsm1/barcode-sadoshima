@@ -26,20 +26,31 @@ struct CardView: View {
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: geometry.size.width * 0.23, height: geometry.size.height * 0.8)
                                 .shadow(color: .gray, radius: 1, x: 0, y: 0)
+                                .padding(EdgeInsets(
+                                            top: (geometry.size.height * 0.015),
+                                            leading: (geometry.size.height * 0.020),
+                                            bottom: (geometry.size.height * 0.008),
+                                            trailing: (geometry.size.height * 0.015)))
                         }
                     }
                 }
                 VStack {
                     Text(input.title)
+                        // 明示的に色を定義しておかないとButton等で包んだ時に色がおかしくなる(バグ？)
                         .foregroundColor(.black)
-                        .font(.system(size: geometry.size.height * 0.15, weight: .bold))
-                    
-                    Spacer()
-                        .frame(height: geometry.size.height * 0.08)
-                    
+                        // 文字数によっては位置が大幅にずれてしまうため文字数によってサイズを変更する(周囲の余白を取得して再計算させられるなら多分そっちの方がいいけどやり方がさっぱりわからない)
+                        .font(.system(size: input.title.count < 10 ? geometry.size.height * 0.14 : geometry.size.height * 0.12, weight: .bold))
+                        .lineLimit(nil)
+                        .fixedSize(horizontal: false, vertical: true)
+
                     Text("登録日時: \(convertDateToString(date: input.createdAt))")
                         .foregroundColor(.black)
-                        .font(.system(size: geometry.size.height * 0.12, weight: .semibold))
+                        .font(.system(size: geometry.size.height * 0.10, weight: .semibold))
+                        .padding(EdgeInsets(
+                                    top: (geometry.size.height * 0.05),
+                                    leading: (geometry.size.height * 0.2),
+                                    bottom: (geometry.size.height * 0.1),
+                                    trailing: (geometry.size.height * 0.1)))
                 }
             }
         }
@@ -50,6 +61,7 @@ struct CardView: View {
         )
     }
     
+    // Date型をString型に変換するメソッド
     private func convertDateToString(date: Date) -> String {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "ja_JP")

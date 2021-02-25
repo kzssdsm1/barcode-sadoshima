@@ -50,10 +50,8 @@ final class LoginViewModel: NSObject, FUIAuthDelegate, ObservableObject {
     }
     
     func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
-        print("デリゲート：\(String(describing: Auth.auth().currentUser?.displayName))")
-        print(authDataResult as Any)
         if authDataResult == nil {
-            print("キャンセル")
+            
         } else {
             login(user: currentUser)
         }
