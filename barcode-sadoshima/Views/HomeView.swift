@@ -26,10 +26,10 @@ struct HomeView: View {
                     .padding((geometry.size.height * 0.02))
                 
                 TabView(selection: $viewModel.selection) {
-                    if (viewModel.isSessionStart) {
+                    if !(viewModel.isShowSheet) {
                         // シミュレーター用
 //                        Text("一時的にカメラは停止されます")
-                        BarcodeScannerView(isSessionStart: $viewModel.isSessionStart, onCommitSubject: $viewModel.onCommitSubject, alertItem: $viewModel.alertItem)
+                        BarcodeScannerView(isShowSheet: $viewModel.isShowSheet, onCommitSubject: $viewModel.onCommitSubject, alertItem: $viewModel.alertItem)
                             .tabItem {
                                 Image(systemName: "camera")
                                 Text("バーコードスキャナー")
@@ -65,7 +65,6 @@ struct HomeView: View {
             .background(Color.white.ignoresSafeArea(.all, edges: .all))
         }
         .sheet(isPresented: $viewModel.isShowSheet, onDismiss: {
-            viewModel.isSessionStart = true
             viewModel.isShowSheet = false
         }) {
             ProductView(titleString: "検索結果", productData: viewModel.productData)

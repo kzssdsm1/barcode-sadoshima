@@ -11,7 +11,7 @@ import Combine
 import AVFoundation
 
 struct BarcodeScannerView: UIViewControllerRepresentable {
-    @Binding var isSessionStart: Bool
+    @Binding var isShowSheet: Bool
     @Binding var onCommitSubject: PassthroughSubject<String, Never>
     @Binding var alertItem: AlertItem?
     
@@ -27,8 +27,8 @@ struct BarcodeScannerView: UIViewControllerRepresentable {
     }
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<BarcodeScannerView>) -> UIViewController {
-        if !(self.isSessionStart) {
-            self.isSessionStart = true
+        if !self.isShowSheet {
+            self.isShowSheet = false
         }
         
         let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: .video, position: .back)

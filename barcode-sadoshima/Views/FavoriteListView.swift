@@ -19,14 +19,14 @@ struct FavoriteListView: View {
             if (authState.isLogin) {
                 if !(viewModel.itemsData.isEmpty) {
                     ScrollView(.vertical, showsIndicators: false) {
-                        VStack(alignment: .center) {
+                        LazyVStack(alignment: .center) {
                             if (authState.isLogin) {
                                 ForEach(viewModel.itemsData) { input in
                                     Button(action: {
                                         showSheet(input: input)
                                     }) {
                                         CardView(input: input)
-                                            .frame(width: geometry.size.width * 0.85, height: geometry.size.height * 0.24)
+                                            .frame(width: geometry.size.width * 0.85, height: geometry.size.height * 0.25)
                                             .padding()
                                     } // Button
                                 } // ForEach

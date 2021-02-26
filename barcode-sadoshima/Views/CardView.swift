@@ -9,11 +9,11 @@ import SwiftUI
 
 struct CardView: View {
     let input: DocumentModel
-    
+
     init(input: DocumentModel) {
         self.input = input
     }
-    
+
     var body: some View {
         GeometryReader { geometry in
             HStack {
@@ -36,7 +36,7 @@ struct CardView: View {
                 }
                 VStack {
                     Text(input.title)
-                        // 明示的に色を定義しておかないとButton等で包んだ時に色がおかしくなる(バグ？)
+                        // 明示的に色を定義しておかないとButton等で包んだ時におかしくなる(バグ？)
                         .foregroundColor(.black)
                         // 文字数によっては位置が大幅にずれてしまうため文字数によってサイズを変更する(周囲の余白を取得して再計算させられるなら多分そっちの方がいいけどやり方がさっぱりわからない)
                         .font(.system(size: input.title.count < 10 ? geometry.size.height * 0.14 : geometry.size.height * 0.12, weight: .bold))
@@ -60,14 +60,14 @@ struct CardView: View {
                 .stroke(Color.gray, lineWidth: 1)
         )
     }
-    
-    // Date型をString型に変換するメソッド
+
+    // Date型をString型に変換する関数
     private func convertDateToString(date: Date) -> String {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "ja_JP")
         formatter.dateStyle = .long
         formatter.timeStyle = .none
-        
+
         let dateString = formatter.string(from: date)
         return dateString
     }

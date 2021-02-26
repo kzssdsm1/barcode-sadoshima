@@ -11,8 +11,6 @@ import Combine
 final class HomeViewModel: ObservableObject {
     @Published var alertItem: AlertItem?
     @Published var isShowSheet = false
-    // BarcodeScannerViewを表示するかを管理する変数
-    @Published var isSessionStart = true
     // 読み取られたISBNコードをキャッチしてストリームを流す変数
     @Published var onCommitSubject = PassthroughSubject<String, Never>()
     @Published var productData = (author: "", title: "", image: "", price: "", link: "")
@@ -65,7 +63,6 @@ final class HomeViewModel: ObservableObject {
                     price: price,
                     link: item[0].itemUrl
                 )
-                self.isSessionStart = false
                 self.isShowSheet = true
             }
         
