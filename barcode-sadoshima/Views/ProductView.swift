@@ -26,17 +26,19 @@ struct ProductView: View {
                     .foregroundColor(.black)
                     .padding((geometry.size.height * 0.02))
                 
-                if let url = URL(string: productData.image) {
-                    if let data = try? Data(contentsOf: url) {
-                        if let image = UIImage(data: data) {
-                            Image(uiImage: image)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: (geometry.size.width * 0.6), height: (geometry.size.height * 0.45))
-                                .shadow(color: .gray, radius: 1, x: 0, y: 0)
-                                .padding((geometry.size.height * 0.02))
-                        }
-                    }
+                if let image = convertStringToUIImage(url: productData.image) {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: (geometry.size.width * 0.6), height: (geometry.size.height * 0.45))
+                        .shadow(color: .gray, radius: 1, x: 0, y: 0)
+                        .padding((geometry.size.height * 0.02))
+                } else {
+                    Image(systemName: "questionmark.circle")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: (geometry.size.width * 0.6), height: (geometry.size.height * 0.45))
+                        .padding((geometry.size.height * 0.02))
                 }
                 
                 Text(productData.title)
@@ -128,5 +130,19 @@ struct ProductView: View {
                     viewModel.remove(uid: authState.uid, link: productData.link)
                 })
         }
+    }
+    
+    // String型のURLをUIImageに変換する関数
+    private func convertStringToUIImage(url: String) -> UIImage? {
+        guard let url = URL(string: url) else {
+            return nil
+        }
+        let data = try! Data(contentsOf: url)
+        
+        guard let uiImage = UIImage(data: data) else {
+            return nil
+        }
+        
+        return uiImage
     }
 }

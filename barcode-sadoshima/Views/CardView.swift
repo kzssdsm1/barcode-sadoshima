@@ -9,32 +9,42 @@ import SwiftUI
 
 struct CardView: View {
     let input: DocumentModel
-
+    
     init(input: DocumentModel) {
         self.input = input
     }
-
+    
     var body: some View {
         GeometryReader { geometry in
             HStack {
-                if let url = URL(string: input.image) {
-                    if let data = try? Data(contentsOf: url) {
-                        if let image = UIImage(data: data) {
-                            Image(uiImage: image)
-                                .renderingMode(.original)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: geometry.size.width * 0.23, height: geometry.size.height * 0.8)
-                                .shadow(color: .gray, radius: 1, x: 0, y: 0)
-                                .padding(EdgeInsets(
-                                            top: (geometry.size.height * 0.015),
-                                            leading: (geometry.size.height * 0.020),
-                                            bottom: (geometry.size.height * 0.008),
-                                            trailing: (geometry.size.height * 0.015)))
-                        }
-                    }
+                if let image = convertStringToUIImage(url: input.image) {
+                    Image(uiImage: image)
+                        // Buttonで包んだ際に色が変わらないようにするため
+                        .renderingMode(.original)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: geometry.size.width * 0.23, height: geometry.size.height * 0.8)
+                        .shadow(color: .gray, radius: 1, x: 0, y: 0)
+                        .padding(EdgeInsets(
+                                    top: (geometry.size.height * 0.015),
+                                    leading: (geometry.size.height * 0.020),
+                                    bottom: (geometry.size.height * 0.008),
+                                    trailing: (geometry.size.height * 0.015)))
+                } else {
+                    Image(systemName: "questionmark.circle")
+                        .renderingMode(.original)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: geometry.size.width * 0.23, height: geometry.size.height * 0.8)
+                        .padding(EdgeInsets(
+                                    top: (geometry.size.height * 0.015),
+                                    leading: (geometry.size.height * 0.020),
+                                    bottom: 0,
+                                    trailing: (geometry.size.height * 0.015)))
                 }
-                VStack {
+                
+                
+                VStack(alignment: .leading) {
                     Text(input.title)
                         // 明示的に色を定義しておかないとButton等で包んだ時におかしくなる(バグ？)
                         .foregroundColor(.black)
@@ -42,14 +52,14 @@ struct CardView: View {
                         .font(.system(size: input.title.count < 10 ? geometry.size.height * 0.14 : geometry.size.height * 0.12, weight: .bold))
                         .lineLimit(nil)
                         .fixedSize(horizontal: false, vertical: true)
-
+                    
                     Text("登録日時: \(convertDateToString(date: input.createdAt))")
                         .foregroundColor(.black)
                         .font(.system(size: geometry.size.height * 0.10, weight: .semibold))
                         .padding(EdgeInsets(
                                     top: (geometry.size.height * 0.05),
-                                    leading: (geometry.size.height * 0.2),
-                                    bottom: (geometry.size.height * 0.1),
+                                    leading: 0,
+                                    bottom: 0,
                                     trailing: (geometry.size.height * 0.1)))
                 }
             }
@@ -60,14 +70,28 @@ struct CardView: View {
                 .stroke(Color.gray, lineWidth: 1)
         )
     }
-
+    
+    // String型のURLをUIImageに変換する関数
+    private func convertStringToUIImage(url: String) -> UIImage? {
+        guard let url = URL(string: url) else {
+            return nil
+        }
+        let data = try! Data(contentsOf: url)
+        
+        guard let uiImage = UIImage(data: data) else {
+            return nil
+        }
+        
+        return uiImage
+    }
+    
     // Date型をString型に変換する関数
     private func convertDateToString(date: Date) -> String {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "ja_JP")
         formatter.dateStyle = .long
         formatter.timeStyle = .none
-
+        
         let dateString = formatter.string(from: date)
         return dateString
     }

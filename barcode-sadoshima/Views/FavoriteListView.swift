@@ -31,7 +31,7 @@ struct FavoriteListView: View {
                                     } // Button
                                 } // ForEach
                             }
-                        } // VStack
+                        } // LazyVStack
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                     } // ScrollView
                     .background(Color.white.ignoresSafeArea(.all, edges: .all))
