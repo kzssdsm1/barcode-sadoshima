@@ -7,8 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EB1DDC0C25E954CB005D213C /* FavoriteItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1DDC0A25E954CB005D213C /* FavoriteItem+CoreDataClass.swift */; };
-		EB1DDC0D25E954CB005D213C /* FavoriteItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1DDC0B25E954CB005D213C /* FavoriteItem+CoreDataProperties.swift */; };
+		EB3D39A225EA12EE001BD287 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3D39A125EA12EE001BD287 /* HomeViewModel.swift */; };
+		EB3D39A525EA1335001BD287 /* ItemsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3D39A425EA1335001BD287 /* ItemsResponse.swift */; };
+		EB3D39AB25EA1491001BD287 /* FavoriteItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3D39A925EA1491001BD287 /* FavoriteItem+CoreDataClass.swift */; };
+		EB3D39AC25EA1491001BD287 /* FavoriteItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3D39AA25EA1491001BD287 /* FavoriteItem+CoreDataProperties.swift */; };
+		EB3D39AF25EA623B001BD287 /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3D39AE25EA623B001BD287 /* ItemView.swift */; };
+		EB3D39B325EA6368001BD287 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3D39B225EA6368001BD287 /* APIService.swift */; };
+		EB3D39B725EA6378001BD287 /* APIServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3D39B625EA6378001BD287 /* APIServiceError.swift */; };
+		EB3D39BA25EA6384001BD287 /* ItemsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3D39B925EA6384001BD287 /* ItemsRequest.swift */; };
+		EB3D39BD25EA9CB4001BD287 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3D39BC25EA9CB4001BD287 /* Alert.swift */; };
+		EB3D39C025EA9D1B001BD287 /* BarcodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3D39BF25EA9D1B001BD287 /* BarcodeScannerView.swift */; };
+		EB3D39C325EAA1E8001BD287 /* AppID.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB3D39C225EAA1E8001BD287 /* AppID.plist */; };
+		EB3D39C625EAA384001BD287 /* FavoriteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3D39C525EAA384001BD287 /* FavoriteListView.swift */; };
+		EB3D39C925EAA692001BD287 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3D39C825EAA692001BD287 /* CardView.swift */; };
 		EB4CD51125E8FD25006A0A03 /* barcode_sadoshimaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4CD51025E8FD25006A0A03 /* barcode_sadoshimaApp.swift */; };
 		EB4CD51325E8FD25006A0A03 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4CD51225E8FD25006A0A03 /* ContentView.swift */; };
 		EB4CD51525E8FD27006A0A03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB4CD51425E8FD27006A0A03 /* Assets.xcassets */; };
@@ -21,8 +32,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		EB1DDC0A25E954CB005D213C /* FavoriteItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteItem+CoreDataClass.swift"; sourceTree = "<group>"; };
-		EB1DDC0B25E954CB005D213C /* FavoriteItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		EB3D39A125EA12EE001BD287 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		EB3D39A425EA1335001BD287 /* ItemsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsResponse.swift; sourceTree = "<group>"; };
+		EB3D39A925EA1491001BD287 /* FavoriteItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteItem+CoreDataClass.swift"; sourceTree = "<group>"; };
+		EB3D39AA25EA1491001BD287 /* FavoriteItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		EB3D39AE25EA623B001BD287 /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
+		EB3D39B225EA6368001BD287 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		EB3D39B625EA6378001BD287 /* APIServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceError.swift; sourceTree = "<group>"; };
+		EB3D39B925EA6384001BD287 /* ItemsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsRequest.swift; sourceTree = "<group>"; };
+		EB3D39BC25EA9CB4001BD287 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		EB3D39BF25EA9D1B001BD287 /* BarcodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScannerView.swift; sourceTree = "<group>"; };
+		EB3D39C225EAA1E8001BD287 /* AppID.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AppID.plist; sourceTree = "<group>"; };
+		EB3D39C525EAA384001BD287 /* FavoriteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListView.swift; sourceTree = "<group>"; };
+		EB3D39C825EAA692001BD287 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		EB4CD50D25E8FD25006A0A03 /* barcode-sadoshima.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "barcode-sadoshima.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB4CD51025E8FD25006A0A03 /* barcode_sadoshimaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = barcode_sadoshimaApp.swift; sourceTree = "<group>"; };
 		EB4CD51225E8FD25006A0A03 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -47,6 +69,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EB3D39B125EA6354001BD287 /* APIService */ = {
+			isa = PBXGroup;
+			children = (
+				EB3D39B225EA6368001BD287 /* APIService.swift */,
+				EB3D39B625EA6378001BD287 /* APIServiceError.swift */,
+				EB3D39B925EA6384001BD287 /* ItemsRequest.swift */,
+			);
+			path = APIService;
+			sourceTree = "<group>";
+		};
 		EB4CD50425E8FD25006A0A03 = {
 			isa = PBXGroup;
 			children = (
@@ -66,6 +98,7 @@
 		EB4CD50F25E8FD25006A0A03 /* barcode-sadoshima */ = {
 			isa = PBXGroup;
 			children = (
+				EB3D39B125EA6354001BD287 /* APIService */,
 				EB4CD53F25E94203006A0A03 /* ViewModels */,
 				EB4CD52C25E8FDE3006A0A03 /* Views */,
 				EB4CD52525E8FD39006A0A03 /* Models */,
@@ -76,6 +109,7 @@
 				EB4CD51E25E8FD27006A0A03 /* Info.plist */,
 				EB4CD51B25E8FD27006A0A03 /* barcode_sadoshima.xcdatamodeld */,
 				EB4CD51625E8FD27006A0A03 /* Preview Content */,
+				EB3D39C225EAA1E8001BD287 /* AppID.plist */,
 			);
 			path = "barcode-sadoshima";
 			sourceTree = "<group>";
@@ -91,9 +125,11 @@
 		EB4CD52525E8FD39006A0A03 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				EB1DDC0A25E954CB005D213C /* FavoriteItem+CoreDataClass.swift */,
-				EB1DDC0B25E954CB005D213C /* FavoriteItem+CoreDataProperties.swift */,
+				EB3D39A925EA1491001BD287 /* FavoriteItem+CoreDataClass.swift */,
+				EB3D39AA25EA1491001BD287 /* FavoriteItem+CoreDataProperties.swift */,
 				EB4CD53825E93F9F006A0A03 /* Item.swift */,
+				EB3D39A425EA1335001BD287 /* ItemsResponse.swift */,
+				EB3D39BC25EA9CB4001BD287 /* Alert.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -102,6 +138,10 @@
 			isa = PBXGroup;
 			children = (
 				EB4CD52D25E8FDF3006A0A03 /* HomeView.swift */,
+				EB3D39AE25EA623B001BD287 /* ItemView.swift */,
+				EB3D39BF25EA9D1B001BD287 /* BarcodeScannerView.swift */,
+				EB3D39C525EAA384001BD287 /* FavoriteListView.swift */,
+				EB3D39C825EAA692001BD287 /* CardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -110,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				EB4CD54025E94216006A0A03 /* ItemViewModel.swift */,
+				EB3D39A125EA12EE001BD287 /* HomeViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -171,6 +212,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB3D39C325EAA1E8001BD287 /* AppID.plist in Resources */,
 				EB4CD51825E8FD27006A0A03 /* Preview Assets.xcassets in Resources */,
 				EB4CD51525E8FD27006A0A03 /* Assets.xcassets in Resources */,
 			);
@@ -185,13 +227,23 @@
 			files = (
 				EB4CD52E25E8FDF3006A0A03 /* HomeView.swift in Sources */,
 				EB4CD51A25E8FD27006A0A03 /* Persistence.swift in Sources */,
+				EB3D39C625EAA384001BD287 /* FavoriteListView.swift in Sources */,
+				EB3D39C025EA9D1B001BD287 /* BarcodeScannerView.swift in Sources */,
 				EB4CD53925E93F9F006A0A03 /* Item.swift in Sources */,
+				EB3D39A225EA12EE001BD287 /* HomeViewModel.swift in Sources */,
 				EB4CD54125E94216006A0A03 /* ItemViewModel.swift in Sources */,
-				EB1DDC0C25E954CB005D213C /* FavoriteItem+CoreDataClass.swift in Sources */,
+				EB3D39C925EAA692001BD287 /* CardView.swift in Sources */,
 				EB4CD51325E8FD25006A0A03 /* ContentView.swift in Sources */,
 				EB4CD51D25E8FD27006A0A03 /* barcode_sadoshima.xcdatamodeld in Sources */,
+				EB3D39BA25EA6384001BD287 /* ItemsRequest.swift in Sources */,
+				EB3D39AF25EA623B001BD287 /* ItemView.swift in Sources */,
+				EB3D39A525EA1335001BD287 /* ItemsResponse.swift in Sources */,
+				EB3D39B725EA6378001BD287 /* APIServiceError.swift in Sources */,
+				EB3D39B325EA6368001BD287 /* APIService.swift in Sources */,
+				EB3D39AB25EA1491001BD287 /* FavoriteItem+CoreDataClass.swift in Sources */,
 				EB4CD51125E8FD25006A0A03 /* barcode_sadoshimaApp.swift in Sources */,
-				EB1DDC0D25E954CB005D213C /* FavoriteItem+CoreDataProperties.swift in Sources */,
+				EB3D39BD25EA9CB4001BD287 /* Alert.swift in Sources */,
+				EB3D39AC25EA1491001BD287 /* FavoriteItem+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -18,7 +18,7 @@ final class ItemViewModel: ObservableObject {
         self.context = context
         self.link = link
         
-        if searchItem(link) != nil {
+        if !(searchItem(link)!.isEmpty) {
             existsItem = true
         }
     }
@@ -27,6 +27,7 @@ final class ItemViewModel: ObservableObject {
         guard let context = context else {
             return
         }
+        
         let newItem = FavoriteItem(context: context)
         
         newItem.author = item.author
@@ -35,6 +36,10 @@ final class ItemViewModel: ObservableObject {
         newItem.link = item.link
         newItem.price = item.price
         newItem.title = item.title
+        
+        guard context.hasChanges else {
+            return
+        }
         
         do {
             try context.save()
@@ -58,6 +63,10 @@ final class ItemViewModel: ObservableObject {
         let removeItem = item[0]
         
         context.delete(removeItem)
+        
+        guard context.hasChanges else {
+            return
+        }
         
         do {
             try context.save()
