@@ -21,7 +21,6 @@
 		EB3D39C625EAA384001BD287 /* FavoriteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3D39C525EAA384001BD287 /* FavoriteListView.swift */; };
 		EB3D39C925EAA692001BD287 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3D39C825EAA692001BD287 /* CardView.swift */; };
 		EB4CD51125E8FD25006A0A03 /* barcode_sadoshimaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4CD51025E8FD25006A0A03 /* barcode_sadoshimaApp.swift */; };
-		EB4CD51325E8FD25006A0A03 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4CD51225E8FD25006A0A03 /* ContentView.swift */; };
 		EB4CD51525E8FD27006A0A03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB4CD51425E8FD27006A0A03 /* Assets.xcassets */; };
 		EB4CD51825E8FD27006A0A03 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB4CD51725E8FD27006A0A03 /* Preview Assets.xcassets */; };
 		EB4CD51A25E8FD27006A0A03 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4CD51925E8FD27006A0A03 /* Persistence.swift */; };
@@ -47,7 +46,6 @@
 		EB3D39C825EAA692001BD287 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		EB4CD50D25E8FD25006A0A03 /* barcode-sadoshima.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "barcode-sadoshima.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB4CD51025E8FD25006A0A03 /* barcode_sadoshimaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = barcode_sadoshimaApp.swift; sourceTree = "<group>"; };
-		EB4CD51225E8FD25006A0A03 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		EB4CD51425E8FD27006A0A03 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EB4CD51725E8FD27006A0A03 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		EB4CD51925E8FD27006A0A03 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -103,7 +101,6 @@
 				EB4CD52C25E8FDE3006A0A03 /* Views */,
 				EB4CD52525E8FD39006A0A03 /* Models */,
 				EB4CD51025E8FD25006A0A03 /* barcode_sadoshimaApp.swift */,
-				EB4CD51225E8FD25006A0A03 /* ContentView.swift */,
 				EB4CD51425E8FD27006A0A03 /* Assets.xcassets */,
 				EB4CD51925E8FD27006A0A03 /* Persistence.swift */,
 				EB4CD51E25E8FD27006A0A03 /* Info.plist */,
@@ -233,7 +230,6 @@
 				EB3D39A225EA12EE001BD287 /* HomeViewModel.swift in Sources */,
 				EB4CD54125E94216006A0A03 /* ItemViewModel.swift in Sources */,
 				EB3D39C925EAA692001BD287 /* CardView.swift in Sources */,
-				EB4CD51325E8FD25006A0A03 /* ContentView.swift in Sources */,
 				EB4CD51D25E8FD27006A0A03 /* barcode_sadoshima.xcdatamodeld in Sources */,
 				EB3D39BA25EA6384001BD287 /* ItemsRequest.swift in Sources */,
 				EB3D39AF25EA623B001BD287 /* ItemView.swift in Sources */,

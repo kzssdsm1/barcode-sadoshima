@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct FavoriteListView: View {
+    @Environment(\.managedObjectContext) var context
+    
     @Binding var item: Item?
     
     @FetchRequest(entity: FavoriteItem.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \FavoriteItem.date, ascending: true)],animation: .spring()) private var items : FetchedResults<FavoriteItem>
@@ -35,6 +37,20 @@ struct FavoriteListView: View {
                 VStack(alignment: .center) {
                     Spacer()
                     
+//                    Button(action: {
+//                        let test = Item(author: "誉田哲也",
+//                                        date: "TEST",
+//                                        image: "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7456/9784334777456.jpg?_ex=200x200",
+//                                        link: "https://books.rakuten.co.jp/rb/15696282/",
+//                                        price: "836",
+//                                        title: "硝子の太陽")
+//                        addItem(item: test)
+//                    }) {
+//                        Text("お気に入りリストに登録された商品がありません")
+//                            .foregroundColor(.black)
+//                            .font(.system(size: geometry.size.height * 0.03, weight: .medium))
+//                    } // Button
+                    
                     Text("お気に入りリストに登録された商品がありません")
                         .foregroundColor(.black)
                         .font(.system(size: geometry.size.height * 0.03, weight: .medium))
@@ -57,4 +73,25 @@ struct FavoriteListView: View {
             title: item.title
         )
     }
+    
+//    func addItem(item: Item) {
+//        let newItem = FavoriteItem(context: context)
+//        
+//        newItem.author = item.author
+//        newItem.date = item.date
+//        newItem.image = item.image
+//        newItem.link = item.link
+//        newItem.price = item.price
+//        newItem.title = item.title
+//        
+//        guard context.hasChanges else {
+//            return
+//        }
+//        
+//        do {
+//            try context.save()
+//        } catch {
+//            fatalError()
+//        }
+//    }
 }
