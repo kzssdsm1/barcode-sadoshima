@@ -10,7 +10,7 @@ import SwiftUI
 struct FavoriteListView: View {
     @Binding var item: Item?
     
-    @FetchRequest(entity: FavoriteItem.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \FavoriteItem.date, ascending: true)],animation: .spring()) private var items : FetchedResults<FavoriteItem>
+    @FetchRequest(entity: FavoriteItem.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \FavoriteItem.date, ascending: false)],animation: .spring()) private var items : FetchedResults<FavoriteItem>
     
     var body: some View {
         GeometryReader { geometry in
@@ -30,29 +30,16 @@ struct FavoriteListView: View {
                                 Button(action: {
                                     self.item = convertToItem(item: item)
                                 }) {
-                                    // titleの行数によってレイアウトがずれないようにここで分岐させる (1行 = 21count)
-                                    if item.title.count > 21 {
-                                        CardView(input: convertToItem(item: item))
-                                            .frame(width: (geometry.size.width - 30))
-                                            .frame(minHeight: (geometry.size.height * 0.4))
-                                            .padding(EdgeInsets(
-                                                        // 上部のバーと被らないようにするため1だけpaddingを設定する
-                                                        top: 1,
-                                                        leading: (geometry.size.height * 0.05),
-                                                        bottom: (geometry.size.height * buildCGFloat(item.title.count)),
-                                                        trailing: (geometry.size.height * 0.05))
-                                            )
-                                    } else {
-                                        CardView(input: convertToItem(item: item))
-                                            .frame(width: (geometry.size.width - 30))
-                                            .frame(minHeight: (geometry.size.height * 0.4))
-                                            .padding(EdgeInsets(
-                                                        top: 1,
-                                                        leading: (geometry.size.height * 0.05),
-                                                        bottom: (geometry.size.height * 0.17),
-                                                        trailing: (geometry.size.height * 0.05))
+                                    CardView(input: convertToItem(item: item))
+                                        .frame(width: (geometry.size.width - 30))
+                                        .frame(minHeight: (geometry.size.height * 0.4))
+                                        .padding(EdgeInsets(
+                                                    // 上部のバーと被らないようにするため1だけpaddingを設定する
+                                                    top: 1,
+                                                    leading: (geometry.size.height * 0.05),
+                                                    bottom: (item.title.count > 21) ? (geometry.size.height * buildCGFloat(item.title.count)) : (geometry.size.height * 0.17),
+                                                    trailing: (geometry.size.height * 0.05))
                                         )
-                                    }
                                 } // Button
                             } // ForEach
                         } // LazyVStack
@@ -64,7 +51,6 @@ struct FavoriteListView: View {
         } // GeometryReader
     } // body
     
-    // 適切なpaddingの数値を返す関数
     private func buildCGFloat(_ titleCount: Int) -> CGFloat {
         let count = titleCount / 21 - 1
         let double = Double(count) * 0.03 + 0.2
