@@ -8,59 +8,68 @@
 import SwiftUI
 
 struct FavoriteListView: View {
-    @Environment(\.managedObjectContext) var context
-    
     @Binding var item: Item?
     
     @FetchRequest(entity: FavoriteItem.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \FavoriteItem.date, ascending: true)],animation: .spring()) private var items : FetchedResults<FavoriteItem>
     
     var body: some View {
         GeometryReader { geometry in
-            if !(items.isEmpty) {
-                ScrollView(.vertical, showsIndicators: false) {
-                    LazyVStack(alignment: .center) {
-                            ForEach(items) { item in
-                                Button(action: {
-                                    self.item = convertToItem(item: item)
-                                }) {
-                                    CardView(input: convertToItem(item: item))
-                                        .frame(width: geometry.size.width * 0.85, height: geometry.size.height * 0.25)
-                                        .padding()
-                                } // Button
-                            } // ForEach
-
-                    } // LazyVStack
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                } // ScrollView
-                .background(Color.white.ignoresSafeArea(.all, edges: .all))
-            } else {
-                VStack(alignment: .center) {
+            VStack(spacing: 0) {
+                if (items.isEmpty) {
                     Spacer()
-                    
-//                    Button(action: {
-//                        let test = Item(author: "誉田哲也",
-//                                        date: "TEST",
-//                                        image: "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7456/9784334777456.jpg?_ex=200x200",
-//                                        link: "https://books.rakuten.co.jp/rb/15696282/",
-//                                        price: "836",
-//                                        title: "硝子の太陽")
-//                        addItem(item: test)
-//                    }) {
-//                        Text("お気に入りリストに登録された商品がありません")
-//                            .foregroundColor(.black)
-//                            .font(.system(size: geometry.size.height * 0.03, weight: .medium))
-//                    } // Button
                     
                     Text("お気に入りリストに登録された商品がありません")
                         .foregroundColor(.black)
                         .font(.system(size: geometry.size.height * 0.03, weight: .medium))
                     
                     Spacer()
-                } // VStack
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(Color.white.ignoresSafeArea(.all, edges: .all))
-            }
-        }
+                } else {
+                    ScrollView(.vertical, showsIndicators: false) {
+                        LazyVStack(spacing: 0) {
+                            ForEach(items) { item in
+                                Button(action: {
+                                    self.item = convertToItem(item: item)
+                                }) {
+                                    // titleの行数によってレイアウトがずれないようにここで分岐させる (1行 = 21count)
+                                    if item.title.count > 21 {
+                                        CardView(input: convertToItem(item: item))
+                                            .frame(width: (geometry.size.width - 30))
+                                            .frame(minHeight: (geometry.size.height * 0.4))
+                                            .padding(EdgeInsets(
+                                                        // 上部のバーと被らないようにするため1だけpaddingを設定する
+                                                        top: 1,
+                                                        leading: (geometry.size.height * 0.05),
+                                                        bottom: (geometry.size.height * buildCGFloat(item.title.count)),
+                                                        trailing: (geometry.size.height * 0.05))
+                                            )
+                                    } else {
+                                        CardView(input: convertToItem(item: item))
+                                            .frame(width: (geometry.size.width - 30))
+                                            .frame(minHeight: (geometry.size.height * 0.4))
+                                            .padding(EdgeInsets(
+                                                        top: 1,
+                                                        leading: (geometry.size.height * 0.05),
+                                                        bottom: (geometry.size.height * 0.17),
+                                                        trailing: (geometry.size.height * 0.05))
+                                        )
+                                    }
+                                } // Button
+                            } // ForEach
+                        } // LazyVStack
+                    } // ScrollView
+                }
+            } // VStack
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.white.edgesIgnoringSafeArea(.bottom))
+        } // GeometryReader
+    } // body
+    
+    // 適切なpaddingの数値を返す関数
+    private func buildCGFloat(_ titleCount: Int) -> CGFloat {
+        let count = titleCount / 21 - 1
+        let double = Double(count) * 0.03 + 0.2
+        let cgFloat = CGFloat(double)
+        return cgFloat
     }
     
     private func convertToItem(item: FavoriteItem) -> Item {
@@ -73,25 +82,4 @@ struct FavoriteListView: View {
             title: item.title
         )
     }
-    
-//    func addItem(item: Item) {
-//        let newItem = FavoriteItem(context: context)
-//        
-//        newItem.author = item.author
-//        newItem.date = item.date
-//        newItem.image = item.image
-//        newItem.link = item.link
-//        newItem.price = item.price
-//        newItem.title = item.title
-//        
-//        guard context.hasChanges else {
-//            return
-//        }
-//        
-//        do {
-//            try context.save()
-//        } catch {
-//            fatalError()
-//        }
-//    }
 }
