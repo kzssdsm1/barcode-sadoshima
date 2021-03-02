@@ -9,32 +9,40 @@ import SwiftUI
 import CoreData
 
 struct EditBar: View {
-    @Binding var removeItemNum: [Int]
+    @Binding var removeItemString: [String]
     @Binding var isShowRemove: Bool
 
-    @FetchRequest(entity: FavoriteItem.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \FavoriteItem.date, ascending: false)],animation: nil) private var items : FetchedResults<FavoriteItem>
+    @FetchRequest var items: FetchedResults<FavoriteItem>
+    
+    init(removeItemString: Binding<[String]>, isShowRemove: Binding<Bool>, items: FetchRequest<FavoriteItem>) {
+        self._removeItemString = removeItemString
+        self._isShowRemove = isShowRemove
+        self._items = items
+    }
     
     var body: some View {
         GeometryReader { geometry in
             HStack {
                 Button(action: {
-                    removeItemNum = []
+                    removeItemString = []
                 }) {
                     Text("全てを解除")
-                        .foregroundColor(.blue)
+                        .foregroundColor((items.isEmpty || removeItemString.isEmpty) ? .gray : .blue)
+                        .opacity((items.isEmpty || removeItemString.isEmpty) ? 0.6 : 1)
                         .font(.system(size: CGFloat(geometry.size.height * 0.4), weight: .medium))
                         .padding(.trailing, CGFloat(geometry.size.height * 0.05))
                 }
-                .disabled(items.isEmpty)
+                .disabled(items.isEmpty || removeItemString.isEmpty)
 
                 Button(action: {
-                    removeItemNum = []
-                    for count in 0..<items.count {
-                        removeItemNum.append(count)
+                    removeItemString = []
+                    for item in items {
+                        removeItemString.append(item.link)
                     }
                 }) {
                     Text("全てを選択")
-                        .foregroundColor(.blue)
+                        .foregroundColor((items.isEmpty) ? .gray : .blue)
+                        .opacity((items.isEmpty) ? 0.6 : 1)
                         .font(.system(size: CGFloat(geometry.size.height * 0.4), weight: .medium))
                 }
                 .disabled(items.isEmpty)
@@ -45,10 +53,11 @@ struct EditBar: View {
                     isShowRemove = true
                 }) {
                     Text("削除")
-                        .foregroundColor(.blue)
+                        .foregroundColor((items.isEmpty || removeItemString.isEmpty) ? .gray : .blue)
+                        .opacity((items.isEmpty || removeItemString.isEmpty) ? 0.6 : 1)
                         .font(.system(size: CGFloat(geometry.size.height * 0.4), weight: .medium))
                 }
-                .disabled(removeItemNum.isEmpty || items.isEmpty)
+                .disabled(removeItemString.isEmpty || items.isEmpty)
             }
         }
     }

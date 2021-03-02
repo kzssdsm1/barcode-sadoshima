@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct TrashButton: View {
-    @Binding var removeItemNum: [Int]
+    @Binding var removeItemString: [String]
     @Binding var isEditMode: Bool
     @Binding var isShowRemove: Bool
     
-    let index: Int
+    let index: String
     
     var body: some View {
         if (isEditMode) {
-            if let itemIndex = removeItemNum.firstIndex(where: {$0 == self.index}) {
+            if let itemIndex = removeItemString.firstIndex(where: {$0 == self.index}) {
                 Button(action: {
-                    removeItemNum.remove(at: itemIndex)
+                    removeItemString.remove(at: itemIndex)
                 }) {
                     Image(systemName: "checkmark.circle.fill")
                         .renderingMode(.template)
@@ -29,7 +29,7 @@ struct TrashButton: View {
                 }
             } else {
                 Button(action: {
-                    removeItemNum.append(index)
+                    removeItemString.append(index)
                 }) {
                     Image(systemName: "circle")
                         .renderingMode(.original)
@@ -40,7 +40,7 @@ struct TrashButton: View {
             }
         } else {
             Button(action: {
-                removeItemNum.append(index)
+                removeItemString.append(index)
                 isShowRemove = true
             }) {
                 Image(systemName: "trash.fill")

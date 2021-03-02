@@ -22,14 +22,16 @@ struct CardView: View {
                             .renderingMode(.original)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 135, height: 200)
+                            .frame(minWidth: (geometry.size.width * 0.2), minHeight: (geometry.size.height * 0.3))
+                            .frame(maxWidth: 135, maxHeight: 200)
                             .shadow(color: .gray, radius: 1, x: 0, y: 0)
                     } else {
                         Image(systemName: "questionmark.circle")
                             .renderingMode(.original)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 135, height: 200)
+                            .frame(minWidth: (geometry.size.width * 0.2), minHeight: (geometry.size.height * 0.3))
+                            .frame(maxWidth: 135, maxHeight: 200)
                     }
                     
                     Spacer()
@@ -49,6 +51,7 @@ struct CardView: View {
                             .fixedSize(horizontal: false, vertical: true)
                         
                         Spacer(minLength: 0)
+                            .frame(maxHeight: (geometry.size.height * 0.08))
                         
                         Text("追加日時：")
                             .foregroundColor(.gray)

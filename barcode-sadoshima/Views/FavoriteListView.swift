@@ -6,48 +6,54 @@
 //
 
 import SwiftUI
+import CoreData
 
-// 式が複雑すぎてコンパイルが通らなかったため削除ボタンと上部の編集バーを部品化して別のファイルに分けています
+// 式が複雑すぎてコンパイルが通らなかったため削除ボタンとヘッダーを部品化して別のファイルに分けています
 // 各所のCGFloatは型チェックを突破しようと試みた時の名残です
 
 struct FavoriteListView: View {
-    @Binding var item: Item?
+    @State private var item: Item?
     
     @Environment(\.managedObjectContext) private var context
     
-    @FetchRequest(entity: FavoriteItem.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \FavoriteItem.date, ascending: false)],animation: .spring()) private var items : FetchedResults<FavoriteItem>
+    @FetchRequest var items: FetchedResults<FavoriteItem>
     
-    @State private var removeItemNum: [Int] = []
+    @State private var removeItemString: [String] = []
     @State private var isShowRemove: Bool = false
     @State private var isEditMode: Bool = false
+    
+    let inputText: String
+    
+    init(inputText: String) {
+        self.inputText = inputText
+        
+        if self.inputText != "" {
+            self._items = FetchRequest(
+                entity: FavoriteItem.entity(),
+                sortDescriptors: [NSSortDescriptor(keyPath: \FavoriteItem.date, ascending: false)],
+                predicate: NSPredicate(format: "title CONTAINS[C] %@", inputText),
+                animation: .spring()
+            )
+        } else {
+            self._items = FetchRequest(
+                entity: FavoriteItem.entity(),
+                sortDescriptors: [NSSortDescriptor(keyPath: \FavoriteItem.date, ascending: false)],
+                animation: .spring()
+            )
+        }
+    }
     
     var body: some View {
         GeometryReader { geometry in
             VStack(spacing: 0) {
-                HStack {
-                    Text("お気に入りリスト")
-                        .foregroundColor(.black)
-                        .font(.system(size: CGFloat(geometry.size.height * 0.03), weight: .heavy))
-                        .padding(CGFloat(geometry.size.height * 0.02))
-                    
-                    Spacer(minLength: 0)
-                    
-                    Button(action: {
-                        if (isEditMode) {
-                            removeItemNum = []
-                        }
-                        isEditMode.toggle()
-                    }) {
-                        Text((isEditMode) ? "終了" : "編集")
-                            .foregroundColor(.blue)
-                            .font(.system(size: CGFloat(geometry.size.height * 0.025), weight: .medium))
-                            .padding(CGFloat(geometry.size.height * 0.02))
-                    }
-                }
+                ListHeader(isEditMode: $isEditMode, removeItemString: $removeItemString)
+                    .frame(height: CGFloat(geometry.size.height * 0.08))
+                    .padding([.top, .horizontal], CGFloat(geometry.size.height * 0.02))
+                
                 if (isEditMode) {
-                    EditBar(removeItemNum: $removeItemNum, isShowRemove: $isShowRemove)
+                    EditBar(removeItemString: $removeItemString, isShowRemove: $isShowRemove, items: _items)
                         .frame(height: CGFloat(geometry.size.height * 0.05))
-                        .padding([.top, .horizontal], CGFloat(geometry.size.height * 0.02))
+                        .padding([.horizontal], CGFloat(geometry.size.height * 0.02))
                 }
                 if (items.isEmpty) {
                     Spacer()
@@ -63,7 +69,7 @@ struct FavoriteListView: View {
                             ForEach(0 ..< items.count, id: \.self) { index in
                                 let item: FavoriteItem = items[index]
                                 VStack(alignment: .leading, spacing: 0) {
-                                    TrashButton(removeItemNum: $removeItemNum, isEditMode: $isEditMode, isShowRemove: $isShowRemove, index: index)
+                                    TrashButton(removeItemString: $removeItemString, isEditMode: $isEditMode, isShowRemove: $isShowRemove, index: item.link)
                                         .padding(EdgeInsets(
                                                     top: CGFloat(geometry.size.height * 0.03),
                                                     leading: CGFloat(geometry.size.height * 0.06),
@@ -73,10 +79,10 @@ struct FavoriteListView: View {
                                     
                                     Button(action: {
                                         if (isEditMode) {
-                                            if let itemIndex = removeItemNum.firstIndex(where: {$0 == index}) {
-                                                removeItemNum.remove(at: itemIndex)
+                                            if let itemIndex = removeItemString.firstIndex(where: {$0 == item.link}) {
+                                                removeItemString.remove(at: itemIndex)
                                             } else {
-                                                removeItemNum.append(index)
+                                                removeItemString.append(item.link)
                                             }
                                         } else {
                                             self.item = convertToItem(item: item)
@@ -85,13 +91,14 @@ struct FavoriteListView: View {
                                         CardView(input: convertToItem(item: item))
                                             .frame(width: CGFloat(geometry.size.width - 30))
                                             .frame(minHeight: CGFloat(geometry.size.height * 0.3))
+                                            .frame(maxHeight: .infinity)
                                     }
                                 }
                                 .frame(width: CGFloat(geometry.size.width - 30))
                                 .frame(minHeight: CGFloat(geometry.size.height * 0.65))
                                 .frame(maxHeight: .infinity)
                                 .overlay(RoundedRectangle(cornerRadius: 20)
-                                            .stroke((removeItemNum.firstIndex(where: {$0 == index}) != nil) ?  Color.blue : Color.gray, lineWidth: 1))
+                                            .stroke((removeItemString.firstIndex(where: {$0 == item.link}) != nil) ?  Color.blue : Color.gray, lineWidth: 1))
                                 .padding(EdgeInsets(
                                             // 上部のバーと被らないようにするため1だけpaddingを設定する
                                             top: 1,
@@ -112,12 +119,15 @@ struct FavoriteListView: View {
                 title: Text("削除"),
                 message: (isEditMode) ? Text("選択した商品を削除しますか？") : Text("お気に入りリストからこの商品を削除しますか？"),
                 primaryButton: .cancel(Text("キャンセル")) {
-                    removeItemNum = []
+                    removeItemString = []
                 },
                 secondaryButton: .destructive(Text("削除")) {
                     removeItem()
                 })
         } // .alert
+        .sheet(item: $item) { item in
+            ItemView(input: item, title: "詳細")
+        }
     } // body
     
     private func buildCGFloat(_ titleCount: Int) -> CGFloat {
@@ -139,13 +149,30 @@ struct FavoriteListView: View {
     }
     
     private func removeItem() {
-        removeItemNum.forEach { index in
-            context.delete(items[index])
+        removeItemString.forEach { link in
+            guard let item = searchItem(link) else {
+                return
+            }
+            
+            context.delete(item[0])
         }
         
         do {
             try context.save()
-            removeItemNum = []
+            removeItemString = []
+        } catch {
+            fatalError()
+        }
+    }
+    
+    private func searchItem(_ link: String) -> [FavoriteItem]? {
+        let request = NSFetchRequest<FavoriteItem>(entityName: "FavoriteItem")
+        let predicate = NSPredicate(format: "link CONTAINS[C] %@", link)
+        
+        request.predicate = predicate
+        
+        do {
+            return try context.fetch(request)
         } catch {
             fatalError()
         }

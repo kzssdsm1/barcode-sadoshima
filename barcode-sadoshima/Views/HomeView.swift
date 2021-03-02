@@ -67,13 +67,15 @@ struct HomeView: View {
                             }
                             .tag(0)
                     }
-                    FavoriteListView(item: $viewModel.item)
+                    TextFieldView()
                         .tabItem{
                             Image(systemName: "star.fill")
                             Text("お気に入りリスト")
                         }
                         .tag(1)
                 }
+                .animation(.linear)
+                .transition(.slide)
                 .accentColor(.blue)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
