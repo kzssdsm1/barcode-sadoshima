@@ -19,16 +19,6 @@ final class HomeViewModel: ObservableObject {
     
     private var cancellables: [AnyCancellable] = []
     
-    var titleString: String {
-        if selection == 0 {
-            return "バーコードスキャナー"
-        } else if selection == 1 {
-            return "お気に入りリスト"
-        } else {
-            return "バーコードスキャナー"
-        }
-    }
-    
     init(apiService: APIServiceType) {
         self.apiService = apiService
         

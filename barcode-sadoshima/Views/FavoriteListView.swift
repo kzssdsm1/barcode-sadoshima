@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+// 式が複雑すぎてコンパイルが通らなかったため削除ボタンと上部の編集バーを部品化して別のファイルに分けています
+// 各所のCGFloatは型チェックを突破しようと試みた時の名残です
+
 struct FavoriteListView: View {
     @Binding var item: Item?
     
@@ -14,60 +17,87 @@ struct FavoriteListView: View {
     
     @FetchRequest(entity: FavoriteItem.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \FavoriteItem.date, ascending: false)],animation: .spring()) private var items : FetchedResults<FavoriteItem>
     
-    @StateObject private var viewModel = FavoriteListViewModel()
+    @State private var removeItemNum: [Int] = []
+    @State private var isShowRemove: Bool = false
+    @State private var isEditMode: Bool = false
     
     var body: some View {
         GeometryReader { geometry in
             VStack(spacing: 0) {
+                HStack {
+                    Text("お気に入りリスト")
+                        .foregroundColor(.black)
+                        .font(.system(size: CGFloat(geometry.size.height * 0.03), weight: .heavy))
+                        .padding(CGFloat(geometry.size.height * 0.02))
+                    
+                    Spacer(minLength: 0)
+                    
+                    Button(action: {
+                        if (isEditMode) {
+                            removeItemNum = []
+                        }
+                        isEditMode.toggle()
+                    }) {
+                        Text((isEditMode) ? "終了" : "編集")
+                            .foregroundColor(.blue)
+                            .font(.system(size: CGFloat(geometry.size.height * 0.025), weight: .medium))
+                            .padding(CGFloat(geometry.size.height * 0.02))
+                    }
+                }
+                if (isEditMode) {
+                    EditBar(removeItemNum: $removeItemNum, isShowRemove: $isShowRemove)
+                        .frame(height: CGFloat(geometry.size.height * 0.05))
+                        .padding([.top, .horizontal], CGFloat(geometry.size.height * 0.02))
+                }
                 if (items.isEmpty) {
                     Spacer()
                     
                     Text("お気に入りリストに登録された商品がありません")
                         .foregroundColor(.black)
-                        .font(.system(size: geometry.size.height * 0.03, weight: .medium))
+                        .font(.system(size: CGFloat(geometry.size.height * 0.03), weight: .medium))
                     
                     Spacer()
                 } else {
                     ScrollView(.vertical, showsIndicators: false) {
                         LazyVStack(spacing: 0) {
                             ForEach(0 ..< items.count, id: \.self) { index in
-                                let item = items[index]
+                                let item: FavoriteItem = items[index]
                                 VStack(alignment: .leading, spacing: 0) {
-                                    Button(action: {
-                                        viewModel.removeItemNum.append(index)
-                                        viewModel.isShowAlert = true
-                                    }) {
-                                        Image(systemName: "trash.fill")
-                                            .renderingMode(.original)
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(width: 35, height: 35)
-                                            .padding(EdgeInsets(
-                                                        top: (geometry.size.height * 0.03),
-                                                        leading: (geometry.size.height * 0.077),
-                                                        bottom: 0,
-                                                        trailing: 0)
-                                            )
-                                    }
+                                    TrashButton(removeItemNum: $removeItemNum, isEditMode: $isEditMode, isShowRemove: $isShowRemove, index: index)
+                                        .padding(EdgeInsets(
+                                                    top: CGFloat(geometry.size.height * 0.03),
+                                                    leading: CGFloat(geometry.size.height * 0.06),
+                                                    bottom: 0,
+                                                    trailing: 0)
+                                        )
                                     
                                     Button(action: {
-                                        self.item = convertToItem(item: item)
+                                        if (isEditMode) {
+                                            if let itemIndex = removeItemNum.firstIndex(where: {$0 == index}) {
+                                                removeItemNum.remove(at: itemIndex)
+                                            } else {
+                                                removeItemNum.append(index)
+                                            }
+                                        } else {
+                                            self.item = convertToItem(item: item)
+                                        }
                                     }) {
                                         CardView(input: convertToItem(item: item))
-                                            .frame(width: (geometry.size.width - 30))
-                                            .frame(minHeight: (geometry.size.height * 0.3))
+                                            .frame(width: CGFloat(geometry.size.width - 30))
+                                            .frame(minHeight: CGFloat(geometry.size.height * 0.3))
                                     }
                                 }
-                                .frame(width: (geometry.size.width - 30))
-                                .frame(minHeight: (geometry.size.height * 0.65))
+                                .frame(width: CGFloat(geometry.size.width - 30))
+                                .frame(minHeight: CGFloat(geometry.size.height * 0.65))
                                 .frame(maxHeight: .infinity)
-                                .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.gray, lineWidth: 1))
+                                .overlay(RoundedRectangle(cornerRadius: 20)
+                                            .stroke((removeItemNum.firstIndex(where: {$0 == index}) != nil) ?  Color.blue : Color.gray, lineWidth: 1))
                                 .padding(EdgeInsets(
                                             // 上部のバーと被らないようにするため1だけpaddingを設定する
                                             top: 1,
-                                            leading: (geometry.size.height * 0.05),
-                                            bottom: (item.title.count > 21) ? (geometry.size.height * buildCGFloat(item.title.count)) : (geometry.size.height * 0.06),
-                                            trailing: (geometry.size.height * 0.05))
+                                            leading: CGFloat(geometry.size.height * 0.05),
+                                            bottom: (item.title.count > 21) ? CGFloat(geometry.size.height * buildCGFloat(item.title.count)) : CGFloat(geometry.size.height * 0.06),
+                                            trailing: CGFloat(geometry.size.height * 0.05))
                                 )
                             } // ForEach
                         } // LazyVStack
@@ -77,26 +107,23 @@ struct FavoriteListView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.white.edgesIgnoringSafeArea(.bottom))
         } // GeometryReader
-        .onAppear {
-            viewModel.setData(context: context)
-        }
-        .alert(isPresented: $viewModel.isShowAlert) {
+        .alert(isPresented: $isShowRemove) {
             Alert(
                 title: Text("削除"),
-                message: Text("お気に入りリストからこの商品を削除しますか？"),
+                message: (isEditMode) ? Text("選択した商品を削除しますか？") : Text("お気に入りリストからこの商品を削除しますか？"),
                 primaryButton: .cancel(Text("キャンセル")) {
-                    viewModel.removeItemNum = []
+                    removeItemNum = []
                 },
                 secondaryButton: .destructive(Text("削除")) {
-                    viewModel.removeItem()
+                    removeItem()
                 })
         } // .alert
     } // body
     
     private func buildCGFloat(_ titleCount: Int) -> CGFloat {
-        let count = titleCount / 21 - 1
-        let double = Double(count) * 0.03 + 0.06
-        let cgFloat = CGFloat(double)
+        let count: Int = titleCount / 21 - 1
+        let double: Double = Double(count) * 0.03 + 0.06
+        let cgFloat: CGFloat = CGFloat(double)
         return cgFloat
     }
     
@@ -109,5 +136,18 @@ struct FavoriteListView: View {
             price: item.price,
             title: item.title
         )
+    }
+    
+    private func removeItem() {
+        removeItemNum.forEach { index in
+            context.delete(items[index])
+        }
+        
+        do {
+            try context.save()
+            removeItemNum = []
+        } catch {
+            fatalError()
+        }
     }
 }

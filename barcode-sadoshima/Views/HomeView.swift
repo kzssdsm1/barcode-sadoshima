@@ -19,16 +19,22 @@ struct HomeView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(spacing: 0) {
-                Text(viewModel.titleString)
-                    .foregroundColor(.black)
-                    .font(.system(size: geometry.size.height * 0.04, weight: .heavy))
-                    .padding((geometry.size.height * 0.02))
+                if (viewModel.selection == 0) {
+                    HStack {
+                        Text("バーコードスキャナー")
+                            .foregroundColor(.black)
+                            .font(.system(size: geometry.size.height * 0.03, weight: .heavy))
+                            .padding((geometry.size.height * 0.02))
+                        
+                        Spacer(minLength: 0)
+                    }
+                }
                 
                 TabView(selection: $viewModel.selection) {
                     if (viewModel.item == nil) {
                         // シミュレーター用
-//                        Text("一時的にカメラは停止されます")
-                        BarcodeScannerView(alertItem: $viewModel.alertItem, onCommitSubject: $viewModel.onCommitSubject)
+                        Text("一時的にカメラは停止されます")
+//                        BarcodeScannerView(alertItem: $viewModel.alertItem, onCommitSubject: $viewModel.onCommitSubject)
                             .tabItem {
                                 Image(systemName: "camera")
                                 Text("バーコードスキャナー")
