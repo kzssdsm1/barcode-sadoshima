@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EB360E8125EDF81D005DC971 /* FavoriteListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB360E8025EDF81D005DC971 /* FavoriteListViewModel.swift */; };
 		EB3D39A225EA12EE001BD287 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3D39A125EA12EE001BD287 /* HomeViewModel.swift */; };
 		EB3D39A525EA1335001BD287 /* ItemsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3D39A425EA1335001BD287 /* ItemsResponse.swift */; };
 		EB3D39AB25EA1491001BD287 /* FavoriteItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3D39A925EA1491001BD287 /* FavoriteItem+CoreDataClass.swift */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EB360E8025EDF81D005DC971 /* FavoriteListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListViewModel.swift; sourceTree = "<group>"; };
 		EB3D39A125EA12EE001BD287 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		EB3D39A425EA1335001BD287 /* ItemsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsResponse.swift; sourceTree = "<group>"; };
 		EB3D39A925EA1491001BD287 /* FavoriteItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteItem+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 			children = (
 				EB4CD54025E94216006A0A03 /* ItemViewModel.swift */,
 				EB3D39A125EA12EE001BD287 /* HomeViewModel.swift */,
+				EB360E8025EDF81D005DC971 /* FavoriteListViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 				EB3D39C925EAA692001BD287 /* CardView.swift in Sources */,
 				EB4CD51D25E8FD27006A0A03 /* barcode_sadoshima.xcdatamodeld in Sources */,
 				EB3D39BA25EA6384001BD287 /* ItemsRequest.swift in Sources */,
+				EB360E8125EDF81D005DC971 /* FavoriteListViewModel.swift in Sources */,
 				EB3D39AF25EA623B001BD287 /* ItemView.swift in Sources */,
 				EB3D39A525EA1335001BD287 /* ItemsResponse.swift in Sources */,
 				EB3D39B725EA6378001BD287 /* APIServiceError.swift in Sources */,

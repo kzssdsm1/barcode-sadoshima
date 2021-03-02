@@ -41,30 +41,32 @@ struct CardView: View {
                         Text("タイトル：")
                             .foregroundColor(.gray)
                             .opacity(0.9)
-                            .font(.system(size: (geometry.size.height * 0.05), weight: .regular))
+                            .font(.system(size: (geometry.size.height * 0.03), weight: .regular))
                         
                         Text(input.title)
                             .foregroundColor(.black)
-                            .font(.system(size: (geometry.size.height * 0.07), weight: .semibold))
-                            .lineLimit(2)
+                            .font(.system(size: (geometry.size.height * 0.05), weight: .semibold))
                             .fixedSize(horizontal: false, vertical: true)
-                            .padding(.bottom, (geometry.size.height * 0.04))
+                        
+                        Spacer(minLength: 0)
                         
                         Text("追加日時：")
                             .foregroundColor(.gray)
                             .opacity(0.9)
-                            .font(.system(size: (geometry.size.height * 0.05), weight: .regular))
+                            .font(.system(size: (geometry.size.height * 0.03), weight: .regular))
                         
                         Text(input.date)
                             .foregroundColor(.black)
-                            .font(.system(size: (geometry.size.height * 0.07), weight: .semibold))
-//                            .padding(.bottom, (geometry.size.height * 0.04))
+                            .font(.system(size: (geometry.size.height * 0.05), weight: .semibold))
                     } // VStack
                     .layoutPriority(100)
                 } // HStack
             } // VStack
-            .padding((geometry.size.height * 0.06))
-            .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.gray, lineWidth: 1))
+            .padding(EdgeInsets(
+                        top: (geometry.size.height * 0.06),
+                        leading: (geometry.size.height * 0.06),
+                        bottom: (geometry.size.height * 0.06),
+                        trailing: (geometry.size.height * 0.06)))
         } // GeometryReader
     } // body
     
