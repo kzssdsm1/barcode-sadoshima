@@ -10,6 +10,7 @@ import Combine
 
 struct HomeView: View {
     @StateObject private var viewModel: HomeViewModel = .init(apiService: APIService())
+    @State private var reload = false
     
     init() {
         UITabBar.appearance().barTintColor = UIColor.white
@@ -27,20 +28,37 @@ struct HomeView: View {
                             .padding((geometry.size.height * 0.02))
                         
                         Spacer(minLength: 0)
+                        
+                        Button(action: {
+                            reload.toggle()
+                        }) {
+                            Image(systemName: "arrow.triangle.2.circlepath")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: CGFloat(geometry.size.height * 0.05), height: (geometry.size.width * 0.05))
+                                .foregroundColor(.blue)
+                                .padding((geometry.size.height * 0.02))
+                        }
                     }
                 }
                 
                 TabView(selection: $viewModel.selection) {
                     if (viewModel.item == nil) {
-                        // シミュレーター用
-                        Text("一時的にカメラは停止されます")
-//                        BarcodeScannerView(alertItem: $viewModel.alertItem, onCommitSubject: $viewModel.onCommitSubject)
-                            .tabItem {
-                                Image(systemName: "camera")
-                                Text("バーコードスキャナー")
-                            }
-                            .tag(0)
-                        // 強制的にViewの再描画を行いAVCaptureSessionを再開させる
+                        if !(reload) {
+                            BarcodeScannerView(alertItem: $viewModel.alertItem, onCommitSubject: $viewModel.onCommitSubject)
+                                .tabItem {
+                                    Image(systemName: "camera")
+                                    Text("バーコードスキャナー")
+                                }
+                                .tag(0)
+                        } else {
+                            BarcodeScannerView(alertItem: $viewModel.alertItem, onCommitSubject: $viewModel.onCommitSubject)
+                                .tabItem {
+                                    Image(systemName: "camera")
+                                    Text("バーコードスキャナー")
+                                }
+                                .tag(0)
+                        }
                     } else {
                         Text("一時的にカメラは停止されます")
                             .tabItem {
