@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		EB275E3725EE100E004E7C91 /* EditBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB275E3625EE100D004E7C91 /* EditBar.swift */; };
 		EB275E3B25EE1468004E7C91 /* TrashButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB275E3A25EE1468004E7C91 /* TrashButton.swift */; };
+		EB392C3325EE98D4004D6DEE /* UIAplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB392C3225EE98D4004D6DEE /* UIAplication+Extension.swift */; };
 		EB3D39A225EA12EE001BD287 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3D39A125EA12EE001BD287 /* HomeViewModel.swift */; };
 		EB3D39A525EA1335001BD287 /* ItemsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3D39A425EA1335001BD287 /* ItemsResponse.swift */; };
 		EB3D39AB25EA1491001BD287 /* FavoriteItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3D39A925EA1491001BD287 /* FavoriteItem+CoreDataClass.swift */; };
@@ -37,6 +38,7 @@
 /* Begin PBXFileReference section */
 		EB275E3625EE100D004E7C91 /* EditBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBar.swift; sourceTree = "<group>"; };
 		EB275E3A25EE1468004E7C91 /* TrashButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashButton.swift; sourceTree = "<group>"; };
+		EB392C3225EE98D4004D6DEE /* UIAplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAplication+Extension.swift"; sourceTree = "<group>"; };
 		EB3D39A125EA12EE001BD287 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		EB3D39A425EA1335001BD287 /* ItemsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsResponse.swift; sourceTree = "<group>"; };
 		EB3D39A925EA1491001BD287 /* FavoriteItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteItem+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -85,6 +87,14 @@
 			path = ViewComponents;
 			sourceTree = "<group>";
 		};
+		EB392C3125EE98A3004D6DEE /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				EB392C3225EE98D4004D6DEE /* UIAplication+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		EB3D39B125EA6354001BD287 /* APIService */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +124,7 @@
 		EB4CD50F25E8FD25006A0A03 /* barcode-sadoshima */ = {
 			isa = PBXGroup;
 			children = (
+				EB392C3125EE98A3004D6DEE /* Extensions */,
 				EB275E3525EE0FFA004E7C91 /* ViewComponents */,
 				EB3D39B125EA6354001BD287 /* APIService */,
 				EB4CD53F25E94203006A0A03 /* ViewModels */,
@@ -248,6 +259,7 @@
 				EB3D39C625EAA384001BD287 /* FavoriteListView.swift in Sources */,
 				EB3D39C025EA9D1B001BD287 /* BarcodeScannerView.swift in Sources */,
 				EB4CD53925E93F9F006A0A03 /* Item.swift in Sources */,
+				EB392C3325EE98D4004D6DEE /* UIAplication+Extension.swift in Sources */,
 				EB3D39A225EA12EE001BD287 /* HomeViewModel.swift in Sources */,
 				EB4CD54125E94216006A0A03 /* ItemViewModel.swift in Sources */,
 				EB56018625EE5CBC004A59E8 /* TextFieldView.swift in Sources */,

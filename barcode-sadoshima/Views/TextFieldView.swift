@@ -17,8 +17,10 @@ struct TextFieldView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                 
                 TextField("タイトルを入力(かな・漢字完全一致)", text: $inputText)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
                     .frame(height: 40)
-                    .background(Color.gray.opacity(0.8))
+                    .cornerRadius(12)
+                    .padding(.horizontal, CGFloat(geometry.size.height * 0.02))
             }
             .background(Color.white.edgesIgnoringSafeArea(.bottom))
         }

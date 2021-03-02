@@ -21,6 +21,7 @@ struct FavoriteListView: View {
     @State private var removeItemString: [String] = []
     @State private var isShowRemove: Bool = false
     @State private var isEditMode: Bool = false
+    @State private var isKeyboardShow = false
     
     let inputText: String
     
@@ -46,9 +47,12 @@ struct FavoriteListView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(spacing: 0) {
-                ListHeader(isEditMode: $isEditMode, removeItemString: $removeItemString)
-                    .frame(height: CGFloat(geometry.size.height * 0.08))
-                    .padding([.top, .horizontal], CGFloat(geometry.size.height * 0.02))
+                if !(isKeyboardShow) {
+                    ListHeader(isEditMode: $isEditMode, removeItemString: $removeItemString)
+                        .frame(height: CGFloat(geometry.size.height * 0.08))
+                        .padding([.top, .horizontal], CGFloat(geometry.size.height * 0.02))
+                    
+                }
                 
                 if (isEditMode) {
                     EditBar(removeItemString: $removeItemString, isShowRemove: $isShowRemove, items: _items)
@@ -101,7 +105,7 @@ struct FavoriteListView: View {
                                             .stroke((removeItemString.firstIndex(where: {$0 == item.link}) != nil) ?  Color.blue : Color.gray, lineWidth: 1))
                                 .padding(EdgeInsets(
                                             // 上部のバーと被らないようにするため1だけpaddingを設定する
-                                            top: 1,
+                                            top: (isKeyboardShow) ? CGFloat(geometry.size.height * 0.05) : 1,
                                             leading: CGFloat(geometry.size.height * 0.05),
                                             bottom: (item.title.count > 21) ? CGFloat(geometry.size.height * buildCGFloat(item.title.count)) : CGFloat(geometry.size.height * 0.06),
                                             trailing: CGFloat(geometry.size.height * 0.05))
@@ -112,8 +116,16 @@ struct FavoriteListView: View {
                 }
             } // VStack
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .onTapGesture {
+                UIApplication.shared.closeKeyboard()
+            }
             .background(Color.white.edgesIgnoringSafeArea(.bottom))
         } // GeometryReader
+        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidShowNotification)) { _ in
+            self.isKeyboardShow = true
+        }.onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidHideNotification)) { _ in
+            self.isKeyboardShow = false
+        }
         .alert(isPresented: $isShowRemove) {
             Alert(
                 title: Text("削除"),
