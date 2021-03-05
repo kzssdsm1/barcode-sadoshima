@@ -33,6 +33,7 @@
 		EB4CD54125E94216006A0A03 /* ItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4CD54025E94216006A0A03 /* ItemViewModel.swift */; };
 		EB56018625EE5CBC004A59E8 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB56018525EE5CBC004A59E8 /* TextFieldView.swift */; };
 		EB56018C25EE79D1004A59E8 /* ListHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB56018B25EE79D1004A59E8 /* ListHeader.swift */; };
+		EBD91AF025F2573A00D46682 /* SortButtonBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD91AEF25F2573A00D46682 /* SortButtonBarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		EB4CD54025E94216006A0A03 /* ItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewModel.swift; sourceTree = "<group>"; };
 		EB56018525EE5CBC004A59E8 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
 		EB56018B25EE79D1004A59E8 /* ListHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListHeader.swift; sourceTree = "<group>"; };
+		EBD91AEF25F2573A00D46682 /* SortButtonBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortButtonBarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				EB275E3625EE100D004E7C91 /* EditBar.swift */,
 				EB275E3A25EE1468004E7C91 /* TrashButton.swift */,
 				EB56018B25EE79D1004A59E8 /* ListHeader.swift */,
+				EBD91AEF25F2573A00D46682 /* SortButtonBarView.swift */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 				EB3D39C925EAA692001BD287 /* CardView.swift in Sources */,
 				EB4CD51D25E8FD27006A0A03 /* barcode_sadoshima.xcdatamodeld in Sources */,
 				EB3D39BA25EA6384001BD287 /* ItemsRequest.swift in Sources */,
+				EBD91AF025F2573A00D46682 /* SortButtonBarView.swift in Sources */,
 				EB3D39AF25EA623B001BD287 /* ItemView.swift in Sources */,
 				EB3D39A525EA1335001BD287 /* ItemsResponse.swift in Sources */,
 				EB3D39B725EA6378001BD287 /* APIServiceError.swift in Sources */,

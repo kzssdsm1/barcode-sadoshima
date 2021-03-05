@@ -8,7 +8,7 @@
 import SwiftUI
 import CoreData
 
-// 式が複雑すぎてコンパイルが通らなかったため削除ボタンとヘッダーを部品化して別のファイルに分けています
+// コードが複雑すぎてコンパイルが通らなかったため削除ボタンとヘッダーを部品化して別のファイルに分けています
 // 各所のCGFloatは型チェックを突破しようと試みた時の名残です
 
 struct FavoriteListView: View {
@@ -24,21 +24,25 @@ struct FavoriteListView: View {
     @State private var isKeyboardShow = false
     
     let inputText: String
+    let isAscending: Bool
+    let sortPath: ReferenceWritableKeyPath<FavoriteItem, String>
     
-    init(inputText: String) {
+    init(inputText: String, isAscending: Bool, sortPath: ReferenceWritableKeyPath<FavoriteItem, String>) {
         self.inputText = inputText
+        self.isAscending = isAscending
+        self.sortPath = sortPath
         
         if self.inputText != "" {
             self._items = FetchRequest(
                 entity: FavoriteItem.entity(),
-                sortDescriptors: [NSSortDescriptor(keyPath: \FavoriteItem.date, ascending: false)],
+                sortDescriptors: [NSSortDescriptor(keyPath: sortPath, ascending: isAscending)],
                 predicate: NSPredicate(format: "title CONTAINS[C] %@", inputText),
                 animation: .spring()
             )
         } else {
             self._items = FetchRequest(
                 entity: FavoriteItem.entity(),
-                sortDescriptors: [NSSortDescriptor(keyPath: \FavoriteItem.date, ascending: false)],
+                sortDescriptors: [NSSortDescriptor(keyPath: sortPath, ascending: isAscending)],
                 animation: .spring()
             )
         }
@@ -97,7 +101,7 @@ struct FavoriteListView: View {
                                             .frame(minHeight: CGFloat(geometry.size.height * 0.3))
                                             .frame(maxHeight: .infinity)
                                     }
-                                }
+                                } // VStack
                                 .frame(width: CGFloat(geometry.size.width - 30))
                                 .frame(minHeight: CGFloat(geometry.size.height * 0.65))
                                 .frame(maxHeight: .infinity)
