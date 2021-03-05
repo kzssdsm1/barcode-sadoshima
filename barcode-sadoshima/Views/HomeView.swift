@@ -74,8 +74,6 @@ struct HomeView: View {
                         }
                         .tag(1)
                 }
-                .animation(.linear)
-                .transition(.slide)
                 .accentColor(.blue)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
