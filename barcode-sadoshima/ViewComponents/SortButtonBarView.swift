@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// MARK: - 並び替えボタンを配置しているバーの構造体
 struct SortButtonBarView: View {
     @Binding var isAscending: Bool
     @Binding var sortPath: ReferenceWritableKeyPath<FavoriteItem, String>
@@ -34,15 +35,9 @@ struct SortButtonBarView: View {
                             .foregroundColor(.blue)
                             .font(.system(size: (geometry.size.height * 0.7), weight: .heavy))
                     } else {
-                        if (isAscending) {
-                            Text("日時↓")
-                                .foregroundColor(.blue)
-                                .font(.system(size: (geometry.size.height * 0.7), weight: .heavy))
-                        } else {
-                            Text("日時↑")
-                                .foregroundColor(.blue)
-                                .font(.system(size: (geometry.size.height * 0.7), weight: .heavy))
-                        }
+                        Text((isAscending) ? "日時↑" : "日時↓")
+                            .foregroundColor(.blue)
+                            .font(.system(size: (geometry.size.height * 0.7), weight: .heavy))
                     }
                 }
                 .padding(.trailing, (geometry.size.width * 0.1))
@@ -64,15 +59,10 @@ struct SortButtonBarView: View {
                             .foregroundColor(.blue)
                             .font(.system(size: (geometry.size.height * 0.7), weight: .heavy))
                     } else {
-                        if (isAscending) {
-                            Text("タイトル↓")
-                                .foregroundColor(.blue)
-                                .font(.system(size: (geometry.size.height * 0.7), weight: .heavy))
-                        } else {
-                            Text("タイトル↑")
-                                .foregroundColor(.blue)
-                                .font(.system(size: (geometry.size.height * 0.7), weight: .heavy))
-                        }
+                        Text((isAscending) ? "タイトル↑" : "タイトル↓")
+                            .foregroundColor(.blue)
+                            .font(.system(size: (geometry.size.height * 0.7), weight: .heavy))
+                        
                     }
                 }
                 

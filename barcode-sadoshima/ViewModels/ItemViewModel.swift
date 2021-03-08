@@ -9,20 +9,28 @@ import Foundation
 import CoreData
 
 final class ItemViewModel: ObservableObject {
+    // 商品が既にお気に入りリストに登録されているかを判定する変数
     @Published var existsItem = false
     
     private var context: NSManagedObjectContext?
     private var link: String?
     
+    /// CoreDataの処理をで利用する環境値で設定されたcontextと商品掲載URLを受け取るメソッド
+    /// - Parameters:
+    ///   - context: コンテキスト
+    ///   - link: 商品掲載URL
     func setData(context: NSManagedObjectContext, link: String) {
         self.context = context
         self.link = link
         
+        // CoreData内に一致する商品があった場合はexistsItemをtrueにする
         if !(searchItem(link)!.isEmpty) {
             existsItem = true
         }
     }
     
+    /// 商品をお気に入りリストに登録するメソッド
+    /// - Parameter item: 商品データ
     func addItem(item: Item) {
         guard let context = context else {
             return
@@ -49,6 +57,7 @@ final class ItemViewModel: ObservableObject {
         }
     }
     
+    /// 商品をお気に入りリストから削除するメソッド
     func removeItem() {
         guard let context = context else {
             return
@@ -76,6 +85,9 @@ final class ItemViewModel: ObservableObject {
         }
     }
     
+    /// 商品掲載URLが一致するデータをCoreDataで検索する関数
+    /// - Parameter link: 親Viewから渡された商品検索URL
+    /// - Returns: 検索結果を格納する配列
     private func searchItem(_ link: String) -> [FavoriteItem]? {
         guard let context = context else {
             return nil

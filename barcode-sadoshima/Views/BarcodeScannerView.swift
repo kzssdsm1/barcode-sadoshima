@@ -49,8 +49,10 @@ struct BarcodeScannerView: UIViewControllerRepresentable {
             }
             
             DispatchQueue.global().async {
+                // startRunninの処理が重たいので別スレッドで行う
                 startSession()
                 
+                // Viewの描画に関する処理はメインスレッドで行わないとエラーが発生する
                 DispatchQueue.main.async {
                     let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
                     previewLayer.frame = viewController.view.bounds
@@ -79,12 +81,16 @@ struct BarcodeScannerView: UIViewControllerRepresentable {
         captureSession.stopRunning()
     }
     
+    /// ISBNの読み取りに成功するとバイブレーションを鳴らしてHomeViewModelにストリームを流すメソッド
+    /// - Parameter barcode: ISBNコード
     private func didFind(barcode: String) {
         endSession()
         AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
         onCommitSubject.send(barcode)
     }
     
+    /// エラーが発生した際にalertItemに値を格納するメソッド（値が格納されると自動でアラートが呼び出される）
+    /// - Parameter error: エラーの型
     private func didSurface(error: ScanError) {
         switch error {
         case .invalidDeviceInput:
@@ -94,6 +100,8 @@ struct BarcodeScannerView: UIViewControllerRepresentable {
         }
     }
     
+    /// カメラの検知を範囲を示す枠線を追加する関数
+    /// - Returns: 枠線
     private func makeBorderline() -> UIView {
         let screenWidth = CGFloat(UIScreen.main.bounds.width)
         let screenHeight = CGFloat(UIScreen.main.bounds.height)
@@ -107,7 +115,9 @@ struct BarcodeScannerView: UIViewControllerRepresentable {
         return borderline
     }
     
-    // ean8及びean13をISBNに変換するメソッド
+    /// ean8及びean13をISBNに変換する関数
+    /// - Parameter value: カメラで読み取ったEAN-8、及びEAN-16
+    /// - Returns: ISBNコード
     private func convertISBN(value: String) -> String? {
         let v = NSString(string: value).longLongValue
         let prefix: Int64 = Int64(v / 10000000000)

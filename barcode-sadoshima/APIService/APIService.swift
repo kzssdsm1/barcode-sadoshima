@@ -21,11 +21,14 @@ protocol APIServiceType {
 }
 
 final class APIService: APIServiceType {
-    // キャッシュが残っていても常にサーバーにリクエストを送るための設定
+    /// キャッシュが残っていても常にサーバーにリクエストを送るための設定
     private let cachePolicy: NSURLRequest.CachePolicy = .useProtocolCachePolicy
-    // 応答待機時間
+    /// 応答待機時間
     private let timeInterval: TimeInterval = 30
     
+    /// APIリクエストを行う関数
+    /// - Parameter request: 別途定義したRequestパラメーターを取りまとめた構造体
+    /// - Returns: APIリクエスト、成功した場合sinkでレスポンスを受け取れる
     func request<T, V>(_ request: T) -> AnyPublisher<V, APIServiceError> where T: APIRequestType, V: Codable, V == T.ResponseType {
         guard let pathURL = URL(string: request.pathString, relativeTo: URL(string: request.baseURLString)) else {
             return Fail(error: APIServiceError.invalidURL)
@@ -36,6 +39,7 @@ final class APIService: APIServiceType {
         let decoder = JSONDecoder()
         
         return URLSession.shared
+            // 既に用意されているURLSession用のPublisherを利用する
             .dataTaskPublisher(for: request)
             .tryMap { data, response in
                 guard let httpResponse = response as? HTTPURLResponse else {
@@ -86,6 +90,11 @@ final class APIService: APIServiceType {
             .eraseToAnyPublisher()
     }
     
+    /// URLRequestを組み立てる関数
+    /// - Parameters:
+    ///   - url: スキーマとドメインとパスからなるベースURL
+    ///   - queryItems: APIリクエストパラメーター
+    /// - Returns: dataTuskPublisherで使用するURLRequest
     private func buildURLRequest(url: URL, queryItems: [URLQueryItem]) -> URLRequest {
         var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true)!
         urlComponents.queryItems = queryItems

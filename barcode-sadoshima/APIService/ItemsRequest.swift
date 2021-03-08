@@ -7,9 +7,11 @@
 
 import Foundation
 
+// MARK: - APIリクエストの構造体
 struct ItemsRequest: APIRequestType {
     typealias ResponseType = ItemsResponse
     
+    // 末尾はcomやjpなどのトップレベルドメインじゃないとリクエストに利用できない
     var baseURLString: String {
         return "https://app.rakuten.co.jp/"
     }
@@ -34,6 +36,8 @@ struct ItemsRequest: APIRequestType {
         self.query = query
     }
     
+    /// Property ListからapplicationIDを読み取る関数
+    /// - Returns: applicationID
     private func getAppID() -> String {
             let filePath = Bundle.main.path(forResource: "AppID", ofType: "plist")!
             let plist = NSDictionary(contentsOfFile: filePath)!

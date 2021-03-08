@@ -43,6 +43,8 @@ struct HomeView: View {
                 }
                 
                 TabView(selection: $viewModel.selection) {
+                    // バーコードを検知した瞬間にお気に入りリストに移動するとAVCaptureSessionが止まったまま再開されないことがあるため
+                    // ヘッダーのリロードボタンをタップすると強制的にBarcodeScannerViewを再描画させるように設定
                     if (viewModel.item == nil) {
                         if !(reload) {
                             BarcodeScannerView(alertItem: $viewModel.alertItem, onCommitSubject: $viewModel.onCommitSubject)

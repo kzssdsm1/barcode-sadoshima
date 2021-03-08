@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// MARK: - 削除ボタンの構造体
 struct TrashButton: View {
     @Binding var removeItemString: [String]
     @Binding var isEditMode: Bool

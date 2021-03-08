@@ -44,6 +44,7 @@ struct ItemView: View {
                                     .shadow(color: .gray, radius: 1, x: 0, y: 0)
                                     .padding([.bottom, .horizontal], (geometry.size.height * 0.04))
                             } else {
+                                // 何らかの理由により画像データを取得できなかった時は代理の画像を表示する
                                 Image(systemName: "questionmark.circle")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
@@ -141,6 +142,9 @@ struct ItemView: View {
         } // .alert
     } // body
     
+    /// String型のURLからUIImageを取り出す関数
+    /// - Parameter url: 親Viewから渡された書籍の画像URL
+    /// - Returns: 画像URLから変換されたUIImage
     private func convertStringToUIImage(url: String) -> UIImage? {
         guard let url = URL(string: url) else {
             return nil

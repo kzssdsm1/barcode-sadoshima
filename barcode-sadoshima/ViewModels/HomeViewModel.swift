@@ -12,9 +12,11 @@ final class HomeViewModel: ObservableObject {
     @Published var alertItem: AlertItem?
     @Published var item: Item?
     @Published var selection = 0
+    /// BarcodeScannerViewでISBNコードを読み取るとストリームを流すPublisher（値そのものを保持しない）
     @Published var onCommitSubject = PassthroughSubject<String, Never>()
     
     private let apiService: APIServiceType
+    /// エラーが返されるとストリームを流すPublisher
     private let errorSubject = PassthroughSubject<APIServiceError, Never>()
     
     private var cancellables: [AnyCancellable] = []
@@ -25,12 +27,15 @@ final class HomeViewModel: ObservableObject {
         bind()
     }
     
+    /// ストリームが流れるとAPIリクエストを行うメソッド
     private func bind() {
         // ストリームが流れるとAPIリクエストを行う
         let responseSubscriber = onCommitSubject
             .flatMap { [apiService] (query) in
                 apiService.request(ItemsRequest(query: query))
+                    // 戻り値がEmptyになっているためこの節では実際にはストリームが流れない
                     .catch { [weak self] error -> Empty<ItemsResponse, Never> in
+                        // エラーを検知するとストリームを流す
                         self?.errorSubject.send(error)
                         return .init()
                     }
@@ -43,6 +48,7 @@ final class HomeViewModel: ObservableObject {
                 self.item = self.convertToItem(item: item)
             }
         
+        // ストリームが流れるとエラーアラートを出す
         let errorSubscriber = errorSubject
             .sink(receiveValue: { [weak self] (error) in
                 print(error)
@@ -52,12 +58,16 @@ final class HomeViewModel: ObservableObject {
                 self.alertItem = AlertContext.invalidURLSession
             })
         
+        // ストリームを流し続けるとメモリリークを起こすためSubscribeを中止する
         cancellables += [
             responseSubscriber,
             errorSubscriber
         ]
     }
     
+    /// APIサーバーから返ってきたJSON構造体をItem型の構造体に変換する関数
+    /// - Parameter item: JSONのResponseModel
+    /// - Returns:
     private func convertToItem(item: [Items]) -> Item {
         let formatter       = DateFormatter()
         formatter.locale    = Locale(identifier: "ja_JP")

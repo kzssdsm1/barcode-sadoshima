@@ -26,6 +26,7 @@ struct CardView: View {
                             .frame(maxWidth: 135, maxHeight: 200)
                             .shadow(color: .gray, radius: 1, x: 0, y: 0)
                     } else {
+                        // 何らかの理由により画像データを取得できなかった時は代理の画像を表示する
                         Image(systemName: "questionmark.circle")
                             .renderingMode(.original)
                             .resizable()
@@ -41,6 +42,7 @@ struct CardView: View {
                 HStack {
                     VStack(alignment: .leading) {
                         Text("タイトル：")
+                            // 明示的に文字色を定義しておかないとButtonで包んだ際におかしくなる
                             .foregroundColor(.gray)
                             .opacity(0.9)
                             .font(.system(size: (geometry.size.height * 0.03), weight: .regular))
@@ -73,7 +75,9 @@ struct CardView: View {
         } // GeometryReader
     } // body
     
-    // String型のURLをUIImageに変換する関数
+    /// String型のURLからUIImageを取り出す関数
+    /// - Parameter url: 親Viewから渡された書籍の画像URL
+    /// - Returns: 画像URLから変換されたUIImage
     private func convertStringToUIImage(url: String) -> UIImage? {
         guard let url = URL(string: url) else {
             return nil

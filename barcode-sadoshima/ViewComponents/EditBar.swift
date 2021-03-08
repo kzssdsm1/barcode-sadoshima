@@ -8,6 +8,7 @@
 import SwiftUI
 import CoreData
 
+// MARK: - 編集モードの際に使用できる編集バーの構造体
 struct EditBar: View {
     @Binding var removeItemString: [String]
     @Binding var isShowRemove: Bool

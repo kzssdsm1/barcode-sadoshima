@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// MARK: - お気に入りリストのヘッダー構造体
 struct ListHeader: View {
     @Binding var isEditMode: Bool
     @Binding var removeItemString: [String]

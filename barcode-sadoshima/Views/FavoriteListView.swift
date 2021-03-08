@@ -8,9 +8,7 @@
 import SwiftUI
 import CoreData
 
-// コードが複雑すぎてコンパイルが通らなかったため削除ボタンとヘッダーを部品化して別のファイルに分けています
-// 各所のCGFloatは型チェックを突破しようと試みた時の名残です
-
+/// お気に入りリストの構造体
 struct FavoriteListView: View {
     @State private var item: Item?
     
@@ -108,9 +106,13 @@ struct FavoriteListView: View {
                                 .overlay(RoundedRectangle(cornerRadius: 20)
                                             .stroke((removeItemString.firstIndex(where: {$0 == item.link}) != nil) ?  Color.blue : Color.gray, lineWidth: 1))
                                 .padding(EdgeInsets(
-                                            // 上部のバーと被らないようにするため1だけpaddingを設定する
+                                            // ヘッダーと被らないようにするため上部に1だけpaddingを設定する
+                                            // ヘッダーが隠れている時はレイアウトがつまっている印象を避けるため余白を設定する
                                             top: (isKeyboardShow) ? CGFloat(geometry.size.height * 0.05) : 1,
                                             leading: CGFloat(geometry.size.height * 0.05),
+                                            // 書籍のタイトルがCardViewのサイズでスケールする一方、CradViewの外部に設定している余白は
+                                            // 本Viewのサイズによってスケールするためタイトルの行数によっては垂直方向のレイアウトが崩れる
+                                            // それを避けるためにタイトルの改行を検知して適宜下方の余白を再設定する
                                             bottom: (item.title.count > 21) ? CGFloat(geometry.size.height * buildCGFloat(item.title.count)) : CGFloat(geometry.size.height * 0.06),
                                             trailing: CGFloat(geometry.size.height * 0.05))
                                 )
@@ -143,9 +145,12 @@ struct FavoriteListView: View {
         } // .alert
         .sheet(item: $item) { item in
             ItemView(input: item, title: "詳細")
-        }
+        } // .sheet
     } // body
     
+    /// 書籍タイトルの文字数を受け取り適切な下方paddigの値を返す関数（1行は21文字）
+    /// - Parameter titleCount: 書籍タイトルの文字数
+    /// - Returns: 下方paddingの値
     private func buildCGFloat(_ titleCount: Int) -> CGFloat {
         let count: Int = titleCount / 21 - 1
         let double: Double = Double(count) * 0.03 + 0.06
@@ -153,6 +158,9 @@ struct FavoriteListView: View {
         return cgFloat
     }
     
+    /// CardViewに渡すためFavoriteItemの構造体をItem構造体に変換する関数
+    /// - Parameter item: FavoriteItemの構造体
+    /// - Returns: Itemの構造体
     private func convertToItem(item: FavoriteItem) -> Item {
         return Item(
             author: item.author,
@@ -164,12 +172,14 @@ struct FavoriteListView: View {
         )
     }
     
+    /// 選択された書籍を削除するメソッド
     private func removeItem() {
         removeItemString.forEach { link in
+            // 削除する書籍は商品掲載URLを用いて同定する
             guard let item = searchItem(link) else {
                 return
             }
-            
+            // データの重複登録はされないようになっているため常に配列の一番の最初の値を取り出す
             context.delete(item[0])
         }
         
@@ -181,6 +191,9 @@ struct FavoriteListView: View {
         }
     }
     
+    /// 削除する書籍をCoreDataから検索する関数
+    /// - Parameter link: 削除する書籍の商品掲載URL
+    /// - Returns: 削除する書籍が格納された配列
     private func searchItem(_ link: String) -> [FavoriteItem]? {
         let request = NSFetchRequest<FavoriteItem>(entityName: "FavoriteItem")
         let predicate = NSPredicate(format: "link CONTAINS[C] %@", link)
