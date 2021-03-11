@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - 並び替えボタンを配置しているバーの構造体
 struct SortButtonBarView: View {
     @Binding var isAscending: Bool
-    @Binding var sortPath: ReferenceWritableKeyPath<FavoriteItem, String>
+    @Binding var sortKeyPath: ReferenceWritableKeyPath<FavoriteItem, String>
     
     var body: some View {
         GeometryReader { geometry in
@@ -18,19 +18,19 @@ struct SortButtonBarView: View {
                 Spacer(minLength: 0)
                 
                 Button(action: {
-                    if (sortPath == \FavoriteItem.date) {
+                    if (sortKeyPath == \FavoriteItem.date) {
                         if (isAscending) {
                             isAscending = false
                         } else {
                             isAscending = true
                         }
                     } else {
-                        sortPath = \FavoriteItem.date
+                        sortKeyPath = \FavoriteItem.date
                         isAscending = false
                     }
                     
                 }) {
-                    if (sortPath == \FavoriteItem.title) {
+                    if (sortKeyPath == \FavoriteItem.title) {
                         Text("日時")
                             .foregroundColor(.blue)
                             .font(.system(size: (geometry.size.height * 0.7), weight: .heavy))
@@ -43,18 +43,18 @@ struct SortButtonBarView: View {
                 .padding(.trailing, (geometry.size.width * 0.1))
                 
                 Button(action: {
-                    if (sortPath == \FavoriteItem.title) {
+                    if (sortKeyPath == \FavoriteItem.title) {
                         if (isAscending) {
                             isAscending = false
                         } else {
                             isAscending = true
                         }
                     } else {
-                        sortPath = \FavoriteItem.title
+                        sortKeyPath = \FavoriteItem.title
                         isAscending = false
                     }
                 }) {
-                    if (sortPath == \FavoriteItem.date) {
+                    if (sortKeyPath == \FavoriteItem.date) {
                         Text("タイトル")
                             .foregroundColor(.blue)
                             .font(.system(size: (geometry.size.height * 0.7), weight: .heavy))
@@ -69,5 +69,5 @@ struct SortButtonBarView: View {
                 Spacer(minLength: 0)
             } // HStack
         } // GeometryReader
-    }
+    } // body
 }

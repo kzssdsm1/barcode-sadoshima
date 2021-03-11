@@ -25,7 +25,6 @@ struct ItemView: View {
                     
                     
                     Text(title)
-                        .foregroundColor(.black)
                         .font(.system(size: (geometry.size.height * 0.05), weight: .heavy))
                         .padding((geometry.size.height * 0.04))
                     
@@ -62,7 +61,6 @@ struct ItemView: View {
                             .padding(.horizontal, (geometry.size.height * 0.04))
                         
                         Text(input.title)
-                            .foregroundColor(.black)
                             .font(.system(size: (geometry.size.height * 0.03), weight: .semibold))
                             .fixedSize(horizontal: false, vertical: true)
                             .padding([.bottom, .horizontal], (geometry.size.height * 0.04))
@@ -74,7 +72,6 @@ struct ItemView: View {
                             .padding(.horizontal, (geometry.size.height * 0.04))
                         
                         Text(input.author)
-                            .foregroundColor(.black)
                             .font(.system(size: (geometry.size.height * 0.03), weight: .semibold))
                             .fixedSize(horizontal: false, vertical: true)
                             .padding([.bottom, .horizontal], (geometry.size.height * 0.04))
@@ -86,7 +83,6 @@ struct ItemView: View {
                             .padding(.horizontal, (geometry.size.height * 0.04))
                         
                         Text("\(input.price)円")
-                            .foregroundColor(.black)
                             .font(.system(size: (geometry.size.height * 0.03), weight: .semibold))
                             .padding([.bottom, .horizontal], (geometry.size.height * 0.04))
                         
@@ -126,7 +122,7 @@ struct ItemView: View {
                 } // ScrollView
             } // VStack
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color.white.edgesIgnoringSafeArea(.bottom))
+            .edgesIgnoringSafeArea(.all)
         } // GeometryReader
         .onAppear() {
             viewModel.setData(context: context, link: input.link)

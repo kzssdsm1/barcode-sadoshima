@@ -13,7 +13,6 @@ struct HomeView: View {
     @State private var reload = false
     
     init() {
-        UITabBar.appearance().barTintColor = UIColor.white
         UITabBar.appearance().unselectedItemTintColor = UIColor.gray
     }
     
@@ -23,9 +22,8 @@ struct HomeView: View {
                 if (viewModel.selection == 0) {
                     HStack {
                         Text("バーコードスキャナー")
-                            .foregroundColor(.black)
-                            .font(.system(size: geometry.size.height * 0.03, weight: .heavy))
-                            .padding((geometry.size.height * 0.02))
+                            .font(.system(size: CGFloat(geometry.size.height * 0.028), weight: .heavy))
+                            .padding(CGFloat(geometry.size.height * 0.02))
                         
                         Spacer(minLength: 0)
                         
@@ -35,11 +33,12 @@ struct HomeView: View {
                             Image(systemName: "arrow.triangle.2.circlepath")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: CGFloat(geometry.size.height * 0.05), height: (geometry.size.width * 0.05))
+                                .frame(width: CGFloat(geometry.size.width * 0.08), height: CGFloat(geometry.size.height * 0.08))
                                 .foregroundColor(.blue)
-                                .padding((geometry.size.height * 0.02))
+                                .padding(CGFloat(geometry.size.height * 0.02))
                         }
                     }
+                    .frame(height: CGFloat(60))
                 }
                 
                 TabView(selection: $viewModel.selection) {
@@ -69,7 +68,7 @@ struct HomeView: View {
                             }
                             .tag(0)
                     }
-                    TextFieldView()
+                    FavoriteListView()
                         .tabItem{
                             Image(systemName: "star.fill")
                             Text("お気に入りリスト")
@@ -79,7 +78,6 @@ struct HomeView: View {
                 .accentColor(.blue)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color.white.edgesIgnoringSafeArea(.bottom))
         }
         .sheet(item: $viewModel.item) { item in
             ItemView(input: item, title: "検索結果")

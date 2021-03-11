@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EB275E3725EE100E004E7C91 /* EditBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB275E3625EE100D004E7C91 /* EditBar.swift */; };
-		EB275E3B25EE1468004E7C91 /* TrashButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB275E3A25EE1468004E7C91 /* TrashButton.swift */; };
 		EB392C3325EE98D4004D6DEE /* UIAplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB392C3225EE98D4004D6DEE /* UIAplication+Extension.swift */; };
 		EB3D39A225EA12EE001BD287 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3D39A125EA12EE001BD287 /* HomeViewModel.swift */; };
 		EB3D39A525EA1335001BD287 /* ItemsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3D39A425EA1335001BD287 /* ItemsResponse.swift */; };
@@ -22,7 +20,6 @@
 		EB3D39C025EA9D1B001BD287 /* BarcodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3D39BF25EA9D1B001BD287 /* BarcodeScannerView.swift */; };
 		EB3D39C325EAA1E8001BD287 /* AppID.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB3D39C225EAA1E8001BD287 /* AppID.plist */; };
 		EB3D39C625EAA384001BD287 /* FavoriteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3D39C525EAA384001BD287 /* FavoriteListView.swift */; };
-		EB3D39C925EAA692001BD287 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3D39C825EAA692001BD287 /* CardView.swift */; };
 		EB4CD51125E8FD25006A0A03 /* barcode_sadoshimaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4CD51025E8FD25006A0A03 /* barcode_sadoshimaApp.swift */; };
 		EB4CD51525E8FD27006A0A03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB4CD51425E8FD27006A0A03 /* Assets.xcassets */; };
 		EB4CD51825E8FD27006A0A03 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB4CD51725E8FD27006A0A03 /* Preview Assets.xcassets */; };
@@ -31,14 +28,16 @@
 		EB4CD52E25E8FDF3006A0A03 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4CD52D25E8FDF3006A0A03 /* HomeView.swift */; };
 		EB4CD53925E93F9F006A0A03 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4CD53825E93F9F006A0A03 /* Item.swift */; };
 		EB4CD54125E94216006A0A03 /* ItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4CD54025E94216006A0A03 /* ItemViewModel.swift */; };
-		EB56018625EE5CBC004A59E8 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB56018525EE5CBC004A59E8 /* TextFieldView.swift */; };
-		EB56018C25EE79D1004A59E8 /* ListHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB56018B25EE79D1004A59E8 /* ListHeader.swift */; };
+		EB7063CC25FA55440014650F /* FavoriteListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7063CB25FA55440014650F /* FavoriteListViewModel.swift */; };
+		EB7063CF25FA56A80014650F /* FavoriteListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7063CE25FA56A80014650F /* FavoriteListHeaderView.swift */; };
+		EB7063D625FA589C0014650F /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7063D525FA589C0014650F /* TextFieldView.swift */; };
+		EB7063E425FA5E460014650F /* EditButtonBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7063E325FA5E460014650F /* EditButtonBarView.swift */; };
+		EB7063F225FA76A40014650F /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7063F125FA76A40014650F /* CardView.swift */; };
+		EB7063F625FA76C20014650F /* FetchedItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7063F525FA76C20014650F /* FetchedItems.swift */; };
 		EBD91AF025F2573A00D46682 /* SortButtonBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD91AEF25F2573A00D46682 /* SortButtonBarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		EB275E3625EE100D004E7C91 /* EditBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBar.swift; sourceTree = "<group>"; };
-		EB275E3A25EE1468004E7C91 /* TrashButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashButton.swift; sourceTree = "<group>"; };
 		EB392C3225EE98D4004D6DEE /* UIAplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAplication+Extension.swift"; sourceTree = "<group>"; };
 		EB3D39A125EA12EE001BD287 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		EB3D39A425EA1335001BD287 /* ItemsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsResponse.swift; sourceTree = "<group>"; };
@@ -52,7 +51,6 @@
 		EB3D39BF25EA9D1B001BD287 /* BarcodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScannerView.swift; sourceTree = "<group>"; };
 		EB3D39C225EAA1E8001BD287 /* AppID.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AppID.plist; sourceTree = "<group>"; };
 		EB3D39C525EAA384001BD287 /* FavoriteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListView.swift; sourceTree = "<group>"; };
-		EB3D39C825EAA692001BD287 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		EB4CD50D25E8FD25006A0A03 /* barcode-sadoshima.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "barcode-sadoshima.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB4CD51025E8FD25006A0A03 /* barcode_sadoshimaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = barcode_sadoshimaApp.swift; sourceTree = "<group>"; };
 		EB4CD51425E8FD27006A0A03 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -63,8 +61,12 @@
 		EB4CD52D25E8FDF3006A0A03 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		EB4CD53825E93F9F006A0A03 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		EB4CD54025E94216006A0A03 /* ItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewModel.swift; sourceTree = "<group>"; };
-		EB56018525EE5CBC004A59E8 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
-		EB56018B25EE79D1004A59E8 /* ListHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListHeader.swift; sourceTree = "<group>"; };
+		EB7063CB25FA55440014650F /* FavoriteListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListViewModel.swift; sourceTree = "<group>"; };
+		EB7063CE25FA56A80014650F /* FavoriteListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListHeaderView.swift; sourceTree = "<group>"; };
+		EB7063D525FA589C0014650F /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
+		EB7063E325FA5E460014650F /* EditButtonBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditButtonBarView.swift; sourceTree = "<group>"; };
+		EB7063F125FA76A40014650F /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		EB7063F525FA76C20014650F /* FetchedItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchedItems.swift; sourceTree = "<group>"; };
 		EBD91AEF25F2573A00D46682 /* SortButtonBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortButtonBarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,10 +84,12 @@
 		EB275E3525EE0FFA004E7C91 /* ViewComponents */ = {
 			isa = PBXGroup;
 			children = (
-				EB275E3625EE100D004E7C91 /* EditBar.swift */,
-				EB275E3A25EE1468004E7C91 /* TrashButton.swift */,
-				EB56018B25EE79D1004A59E8 /* ListHeader.swift */,
 				EBD91AEF25F2573A00D46682 /* SortButtonBarView.swift */,
+				EB7063CE25FA56A80014650F /* FavoriteListHeaderView.swift */,
+				EB7063D525FA589C0014650F /* TextFieldView.swift */,
+				EB7063E325FA5E460014650F /* EditButtonBarView.swift */,
+				EB7063F125FA76A40014650F /* CardView.swift */,
+				EB7063F525FA76C20014650F /* FetchedItems.swift */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
@@ -171,8 +175,6 @@
 				EB3D39AE25EA623B001BD287 /* ItemView.swift */,
 				EB3D39BF25EA9D1B001BD287 /* BarcodeScannerView.swift */,
 				EB3D39C525EAA384001BD287 /* FavoriteListView.swift */,
-				EB3D39C825EAA692001BD287 /* CardView.swift */,
-				EB56018525EE5CBC004A59E8 /* TextFieldView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -182,6 +184,7 @@
 			children = (
 				EB4CD54025E94216006A0A03 /* ItemViewModel.swift */,
 				EB3D39A125EA12EE001BD287 /* HomeViewModel.swift */,
+				EB7063CB25FA55440014650F /* FavoriteListViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -256,27 +259,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB7063CC25FA55440014650F /* FavoriteListViewModel.swift in Sources */,
+				EB7063CF25FA56A80014650F /* FavoriteListHeaderView.swift in Sources */,
 				EB4CD52E25E8FDF3006A0A03 /* HomeView.swift in Sources */,
 				EB4CD51A25E8FD27006A0A03 /* Persistence.swift in Sources */,
-				EB275E3B25EE1468004E7C91 /* TrashButton.swift in Sources */,
+				EB7063E425FA5E460014650F /* EditButtonBarView.swift in Sources */,
 				EB3D39C625EAA384001BD287 /* FavoriteListView.swift in Sources */,
 				EB3D39C025EA9D1B001BD287 /* BarcodeScannerView.swift in Sources */,
 				EB4CD53925E93F9F006A0A03 /* Item.swift in Sources */,
 				EB392C3325EE98D4004D6DEE /* UIAplication+Extension.swift in Sources */,
 				EB3D39A225EA12EE001BD287 /* HomeViewModel.swift in Sources */,
 				EB4CD54125E94216006A0A03 /* ItemViewModel.swift in Sources */,
-				EB56018625EE5CBC004A59E8 /* TextFieldView.swift in Sources */,
-				EB275E3725EE100E004E7C91 /* EditBar.swift in Sources */,
-				EB3D39C925EAA692001BD287 /* CardView.swift in Sources */,
 				EB4CD51D25E8FD27006A0A03 /* barcode_sadoshima.xcdatamodeld in Sources */,
+				EB7063F625FA76C20014650F /* FetchedItems.swift in Sources */,
 				EB3D39BA25EA6384001BD287 /* ItemsRequest.swift in Sources */,
 				EBD91AF025F2573A00D46682 /* SortButtonBarView.swift in Sources */,
 				EB3D39AF25EA623B001BD287 /* ItemView.swift in Sources */,
 				EB3D39A525EA1335001BD287 /* ItemsResponse.swift in Sources */,
 				EB3D39B725EA6378001BD287 /* APIServiceError.swift in Sources */,
 				EB3D39B325EA6368001BD287 /* APIService.swift in Sources */,
+				EB7063F225FA76A40014650F /* CardView.swift in Sources */,
+				EB7063D625FA589C0014650F /* TextFieldView.swift in Sources */,
 				EB3D39AB25EA1491001BD287 /* FavoriteItem+CoreDataClass.swift in Sources */,
-				EB56018C25EE79D1004A59E8 /* ListHeader.swift in Sources */,
 				EB4CD51125E8FD25006A0A03 /* barcode_sadoshimaApp.swift in Sources */,
 				EB3D39BD25EA9CB4001BD287 /* Alert.swift in Sources */,
 				EB3D39AC25EA1491001BD287 /* FavoriteItem+CoreDataProperties.swift in Sources */,

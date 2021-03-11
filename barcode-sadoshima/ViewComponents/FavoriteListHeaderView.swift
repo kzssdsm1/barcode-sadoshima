@@ -1,37 +1,36 @@
 //
-//  ListHeader.swift
+//  FavoriteListHeaderView.swift
 //  barcode-sadoshima
 //
-//  Created by 佐渡島和志 on 2021/03/02.
+//  Created by 佐渡島和志 on 2021/03/11.
 //
 
 import SwiftUI
 
-// MARK: - お気に入りリストのヘッダー構造体
-struct ListHeader: View {
-    @Binding var isEditMode: Bool
-    @Binding var removeItemString: [String]
+struct FavoriteListHeaderView: View {
+    @Binding var isEditing: Bool
+    @Binding var removeItems: [String]
     
     var body: some View {
         GeometryReader { geometry in
-            HStack {
+            HStack(spacing: 0) {
                 Text("お気に入りリスト")
-                    .foregroundColor(.black)
                     .font(.system(size: CGFloat(geometry.size.height * 0.35), weight: .heavy))
                 
                 Spacer(minLength: 0)
                 
                 Button(action: {
-                    if (isEditMode) {
-                        removeItemString = []
+                    if (isEditing) {
+                        removeItems = []
                     }
-                    isEditMode.toggle()
+                    isEditing.toggle()
                 }) {
-                    Text((isEditMode) ? "終了" : "編集")
+                    Text((isEditing) ? "終了" : "編集")
                         .foregroundColor(.blue)
                         .font(.system(size: CGFloat(geometry.size.height * 0.35), weight: .medium))
                 }
             }
+            .padding(CGFloat(geometry.size.height * 0.15))
         }
     }
 }
