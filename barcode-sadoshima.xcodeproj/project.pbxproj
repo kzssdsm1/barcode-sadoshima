@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EB36332F260E238C00DDF0C0 /* AppDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB36332E260E238C00DDF0C0 /* AppDescriptionView.swift */; };
+		EB363336260E2C6500DDF0C0 /* CurrentUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB363335260E2C6500DDF0C0 /* CurrentUserDefaults.swift */; };
 		EB392C3325EE98D4004D6DEE /* UIAplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB392C3225EE98D4004D6DEE /* UIAplication+Extension.swift */; };
 		EB3D39A225EA12EE001BD287 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3D39A125EA12EE001BD287 /* HomeViewModel.swift */; };
 		EB3D39A525EA1335001BD287 /* ItemsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3D39A425EA1335001BD287 /* ItemsResponse.swift */; };
@@ -39,6 +41,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EB36332E260E238C00DDF0C0 /* AppDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDescriptionView.swift; sourceTree = "<group>"; };
+		EB363335260E2C6500DDF0C0 /* CurrentUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserDefaults.swift; sourceTree = "<group>"; };
 		EB392C3225EE98D4004D6DEE /* UIAplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAplication+Extension.swift"; sourceTree = "<group>"; };
 		EB3D39A125EA12EE001BD287 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		EB3D39A425EA1335001BD287 /* ItemsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsResponse.swift; sourceTree = "<group>"; };
@@ -167,6 +171,7 @@
 				EB4CD53825E93F9F006A0A03 /* Item.swift */,
 				EB3D39A425EA1335001BD287 /* ItemsResponse.swift */,
 				EB3D39BC25EA9CB4001BD287 /* Alert.swift */,
+				EB363335260E2C6500DDF0C0 /* CurrentUserDefaults.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -178,6 +183,7 @@
 				EB3D39AE25EA623B001BD287 /* ItemView.swift */,
 				EB3D39BF25EA9D1B001BD287 /* BarcodeScannerView.swift */,
 				EB3D39C525EAA384001BD287 /* FavoriteListView.swift */,
+				EB36332E260E238C00DDF0C0 /* AppDescriptionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -266,6 +272,7 @@
 				EB7063CC25FA55440014650F /* FavoriteListViewModel.swift in Sources */,
 				EB7063CF25FA56A80014650F /* FavoriteListHeaderView.swift in Sources */,
 				EB4CD52E25E8FDF3006A0A03 /* HomeView.swift in Sources */,
+				EB363336260E2C6500DDF0C0 /* CurrentUserDefaults.swift in Sources */,
 				EB4CD51A25E8FD27006A0A03 /* Persistence.swift in Sources */,
 				EB7063E425FA5E460014650F /* EditButtonBarView.swift in Sources */,
 				EB3D39C625EAA384001BD287 /* FavoriteListView.swift in Sources */,
@@ -286,6 +293,7 @@
 				EB7063D625FA589C0014650F /* TextFieldView.swift in Sources */,
 				EB3D39AB25EA1491001BD287 /* FavoriteItem+CoreDataClass.swift in Sources */,
 				EB4CD51125E8FD25006A0A03 /* barcode_sadoshimaApp.swift in Sources */,
+				EB36332F260E238C00DDF0C0 /* AppDescriptionView.swift in Sources */,
 				EB3D39BD25EA9CB4001BD287 /* Alert.swift in Sources */,
 				EB3D39AC25EA1491001BD287 /* FavoriteItem+CoreDataProperties.swift in Sources */,
 			);

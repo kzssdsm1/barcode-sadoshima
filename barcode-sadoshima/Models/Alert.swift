@@ -11,7 +11,8 @@ import SwiftUI
 struct AlertItem: Identifiable {
     let id = UUID()
     let title: String
-    let message: String}
+    let message: String
+}
 
 struct AlertContext {
     static let invalidDeviceAction = AlertItem(
@@ -28,4 +29,8 @@ struct AlertContext {
         title: "通信エラー",
         message: "通信の際にエラーが発生しました"
     )
+    
+    static let dontExistsData = AlertItem(
+        title: "データが見つかりませんでした",
+        message: "楽天ブックスでは現在取り扱っていない可能性があります")
 }

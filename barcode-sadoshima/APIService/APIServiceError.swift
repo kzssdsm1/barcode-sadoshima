@@ -15,3 +15,22 @@ enum APIServiceError: Error {
     case parseError(Error)
     case unknownError
 }
+
+extension APIServiceError: LocalizedError {
+    var errorDescription: String? {
+        switch self {
+        case .invalidURL:
+            return "通信の際に問題が発生しました"
+        case .invalidResponse:
+            return "通信の際に問題が発生しました"
+        case .requestError(_):
+            return "通信の際に問題が発生しました"
+        case .serverError(_):
+            return "通信の際に問題が発生しました"
+        case .parseError(_):
+            return "楽天ブックスでは現在取り扱っていないようです"
+        case .unknownError:
+            return "通信の際に問題が発生しました"
+        }
+    }
+}

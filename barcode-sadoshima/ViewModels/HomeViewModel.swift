@@ -12,7 +12,7 @@ final class HomeViewModel: ObservableObject {
     @Published var alertItem: AlertItem?
     @Published var item: Item?
     @Published var isLoading = false
-    @Published var selection = 0
+    @Published var isShowSheet = false
     /// BarcodeScannerViewでISBNコードを読み取るとストリームを流すPublisher（値そのものを保持しない）
     @Published var onCommitSubject = PassthroughSubject<String, Never>()
     
@@ -48,6 +48,7 @@ final class HomeViewModel: ObservableObject {
                 }
                 self.isLoading = false
                 self.item = self.convertToItem(item: item)
+                self.isShowSheet = true
             }
         
         // ストリームが流れるとエラーアラートを出す
@@ -57,7 +58,11 @@ final class HomeViewModel: ObservableObject {
                     return
                 }
                 self.isLoading = false
-                self.alertItem = AlertContext.invalidURLSession
+                if error.errorDescription == "楽天ブックスでは現在取り扱っていないようです" {
+                    self.alertItem = AlertContext.dontExistsData
+                } else {
+                    self.alertItem = AlertContext.invalidURLSession
+                }
             })
         
         // ストリームを流し続けるとメモリリークを起こすためSubscribeを中止する

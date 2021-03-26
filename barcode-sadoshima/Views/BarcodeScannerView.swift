@@ -21,7 +21,7 @@ struct BarcodeScannerView: UIViewControllerRepresentable {
     }
     
     let captureSession: AVCaptureSession
-
+    
     private let viewController = UIViewController()
     
     func makeCoordinator() -> Coordinator {
@@ -51,17 +51,38 @@ struct BarcodeScannerView: UIViewControllerRepresentable {
                 }
             }
             
-            let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-            previewLayer.frame = viewController.view.bounds
-            previewLayer.videoGravity = .resizeAspectFill
+//            DispatchQueue.global().async {
+//                // startRunninの処理が重たいので別スレッドで行う
+//                startSession()
+//
+//                // Viewの描画に関する処理はメインスレッドで行わないとエラーが発生する
+//                DispatchQueue.main.async {
+//                    let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+//                    previewLayer.frame = viewController.view.bounds
+//                    previewLayer.videoGravity = .resizeAspectFill
+//
+//                    viewController.view.layer.addSublayer(previewLayer)
+//                    viewController.view.addSubview(makeBorderline())
+//                }
+//
+//            }
             
-            viewController.view.layer.addSublayer(previewLayer)
-            viewController.view.addSubview(makeBorderline())
+                        let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+                        previewLayer.frame = viewController.view.bounds
+                        previewLayer.videoGravity = .resizeAspectFill
+            
+                        viewController.view.layer.addSublayer(previewLayer)
+                        viewController.view.addSubview(makeBorderline())
         }
         return viewController
     }
     
     func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<BarcodeScannerView>) {}
+    
+    private func startSession() {
+        guard !captureSession.isRunning else { return }
+        captureSession.startRunning()
+    }
     
     private func endSession() {
         guard captureSession.isRunning else { return }

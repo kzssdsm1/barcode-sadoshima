@@ -11,8 +11,10 @@ import Combine
 
 struct HomeView: View {
     @StateObject private var viewModel: HomeViewModel = .init(apiService: APIService())
-    
+
+    @State private var isShowDesc = false
     @State private var isAnimating = false
+    @State private var selection = 0
     
     private let captureSession = AVCaptureSession()
     private let animation = Animation.linear(duration: 1).repeatForever(autoreverses: false)
@@ -25,25 +27,35 @@ struct HomeView: View {
         GeometryReader { geometry in
             ZStack {
                 VStack(spacing: 0) {
-                    if (viewModel.selection == 0) {
+                    if (selection == 0) {
                         HStack {
                             Text("バーコードスキャナー")
                                 .font(.system(size: CGFloat(geometry.size.height * 0.028), weight: .heavy))
                                 .padding(CGFloat(geometry.size.height * 0.02))
                             
                             Spacer(minLength: 0)
+                            
+                            Button(action: {
+                                isShowDesc = true
+                                viewModel.isShowSheet = true
+                            }) {
+                                Text("使い方")
+                                    .foregroundColor(.blue)
+                                    .font(.system(size: CGFloat(geometry.size.height * 0.028), weight: .heavy))
+                                    .padding(CGFloat(geometry.size.height * 0.02))
+                            }
                         } // HStack
                         .frame(height: CGFloat(60))
                     }
                     
-                    TabView(selection: $viewModel.selection) {
-                        BarcodeScannerView(alertItem: $viewModel.alertItem, isLoading: $viewModel.isLoading, selection: $viewModel.selection, onCommitSubject: $viewModel.onCommitSubject, captureSession: captureSession)
+                    TabView(selection: $selection) {
+                        BarcodeScannerView(alertItem: $viewModel.alertItem, isLoading: $viewModel.isLoading, selection: $selection, onCommitSubject: $viewModel.onCommitSubject, captureSession: captureSession)
                             .onAppear {
                                 DispatchQueue.global(qos: .userInitiated).async {
                                     startSession()
                                 }
                             }
-                            .onDisappear {
+                            .onDisappear() {
                                 endSession()
                             }
                             .tabItem {
@@ -52,16 +64,14 @@ struct HomeView: View {
                             }
                             .tag(0)
                         
-                        FavoriteListView(selection: $viewModel.selection)
+                        FavoriteListView(selection: $selection)
                             .onAppear {
                                 endSession()
                             }
-                            .onDisappear {
-                                DispatchQueue.global(qos: .userInitiated).async {
-                                    startSession()
-                                }
+                            .onDisappear() {
+                                startSession()
                             }
-                            .tabItem{
+                            .tabItem {
                                 Image(systemName: "star.fill")
                                 Text("お気に入りリスト")
                             }
@@ -70,15 +80,24 @@ struct HomeView: View {
                     .accentColor(.blue)
                 } // VStack
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .onAppear {
+                    firstVisitSetup()
+                }
                 
                 if (viewModel.isLoading) {
                     ZStack {
-                        // ①Loading中に画面をタップできないようにするためのほぼ透明なLayer
                         Color(.black)
                             .opacity(0.01)
                             .frame(width: geometry.size.width, height: geometry.size.height)
                             .edgesIgnoringSafeArea(.all)
                             .disabled(viewModel.isLoading)
+                        
+                        Color(.black)
+                            .opacity(0.6)
+                            .frame(width: 100, height: 100)
+                            .cornerRadius(12)
+                            .disabled(viewModel.isLoading)
+                        
                         Circle()
                             .trim(from: 0, to: 0.6)
                             .stroke(AngularGradient(gradient: Gradient(colors: [.gray, .white]), center: .center),
@@ -89,7 +108,6 @@ struct HomeView: View {
                                         dashPhase: 8))
                             .frame(width: 60, height: 60)
                             .rotationEffect(.degrees(self.isAnimating ? 360 : 0))
-                            // ②アニメーションの実装
                             .onAppear() {
                                 withAnimation(Animation.linear(duration: 1).repeatForever(autoreverses: false)) {
                                     self.isAnimating = true
@@ -103,16 +121,29 @@ struct HomeView: View {
                 }
             } // ZStack
         }
-        .sheet(item: $viewModel.item) { item in
-            ItemView(input: item, title: "検索結果")
-                .onAppear {
-                    endSession()
-                }
-                .onDisappear {
-                    DispatchQueue.global(qos: .userInitiated).async {
-                        startSession()
+        .sheet(isPresented: $viewModel.isShowSheet) {
+            if (isShowDesc) {
+                AppDescriptionView()
+                    .onAppear {
+                        endSession()
                     }
-                }
+                    .onDisappear() {
+                        isShowDesc = false
+                        DispatchQueue.global(qos: .userInitiated).async {
+                            startSession()
+                        }
+                    }
+            } else {
+                ItemView(input: viewModel.item!, title: "検索結果")
+                    .onAppear {
+                        endSession()
+                    }
+                    .onDisappear {
+                            DispatchQueue.global(qos: .userInitiated).async {
+                                startSession()
+                            }
+                    }
+            }
         }
         .alert(item: $viewModel.alertItem) { alertItem in
             Alert.init(
@@ -121,8 +152,10 @@ struct HomeView: View {
                 dismissButton: Alert.Button.default(
                     Text("OK"),
                     action: {
-                        DispatchQueue.global(qos: .userInitiated).async {
-                            startSession()
+                        if (selection == 0) {
+                            DispatchQueue.global(qos: .userInitiated).async {
+                                startSession()
+                            }
                         }
                     }
                 )
@@ -137,5 +170,17 @@ struct HomeView: View {
     private func endSession() {
         guard captureSession.isRunning else { return }
         captureSession.stopRunning()
+    }
+    
+    private func firstVisitSetup(){
+        let visit = UserDefaults.standard.bool(forKey: CurrentUserDefaults.isFirstVisit)
+        
+        if visit {
+            
+        } else {
+            isShowDesc = true
+            viewModel.isShowSheet = true
+            UserDefaults.standard.set(true, forKey: CurrentUserDefaults.isFirstVisit)
+        }
     }
 }
