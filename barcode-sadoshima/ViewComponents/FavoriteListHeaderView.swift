@@ -9,6 +9,7 @@ import SwiftUI
 
 struct FavoriteListHeaderView: View {
     @Binding var isEditing: Bool
+    @Binding var isEmpty: Bool
     @Binding var removeItems: [String]
     
     var body: some View {
@@ -26,11 +27,12 @@ struct FavoriteListHeaderView: View {
                     isEditing.toggle()
                 }) {
                     Text((isEditing) ? "終了" : "編集")
-                        .foregroundColor(.blue)
+                        .foregroundColor((isEmpty) ? .gray : .blue)
                         .font(.system(size: CGFloat(geometry.size.height * 0.35), weight: .medium))
                 }
-            }
-            .padding(CGFloat(geometry.size.height * 0.15))
+                .disabled(isEmpty)
+            } // HStack
+            .padding(CGFloat(geometry.size.height * 0.25))
         }
     }
 }

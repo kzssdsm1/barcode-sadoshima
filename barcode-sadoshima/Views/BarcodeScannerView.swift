@@ -12,13 +12,15 @@ import AVFoundation
 
 struct BarcodeScannerView: UIViewControllerRepresentable {
     @Binding var alertItem: AlertItem?
+    @Binding var selection: Int
     @Binding var onCommitSubject: PassthroughSubject<String, Never>
     
     private enum ScanError {
         case invalidDeviceInput, invalidSacnnedValue
     }
     
-    private let captureSession = AVCaptureSession()
+    let captureSession: AVCaptureSession
+
     private let viewController = UIViewController()
     
     func makeCoordinator() -> Coordinator {
@@ -48,33 +50,17 @@ struct BarcodeScannerView: UIViewControllerRepresentable {
                 }
             }
             
-            DispatchQueue.global().async {
-                // startRunninの処理が重たいので別スレッドで行う
-                startSession()
-                
-                // Viewの描画に関する処理はメインスレッドで行わないとエラーが発生する
-                DispatchQueue.main.async {
-                    let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-                    previewLayer.frame = viewController.view.bounds
-                    previewLayer.videoGravity = .resizeAspectFill
-                    
-                    viewController.view.layer.addSublayer(previewLayer)
-                    viewController.view.addSubview(makeBorderline())
-                }
-                
-            }
+            let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+            previewLayer.frame = viewController.view.bounds
+            previewLayer.videoGravity = .resizeAspectFill
             
+            viewController.view.layer.addSublayer(previewLayer)
+            viewController.view.addSubview(makeBorderline())
         }
-        
         return viewController
     }
     
     func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<BarcodeScannerView>) {}
-    
-    private func startSession() {
-        guard !captureSession.isRunning else { return }
-        captureSession.startRunning()
-    }
     
     private func endSession() {
         guard captureSession.isRunning else { return }
@@ -85,8 +71,8 @@ struct BarcodeScannerView: UIViewControllerRepresentable {
     /// - Parameter barcode: ISBNコード
     private func didFind(barcode: String) {
         endSession()
-        AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
         onCommitSubject.send(barcode)
+        AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
     }
     
     /// エラーが発生した際にalertItemに値を格納するメソッド（値が格納されると自動でアラートが呼び出される）
