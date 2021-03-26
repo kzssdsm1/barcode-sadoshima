@@ -11,7 +11,7 @@ import Combine
 
 struct HomeView: View {
     @StateObject private var viewModel: HomeViewModel = .init(apiService: APIService())
-
+    
     @State private var isShowDesc = false
     @State private var isAnimating = false
     @State private var selection = 0
@@ -139,9 +139,9 @@ struct HomeView: View {
                         endSession()
                     }
                     .onDisappear {
-                            DispatchQueue.global(qos: .userInitiated).async {
-                                startSession()
-                            }
+                        DispatchQueue.global(qos: .userInitiated).async {
+                            startSession()
+                        }
                     }
             }
         }
