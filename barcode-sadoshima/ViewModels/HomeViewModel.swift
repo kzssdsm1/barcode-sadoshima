@@ -11,6 +11,7 @@ import Combine
 final class HomeViewModel: ObservableObject {
     @Published var alertItem: AlertItem?
     @Published var item: Item?
+    @Published var isLoading = false
     @Published var selection = 0
     /// BarcodeScannerViewでISBNコードを読み取るとストリームを流すPublisher（値そのものを保持しない）
     @Published var onCommitSubject = PassthroughSubject<String, Never>()
@@ -45,16 +46,17 @@ final class HomeViewModel: ObservableObject {
                 guard let self = self else {
                     return
                 }
+                self.isLoading = false
                 self.item = self.convertToItem(item: item)
             }
         
         // ストリームが流れるとエラーアラートを出す
         let errorSubscriber = errorSubject
             .sink(receiveValue: { [weak self] (error) in
-                print(error)
                 guard let self = self else {
                     return
                 }
+                self.isLoading = false
                 self.alertItem = AlertContext.invalidURLSession
             })
         
@@ -87,4 +89,3 @@ final class HomeViewModel: ObservableObject {
         )
     }
 }
-

@@ -12,6 +12,7 @@ import AVFoundation
 
 struct BarcodeScannerView: UIViewControllerRepresentable {
     @Binding var alertItem: AlertItem?
+    @Binding var isLoading: Bool
     @Binding var selection: Int
     @Binding var onCommitSubject: PassthroughSubject<String, Never>
     
@@ -71,8 +72,9 @@ struct BarcodeScannerView: UIViewControllerRepresentable {
     /// - Parameter barcode: ISBNコード
     private func didFind(barcode: String) {
         endSession()
-        onCommitSubject.send(barcode)
         AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+        isLoading = true
+        onCommitSubject.send(barcode)
     }
     
     /// エラーが発生した際にalertItemに値を格納するメソッド（値が格納されると自動でアラートが呼び出される）

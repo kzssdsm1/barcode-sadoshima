@@ -11,26 +11,21 @@ import SwiftUI
 struct AlertItem: Identifiable {
     let id = UUID()
     let title: String
-    let message: String
-    let dismissButton: Alert.Button
-}
+    let message: String}
 
 struct AlertContext {
     static let invalidDeviceAction = AlertItem(
         title: "無効なデバイス入力",
-        message: "不明なエラーによりバーコードが読み取れませんでした",
-        dismissButton: .default(Text("OK"))
+        message: "不明なエラーによりバーコードが読み取れませんでした"
     )
     
     static let invalidScannedValue = AlertItem(
         title: "無効なバーコード形式",
-        message: "このアプリはEAN-8、EAN-13以外のバーコード形式には対応しておりません",
-        dismissButton: .default(Text("OK"))
+        message: "このアプリはEAN-8、EAN-13以外のバーコード形式には対応しておりません"
     )
     
     static let invalidURLSession = AlertItem(
-        title: "API通信エラー",
-        message: "通信の際にエラーが発生しました",
-        dismissButton: .default(Text("OK"))
+        title: "通信エラー",
+        message: "通信の際にエラーが発生しました"
     )
 }
