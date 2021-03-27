@@ -33,4 +33,8 @@ struct AlertContext {
     static let dontExistsData = AlertItem(
         title: "データが見つかりませんでした",
         message: "楽天ブックスでは現在取り扱っていない可能性があります")
+    
+    static let serverError = AlertItem(
+        title: "サーバーエラー",
+        message: "楽天ブックスのサーバーに問題が発生しているようです")
 }

@@ -12,8 +12,6 @@ struct SortButtonBarView: View {
     @Binding var isAscending: Bool
     @Binding var sortKeyPath: ReferenceWritableKeyPath<FavoriteItem, String>
     
-    @State private var currentSortingMethod = "日時↓"
-    
     var body: some View {
         GeometryReader { geometry in
             HStack(spacing: 0) {
@@ -22,31 +20,36 @@ struct SortButtonBarView: View {
                 Text("並び順：")
                     .foregroundColor(.blue)
                     .font(.system(size: (geometry.size.height * 0.55), weight: .heavy))
-                    .padding(.trailing, (geometry.size.width * 0.05))
+                    .padding(.trailing, (geometry.size.width * 0.02))
                 
-                Menu(currentSortingMethod) {
-                    Button("日時↓", action: {
+                Menu {
+                    Button("↓日時", action: {
                         isAscending = false
                         sortKeyPath = \FavoriteItem.date
-                        currentSortingMethod = "日時↓"
                     })
-                    Button("日時↑", action: {
+                    Button("↑日時", action: {
                         isAscending = true
                         sortKeyPath = \FavoriteItem.date
-                        currentSortingMethod = "日時↑"
                     })
-                    Button("名前↓", action: {
+                    Button("↓名前", action: {
                         isAscending = false
                         sortKeyPath = \FavoriteItem.title
-                        currentSortingMethod = "名前↓"
                     })
-                    Button("名前↑", action: {
+                    Button("↑名前", action: {
                         isAscending = true
                         sortKeyPath = \FavoriteItem.title
-                        currentSortingMethod = "名前↑"
                     })
+                } label: {
+                    Label(
+                        (sortKeyPath == \FavoriteItem.date) ? "日時" : "名前",
+                        systemImage: (isAscending == true) ? "arrow.up" : "arrow.down"
+                    )
+                    .font(.system(size: (geometry.size.height * 0.6), weight: .medium))
+                    .foregroundColor(.white)
+                    .frame(width: (geometry.size.width * 0.19), height:(geometry.size.height))
+                    .background(Color.blue)
+                    .cornerRadius(5)
                 }
-                .frame(width: geometry.size.width * 0.15, height: geometry.size.height * 0.7)
                 
                 Spacer(minLength: 0)
             } // HStack

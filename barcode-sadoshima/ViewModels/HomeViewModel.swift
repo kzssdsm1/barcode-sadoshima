@@ -60,6 +60,8 @@ final class HomeViewModel: ObservableObject {
                 self.isLoading = false
                 if error.errorDescription == "楽天ブックスでは現在取り扱っていないようです" {
                     self.alertItem = AlertContext.dontExistsData
+                } else if error.errorDescription == "楽天ブックスのサーバーに問題が発生しているようです" {
+                    self.alertItem = AlertContext.serverError
                 } else {
                     self.alertItem = AlertContext.invalidURLSession
                 }

@@ -26,7 +26,7 @@ extension APIServiceError: LocalizedError {
         case .requestError(_):
             return "通信の際に問題が発生しました"
         case .serverError(_):
-            return "通信の際に問題が発生しました"
+            return "楽天ブックスのサーバーに問題が発生しているようです"
         case .parseError(_):
             return "楽天ブックスでは現在取り扱っていないようです"
         case .unknownError:
