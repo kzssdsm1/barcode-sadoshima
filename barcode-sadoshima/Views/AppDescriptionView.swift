@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct AppDescriptionView: View {
+    @Binding var isFirstTime: Bool
+    @Binding var isShowsheet: Bool
+    
     var body: some View {
         GeometryReader { geometry in
             VStack(spacing: 0) {
@@ -41,7 +44,7 @@ struct AppDescriptionView: View {
                             .font(.system(size: (geometry.size.height * 0.025), weight: .medium))
                             .fixedSize(horizontal: false, vertical: true)
                     }
-                    .padding(.vertical, (geometry.size.height * 0.1))
+                    .padding(.vertical, (geometry.size.height * 0.05))
                     
                     HStack {
                         Text("バーコードの読み取りに成功すると自動で楽天ブックスで書籍データが検索されます")
@@ -64,7 +67,7 @@ struct AppDescriptionView: View {
                             .foregroundColor(.blue)
                         
                     } // HStack
-                    .padding(.bottom, (geometry.size.height * 0.1))
+                    .padding(.bottom, (geometry.size.height * 0.05))
                     
                     HStack {
                         Image(systemName: "book.fill")
@@ -93,7 +96,7 @@ struct AppDescriptionView: View {
                         }
                         
                     }
-                    .padding(.bottom, (geometry.size.height * 0.1))
+                    .padding(.bottom, (geometry.size.height * 0.05))
                     
                     HStack {
                         Text("お気に入り登録した書籍はお気に入りリストからいつでも見返すことが出来ます")
@@ -116,7 +119,22 @@ struct AppDescriptionView: View {
                             .frame(width: (geometry.size.width * 0.18))
                             .foregroundColor(.blue)
                     } // HStack
-                    .padding(.bottom, (geometry.size.height * 0.2))
+                    .padding(.bottom, (isFirstTime) ? (geometry.size.height * 0.05) : (geometry.size.height * 0.1))
+                    
+                    if (isFirstTime) {
+                        Button(action: {
+                            isFirstTime = false
+                            isShowsheet = false
+                        }) {
+                            Text("バーコードスキャナーへ")
+                                .font(.system(size: (geometry.size.height * 0.03), weight: .medium))
+                                .foregroundColor(.white)
+                                .frame(width: (geometry.size.width * 0.7), height:(geometry.size.height * 0.12))
+                                .background(Color.blue)
+                                .cornerRadius(20)
+                        }
+                        .padding(.bottom, (geometry.size.height * 0.05))
+                    }
                 } // VStack
                 .padding(.horizontal, (geometry.size.height * 0.03))
                 .frame(maxWidth: .infinity, maxHeight: .infinity)

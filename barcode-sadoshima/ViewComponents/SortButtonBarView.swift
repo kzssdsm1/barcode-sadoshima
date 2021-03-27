@@ -12,6 +12,8 @@ struct SortButtonBarView: View {
     @Binding var isAscending: Bool
     @Binding var sortKeyPath: ReferenceWritableKeyPath<FavoriteItem, String>
     
+    @State private var currentSortingMethod = "日時↓"
+    
     var body: some View {
         GeometryReader { geometry in
             HStack(spacing: 0) {
@@ -19,63 +21,32 @@ struct SortButtonBarView: View {
                 
                 Text("並び順：")
                     .foregroundColor(.blue)
-                    .font(.system(size: (geometry.size.height * 0.5), weight: .heavy))
+                    .font(.system(size: (geometry.size.height * 0.55), weight: .heavy))
                     .padding(.trailing, (geometry.size.width * 0.05))
                 
-                Button(action: {
-                    if (sortKeyPath == \FavoriteItem.date) {
-                        if (isAscending) {
-                            isAscending = false
-                        } else {
-                            isAscending = true
-                        }
-                    } else {
+                Menu(currentSortingMethod) {
+                    Button("日時↓", action: {
+                        isAscending = false
                         sortKeyPath = \FavoriteItem.date
+                        currentSortingMethod = "日時↓"
+                    })
+                    Button("日時↑", action: {
+                        isAscending = true
+                        sortKeyPath = \FavoriteItem.date
+                        currentSortingMethod = "日時↑"
+                    })
+                    Button("名前↓", action: {
                         isAscending = false
-                    }
-                    
-                }) {
-                    if (sortKeyPath == \FavoriteItem.title) {
-                        Text("日時")
-                            .foregroundColor(.blue)
-                            .font(.system(size: (geometry.size.height * 0.7), weight: .heavy))
-                    } else {
-                        Text((isAscending) ? "日時↑" : "日時↓")
-                            .foregroundColor(.white)
-                            .font(.system(size: (geometry.size.height * 0.7), weight: .heavy))
-                            .frame(width: (geometry.size.width * 0.2), height:(geometry.size.height * 0.85))
-                            .background(Color.blue)
-                            .cornerRadius(6)
-                    }
-                }
-                .padding(.trailing, (sortKeyPath == \FavoriteItem.title) ? (geometry.size.width * 0.105) : (geometry.size.width * 0.1))
-                
-                Button(action: {
-                    if (sortKeyPath == \FavoriteItem.title) {
-                        if (isAscending) {
-                            isAscending = false
-                        } else {
-                            isAscending = true
-                        }
-                    } else {
                         sortKeyPath = \FavoriteItem.title
-                        isAscending = false
-                    }
-                }) {
-                    if (sortKeyPath == \FavoriteItem.date) {
-                        Text("タイトル")
-                            .foregroundColor(.blue)
-                            .font(.system(size: (geometry.size.height * 0.7), weight: .heavy))
-                    } else {
-                        Text((isAscending) ? "タイトル↑" : "タイトル↓")
-                            .foregroundColor(.white)
-                            .font(.system(size: (geometry.size.height * 0.7), weight: .heavy))
-                            .frame(width: (geometry.size.width * 0.3), height:(geometry.size.height * 0.85))
-                            .background(Color.blue)
-                            .cornerRadius(6)
-                        
-                    }
+                        currentSortingMethod = "名前↓"
+                    })
+                    Button("名前↑", action: {
+                        isAscending = true
+                        sortKeyPath = \FavoriteItem.title
+                        currentSortingMethod = "名前↑"
+                    })
                 }
+                .frame(width: geometry.size.width * 0.15, height: geometry.size.height * 0.7)
                 
                 Spacer(minLength: 0)
             } // HStack

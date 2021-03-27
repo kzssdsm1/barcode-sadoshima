@@ -12,8 +12,9 @@ import Combine
 struct HomeView: View {
     @StateObject private var viewModel: HomeViewModel = .init(apiService: APIService())
     
-    @State private var isShowDesc = false
     @State private var isAnimating = false
+    @State private var isFirstTime = false
+    @State private var isShowDesc = false
     @State private var selection = 0
     
     private let captureSession = AVCaptureSession()
@@ -123,11 +124,12 @@ struct HomeView: View {
         }
         .sheet(isPresented: $viewModel.isShowSheet) {
             if (isShowDesc) {
-                AppDescriptionView()
+                AppDescriptionView(isFirstTime: $isFirstTime, isShowsheet: $viewModel.isShowSheet)
                     .onAppear {
                         endSession()
                     }
                     .onDisappear() {
+                        isFirstTime = false
                         isShowDesc = false
                         DispatchQueue.global(qos: .userInitiated).async {
                             startSession()
@@ -178,6 +180,7 @@ struct HomeView: View {
         if visit {
             
         } else {
+            isFirstTime = true
             isShowDesc = true
             viewModel.isShowSheet = true
             UserDefaults.standard.set(true, forKey: CurrentUserDefaults.isFirstVisit)
