@@ -26,15 +26,7 @@ struct AlertContext {
     )
     
     static let invalidURLSession = AlertItem(
-        title: "通信エラー",
-        message: "通信の際にエラーが発生しました"
+        title: "問題が発生しました",
+        message: "通信状況に問題があるか、楽天ブックスでは現在取り扱っていない商品の可能性があります"
     )
-    
-    static let dontExistsData = AlertItem(
-        title: "データが見つかりませんでした",
-        message: "楽天ブックスでは現在取り扱っていない可能性があります")
-    
-    static let serverError = AlertItem(
-        title: "サーバーエラー",
-        message: "楽天ブックスのサーバーに問題が発生しているようです")
 }

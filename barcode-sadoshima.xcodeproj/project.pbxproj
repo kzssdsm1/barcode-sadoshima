@@ -30,14 +30,22 @@
 		EB4CD52E25E8FDF3006A0A03 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4CD52D25E8FDF3006A0A03 /* HomeView.swift */; };
 		EB4CD53925E93F9F006A0A03 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4CD53825E93F9F006A0A03 /* Item.swift */; };
 		EB4CD54125E94216006A0A03 /* ItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4CD54025E94216006A0A03 /* ItemViewModel.swift */; };
-		EB7063CC25FA55440014650F /* FavoriteListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7063CB25FA55440014650F /* FavoriteListViewModel.swift */; };
-		EB7063CF25FA56A80014650F /* FavoriteListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7063CE25FA56A80014650F /* FavoriteListHeaderView.swift */; };
+		EB5A44392613452F000E90F0 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5A44382613452E000E90F0 /* RootView.swift */; };
+		EB5A443C26134560000E90F0 /* TabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5A443B26134560000E90F0 /* TabItem.swift */; };
+		EB5A443F261345BF000E90F0 /* CustomButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5A443E261345BF000E90F0 /* CustomButtonStyle.swift */; };
+		EB5A4442261345FC000E90F0 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5A4441261345FC000E90F0 /* Color+Extension.swift */; };
+		EB5A44452613462D000E90F0 /* LinearGradient+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5A44442613462D000E90F0 /* LinearGradient+Extension.swift */; };
+		EB5A44482613467B000E90F0 /* EditButtonBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5A44472613467B000E90F0 /* EditButtonBar.swift */; };
+		EB5A444C261346C4000E90F0 /* FavoriteListViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5A444B261346C4000E90F0 /* FavoriteListViewHeader.swift */; };
+		EB5A44502613471E000E90F0 /* SortButtonBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5A444F2613471E000E90F0 /* SortButtonBar.swift */; };
+		EB5A44542613478F000E90F0 /* MotionTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5A44532613478F000E90F0 /* MotionTabBar.swift */; };
+		EB5A4457261347AC000E90F0 /* TabBarShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5A4456261347AC000E90F0 /* TabBarShape.swift */; };
+		EB5A445A261347C8000E90F0 /* TabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5A4459261347C8000E90F0 /* TabBarButton.swift */; };
+		EB5A446226138CB1000E90F0 /* CustomRoundedRectangleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5A446126138CB1000E90F0 /* CustomRoundedRectangleButtonStyle.swift */; };
 		EB7063D625FA589C0014650F /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7063D525FA589C0014650F /* TextFieldView.swift */; };
-		EB7063E425FA5E460014650F /* EditButtonBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7063E325FA5E460014650F /* EditButtonBarView.swift */; };
 		EB7063F225FA76A40014650F /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7063F125FA76A40014650F /* CardView.swift */; };
 		EB7063F625FA76C20014650F /* FetchedItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7063F525FA76C20014650F /* FetchedItems.swift */; };
 		EB7B2A7325FB0F87004801D7 /* spli.png in Resources */ = {isa = PBXBuildFile; fileRef = EB7B2A7225FB0F87004801D7 /* spli.png */; };
-		EBD91AF025F2573A00D46682 /* SortButtonBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD91AEF25F2573A00D46682 /* SortButtonBarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,14 +74,22 @@
 		EB4CD52D25E8FDF3006A0A03 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		EB4CD53825E93F9F006A0A03 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		EB4CD54025E94216006A0A03 /* ItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewModel.swift; sourceTree = "<group>"; };
-		EB7063CB25FA55440014650F /* FavoriteListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListViewModel.swift; sourceTree = "<group>"; };
-		EB7063CE25FA56A80014650F /* FavoriteListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListHeaderView.swift; sourceTree = "<group>"; };
+		EB5A44382613452E000E90F0 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		EB5A443B26134560000E90F0 /* TabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItem.swift; sourceTree = "<group>"; };
+		EB5A443E261345BF000E90F0 /* CustomButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonStyle.swift; sourceTree = "<group>"; };
+		EB5A4441261345FC000E90F0 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
+		EB5A44442613462D000E90F0 /* LinearGradient+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LinearGradient+Extension.swift"; sourceTree = "<group>"; };
+		EB5A44472613467B000E90F0 /* EditButtonBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditButtonBar.swift; sourceTree = "<group>"; };
+		EB5A444B261346C4000E90F0 /* FavoriteListViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListViewHeader.swift; sourceTree = "<group>"; };
+		EB5A444F2613471E000E90F0 /* SortButtonBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortButtonBar.swift; sourceTree = "<group>"; };
+		EB5A44532613478F000E90F0 /* MotionTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionTabBar.swift; sourceTree = "<group>"; };
+		EB5A4456261347AC000E90F0 /* TabBarShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarShape.swift; sourceTree = "<group>"; };
+		EB5A4459261347C8000E90F0 /* TabBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarButton.swift; sourceTree = "<group>"; };
+		EB5A446126138CB1000E90F0 /* CustomRoundedRectangleButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRoundedRectangleButtonStyle.swift; sourceTree = "<group>"; };
 		EB7063D525FA589C0014650F /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
-		EB7063E325FA5E460014650F /* EditButtonBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditButtonBarView.swift; sourceTree = "<group>"; };
 		EB7063F125FA76A40014650F /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		EB7063F525FA76C20014650F /* FetchedItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchedItems.swift; sourceTree = "<group>"; };
 		EB7B2A7225FB0F87004801D7 /* spli.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spli.png; sourceTree = "<group>"; };
-		EBD91AEF25F2573A00D46682 /* SortButtonBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortButtonBarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,12 +106,17 @@
 		EB275E3525EE0FFA004E7C91 /* ViewComponents */ = {
 			isa = PBXGroup;
 			children = (
-				EBD91AEF25F2573A00D46682 /* SortButtonBarView.swift */,
-				EB7063CE25FA56A80014650F /* FavoriteListHeaderView.swift */,
 				EB7063D525FA589C0014650F /* TextFieldView.swift */,
-				EB7063E325FA5E460014650F /* EditButtonBarView.swift */,
 				EB7063F125FA76A40014650F /* CardView.swift */,
 				EB7063F525FA76C20014650F /* FetchedItems.swift */,
+				EB5A443E261345BF000E90F0 /* CustomButtonStyle.swift */,
+				EB5A44472613467B000E90F0 /* EditButtonBar.swift */,
+				EB5A444B261346C4000E90F0 /* FavoriteListViewHeader.swift */,
+				EB5A444F2613471E000E90F0 /* SortButtonBar.swift */,
+				EB5A44532613478F000E90F0 /* MotionTabBar.swift */,
+				EB5A4456261347AC000E90F0 /* TabBarShape.swift */,
+				EB5A4459261347C8000E90F0 /* TabBarButton.swift */,
+				EB5A446126138CB1000E90F0 /* CustomRoundedRectangleButtonStyle.swift */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
@@ -104,6 +125,8 @@
 			isa = PBXGroup;
 			children = (
 				EB392C3225EE98D4004D6DEE /* UIAplication+Extension.swift */,
+				EB5A4441261345FC000E90F0 /* Color+Extension.swift */,
+				EB5A44442613462D000E90F0 /* LinearGradient+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -172,6 +195,7 @@
 				EB3D39A425EA1335001BD287 /* ItemsResponse.swift */,
 				EB3D39BC25EA9CB4001BD287 /* Alert.swift */,
 				EB363335260E2C6500DDF0C0 /* CurrentUserDefaults.swift */,
+				EB5A443B26134560000E90F0 /* TabItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -184,6 +208,7 @@
 				EB3D39BF25EA9D1B001BD287 /* BarcodeScannerView.swift */,
 				EB3D39C525EAA384001BD287 /* FavoriteListView.swift */,
 				EB36332E260E238C00DDF0C0 /* AppDescriptionView.swift */,
+				EB5A44382613452E000E90F0 /* RootView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -193,7 +218,6 @@
 			children = (
 				EB4CD54025E94216006A0A03 /* ItemViewModel.swift */,
 				EB3D39A125EA12EE001BD287 /* HomeViewModel.swift */,
-				EB7063CB25FA55440014650F /* FavoriteListViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -269,28 +293,36 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB7063CC25FA55440014650F /* FavoriteListViewModel.swift in Sources */,
-				EB7063CF25FA56A80014650F /* FavoriteListHeaderView.swift in Sources */,
 				EB4CD52E25E8FDF3006A0A03 /* HomeView.swift in Sources */,
 				EB363336260E2C6500DDF0C0 /* CurrentUserDefaults.swift in Sources */,
+				EB5A44392613452F000E90F0 /* RootView.swift in Sources */,
 				EB4CD51A25E8FD27006A0A03 /* Persistence.swift in Sources */,
-				EB7063E425FA5E460014650F /* EditButtonBarView.swift in Sources */,
 				EB3D39C625EAA384001BD287 /* FavoriteListView.swift in Sources */,
+				EB5A446226138CB1000E90F0 /* CustomRoundedRectangleButtonStyle.swift in Sources */,
 				EB3D39C025EA9D1B001BD287 /* BarcodeScannerView.swift in Sources */,
+				EB5A4457261347AC000E90F0 /* TabBarShape.swift in Sources */,
 				EB4CD53925E93F9F006A0A03 /* Item.swift in Sources */,
+				EB5A44452613462D000E90F0 /* LinearGradient+Extension.swift in Sources */,
+				EB5A44542613478F000E90F0 /* MotionTabBar.swift in Sources */,
 				EB392C3325EE98D4004D6DEE /* UIAplication+Extension.swift in Sources */,
 				EB3D39A225EA12EE001BD287 /* HomeViewModel.swift in Sources */,
+				EB5A443F261345BF000E90F0 /* CustomButtonStyle.swift in Sources */,
+				EB5A44482613467B000E90F0 /* EditButtonBar.swift in Sources */,
 				EB4CD54125E94216006A0A03 /* ItemViewModel.swift in Sources */,
 				EB4CD51D25E8FD27006A0A03 /* barcode_sadoshima.xcdatamodeld in Sources */,
 				EB7063F625FA76C20014650F /* FetchedItems.swift in Sources */,
+				EB5A445A261347C8000E90F0 /* TabBarButton.swift in Sources */,
 				EB3D39BA25EA6384001BD287 /* ItemsRequest.swift in Sources */,
-				EBD91AF025F2573A00D46682 /* SortButtonBarView.swift in Sources */,
 				EB3D39AF25EA623B001BD287 /* ItemView.swift in Sources */,
 				EB3D39A525EA1335001BD287 /* ItemsResponse.swift in Sources */,
 				EB3D39B725EA6378001BD287 /* APIServiceError.swift in Sources */,
+				EB5A443C26134560000E90F0 /* TabItem.swift in Sources */,
 				EB3D39B325EA6368001BD287 /* APIService.swift in Sources */,
+				EB5A444C261346C4000E90F0 /* FavoriteListViewHeader.swift in Sources */,
+				EB5A4442261345FC000E90F0 /* Color+Extension.swift in Sources */,
 				EB7063F225FA76A40014650F /* CardView.swift in Sources */,
 				EB7063D625FA589C0014650F /* TextFieldView.swift in Sources */,
+				EB5A44502613471E000E90F0 /* SortButtonBar.swift in Sources */,
 				EB3D39AB25EA1491001BD287 /* FavoriteItem+CoreDataClass.swift in Sources */,
 				EB4CD51125E8FD25006A0A03 /* barcode_sadoshimaApp.swift in Sources */,
 				EB36332F260E238C00DDF0C0 /* AppDescriptionView.swift in Sources */,

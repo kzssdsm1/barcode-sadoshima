@@ -8,137 +8,139 @@
 import SwiftUI
 
 struct AppDescriptionView: View {
-    @Binding var isFirstTime: Bool
-    @Binding var isShowsheet: Bool
+    private let screenWidth = CGFloat(UIScreen.main.bounds.width)
     
     var body: some View {
-        GeometryReader { geometry in
+        GeometryReader { proxy in
             VStack(spacing: 0) {
                 HStack {
                     Text("アプリの使い方")
-                        .font(.system(size: CGFloat(geometry.size.height * 0.03), weight: .heavy))
+                        .font(.system(size: 22, weight: .heavy))
+                        .foregroundColor(.gray)
+                        .padding(.leading, 10)
                     
                     Spacer(minLength: 0)
                 } // HStack
-                .padding((geometry.size.width * 0.02))
-                .frame(height: CGFloat(60))
+                .frame(height: 60)
+                .padding(.bottom, 30)
                 
-                VStack {
-                    HStack {
-                        Image(systemName: "camera.fill")
-                            .renderingMode(.template)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: (geometry.size.width * 0.18))
-                            .foregroundColor(.blue)
-                            .padding(
-                                EdgeInsets(
-                                    top: 0,
-                                    leading: (geometry.size.width * 0.01),
-                                    bottom: 0,
-                                    trailing: (geometry.size.width * 0.05)
-                                )
-                            )
-                        
-                        Text("バーコードスキャナーで書籍のバーコードを読み取ります")
-                            .font(.system(size: (geometry.size.height * 0.025), weight: .medium))
-                            .fixedSize(horizontal: false, vertical: true)
-                    }
-                    .padding(.vertical, (geometry.size.height * 0.05))
-                    
-                    HStack {
-                        Text("バーコードの読み取りに成功すると自動で楽天ブックスで書籍データが検索されます")
-                            .font(.system(size: (geometry.size.height * 0.025), weight: .medium))
-                            .fixedSize(horizontal: false, vertical: true)
-                            .padding(
-                                EdgeInsets(
-                                    top: 0,
-                                    leading: (geometry.size.width * 0.01),
-                                    bottom: 0,
-                                    trailing: (geometry.size.width * 0.05)
-                                )
-                            )
-                        
-                        Image(systemName: "network")
-                            .renderingMode(.template)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: (geometry.size.width * 0.18))
-                            .foregroundColor(.blue)
-                        
-                    } // HStack
-                    .padding(.bottom, (geometry.size.height * 0.05))
-                    
-                    HStack {
-                        Image(systemName: "book.fill")
-                            .renderingMode(.template)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: (geometry.size.width * 0.18))
-                            .foregroundColor(.blue)
-                            .padding(
-                                EdgeInsets(
-                                    top: 0,
-                                    leading: (geometry.size.width * 0.01),
-                                    bottom: 0,
-                                    trailing: (geometry.size.width * 0.05)
-                                )
-                            )
-                        
-                        VStack {
-                            Text("検索に成功すると書籍の詳細画面が開きます")
-                                .font(.system(size: (geometry.size.height * 0.025), weight: .medium))
-                                .fixedSize(horizontal: false, vertical: true)
+                ScrollView(.vertical, showsIndicators: false) {
+                    VStack {
+                        HStack {
+                            Image(systemName: "camera.fill")
+                                .renderingMode(.template)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 60)
+                                .foregroundColor(.blue)
+                                .padding(.trailing, 20)
                             
-                            Text("書籍の詳細画面では書籍をお気に入り登録することが出来ます")
-                                .font(.system(size: (geometry.size.height * 0.025), weight: .medium))
+                            Text("バーコードスキャナーで書籍のバーコードを読み取ります")
+                                .font(.system(size: 20, weight: .medium))
+                                .foregroundColor(.gray)
                                 .fixedSize(horizontal: false, vertical: true)
                         }
+                        .padding(.vertical ,20)
+                        .padding(.horizontal, 40)
+                        .frame(height: 240)
+                        .background(
+                            RoundedRectangle(cornerRadius: 25)
+                                .fill(Color.offWhite)
+                                .frame(width: screenWidth - 50, height: 200)
+                                .shadow(color: Color.black.opacity(0.2), radius: 10, x: 10, y: 10)
+                                .shadow(color: Color.white.opacity(0.7), radius: 10, x: -5, y: -5)
+                        )
+                        .padding(.bottom, 20)
                         
-                    }
-                    .padding(.bottom, (geometry.size.height * 0.05))
-                    
-                    HStack {
-                        Text("お気に入り登録した書籍はお気に入りリストからいつでも見返すことが出来ます")
-                            .font(.system(size: (geometry.size.height * 0.025), weight: .medium))
-                            .fixedSize(horizontal: false, vertical: true)
-                            .padding(.trailing, (geometry.size.width * 0.05))
-                            .padding(
-                                EdgeInsets(
-                                    top: 0,
-                                    leading: (geometry.size.width * 0.01),
-                                    bottom: 0,
-                                    trailing: (geometry.size.width * 0.05)
-                                )
-                            )
-                        
-                        Image(systemName: "star.fill")
-                            .renderingMode(.template)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: (geometry.size.width * 0.18))
-                            .foregroundColor(.blue)
-                    } // HStack
-                    .padding(.bottom, (isFirstTime) ? (geometry.size.height * 0.05) : (geometry.size.height * 0.1))
-                    
-                    if (isFirstTime) {
-                        Button(action: {
-                            isFirstTime = false
-                            isShowsheet = false
-                        }) {
-                            Text("バーコードスキャナーへ")
-                                .font(.system(size: (geometry.size.height * 0.03), weight: .medium))
-                                .foregroundColor(.white)
-                                .frame(width: (geometry.size.width * 0.7), height:(geometry.size.height * 0.12))
-                                .background(Color.blue)
-                                .cornerRadius(20)
+                        HStack {
+                            Text("バーコードの読み取りに成功すると自動で楽天ブックスで書籍データが検索されます")
+                                .font(.system(size: 20, weight: .medium))
+                                .foregroundColor(.gray)
+                                .fixedSize(horizontal: false, vertical: true)
+                                .padding(.trailing, 20)
+                            
+                            Image(systemName: "network")
+                                .renderingMode(.template)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 80)
+                                .foregroundColor(.green)
                         }
-                        .padding(.bottom, (geometry.size.height * 0.05))
+                        .padding(.vertical ,20)
+                        .padding(.horizontal, 40)
+                        .frame(height: 240)
+                        .background(
+                            RoundedRectangle(cornerRadius: 25)
+                                .fill(Color.offWhite)
+                                .frame(width: screenWidth - 50, height: 200)
+                                .shadow(color: Color.black.opacity(0.2), radius: 10, x: 10, y: 10)
+                                .shadow(color: Color.white.opacity(0.7), radius: 10, x: -5, y: -5)
+                        )
+                        .padding(.bottom, 20)
+                        
+                        HStack {
+                            Image(systemName: "book.fill")
+                                .renderingMode(.template)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 60)
+                                .foregroundColor(.purple)
+                                .padding(.trailing, 20)
+                            
+                            VStack {
+                                Text("検索に成功すると書籍の詳細画面が開きます")
+                                    .font(.system(size: 20, weight: .medium))
+                                    .foregroundColor(.gray)
+                                    .fixedSize(horizontal: false, vertical: true)
+                                
+                                Text("書籍の詳細画面では書籍をお気に入り登録することが出来ます")
+                                    .font(.system(size: 20, weight: .medium))
+                                    .foregroundColor(.gray)
+                                    .fixedSize(horizontal: false, vertical: true)
+                            }
+                        }
+                        .padding(.vertical ,20)
+                        .padding(.horizontal, 40)
+                        .frame(height: 240)
+                        .background(
+                            RoundedRectangle(cornerRadius: 25)
+                                .fill(Color.offWhite)
+                                .frame(width: screenWidth - 50, height: 200)
+                                .shadow(color: Color.black.opacity(0.2), radius: 10, x: 10, y: 10)
+                                .shadow(color: Color.white.opacity(0.7), radius: 10, x: -5, y: -5)
+                        )
+                        .padding(.bottom, 20)
+                        
+                        HStack {
+                            Text("お気に入り登録した書籍はお気に入りリストからいつでも見返すことが出来ます")
+                                .font(.system(size: 20, weight: .medium))
+                                .foregroundColor(.gray)
+                                .fixedSize(horizontal: false, vertical: true)
+                                .padding(.trailing, 20)
+                            
+                            Image(systemName: "star.fill")
+                                .renderingMode(.template)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 60)
+                                .foregroundColor(.yellow)
+                        }
+                        .padding(.vertical ,20)
+                        .padding(.horizontal, 40)
+                        .frame(height: 240)
+                        .background(
+                            RoundedRectangle(cornerRadius: 25)
+                                .fill(Color.offWhite)
+                                .frame(width: screenWidth - 50, height: 200)
+                                .shadow(color: Color.black.opacity(0.2), radius: 10, x: 10, y: 10)
+                                .shadow(color: Color.white.opacity(0.7), radius: 10, x: -5, y: -5)
+                        )
+                        .padding(.bottom, 90)
                     }
-                } // VStack
-                .padding(.horizontal, (geometry.size.height * 0.03))
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-            } // GeometryReader
-        } // body
-    }
+                }
+            } // VStack
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.offWhite.edgesIgnoringSafeArea(.all))
+        } // GeometryReader
+    } // body
 }

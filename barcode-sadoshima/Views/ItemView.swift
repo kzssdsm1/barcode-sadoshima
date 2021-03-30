@@ -12,24 +12,17 @@ struct ItemView: View {
     
     @StateObject private var viewModel = ItemViewModel()
     
-    @State private var isShowAlert = false
+    @State private var showAlert = false
     
     let input: Item
-    let title: String
     
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .leading, spacing: 0) {
-                HStack {
-                    Spacer()
-                    
-                    
-                    Text(title)
-                        .font(.system(size: (geometry.size.height * 0.05), weight: .heavy))
-                        .padding((geometry.size.height * 0.04))
-                    
-                    Spacer()
-                }
+                Text("書籍情報")
+                    .font(.system(size: 22, weight: .heavy))
+                    .foregroundColor(.gray)
+                
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(alignment:  .leading, spacing: 0) {
                         HStack {
@@ -40,51 +33,66 @@ struct ItemView: View {
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 135, height: 200)
-                                    .shadow(color: .gray, radius: 1, x: 0, y: 0)
-                                    .padding([.bottom, .horizontal], (geometry.size.height * 0.04))
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 25)
+                                            .fill(Color.offWhite)
+                                            .frame(width: 170, height: 230)
+                                            .shadow(color: Color.black.opacity(0.2), radius: 10, x: 10, y: 10)
+                                            .shadow(color: Color.white.opacity(0.7), radius: 10, x: -5, y: -5)
+                                    )
                             } else {
                                 // 何らかの理由により画像データを取得できなかった時は代理の画像を表示する
                                 Image(systemName: "questionmark.circle")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
-                                    .frame(width: 135, height: 200)
-                                    .padding([.bottom, .horizontal], (geometry.size.height * 0.04))
+                                    .frame(width: 170, height: 230)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 25)
+                                            .fill(Color.offWhite)
+                                            .frame(width: 155, height: 200)
+                                            .shadow(color: Color.black.opacity(0.2), radius: 10, x: 10, y: 10)
+                                            .shadow(color: Color.white.opacity(0.7), radius: 10, x: -5, y: -5)
+                                    )
                             }
                             
                             Spacer()
-                        }
+                        } // HStack
+                        .frame(height: 270)
+                        .padding(.bottom, 20)
+                        .padding(.top, 10)
                         
                         Text("タイトル：")
                             .foregroundColor(.gray)
                             .opacity(0.9)
-                            .font(.system(size: (geometry.size.height * 0.02), weight: .regular))
-                            .padding(.horizontal, (geometry.size.height * 0.04))
+                            .font(.system(size: 18, weight: .regular))
                         
                         Text(input.title)
-                            .font(.system(size: (geometry.size.height * 0.03), weight: .semibold))
+                            .font(.system(size: 22, weight: .semibold))
+                            .foregroundColor(.gray)
                             .fixedSize(horizontal: false, vertical: true)
-                            .padding([.bottom, .horizontal], (geometry.size.height * 0.04))
+                            .padding(.bottom, 20)
                         
                         Text("著者：")
                             .foregroundColor(.gray)
                             .opacity(0.9)
-                            .font(.system(size: (geometry.size.height * 0.02), weight: .regular))
-                            .padding(.horizontal, (geometry.size.height * 0.04))
+                            .font(.system(size: 18, weight: .regular))
                         
                         Text(input.author)
-                            .font(.system(size: (geometry.size.height * 0.03), weight: .semibold))
+                            .font(.system(size: 22, weight: .semibold))
+                            .foregroundColor(.gray)
                             .fixedSize(horizontal: false, vertical: true)
-                            .padding([.bottom, .horizontal], (geometry.size.height * 0.04))
+                            .padding(.bottom, 20)
                         
                         Text("値段：")
                             .foregroundColor(.gray)
                             .opacity(0.9)
-                            .font(.system(size: (geometry.size.height * 0.02), weight: .regular))
-                            .padding(.horizontal, (geometry.size.height * 0.04))
+                            .font(.system(size: 18, weight: .regular))
                         
                         Text("\(input.price)円")
-                            .font(.system(size: (geometry.size.height * 0.03), weight: .semibold))
-                            .padding([.bottom, .horizontal], (geometry.size.height * 0.04))
+                            .font(.system(size: 22, weight: .semibold))
+                            .foregroundColor(.gray)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .padding(.bottom, 20)
                         
                         HStack {
                             Button(action: {
@@ -92,18 +100,17 @@ struct ItemView: View {
                                 UIApplication.shared.open(url!)
                             }, label: {
                                 Text("Safariで商品ページを開く")
-                                    .font(.system(size: (geometry.size.height * 0.02), weight: .medium))
-                                    .foregroundColor(.white)
-                                    .frame(width: (geometry.size.width * 0.5), height:(geometry.size.height * 0.08))
-                                    .background(Color.blue)
-                                    .cornerRadius(12)
+                                    .font(.system(size: 15, weight: .medium))
+                                    .foregroundColor(.gray)
                             }) // Button
+                            .buttonStyle(CustomRoundedRectangleButtonStyle())
+                            .frame(width: 200, height: 80)
                             
-                            Spacer()
+                            Spacer(minLength: 20)
                             
                             Button(action: {
                                 if (viewModel.existsItem) {
-                                    isShowAlert = true
+                                    showAlert = true
                                 } else {
                                     viewModel.addItem(item: input)
                                 }
@@ -112,22 +119,26 @@ struct ItemView: View {
                                     .renderingMode(.template)
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
-                                    .frame(width: (geometry.size.width * 0.15), height: (geometry.size.height * 0.15))
+                                    .frame(width: 50, height: 50)
                                     .foregroundColor((viewModel.existsItem) ? .yellow : .gray)
                                     .opacity((viewModel.existsItem) ? 1.0 : 0.7)
                             }) // Button
+                            .buttonStyle(CustomButtonStyle())
+                            .frame(width: 80, height: 80)
                         } // HStack
-                        .padding(.horizontal, (geometry.size.height * 0.06))
+                        .padding(.horizontal, 15)
+                        .padding(.bottom, 30)
                     } // VStack
                 } // ScrollView
             } // VStack
+            .padding(20)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .edgesIgnoringSafeArea(.all)
+            .background(Color.offWhite.edgesIgnoringSafeArea(.all))
         } // GeometryReader
         .onAppear() {
             viewModel.setData(context: context, link: input.link)
         } // .onAppear
-        .alert(isPresented: $isShowAlert) {
+        .alert(isPresented: $showAlert) {
             Alert(
                 title: Text("削除"),
                 message: Text("お気に入りリストからこの商品を削除しますか？"),

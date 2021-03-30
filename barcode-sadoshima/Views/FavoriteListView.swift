@@ -9,31 +9,29 @@ import SwiftUI
 import CoreData
 
 struct FavoriteListView: View {
-    @Binding var selection: Int
-    
-    @Environment(\.managedObjectContext) private var context
-    
-    @StateObject private var viewModel = FavoriteListViewModel()
+    @Binding var isEditing: Bool
+    @Binding var isShowingKeyboard: Bool
+    @Binding var showAlert: Bool
+    @Binding var removeItems: [String]
+    @Binding var selectedItem: Item?
     
     @State private var inputText = ""
-    @State private var isAscending = false
-    @State private var isEditing = false
+    @State private var isAscending = true
+    @State private var sortKeyPath = \FavoriteItem.title
     @State private var isEmpty = false
-    @State private var isShowAlert = false
-    @State private var isShowingKeyboard = false
-    @State private var selectedItem: Item?
-    @State private var sortKeyPath = \FavoriteItem.date
+    
+    private let screenWidth = CGFloat(UIScreen.main.bounds.width)
     
     var body: some View {
-        GeometryReader { geometry in
+        GeometryReader { proxy in
             VStack(spacing: 0) {
-                if !(isShowingKeyboard) {
-                    FavoriteListHeaderView(
-                        isEditing: $isEditing,
-                        isEmpty: $isEmpty,
-                        removeItems: $viewModel.removeItems
-                    )
-                        .frame(height: 60)
+                if !isShowingKeyboard {
+                    FavoriteListViewHeader(isEditing: $isEditing, removeItems: $removeItems, isEmpty: $isEmpty)
+                }
+                SortButtonBar(isAscending: $isAscending, sortKeyPath: $sortKeyPath)
+                if !isEditing {
+                    TextFieldView(inputText: $inputText, isShowingKeyboard: $isShowingKeyboard)
+                        .transition(AnyTransition.opacity.combined(with: .move(edge: .trailing)))
                 }
                 
                 FetchedItems(
@@ -41,17 +39,22 @@ struct FavoriteListView: View {
                     isAscending: isAscending,
                     sortKeyPath: sortKeyPath
                 ) { (items: [FavoriteItem]) in
-                    if (isEditing) {
-                        EditButtonBarView(removeItems: $viewModel.removeItems, isShowAlert: $isShowAlert, items: items)
-                            .frame(height: CGFloat(40))
-                            .padding(.horizontal, CGFloat(geometry.size.height * 0.02))
+                    if isEditing {
+                        EditButtonBar(
+                            removeItems: $removeItems,
+                            showAlert: $showAlert,
+                            items: items
+                        )
+                        .transition(AnyTransition.opacity.combined(with: .move(edge: .trailing)))
                     }
+                    
                     if (items.isEmpty) {
                         VStack {
                             Spacer(minLength: 0)
                             
                             Text("お気に入りリストに登録された商品がありません")
-                                .font(.system(size: CGFloat(geometry.size.height * 0.025), weight: .medium))
+                                .font(.system(size: 18, weight: .medium))
+                                .foregroundColor(.gray)
                             
                             Spacer(minLength: 0)
                         }
@@ -60,78 +63,60 @@ struct FavoriteListView: View {
                         }
                     } else {
                         ScrollView(.vertical, showsIndicators: false) {
-                            LazyVStack {
+                            LazyVStack(alignment: .leading) {
                                 ForEach(items) { item in
                                     CardView(
                                         isEditing: $isEditing,
-                                        isShowAlert: $isShowAlert,
-                                        removeItems: $viewModel.removeItems,
+                                        showAlert: $showAlert,
+                                        removeItems: $removeItems,
                                         selectedItem: $selectedItem,
-                                        input: convertToItem(item: item)
-                                    )
-                                    .padding(CGFloat(geometry.size.height * 0.025))
-                                    .frame(width: CGFloat(geometry.size.width - 30), height: CGFloat(geometry.size.height * 0.25))
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 20)
-                                            .stroke((viewModel.removeItems.firstIndex(where: {$0 == item.link}) != nil) ?  Color.blue : Color.gray, lineWidth: 1)
-                                    )
-                                    .padding(
-                                        EdgeInsets(
-                                            // ヘッダーと被らないようにするため上部に1だけpaddingを設定する
-                                            // ヘッダーが隠れている時はレイアウトがつまっている印象を避けるため余白を設定する
-                                            top: (isShowingKeyboard) ? CGFloat(geometry.size.height * 0.02) : 1,
-                                            leading: CGFloat(geometry.size.height * 0.02),
-                                            bottom: CGFloat(geometry.size.height * 0.02),
-                                            trailing: CGFloat(geometry.size.height * 0.02)
+                                        input: convertToItem(item: item))
+                                        .frame(width: screenWidth - 20, height: 180)
+                                        .background(
+                                            Group {
+                                                if removeItems.firstIndex(where: {$0 == item.link}) == nil {
+                                                    RoundedRectangle(cornerRadius: 25)
+                                                        .fill(Color.offWhite)
+                                                        .frame(width: screenWidth - 20, height: 180)
+                                                        .shadow(color: Color.black.opacity(0.2), radius: 10, x: 10, y: 10)
+                                                        .shadow(color: Color.white.opacity(0.7), radius: 10, x: -5, y: -5)
+                                                    
+                                                } else {
+                                                    RoundedRectangle(cornerRadius: 25)
+                                                        .fill(Color.offWhite)
+                                                        .frame(width: screenWidth - 20, height: 180)
+                                                        .overlay(
+                                                            RoundedRectangle(cornerRadius: 25)
+                                                                .stroke(Color.gray, lineWidth: 4)
+                                                                .blur(radius: 4)
+                                                                .offset(x: 2, y: 2)
+                                                                .mask(RoundedRectangle(cornerRadius: 25).fill(LinearGradient(Color.black, Color.clear)))
+                                                        )
+                                                        .overlay(
+                                                            RoundedRectangle(cornerRadius: 25)
+                                                                .stroke(Color.white, lineWidth: 8)
+                                                                .blur(radius: 4)
+                                                                .offset(x: -2, y: -2)
+                                                                .mask(RoundedRectangle(cornerRadius: 25).fill(LinearGradient(Color.clear, Color.black)))
+                                                        )
+                                                }
+                                            }
                                         )
-                                    )
-                                } // ForEach
-                            } // LazyVStack
+                                        .padding(.horizontal, 10)
+                                        .padding(.vertical, 10)
+                                }
+                            }
                         } // ScrollView
+                        .padding(.top, 10)
                         .onAppear {
                             isEmpty = false
                         }
                     }
                 }
-                if !(isShowingKeyboard) {
-                    SortButtonBarView(isAscending: $isAscending, sortKeyPath: $sortKeyPath)
-                        .frame(height: CGFloat(30))
-                        .padding(.top, CGFloat(geometry.size.height * 0.01))
-                }
-                
-                TextFieldView(inputText: $inputText, isShowingKeyboard: $isShowingKeyboard)
-                    .frame(height: CGFloat(40))
-                    .padding(
-                        EdgeInsets(
-                            top: CGFloat(geometry.size.height * 0.01),
-                            leading: CGFloat(geometry.size.height * 0.01),
-                            bottom: CGFloat(geometry.size.height * 0.025),
-                            trailing: CGFloat(geometry.size.height * 0.01)
-                        )
-                    )
             } // VStack
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .onTapGesture {
-                UIApplication.shared.closeKeyboard()
-            }
+            .background(Color.offWhite.edgesIgnoringSafeArea(.all))
         } // GeometryReader
-        .alert(isPresented: $isShowAlert) {
-            Alert(
-                title: Text("削除"),
-                message: (isEditing) ? Text("選択した商品を削除しますか？") : Text("お気に入りリストからこの商品を削除しますか？"),
-                primaryButton: .cancel(Text("キャンセル")) {
-                    viewModel.removeItems = []
-                },
-                secondaryButton: .destructive(Text("削除")) {
-                    viewModel.removeItem()
-                })
-        } // .alert
-        .sheet(item: $selectedItem) { item in
-            ItemView(input: item, title: "詳細")
-        }
-        .onAppear {
-            viewModel.context = context
-        } // .onAppear
     } // body
     
     private func convertToItem(item: FavoriteItem) -> Item {

@@ -13,14 +13,13 @@ import AVFoundation
 struct BarcodeScannerView: UIViewControllerRepresentable {
     @Binding var alertItem: AlertItem?
     @Binding var isLoading: Bool
-    @Binding var selection: Int
     @Binding var onCommitSubject: PassthroughSubject<String, Never>
+    @Binding var captureSession: AVCaptureSession
+    @Binding var showAlert: Bool
     
     private enum ScanError {
         case invalidDeviceInput, invalidSacnnedValue
     }
-    
-    let captureSession: AVCaptureSession
     
     private let viewController = UIViewController()
     
@@ -33,10 +32,18 @@ struct BarcodeScannerView: UIViewControllerRepresentable {
         
         if let captureDevice = discoverySession.devices.first {
             if let deviceInput = try? AVCaptureDeviceInput(device: captureDevice) {
+                for ii in captureSession.inputs {
+                    captureSession.removeInput(ii as AVCaptureInput)
+                }
+                
                 if captureSession.canAddInput(deviceInput) {
                     captureSession.addInput(deviceInput)
                 } else {
                     didSurface(error: .invalidDeviceInput)
+                }
+                
+                for ii in captureSession.outputs {
+                    captureSession.removeOutput(ii as AVCaptureOutput)
                 }
                 
                 let metadataOutput = AVCaptureMetadataOutput()
@@ -91,6 +98,8 @@ struct BarcodeScannerView: UIViewControllerRepresentable {
         case .invalidSacnnedValue:
             alertItem = AlertContext.invalidScannedValue
         }
+        
+        showAlert = true
     }
     
     /// カメラの検知を範囲を示す枠線を追加する関数

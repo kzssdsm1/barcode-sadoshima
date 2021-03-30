@@ -10,9 +10,9 @@ import Combine
 
 final class HomeViewModel: ObservableObject {
     @Published var alertItem: AlertItem?
-    @Published var item: Item?
+    @Published var showAlert = false
+    @Published var selectedItem: Item?
     @Published var isLoading = false
-    @Published var isShowSheet = false
     /// BarcodeScannerViewでISBNコードを読み取るとストリームを流すPublisher（値そのものを保持しない）
     @Published var onCommitSubject = PassthroughSubject<String, Never>()
     
@@ -47,24 +47,19 @@ final class HomeViewModel: ObservableObject {
                     return
                 }
                 self.isLoading = false
-                self.item = self.convertToItem(item: item)
-                self.isShowSheet = true
+                self.selectedItem = self.convertToItem(item: item)
             }
         
         // ストリームが流れるとエラーアラートを出す
         let errorSubscriber = errorSubject
             .sink(receiveValue: { [weak self] (error) in
+                print(error)
                 guard let self = self else {
                     return
                 }
                 self.isLoading = false
-                if error.errorDescription == "楽天ブックスでは現在取り扱っていないようです" {
-                    self.alertItem = AlertContext.dontExistsData
-                } else if error.errorDescription == "楽天ブックスのサーバーに問題が発生しているようです" {
-                    self.alertItem = AlertContext.serverError
-                } else {
-                    self.alertItem = AlertContext.invalidURLSession
-                }
+                self.alertItem = AlertContext.invalidURLSession
+                self.showAlert = true
             })
         
         // ストリームを流し続けるとメモリリークを起こすためSubscribeを中止する
