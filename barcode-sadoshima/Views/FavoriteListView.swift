@@ -106,7 +106,7 @@ struct FavoriteListView: View {
                                         )
                                         .padding(.horizontal, 10)
                                         .padding(.vertical, 10)
-                                }
+                                } // ForEach
                             }
                         } // ScrollView
                         .padding(.top, 10)

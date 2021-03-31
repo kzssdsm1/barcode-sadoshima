@@ -16,7 +16,6 @@ struct HomeView: View {
     @StateObject private var viewModel: HomeViewModel = .init(apiService: APIService())
     
     @State private var tappedItemMidX: CGFloat = 0
-    //@State private var selection: TabItem = .スキャナー
     @State private var isEditing = false
     @State private var isShowingKeyboard = false
     @State private var showAlert = false
@@ -74,6 +73,7 @@ struct HomeView: View {
                                 self.isAnimating = false
                             }
                     } // ZStack
+                    .drawingGroup()
                     
                     Spacer()
                 }

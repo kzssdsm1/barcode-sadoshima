@@ -32,6 +32,30 @@ struct SearchView: View {
                     .padding(.leading, 10)
                 
                 Spacer(minLength: 0)
+                
+                Button(action: {
+                    withAnimation {
+                        showItems = []
+                    }
+                }) {
+                    Rectangle()
+                        .foregroundColor(.clear)
+                        .overlay(
+                            Image(systemName: "arrow.clockwise")
+                                .foregroundColor(showItems.isEmpty ? .gray : .accentColor)
+                                .offset(y: -5)
+                        )
+                        .background(
+                            Text("クリア")
+                                .font(.system(size: 12, weight: .medium))
+                                .foregroundColor(showItems.isEmpty ? .gray : .accentColor)
+                                .offset(y: 12)
+                        )
+                }
+                .buttonStyle(CustomButtonStyle())
+                .frame(width: 50, height: 50)
+                .disabled(showItems.isEmpty)
+                .padding(.trailing, 10)
             } // HStack
             .frame(height: 60)
             
