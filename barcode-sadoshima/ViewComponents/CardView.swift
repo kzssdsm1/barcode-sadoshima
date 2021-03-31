@@ -39,6 +39,7 @@ struct CardView: View {
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 70, height: 110)
+                                .shadow(color: .gray, radius: 1, x: 0, y: 0)
                                 .background(
                                     RoundedRectangle(cornerRadius: 15)
                                         .fill(Color.offWhite)
@@ -52,6 +53,14 @@ struct CardView: View {
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 70, height: 110)
+                                .shadow(color: .gray, radius: 1, x: 0, y: 0)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 15)
+                                        .fill(Color.offWhite)
+                                        .frame(width: 80, height: 120)
+                                        .shadow(color: Color.black.opacity(0.2), radius: 10, x: 10, y: 10)
+                                        .shadow(color: Color.white.opacity(0.7), radius: 10, x: -5, y: -5)
+                                )
                         }
                         
                         VStack(alignment: .leading) {

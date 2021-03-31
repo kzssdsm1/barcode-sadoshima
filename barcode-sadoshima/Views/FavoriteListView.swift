@@ -60,7 +60,6 @@ struct FavoriteListView: View {
                             Spacer(minLength: 0)
                         }
                         .onAppear {
-                            isEditing = false
                             isEmpty = true
                         }
                     } else {
@@ -115,7 +114,7 @@ struct FavoriteListView: View {
                             isEmpty = false
                         }
                     }
-                } // FetchedItems
+                }
             } // VStack
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.offWhite.edgesIgnoringSafeArea(.all))

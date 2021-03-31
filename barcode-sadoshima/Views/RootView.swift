@@ -35,7 +35,9 @@ struct RootView: View {
                     Spacer(minLength: 0)
                 }
                 .frame(height: 60)
-                
+            }
+            
+            ZStack {
                 BarcodeScannerView(
                     alertItem: $alertItem,
                     isLoading: $isLoading,
@@ -43,7 +45,7 @@ struct RootView: View {
                     captureSession: $captureSession,
                     showAlert: $showAlert
                 )
-                .transition(.opacity)
+                .opacity(selection == .スキャナー ? 1 : 0)
                 .onAppear {
                     if !isFirstTime {
                         DispatchQueue.global(qos: .userInitiated).async {
@@ -51,12 +53,7 @@ struct RootView: View {
                         }
                     }
                 }
-                .onDisappear() {
-                    DispatchQueue.global(qos: .userInitiated).async {
-                        endSession()
-                    }
-                }
-            } else if selection == .検索 {
+                
                 SearchView(
                     isLoading: $isLoading,
                     onCommitSubject: $onCommitSubject,
@@ -65,14 +62,8 @@ struct RootView: View {
                     selection: $selection,
                     isShowingKeyboard: $isShowingKeyboard
                 )
-                .transition(.opacity)
-                .onAppear {
-                    DispatchQueue.global(qos: .userInitiated).async {
-                        endSession()
-                        
-                    }
-                }
-            } else if selection == .お気に入り {
+                .opacity(selection == .検索 ? 1 : 0)
+                
                 FavoriteListView(
                     isEditing: $isEditing,
                     isShowingKeyboard: $isShowingKeyboard,
@@ -81,24 +72,12 @@ struct RootView: View {
                     selectedItem: $selectedItem,
                     selection: $selection
                 )
-                .transition(.opacity)
-                .onAppear {
-                    DispatchQueue.global(qos: .userInitiated).async {
-                        endSession()
-                    }
-                }
-            } else if selection == .使い方 {
+                .opacity(selection == .お気に入り ? 1 : 0)
+                
                 AppDescriptionView()
-                    .transition(.opacity)
-                    .onAppear {
-                        DispatchQueue.global(qos: .userInitiated).async {
-                            endSession()
-                        }
-                    }
-                    .onDisappear() {
-                        isFirstTime = false
-                    }
-            }
+                    .opacity(selection == .使い方 ? 1 : 0)
+            } // ZStack
+            
         } // VStack
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     } // body

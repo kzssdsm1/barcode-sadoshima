@@ -33,6 +33,7 @@ struct ItemView: View {
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 135, height: 200)
+                                    .shadow(color: .gray, radius: 1, x: 0, y: 0)
                                     .background(
                                         RoundedRectangle(cornerRadius: 25)
                                             .fill(Color.offWhite)
@@ -45,11 +46,12 @@ struct ItemView: View {
                                 Image(systemName: "questionmark.circle")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
-                                    .frame(width: 170, height: 230)
+                                    .frame(width: 135, height: 200)
+                                    .shadow(color: .gray, radius: 1, x: 0, y: 0)
                                     .background(
                                         RoundedRectangle(cornerRadius: 25)
                                             .fill(Color.offWhite)
-                                            .frame(width: 155, height: 200)
+                                            .frame(width: 170, height: 230)
                                             .shadow(color: Color.black.opacity(0.2), radius: 10, x: 10, y: 10)
                                             .shadow(color: Color.white.opacity(0.7), radius: 10, x: -5, y: -5)
                                     )

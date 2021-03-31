@@ -78,7 +78,12 @@ struct HomeView: View {
                     Spacer()
                 }
                 
-                MotionTabBar(selection: $viewModel.selection, isFirstTime: $isFirstTime)
+                MotionTabBar(
+                    selection: $viewModel.selection,
+                    isFirstTime: $isFirstTime,
+                    captureSession: $captureSession,
+                    isEditing: $isEditing
+                    )
                     .disabled(viewModel.isLoading)
                     .opacity(!isShowingKeyboard ? 1 : 0)
             } // VStack

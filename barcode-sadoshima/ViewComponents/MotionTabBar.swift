@@ -6,11 +6,14 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct MotionTabBar: View {
     @State private var tappedItemMidX: CGFloat = 0
     @Binding var selection: TabItem
     @Binding var isFirstTime: Bool
+    @Binding var captureSession: AVCaptureSession
+    @Binding var isEditing: Bool
     
     var body: some View {
         HStack(spacing: 0) {
@@ -23,6 +26,25 @@ struct MotionTabBar: View {
                             )
                         ) {
                             tappedItemMidX = proxy.frame(in: .global).midX
+                            if item == .スキャナー {
+                                isEditing = false
+                                isFirstTime = false
+                                DispatchQueue.global(qos: .userInitiated).async {
+                                    startSession()
+                                }
+                            } else {
+                                DispatchQueue.global(qos: .userInitiated).async {
+                                    endSession()
+                                }
+                                if item != .お気に入り {
+                                    isEditing = false
+                                    if item != .使い方 {
+                                        isFirstTime = false
+                                    }
+                                } else {
+                                    isFirstTime = false
+                                }
+                            }
                             selection = item
                         }
                     }, label: {
@@ -45,7 +67,7 @@ struct MotionTabBar: View {
                     .frame(width: proxy.size.width, height: proxy.size.height)
                     .onAppear {
                         if isFirstTime {
-                            if item == TabItem.allCases[2] {
+                            if item == TabItem.allCases[3] {
                                 tappedItemMidX = proxy.frame(in: .global).midX
                             }
                         } else {
@@ -69,5 +91,15 @@ struct MotionTabBar: View {
                 )
         )
     } // body
+    
+    private func startSession() {
+        guard !captureSession.isRunning else { return }
+        captureSession.startRunning()
+    }
+    
+    private func endSession() {
+        guard captureSession.isRunning else { return }
+        captureSession.stopRunning()
+    }
 }
 
