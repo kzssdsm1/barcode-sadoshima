@@ -21,8 +21,6 @@ struct FavoriteListView: View {
     @State private var sortKeyPath = \FavoriteItem.title
     @State private var isEmpty = false
     
-    @State private var isShowing = false
-    
     private let screenWidth = CGFloat(UIScreen.main.bounds.width)
     
     var body: some View {
