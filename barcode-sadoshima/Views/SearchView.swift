@@ -25,39 +25,41 @@ struct SearchView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            HStack {
-                Text("タイトルで検索")
-                    .font(.system(size: 22, weight: .heavy))
-                    .foregroundColor(.gray)
-                
-                Spacer(minLength: 0)
-                
-                Button(action: {
-                    withAnimation {
-                        showItems = []
+            if !isShowingKeyboard {
+                HStack {
+                    Text("タイトルで検索")
+                        .font(.system(size: 22, weight: .heavy))
+                        .foregroundColor(.gray)
+                    
+                    Spacer(minLength: 0)
+                    
+                    Button(action: {
+                        withAnimation {
+                            showItems = []
+                        }
+                    }) {
+                        Rectangle()
+                            .foregroundColor(.clear)
+                            .overlay(
+                                Image(systemName: "arrow.clockwise")
+                                    .foregroundColor(showItems.isEmpty ? .gray : .accentColor)
+                                    .offset(y: -5)
+                            )
+                            .background(
+                                Text("クリア")
+                                    .font(.system(size: 12, weight: .medium))
+                                    .foregroundColor(showItems.isEmpty ? .gray : .accentColor)
+                                    .offset(y: 12)
+                            )
                     }
-                }) {
-                    Rectangle()
-                        .foregroundColor(.clear)
-                        .overlay(
-                            Image(systemName: "arrow.clockwise")
-                                .foregroundColor(showItems.isEmpty ? .gray : .accentColor)
-                                .offset(y: -5)
-                        )
-                        .background(
-                            Text("クリア")
-                                .font(.system(size: 12, weight: .medium))
-                                .foregroundColor(showItems.isEmpty ? .gray : .accentColor)
-                                .offset(y: 12)
-                        )
-                }
-                .buttonStyle(CustomButtonStyle())
-                .frame(width: 50, height: 50)
-                .disabled(showItems.isEmpty)
-                .padding(.trailing, 10)
-            } // HStack
-            .padding(10)
-            .frame(height: 60)
+                    .buttonStyle(CustomButtonStyle())
+                    .frame(width: 50, height: 50)
+                    .disabled(showItems.isEmpty)
+                    .padding(.trailing, 10)
+                } // HStack
+                .padding(10)
+                .frame(height: 60)
+            }
             
             SearchTextFieldView(
                 inputText: $inputText,
@@ -120,12 +122,15 @@ struct SearchView: View {
                                 )
                                 .padding(.horizontal, 10)
                                 .padding(.vertical, 10)
-                        }
-                    }
+                        } // ForEach
+                    } // LazyVStack
                 } // ScrollView
                 .padding(.top, 10)
             }
         } //VStack
+        .onTapGesture {
+            UIApplication.shared.closeKeyboard()
+        }
         .disabled(isLoading)
     } // body
 }

@@ -28,8 +28,8 @@ struct FavoriteListView: View {
             VStack(spacing: 0) {
                 if !isShowingKeyboard {
                     FavoriteListViewHeader(isEditing: $isEditing, removeItems: $removeItems, isEmpty: $isEmpty)
+                    SortButtonBar(isAscending: $isAscending, sortKeyPath: $sortKeyPath)
                 }
-                SortButtonBar(isAscending: $isAscending, sortKeyPath: $sortKeyPath)
                 if !isEditing {
                     TextFieldView(inputText: $inputText, isShowingKeyboard: $isShowingKeyboard)
                         .transition(AnyTransition.opacity.combined(with: .move(edge: .trailing)))
@@ -118,6 +118,9 @@ struct FavoriteListView: View {
             } // VStack
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.offWhite.edgesIgnoringSafeArea(.all))
+            .onTapGesture {
+                UIApplication.shared.closeKeyboard()
+            }
         } // GeometryReader
     } // body
     
