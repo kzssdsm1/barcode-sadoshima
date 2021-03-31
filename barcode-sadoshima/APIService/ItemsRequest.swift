@@ -21,19 +21,31 @@ struct ItemsRequest: APIRequestType {
     }
     
     var queryItems: [URLQueryItem] {
-        return [
-            .init(name: "isbn", value: query),
-            .init(name: "elements", value: "author,title,largeImageUrl,itemPrice,itemUrl"),
-            .init(name: "formatVersion", value: "2"),
-            .init(name: "hits", value: "1"),
-            .init(name: "applicationId", value: getAppID())
-        ]
+        if useISBN {
+            return [
+                .init(name: "isbn", value: query),
+                .init(name: "elements", value: "author,title,largeImageUrl,itemPrice,itemUrl"),
+                .init(name: "formatVersion", value: "2"),
+                .init(name: "hits", value: "1"),
+                .init(name: "applicationId", value: getAppID())
+            ]
+        } else {
+            return [
+                .init(name: "title", value: query),
+                .init(name: "elements", value: "author,title,largeImageUrl,itemPrice,itemUrl"),
+                .init(name: "formatVersion", value: "2"),
+                .init(name: "hits", value: "30"),
+                .init(name: "applicationId", value: getAppID())
+            ]
+        }
     }
     
     private let query: String
+    private let useISBN: Bool
     
-    init(query: String) {
+    init(query: String, useISBN: Bool) {
         self.query = query
+        self.useISBN = useISBN
     }
     
     /// Property ListからapplicationIDを読み取る関数

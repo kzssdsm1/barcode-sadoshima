@@ -15,6 +15,8 @@ final class HomeViewModel: ObservableObject {
     @Published var isLoading = false
     /// BarcodeScannerViewでISBNコードを読み取るとストリームを流すPublisher（値そのものを保持しない）
     @Published var onCommitSubject = PassthroughSubject<String, Never>()
+    @Published var selection: TabItem = .スキャナー
+    @Published var showItems = [Item]()
     
     private let apiService: APIServiceType
     /// エラーが返されるとストリームを流すPublisher
@@ -33,7 +35,7 @@ final class HomeViewModel: ObservableObject {
         // ストリームが流れるとAPIリクエストを行う
         let responseSubscriber = onCommitSubject
             .flatMap { [apiService] (query) in
-                apiService.request(ItemsRequest(query: query))
+                apiService.request(ItemsRequest(query: query, useISBN: (self.selection == .スキャナー)))
                     // 戻り値がEmptyになっているためこの節では実際にはストリームが流れない
                     .catch { [weak self] error -> Empty<ItemsResponse, Never> in
                         // エラーを検知するとストリームを流す
@@ -47,7 +49,11 @@ final class HomeViewModel: ObservableObject {
                     return
                 }
                 self.isLoading = false
-                self.selectedItem = self.convertToItem(item: item)
+                if self.selection == .スキャナー {
+                    self.selectedItem = self.convertToItem(item: item)
+                } else {
+                    self.showItems = self.convertToItems(items: item)
+                }
             }
         
         // ストリームが流れるとエラーアラートを出す
@@ -89,5 +95,26 @@ final class HomeViewModel: ObservableObject {
             price: price,
             title: item[0].title
         )
+    }
+    
+    private func convertToItems(items: [Items]) -> [Item] {
+        return items.compactMap { (repo) -> Item in
+            let formatter       = DateFormatter()
+            formatter.locale    = Locale(identifier: "ja_JP")
+            formatter.dateStyle = .long
+            formatter.timeStyle = .none
+            
+            let date = formatter.string(from: Date())
+            let price = String(repo.itemPrice)
+            
+            return Item(
+                author: repo.author,
+                date: date,
+                image: repo.largeImageUrl,
+                link: repo.itemUrl,
+                price: price,
+                title: repo.title
+            )
+        }
     }
 }

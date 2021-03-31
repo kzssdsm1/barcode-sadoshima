@@ -16,7 +16,7 @@ struct HomeView: View {
     @StateObject private var viewModel: HomeViewModel = .init(apiService: APIService())
     
     @State private var tappedItemMidX: CGFloat = 0
-    @State private var selection: TabItem = .スキャナー
+    //@State private var selection: TabItem = .スキャナー
     @State private var isEditing = false
     @State private var isShowingKeyboard = false
     @State private var showAlert = false
@@ -29,7 +29,7 @@ struct HomeView: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             RootView(
-                selection: $selection,
+                selection: $viewModel.selection,
                 isEditing: $isEditing,
                 isShowingKeyboard: $isShowingKeyboard,
                 showAlert: $viewModel.showAlert,
@@ -39,12 +39,49 @@ struct HomeView: View {
                 isLoading: $viewModel.isLoading,
                 onCommitSubject: $viewModel.onCommitSubject,
                 captureSession: $captureSession,
-                isFirstTime: $isFirstTime
+                isFirstTime: $isFirstTime,
+                showItems: $viewModel.showItems
             )
             
-            MotionTabBar(selection: $selection, isFirstTime: $isFirstTime)
-                .disabled(viewModel.isLoading)
-                .opacity(!isShowingKeyboard ? 1 : 0)
+            VStack(spacing: 0) {
+                
+                if viewModel.isLoading {
+                    Spacer()
+                    
+                    ZStack {
+                        Color(.black)
+                            .opacity(0.6)
+                            .frame(width: 100, height: 100)
+                            .cornerRadius(12)
+                            .disabled(viewModel.isLoading)
+                        
+                        Circle()
+                            .trim(from: 0, to: 0.6)
+                            .stroke(AngularGradient(gradient: Gradient(colors: [.gray, .white]), center: .center),
+                                    style: StrokeStyle(
+                                        lineWidth: 8,
+                                        lineCap: .round,
+                                        dash: [0.1, 16],
+                                        dashPhase: 8))
+                            .frame(width: 60, height: 60)
+                            .rotationEffect(.degrees(self.isAnimating ? 360 : 0))
+                            .onAppear() {
+                                withAnimation(Animation.linear(duration: 1).repeatForever(autoreverses: false)) {
+                                    self.isAnimating = true
+                                }
+                            }
+                            .onDisappear() {
+                                self.isAnimating = false
+                            }
+                    } // ZStack
+                    
+                    Spacer()
+                }
+                
+                MotionTabBar(selection: $viewModel.selection, isFirstTime: $isFirstTime)
+                    .disabled(viewModel.isLoading)
+                    .opacity(!isShowingKeyboard ? 1 : 0)
+            } // VStack
         } // ZStack
         .onAppear {
             firstVisitSetup()
@@ -83,7 +120,7 @@ struct HomeView: View {
                     }
                 }
                 .onDisappear() {
-                    if selection == .スキャナー {
+                    if viewModel.selection == .スキャナー {
                         DispatchQueue.global(qos: .userInitiated).async {
                             startSession()
                         }
@@ -141,7 +178,7 @@ struct HomeView: View {
             isFirstTime = false
         } else {
             isFirstTime = true
-            selection = .使い方
+            viewModel.selection = .使い方
             UserDefaults.standard.set(true, forKey: CurrentUserDefaults.isFirstVisit)
         }
     }

@@ -12,6 +12,7 @@ struct CardView: View {
     @Binding var showAlert: Bool
     @Binding var removeItems: [String]
     @Binding var selectedItem: Item?
+    @Binding var selection: TabItem
     
     let input: Item
     
@@ -67,14 +68,27 @@ struct CardView: View {
                             
                             Spacer(minLength: 0)
                             
-                            Text("追加日時：")
-                                .foregroundColor(.gray)
-                                .opacity(0.9)
-                                .font(.system(size: CGFloat(proxy.size.width * 0.04), weight: .regular))
-                            
-                            Text(input.date)
-                                .foregroundColor(.gray)
-                                .font(.system(size: CGFloat(proxy.size.width * 0.05), weight: .semibold))
+                            if selection == .お気に入り {
+                                Text("追加日時：")
+                                    .foregroundColor(.gray)
+                                    .opacity(0.9)
+                                    .font(.system(size: CGFloat(proxy.size.width * 0.04), weight: .regular))
+                                
+                                Text(input.date)
+                                    .foregroundColor(.gray)
+                                    .font(.system(size: CGFloat(proxy.size.width * 0.05), weight: .semibold))
+                            } else {
+                                Text("著者：")
+                                    .foregroundColor(.gray)
+                                    .opacity(0.9)
+                                    .font(.system(size: CGFloat(proxy.size.width * 0.04), weight: .regular))
+                                
+                                Text(input.author)
+                                    .foregroundColor(.gray)
+                                    .font(.system(size: CGFloat(proxy.size.width * 0.05), weight: .semibold))
+                                    .lineLimit(2)
+                                    .fixedSize(horizontal: false, vertical: true)
+                            }
                         } // VStack
                         .padding(.leading, 10)
                         .padding(.vertical, 30)
@@ -84,52 +98,54 @@ struct CardView: View {
                     } // HStack
                 } // Button
                 
-                if !isEditing {
-                    Button(action: {
-                        removeItems.append(input.link)
-                        showAlert = true
-                    }) {
-                        Rectangle()
-                            .foregroundColor(.clear)
-                            .overlay(
-                                Image(systemName: "trash.fill")
-                                    .foregroundColor(.gray)
-                            )
-                    }
-                    .buttonStyle(CustomButtonStyle())
-                    .frame(width: 50, height: 50)
-                } else {
-                    if let itemIndex = removeItems.firstIndex(where: {$0 == input.link}) {
-                        Button(action: {
-                            removeItems.remove(at: itemIndex)
-                        }) {
-                            Rectangle()
-                                .foregroundColor(.clear)
-                                .overlay(
-                                    Image(systemName: "checkmark.circle.fill")
-                                        .renderingMode(.template)
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .foregroundColor(.accentColor)
-                                )
-                        }
-                        .buttonStyle(CustomButtonStyle())
-                        .frame(width: 50, height: 50)
-                    } else {
+                if selection == .お気に入り {
+                    if !isEditing {
                         Button(action: {
                             removeItems.append(input.link)
+                            showAlert = true
                         }) {
                             Rectangle()
                                 .foregroundColor(.clear)
                                 .overlay(
-                                    Image(systemName: "circle")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
+                                    Image(systemName: "trash.fill")
                                         .foregroundColor(.gray)
                                 )
                         }
                         .buttonStyle(CustomButtonStyle())
                         .frame(width: 50, height: 50)
+                    } else {
+                        if let itemIndex = removeItems.firstIndex(where: {$0 == input.link}) {
+                            Button(action: {
+                                removeItems.remove(at: itemIndex)
+                            }) {
+                                Rectangle()
+                                    .foregroundColor(.clear)
+                                    .overlay(
+                                        Image(systemName: "checkmark.circle.fill")
+                                            .renderingMode(.template)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .foregroundColor(.accentColor)
+                                    )
+                            }
+                            .buttonStyle(CustomButtonStyle())
+                            .frame(width: 50, height: 50)
+                        } else {
+                            Button(action: {
+                                removeItems.append(input.link)
+                            }) {
+                                Rectangle()
+                                    .foregroundColor(.clear)
+                                    .overlay(
+                                        Image(systemName: "circle")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .foregroundColor(.gray)
+                                    )
+                            }
+                            .buttonStyle(CustomButtonStyle())
+                            .frame(width: 50, height: 50)
+                        }
                     }
                 }
             }

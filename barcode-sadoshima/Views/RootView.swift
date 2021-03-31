@@ -21,97 +21,85 @@ struct RootView: View {
     @Binding var onCommitSubject: PassthroughSubject<String, Never>
     @Binding var captureSession: AVCaptureSession
     @Binding var isFirstTime: Bool
-    
-    @State private var isAnimating = false
+    @Binding var showItems: [Item]
     
     var body: some View {
-        ZStack {
-            VStack(spacing: 0) {
-                if selection == .スキャナー {
-                    HStack {
-                        Text("バーコードスキャナー")
-                            .font(.system(size: 22, weight: .heavy))
-                            .foregroundColor(.gray)
-                            .padding(.leading, 10)
-                        
-                        Spacer(minLength: 0)
-                    }
-                    .frame(height: 60)
+        VStack(spacing: 0) {
+            if selection == .スキャナー {
+                HStack {
+                    Text("バーコードスキャナー")
+                        .font(.system(size: 22, weight: .heavy))
+                        .foregroundColor(.gray)
+                        .padding(.leading, 10)
                     
-                    BarcodeScannerView(
-                        alertItem: $alertItem,
-                        isLoading: $isLoading,
-                        onCommitSubject: $onCommitSubject,
-                        captureSession: $captureSession,
-                        showAlert: $showAlert
-                    )
+                    Spacer(minLength: 0)
+                }
+                .frame(height: 60)
+                
+                BarcodeScannerView(
+                    alertItem: $alertItem,
+                    isLoading: $isLoading,
+                    onCommitSubject: $onCommitSubject,
+                    captureSession: $captureSession,
+                    showAlert: $showAlert
+                )
+                .transition(.opacity)
+                .onAppear {
+                    if !isFirstTime {
+                        DispatchQueue.global(qos: .userInitiated).async {
+                            startSession()
+                        }
+                    }
+                }
+                .onDisappear() {
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        endSession()
+                    }
+                }
+            } else if selection == .検索 {
+                SearchView(
+                    isLoading: $isLoading,
+                    onCommitSubject: $onCommitSubject,
+                    showItems: $showItems,
+                    selectedItem: $selectedItem,
+                    selection: $selection,
+                    isShowingKeyboard: $isShowingKeyboard
+                )
+                .transition(.opacity)
+                .onAppear {
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        endSession()
+                        
+                    }
+                }
+            } else if selection == .お気に入り {
+                FavoriteListView(
+                    isEditing: $isEditing,
+                    isShowingKeyboard: $isShowingKeyboard,
+                    showAlert: $showAlert,
+                    removeItems: $removeItems,
+                    selectedItem: $selectedItem,
+                    selection: $selection
+                )
+                .transition(.opacity)
+                .onAppear {
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        endSession()
+                    }
+                }
+            } else if selection == .使い方 {
+                AppDescriptionView()
+                    .transition(.opacity)
                     .onAppear {
-                        if !isFirstTime {
-                            DispatchQueue.global(qos: .userInitiated).async {
-                                startSession()
-                            }
+                        DispatchQueue.global(qos: .userInitiated).async {
+                            endSession()
                         }
                     }
                     .onDisappear() {
-                        DispatchQueue.global(qos: .userInitiated).async {
-                            endSession()
-                        }
+                        isFirstTime = false
                     }
-                } else if selection == .お気に入り {
-                    FavoriteListView(
-                        isEditing: $isEditing,
-                        isShowingKeyboard: $isShowingKeyboard,
-                        showAlert: $showAlert,
-                        removeItems: $removeItems,
-                        selectedItem: $selectedItem
-                    )
-                    .onAppear {
-                        DispatchQueue.global(qos: .userInitiated).async {
-                            endSession()
-                        }
-                    }
-                } else if selection == .使い方 {
-                    AppDescriptionView()
-                        .onAppear {
-                            DispatchQueue.global(qos: .userInitiated).async {
-                                endSession()
-                            }
-                        }
-                        .onDisappear() {
-                            isFirstTime = false
-                        }
-                }
-            } // VStack
-            
-            if isLoading {
-                ZStack {
-                    Color(.black)
-                        .opacity(0.6)
-                        .frame(width: 100, height: 100)
-                        .cornerRadius(12)
-                        .disabled(isLoading)
-                    
-                    Circle()
-                        .trim(from: 0, to: 0.6)
-                        .stroke(AngularGradient(gradient: Gradient(colors: [.gray, .white]), center: .center),
-                                style: StrokeStyle(
-                                    lineWidth: 8,
-                                    lineCap: .round,
-                                    dash: [0.1, 16],
-                                    dashPhase: 8))
-                        .frame(width: 60, height: 60)
-                        .rotationEffect(.degrees(self.isAnimating ? 360 : 0))
-                        .onAppear() {
-                            withAnimation(Animation.linear(duration: 1).repeatForever(autoreverses: false)) {
-                                self.isAnimating = true
-                            }
-                        }
-                        .onDisappear() {
-                            self.isAnimating = false
-                        }
-                } // ZStack
             }
-        } // ZStack
+        } // VStack
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     } // body
     

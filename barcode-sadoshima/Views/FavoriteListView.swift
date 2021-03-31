@@ -14,11 +14,14 @@ struct FavoriteListView: View {
     @Binding var showAlert: Bool
     @Binding var removeItems: [String]
     @Binding var selectedItem: Item?
+    @Binding var selection: TabItem
     
     @State private var inputText = ""
     @State private var isAscending = true
     @State private var sortKeyPath = \FavoriteItem.title
     @State private var isEmpty = false
+    
+    @State private var isShowing = false
     
     private let screenWidth = CGFloat(UIScreen.main.bounds.width)
     
@@ -59,6 +62,7 @@ struct FavoriteListView: View {
                             Spacer(minLength: 0)
                         }
                         .onAppear {
+                            isEditing = false
                             isEmpty = true
                         }
                     } else {
@@ -70,6 +74,7 @@ struct FavoriteListView: View {
                                         showAlert: $showAlert,
                                         removeItems: $removeItems,
                                         selectedItem: $selectedItem,
+                                        selection: $selection,
                                         input: convertToItem(item: item))
                                         .frame(width: screenWidth - 20, height: 180)
                                         .background(
@@ -112,7 +117,7 @@ struct FavoriteListView: View {
                             isEmpty = false
                         }
                     }
-                }
+                } // FetchedItems
             } // VStack
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.offWhite.edgesIgnoringSafeArea(.all))

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EB301D6D26144BDF0082DD51 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB301D6C26144BDF0082DD51 /* SearchView.swift */; };
+		EB301D7126144E990082DD51 /* SearchTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB301D7026144E990082DD51 /* SearchTextFieldView.swift */; };
 		EB36332F260E238C00DDF0C0 /* AppDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB36332E260E238C00DDF0C0 /* AppDescriptionView.swift */; };
 		EB363336260E2C6500DDF0C0 /* CurrentUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB363335260E2C6500DDF0C0 /* CurrentUserDefaults.swift */; };
 		EB392C3325EE98D4004D6DEE /* UIAplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB392C3225EE98D4004D6DEE /* UIAplication+Extension.swift */; };
@@ -49,6 +51,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EB301D6C26144BDF0082DD51 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		EB301D7026144E990082DD51 /* SearchTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextFieldView.swift; sourceTree = "<group>"; };
 		EB36332E260E238C00DDF0C0 /* AppDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDescriptionView.swift; sourceTree = "<group>"; };
 		EB363335260E2C6500DDF0C0 /* CurrentUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserDefaults.swift; sourceTree = "<group>"; };
 		EB392C3225EE98D4004D6DEE /* UIAplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAplication+Extension.swift"; sourceTree = "<group>"; };
@@ -117,6 +121,7 @@
 				EB5A4456261347AC000E90F0 /* TabBarShape.swift */,
 				EB5A4459261347C8000E90F0 /* TabBarButton.swift */,
 				EB5A446126138CB1000E90F0 /* CustomRoundedRectangleButtonStyle.swift */,
+				EB301D7026144E990082DD51 /* SearchTextFieldView.swift */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
@@ -209,6 +214,7 @@
 				EB3D39C525EAA384001BD287 /* FavoriteListView.swift */,
 				EB36332E260E238C00DDF0C0 /* AppDescriptionView.swift */,
 				EB5A44382613452E000E90F0 /* RootView.swift */,
+				EB301D6C26144BDF0082DD51 /* SearchView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -321,10 +327,12 @@
 				EB5A444C261346C4000E90F0 /* FavoriteListViewHeader.swift in Sources */,
 				EB5A4442261345FC000E90F0 /* Color+Extension.swift in Sources */,
 				EB7063F225FA76A40014650F /* CardView.swift in Sources */,
+				EB301D6D26144BDF0082DD51 /* SearchView.swift in Sources */,
 				EB7063D625FA589C0014650F /* TextFieldView.swift in Sources */,
 				EB5A44502613471E000E90F0 /* SortButtonBar.swift in Sources */,
 				EB3D39AB25EA1491001BD287 /* FavoriteItem+CoreDataClass.swift in Sources */,
 				EB4CD51125E8FD25006A0A03 /* barcode_sadoshimaApp.swift in Sources */,
+				EB301D7126144E990082DD51 /* SearchTextFieldView.swift in Sources */,
 				EB36332F260E238C00DDF0C0 /* AppDescriptionView.swift in Sources */,
 				EB3D39BD25EA9CB4001BD287 /* Alert.swift in Sources */,
 				EB3D39AC25EA1491001BD287 /* FavoriteItem+CoreDataProperties.swift in Sources */,
