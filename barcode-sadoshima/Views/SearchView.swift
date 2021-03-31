@@ -29,7 +29,6 @@ struct SearchView: View {
                 Text("タイトルで検索")
                     .font(.system(size: 22, weight: .heavy))
                     .foregroundColor(.gray)
-                    .padding(.leading, 10)
                 
                 Spacer(minLength: 0)
                 
@@ -57,6 +56,7 @@ struct SearchView: View {
                 .disabled(showItems.isEmpty)
                 .padding(.trailing, 10)
             } // HStack
+            .padding(10)
             .frame(height: 60)
             
             SearchTextFieldView(
