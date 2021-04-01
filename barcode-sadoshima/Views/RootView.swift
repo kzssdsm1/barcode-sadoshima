@@ -90,9 +90,4 @@ struct RootView: View {
         guard !captureSession.isRunning else { return }
         captureSession.startRunning()
     }
-    
-    private func endSession() {
-        guard captureSession.isRunning else { return }
-        captureSession.stopRunning()
-    }
 }
