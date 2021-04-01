@@ -23,9 +23,6 @@ struct SearchView: View {
     @State private var removeItems = [String]()
     @State private var isAnimating = false
     
-    private let screenWidth = CGFloat(UIScreen.main.bounds.width)
-    private let screenHeight = CGFloat(UIScreen.main.bounds.height)
-    
     var body: some View {
         VStack(spacing: 0) {
             if !isShowingKeyboard {
@@ -94,52 +91,59 @@ struct SearchView: View {
                                     selectedItem: $selectedItem,
                                     selection: $selection,
                                     input: item)
-                                    .frame(width: screenWidth - 20, height: 180)
+                                    .frame(height: 180)
+                                    .frame(minWidth: 300)
                                     .background(
                                         RoundedRectangle(cornerRadius: 25)
                                             .fill(Color.offWhite)
-                                            .frame(width: screenWidth - 20, height: 180)
+                                            .frame(height: 180)
+                                            .frame(minWidth: 300)
                                             .shadow(color: Color.black.opacity(0.2), radius: 10, x: 10, y: 10)
                                             .shadow(color: Color.white.opacity(0.7), radius: 10, x: -5, y: -5)
                                     )
-                                    .padding(.horizontal, 10)
                                     .padding(.vertical, 10)
+                                    .padding(.horizontal)
                             } // ForEach
                         } // LazyVStack
+                        .padding(.top, 10)
+                        .padding(.bottom, 90)
                     } // ScrollView
-                    .padding(.top, 10)
-                } else {
-                    Spacer()
-                    
-                    ZStack {
-                        Color(.black)
-                            .opacity(0.6)
-                            .frame(width: 100, height: 100)
-                            .cornerRadius(12)
-                            .disabled(isShowingItems)
+                } else if !isShowingItems {
+                    if selection == .検索 {
+                        Spacer()
                         
-                        Circle()
-                            .trim(from: 0, to: 0.6)
-                            .stroke(AngularGradient(gradient: Gradient(colors: [.gray, .white]), center: .center),
-                                    style: StrokeStyle(
-                                        lineWidth: 8,
-                                        lineCap: .round,
-                                        dash: [0.1, 16],
-                                        dashPhase: 8))
-                            .frame(width: 60, height: 60)
-                            .rotationEffect(.degrees(isAnimating ? 360 : 0))
-                            .onAppear() {
-                                withAnimation(Animation.linear(duration: 1).repeatForever(autoreverses: false)) {
-                                    isAnimating = true
+                        ZStack {
+                            Color(.black)
+                                .opacity(0.6)
+                                .frame(width: 100, height: 100)
+                                .cornerRadius(12)
+                                .disabled(isShowingItems)
+                            
+                            Circle()
+                                .trim(from: 0, to: 0.6)
+                                .stroke(AngularGradient(gradient: Gradient(colors: [.gray, .white]), center: .center),
+                                        style: StrokeStyle(
+                                            lineWidth: 8,
+                                            lineCap: .round,
+                                            dash: [0.1, 16],
+                                            dashPhase: 8))
+                                .frame(width: 60, height: 60)
+                                .rotationEffect(.degrees(isAnimating ? 360 : 0))
+                                .onAppear() {
+                                    withAnimation(Animation.linear(duration: 1).repeatForever(autoreverses: false)) {
+                                        self.isAnimating = true
+                                    }
                                 }
-                            }
-                            .onDisappear() {
-                                isAnimating = false
-                            }
-                    } // ZStack
-                    .drawingGroup()
-                    
-                    Spacer(minLength: 300)
+                                .onDisappear() {
+                                    self.isAnimating = false
+                                }
+                        } // ZStack
+                        .drawingGroup()
+                        
+                        Spacer(minLength: 300)
+                    } else {
+                        Spacer()
+                    }
                 }
             }
         } //VStack
