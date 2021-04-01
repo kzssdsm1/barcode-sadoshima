@@ -14,14 +14,17 @@ struct SearchView: View {
     @Binding var showItems: [Item]
     @Binding var selectedItem: Item?
     @Binding var selection: TabItem
+    @Binding var isShowingKeyboard: Bool
+    @Binding var isShowingItems: Bool
     
     @State private var inputText = ""
-    @Binding var isShowingKeyboard: Bool
-    
-    private let screenWidth = CGFloat(UIScreen.main.bounds.width)
     @State private var isEditing = false
     @State private var showAlert = false
     @State private var removeItems = [String]()
+    @State private var isAnimating = false
+    
+    private let screenWidth = CGFloat(UIScreen.main.bounds.width)
+    private let screenHeight = CGFloat(UIScreen.main.bounds.height)
     
     var body: some View {
         VStack(spacing: 0) {
@@ -36,6 +39,7 @@ struct SearchView: View {
                     Button(action: {
                         withAnimation {
                             showItems = []
+                            inputText = ""
                         }
                     }) {
                         Rectangle()
@@ -79,53 +83,64 @@ struct SearchView: View {
                     Spacer(minLength: 0)
                 }
             } else {
-                ScrollView(.vertical, showsIndicators: false) {
-                    LazyVStack(alignment: .leading) {
-                        ForEach(showItems) { item in
-                            CardView(
-                                isEditing: $isEditing,
-                                showAlert: $showAlert,
-                                removeItems: $removeItems,
-                                selectedItem: $selectedItem,
-                                selection: $selection,
-                                input: item)
-                                .frame(width: screenWidth - 20, height: 180)
-                                .background(
-                                    Group {
-                                        if removeItems.firstIndex(where: {$0 == item.link}) == nil {
-                                            RoundedRectangle(cornerRadius: 25)
-                                                .fill(Color.offWhite)
-                                                .frame(width: screenWidth - 20, height: 180)
-                                                .shadow(color: Color.black.opacity(0.2), radius: 10, x: 10, y: 10)
-                                                .shadow(color: Color.white.opacity(0.7), radius: 10, x: -5, y: -5)
-                                            
-                                        } else {
-                                            RoundedRectangle(cornerRadius: 25)
-                                                .fill(Color.offWhite)
-                                                .frame(width: screenWidth - 20, height: 180)
-                                                .overlay(
-                                                    RoundedRectangle(cornerRadius: 25)
-                                                        .stroke(Color.gray, lineWidth: 4)
-                                                        .blur(radius: 4)
-                                                        .offset(x: 2, y: 2)
-                                                        .mask(RoundedRectangle(cornerRadius: 25).fill(LinearGradient(Color.black, Color.clear)))
-                                                )
-                                                .overlay(
-                                                    RoundedRectangle(cornerRadius: 25)
-                                                        .stroke(Color.white, lineWidth: 8)
-                                                        .blur(radius: 4)
-                                                        .offset(x: -2, y: -2)
-                                                        .mask(RoundedRectangle(cornerRadius: 25).fill(LinearGradient(Color.clear, Color.black)))
-                                                )
-                                        }
-                                    }
-                                )
-                                .padding(.horizontal, 10)
-                                .padding(.vertical, 10)
-                        } // ForEach
-                    } // LazyVStack
-                } // ScrollView
-                .padding(.top, 10)
+                if isShowingItems {
+                    ScrollView(.vertical, showsIndicators: false) {
+                        LazyVStack(alignment: .leading) {
+                            ForEach(showItems) { item in
+                                CardView(
+                                    isEditing: $isEditing,
+                                    showAlert: $showAlert,
+                                    removeItems: $removeItems,
+                                    selectedItem: $selectedItem,
+                                    selection: $selection,
+                                    input: item)
+                                    .frame(width: screenWidth - 20, height: 180)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 25)
+                                            .fill(Color.offWhite)
+                                            .frame(width: screenWidth - 20, height: 180)
+                                            .shadow(color: Color.black.opacity(0.2), radius: 10, x: 10, y: 10)
+                                            .shadow(color: Color.white.opacity(0.7), radius: 10, x: -5, y: -5)
+                                    )
+                                    .padding(.horizontal, 10)
+                                    .padding(.vertical, 10)
+                            } // ForEach
+                        } // LazyVStack
+                    } // ScrollView
+                    .padding(.top, 10)
+                } else {
+                    Spacer()
+                    
+                    ZStack {
+                        Color(.black)
+                            .opacity(0.6)
+                            .frame(width: 100, height: 100)
+                            .cornerRadius(12)
+                            .disabled(isShowingItems)
+                        
+                        Circle()
+                            .trim(from: 0, to: 0.6)
+                            .stroke(AngularGradient(gradient: Gradient(colors: [.gray, .white]), center: .center),
+                                    style: StrokeStyle(
+                                        lineWidth: 8,
+                                        lineCap: .round,
+                                        dash: [0.1, 16],
+                                        dashPhase: 8))
+                            .frame(width: 60, height: 60)
+                            .rotationEffect(.degrees(isAnimating ? 360 : 0))
+                            .onAppear() {
+                                withAnimation(Animation.linear(duration: 1).repeatForever(autoreverses: false)) {
+                                    isAnimating = true
+                                }
+                            }
+                            .onDisappear() {
+                                isAnimating = false
+                            }
+                    } // ZStack
+                    .drawingGroup()
+                    
+                    Spacer(minLength: 300)
+                }
             }
         } //VStack
         .onTapGesture {

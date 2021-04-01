@@ -14,6 +14,8 @@ struct MotionTabBar: View {
     @Binding var isFirstTime: Bool
     @Binding var captureSession: AVCaptureSession
     @Binding var isEditing: Bool
+    @Binding var isShowingItems: Bool
+    @Binding var isShowingFavoriteItems: Bool
     
     var body: some View {
         HStack(spacing: 0) {
@@ -22,29 +24,49 @@ struct MotionTabBar: View {
                     Button(action: {
                         withAnimation(
                             .interactiveSpring(
-                                response: 0.5, dampingFraction: 0.5, blendDuration: 0.5
+                                response: 0.4,
+                                dampingFraction: 0.5
                             )
                         ) {
                             tappedItemMidX = proxy.frame(in: .global).midX
+                            
                             if item == .スキャナー {
-                                isEditing = false
                                 isFirstTime = false
+                                isShowingItems = false
+                                isShowingFavoriteItems = false
+                                
                                 DispatchQueue.global(qos: .userInitiated).async {
                                     startSession()
                                 }
-                            } else {
+                            } else if item == .検索 {
+                                isFirstTime = false
+                                isShowingFavoriteItems = false
+                                
+                                DispatchQueue.global(qos: .userInitiated).async {
+                                    endSession()
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                                        isShowingItems = true
+                                    }
+                                }
+                            } else if item == .お気に入り {
+                                isFirstTime = false
+                                isShowingItems = false
+                                
+                                DispatchQueue.global(qos: .userInitiated).async {
+                                    endSession()
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                                        isShowingFavoriteItems = true
+                                    }
+                                }
+                            } else if item == .使い方 {
+                                isShowingItems = false
+                                isShowingFavoriteItems = false
+                                
                                 DispatchQueue.global(qos: .userInitiated).async {
                                     endSession()
                                 }
-                                if item != .お気に入り {
-                                    isEditing = false
-                                    if item != .使い方 {
-                                        isFirstTime = false
-                                    }
-                                } else {
-                                    isFirstTime = false
-                                }
                             }
+                            
                             selection = item
                         }
                     }, label: {
