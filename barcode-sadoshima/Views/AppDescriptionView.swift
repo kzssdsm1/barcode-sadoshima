@@ -31,7 +31,7 @@ struct AppDescriptionView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 60)
-                            .foregroundColor(.blue)
+                            .foregroundColor(.calmBlue)
                             .padding(.trailing, 20)
                         
                         Text("バーコードスキャナーで書籍のバーコードを読み取ります")
@@ -63,7 +63,7 @@ struct AppDescriptionView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 80)
-                            .foregroundColor(.green)
+                            .foregroundColor(.vividGreen)
                     }
                     .padding(.vertical ,20)
                     .padding(.horizontal, 40)
@@ -83,7 +83,7 @@ struct AppDescriptionView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 60)
-                            .foregroundColor(.purple)
+                            .foregroundColor(.deepPurple)
                             .padding(.trailing, 20)
                         
                         VStack(alignment: .leading) {

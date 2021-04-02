@@ -118,7 +118,7 @@ struct FavoriteListView: View {
                             isEmpty = false
                         }
                     } else if !isShowingFavoriteItems {
-                        if selection == .お気に入り {
+                        if selection == .favorite {
                             Spacer()
                             
                             ZStack {

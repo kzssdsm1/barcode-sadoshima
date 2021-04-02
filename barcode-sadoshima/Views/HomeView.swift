@@ -131,7 +131,7 @@ struct HomeView: View {
                     }
                 }
                 .onDisappear() {
-                    if viewModel.selection == .スキャナー {
+                    if viewModel.selection == .scanner {
                         DispatchQueue.global(qos: .userInitiated).async {
                             startSession()
                         }
@@ -189,7 +189,7 @@ struct HomeView: View {
             isFirstTime = false
         } else {
             isFirstTime = true
-            viewModel.selection = .使い方
+            viewModel.selection = .usage
             UserDefaults.standard.set(true, forKey: CurrentUserDefaults.isFirstVisit)
         }
     }

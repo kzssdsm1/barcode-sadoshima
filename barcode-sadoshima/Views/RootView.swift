@@ -27,7 +27,7 @@ struct RootView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            if selection == .スキャナー {
+            if selection == .scanner {
                 HStack {
                     Text("バーコードスキャナー")
                         .font(.system(size: 22, weight: .heavy))
@@ -47,7 +47,7 @@ struct RootView: View {
                     captureSession: $captureSession,
                     showAlert: $showAlert
                 )
-                .opacity(selection == .スキャナー ? 1 : 0)
+                .opacity(selection == .scanner ? 1 : 0)
                 .onAppear {
                     if !isFirstTime {
                         DispatchQueue.global(qos: .userInitiated).async {
@@ -65,7 +65,7 @@ struct RootView: View {
                     isShowingKeyboard: $isShowingKeyboard,
                     isShowingItems: $isShowingItems
                 )
-                .opacity(selection == .検索 ? 1 : 0)
+                .opacity(selection == .search ? 1 : 0)
                 
                 FavoriteListView(
                     isEditing: $isEditing,
@@ -76,10 +76,10 @@ struct RootView: View {
                     selection: $selection,
                     isShowingFavoriteItems: $isShowingFavoriteItems
                 )
-                .opacity(selection == .お気に入り ? 1 : 0)
+                .opacity(selection == .favorite ? 1 : 0)
                 
                 AppDescriptionView()
-                    .opacity(selection == .使い方 ? 1 : 0)
+                    .opacity(selection == .usage ? 1 : 0)
             } // ZStack
             
         } // VStack

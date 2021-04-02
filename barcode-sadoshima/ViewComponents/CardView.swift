@@ -76,7 +76,7 @@ struct CardView: View {
                         
                         Spacer(minLength: 0)
                         
-                        if selection == .お気に入り {
+                        if selection == .favorite {
                             Text("追加日時：")
                                 .foregroundColor(.gray)
                                 .opacity(0.9)
@@ -106,7 +106,7 @@ struct CardView: View {
                 } // HStack
             } // Button
             
-            if selection == .お気に入り {
+            if selection == .favorite {
                 if !isEditing {
                     Button(action: {
                         removeItems.append(input.link)

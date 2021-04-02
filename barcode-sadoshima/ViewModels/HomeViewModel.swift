@@ -15,7 +15,7 @@ final class HomeViewModel: ObservableObject {
     @Published var isLoading = false
     /// BarcodeScannerViewでISBNコードを読み取るとストリームを流すPublisher（値そのものを保持しない）
     @Published var onCommitSubject = PassthroughSubject<String, Never>()
-    @Published var selection: TabItem = .スキャナー
+    @Published var selection: TabItem = .scanner
     @Published var showItems = [Item]()
     
     private let apiService: APIServiceType
@@ -35,7 +35,7 @@ final class HomeViewModel: ObservableObject {
         // ストリームが流れるとAPIリクエストを行う
         let responseSubscriber = onCommitSubject
             .flatMap { [apiService] (query) in
-                apiService.request(ItemsRequest(query: query, useISBN: (self.selection == .スキャナー)))
+                apiService.request(ItemsRequest(query: query, useISBN: (self.selection == .scanner)))
                     // 戻り値がEmptyになっているためこの節では実際にはストリームが流れない
                     .catch { [weak self] error -> Empty<ItemsResponse, Never> in
                         // エラーを検知するとストリームを流す
@@ -49,7 +49,7 @@ final class HomeViewModel: ObservableObject {
                     return
                 }
                 self.isLoading = false
-                if self.selection == .スキャナー {
+                if self.selection == .favorite {
                     self.selectedItem = self.convertToItem(item: item)
                 } else {
                     self.showItems = self.convertToItems(items: item)

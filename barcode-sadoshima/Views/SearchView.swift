@@ -109,7 +109,7 @@ struct SearchView: View {
                         .padding(.bottom, 90)
                     } // ScrollView
                 } else if !isShowingItems {
-                    if selection == .検索 {
+                    if selection == .search {
                         Spacer()
                         
                         ZStack {

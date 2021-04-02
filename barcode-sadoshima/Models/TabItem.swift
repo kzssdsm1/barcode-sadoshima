@@ -24,10 +24,10 @@ enum TabItem: String, CaseIterable {
     
     var buttonColor: Color {
         switch self {
-        case .scanner: return .blue
-        case .search: return .purple
+        case .scanner: return .calmBlue
+        case .search: return .deepPurple
         case .favorite: return .yellow
-        case .usage: return .green
+        case .usage: return .vividGreen
         }
     }
     
