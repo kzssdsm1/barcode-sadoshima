@@ -33,8 +33,8 @@ extension Color {
         )
     }
     
-    static let vividOrange = Color(hex: "ff9900")
-    static let christmasYellow = Color(hex: "ffcc00")
+    static let gold = Color(hex: "d7c447")
+    static let mikan = Color(hex: "f08300")
     static let deepPurple = Color(hex: "663399")
     static let calmBlue = Color(hex: "336699")
     static let vividGreen = Color(hex: "009900")

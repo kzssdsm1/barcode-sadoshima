@@ -132,7 +132,7 @@ struct AppDescriptionView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 60)
-                            .foregroundColor(.vividOrange)
+                            .foregroundColor(.mikan)
                             .opacity(0.8)
                     }
                     .padding(.vertical ,20)
@@ -153,7 +153,7 @@ struct AppDescriptionView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 60)
-                            .foregroundColor(.christmasYellow)
+                            .foregroundColor(.gold)
                             .opacity(0.8)
                             .padding(.trailing, 20)
                         

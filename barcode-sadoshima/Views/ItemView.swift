@@ -122,7 +122,7 @@ struct ItemView: View {
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 50, height: 50)
-                                    .foregroundColor((viewModel.existsItem) ? .yellow : .gray)
+                                    .foregroundColor((viewModel.existsItem) ? .gold : .gray)
                                     .opacity((viewModel.existsItem) ? 1.0 : 0.7)
                             }) // Button
                             .buttonStyle(CustomButtonStyle())

@@ -83,7 +83,6 @@ struct BarcodeScannerView: UIViewControllerRepresentable {
     /// ISBNの読み取りに成功するとバイブレーションを鳴らしてHomeViewModelにストリームを流すメソッド
     /// - Parameter barcode: ISBNコード
     private func didFind(barcode: String) {
-        endSession()
         AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
         isLoading = true
         onCommitSubject.send(barcode)
@@ -150,6 +149,7 @@ extension BarcodeScannerView {
         }
         
         func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+            parent.endSession()
             
             guard let metadataObject = metadataObjects.first else {
                 parent.didSurface(error: .invalidSacnnedValue)
