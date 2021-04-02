@@ -30,7 +30,7 @@ struct MotionTabBar: View {
                         ) {
                             tappedItemMidX = proxy.frame(in: .global).midX
                             
-                            if item == .スキャナー {
+                            if item == .scanner {
                                 isFirstTime = false
                                 isShowingItems = false
                                 isShowingFavoriteItems = false
@@ -38,7 +38,7 @@ struct MotionTabBar: View {
                                 DispatchQueue.global(qos: .userInitiated).async {
                                     startSession()
                                 }
-                            } else if item == .検索 {
+                            } else if item == .search {
                                 isFirstTime = false
                                 isShowingFavoriteItems = false
                                 
@@ -48,7 +48,7 @@ struct MotionTabBar: View {
                                         isShowingItems = true
                                     }
                                 }
-                            } else if item == .お気に入り {
+                            } else if item == .favorite {
                                 isFirstTime = false
                                 isShowingItems = false
                                 
@@ -58,7 +58,7 @@ struct MotionTabBar: View {
                                         isShowingFavoriteItems = true
                                     }
                                 }
-                            } else if item == .使い方 {
+                            } else if item == .usage {
                                 isShowingItems = false
                                 isShowingFavoriteItems = false
                                 
@@ -80,7 +80,7 @@ struct MotionTabBar: View {
                                 )
                             )
                             .background(
-                                Text(item.rawValue.uppercased())
+                                Text(item.buttonText)
                                     .font(.system(size: 12, weight: .medium))
                                     .foregroundColor(selection == item ? item.buttonColor : .gray)
                                     .offset(y: 15)

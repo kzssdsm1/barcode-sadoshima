@@ -8,26 +8,35 @@
 import SwiftUI
 
 enum TabItem: String, CaseIterable {
-    case スキャナー
-    case 検索
-    case お気に入り
-    case 使い方
+    case scanner
+    case search
+    case favorite
+    case usage
     
     var imageName: String {
         switch self {
-        case .スキャナー: return "camera.fill"
-        case .検索: return "magnifyingglass"
-        case .お気に入り: return "star.fill"
-        case .使い方: return "questionmark.circle.fill"
+        case .scanner: return "camera.fill"
+        case .search: return "magnifyingglass"
+        case .favorite: return "star.fill"
+        case .usage: return "questionmark.circle.fill"
         }
     }
     
     var buttonColor: Color {
         switch self {
-        case .スキャナー: return .blue
-        case .検索: return .purple
-        case .お気に入り: return .yellow
-        case .使い方: return .green
+        case .scanner: return .blue
+        case .search: return .purple
+        case .favorite: return .yellow
+        case .usage: return .green
+        }
+    }
+    
+    var buttonText: String {
+        switch self {
+        case .scanner: return "スキャナー"
+        case .search: return "検索"
+        case .favorite: return "お気に入り"
+        case .usage: return "使い方"
         }
     }
 }
