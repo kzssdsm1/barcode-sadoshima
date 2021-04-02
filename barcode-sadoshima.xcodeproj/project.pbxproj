@@ -40,13 +40,13 @@
 		EB5A44482613467B000E90F0 /* EditButtonBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5A44472613467B000E90F0 /* EditButtonBar.swift */; };
 		EB5A444C261346C4000E90F0 /* FavoriteListViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5A444B261346C4000E90F0 /* FavoriteListViewHeader.swift */; };
 		EB5A44502613471E000E90F0 /* SortButtonBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5A444F2613471E000E90F0 /* SortButtonBar.swift */; };
-		EB5A44542613478F000E90F0 /* MotionTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5A44532613478F000E90F0 /* MotionTabBar.swift */; };
 		EB5A4457261347AC000E90F0 /* TabBarShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5A4456261347AC000E90F0 /* TabBarShape.swift */; };
 		EB5A445A261347C8000E90F0 /* TabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5A4459261347C8000E90F0 /* TabBarButton.swift */; };
 		EB5A446226138CB1000E90F0 /* CustomRoundedRectangleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5A446126138CB1000E90F0 /* CustomRoundedRectangleButtonStyle.swift */; };
 		EB7063D625FA589C0014650F /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7063D525FA589C0014650F /* TextFieldView.swift */; };
 		EB7063F225FA76A40014650F /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7063F125FA76A40014650F /* CardView.swift */; };
 		EB7063F625FA76C20014650F /* FetchedItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7063F525FA76C20014650F /* FetchedItems.swift */; };
+		EB71A4F42616CDCF007885D6 /* MotionTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB71A4F32616CDCF007885D6 /* MotionTabBar.swift */; };
 		EB7B2A7325FB0F87004801D7 /* spli.png in Resources */ = {isa = PBXBuildFile; fileRef = EB7B2A7225FB0F87004801D7 /* spli.png */; };
 /* End PBXBuildFile section */
 
@@ -86,13 +86,13 @@
 		EB5A44472613467B000E90F0 /* EditButtonBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditButtonBar.swift; sourceTree = "<group>"; };
 		EB5A444B261346C4000E90F0 /* FavoriteListViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListViewHeader.swift; sourceTree = "<group>"; };
 		EB5A444F2613471E000E90F0 /* SortButtonBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortButtonBar.swift; sourceTree = "<group>"; };
-		EB5A44532613478F000E90F0 /* MotionTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionTabBar.swift; sourceTree = "<group>"; };
 		EB5A4456261347AC000E90F0 /* TabBarShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarShape.swift; sourceTree = "<group>"; };
 		EB5A4459261347C8000E90F0 /* TabBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarButton.swift; sourceTree = "<group>"; };
 		EB5A446126138CB1000E90F0 /* CustomRoundedRectangleButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRoundedRectangleButtonStyle.swift; sourceTree = "<group>"; };
 		EB7063D525FA589C0014650F /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
 		EB7063F125FA76A40014650F /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		EB7063F525FA76C20014650F /* FetchedItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchedItems.swift; sourceTree = "<group>"; };
+		EB71A4F32616CDCF007885D6 /* MotionTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionTabBar.swift; sourceTree = "<group>"; };
 		EB7B2A7225FB0F87004801D7 /* spli.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spli.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -117,11 +117,11 @@
 				EB5A44472613467B000E90F0 /* EditButtonBar.swift */,
 				EB5A444B261346C4000E90F0 /* FavoriteListViewHeader.swift */,
 				EB5A444F2613471E000E90F0 /* SortButtonBar.swift */,
-				EB5A44532613478F000E90F0 /* MotionTabBar.swift */,
 				EB5A4456261347AC000E90F0 /* TabBarShape.swift */,
 				EB5A4459261347C8000E90F0 /* TabBarButton.swift */,
 				EB5A446126138CB1000E90F0 /* CustomRoundedRectangleButtonStyle.swift */,
 				EB301D7026144E990082DD51 /* SearchTextFieldView.swift */,
+				EB71A4F32616CDCF007885D6 /* MotionTabBar.swift */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
@@ -309,7 +309,6 @@
 				EB5A4457261347AC000E90F0 /* TabBarShape.swift in Sources */,
 				EB4CD53925E93F9F006A0A03 /* Item.swift in Sources */,
 				EB5A44452613462D000E90F0 /* LinearGradient+Extension.swift in Sources */,
-				EB5A44542613478F000E90F0 /* MotionTabBar.swift in Sources */,
 				EB392C3325EE98D4004D6DEE /* UIAplication+Extension.swift in Sources */,
 				EB3D39A225EA12EE001BD287 /* HomeViewModel.swift in Sources */,
 				EB5A443F261345BF000E90F0 /* CustomButtonStyle.swift in Sources */,
@@ -317,6 +316,7 @@
 				EB4CD54125E94216006A0A03 /* ItemViewModel.swift in Sources */,
 				EB4CD51D25E8FD27006A0A03 /* barcode_sadoshima.xcdatamodeld in Sources */,
 				EB7063F625FA76C20014650F /* FetchedItems.swift in Sources */,
+				EB71A4F42616CDCF007885D6 /* MotionTabBar.swift in Sources */,
 				EB5A445A261347C8000E90F0 /* TabBarButton.swift in Sources */,
 				EB3D39BA25EA6384001BD287 /* ItemsRequest.swift in Sources */,
 				EB3D39AF25EA623B001BD287 /* ItemView.swift in Sources */,

@@ -49,7 +49,7 @@ final class HomeViewModel: ObservableObject {
                     return
                 }
                 self.isLoading = false
-                if self.selection == .favorite {
+                if self.selection == .scanner {
                     self.selectedItem = self.convertToItem(item: item)
                 } else {
                     self.showItems = self.convertToItems(items: item)

@@ -15,13 +15,11 @@ struct SearchView: View {
     @Binding var selectedItem: Item?
     @Binding var selection: TabItem
     @Binding var isShowingKeyboard: Bool
-    @Binding var isShowingItems: Bool
     
     @State private var inputText = ""
     @State private var isEditing = false
     @State private var showAlert = false
     @State private var removeItems = [String]()
-    @State private var isAnimating = false
     
     var body: some View {
         VStack(spacing: 0) {
@@ -80,71 +78,33 @@ struct SearchView: View {
                     Spacer(minLength: 0)
                 }
             } else {
-                if isShowingItems {
-                    ScrollView(.vertical, showsIndicators: false) {
-                        LazyVStack(alignment: .leading) {
-                            ForEach(showItems) { item in
-                                CardView(
-                                    isEditing: $isEditing,
-                                    showAlert: $showAlert,
-                                    removeItems: $removeItems,
-                                    selectedItem: $selectedItem,
-                                    selection: $selection,
-                                    input: item)
-                                    .frame(height: 180)
-                                    .frame(minWidth: 300)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 25)
-                                            .fill(Color.offWhite)
-                                            .frame(height: 180)
-                                            .frame(minWidth: 300)
-                                            .shadow(color: Color.black.opacity(0.2), radius: 10, x: 10, y: 10)
-                                            .shadow(color: Color.white.opacity(0.7), radius: 10, x: -5, y: -5)
-                                    )
-                                    .padding(.vertical, 10)
-                                    .padding(.horizontal)
-                            } // ForEach
-                        } // LazyVStack
-                        .padding(.top, 10)
-                        .padding(.bottom, 90)
-                    } // ScrollView
-                } else if !isShowingItems {
-                    if selection == .search {
-                        Spacer()
-                        
-                        ZStack {
-                            Color(.black)
-                                .opacity(0.6)
-                                .frame(width: 100, height: 100)
-                                .cornerRadius(12)
-                                .disabled(isShowingItems)
-                            
-                            Circle()
-                                .trim(from: 0, to: 0.6)
-                                .stroke(AngularGradient(gradient: Gradient(colors: [.gray, .white]), center: .center),
-                                        style: StrokeStyle(
-                                            lineWidth: 8,
-                                            lineCap: .round,
-                                            dash: [0.1, 16],
-                                            dashPhase: 8))
-                                .frame(width: 60, height: 60)
-                                .rotationEffect(.degrees(isAnimating ? 360 : 0))
-                                .onAppear() {
-                                    withAnimation(Animation.linear(duration: 1).repeatForever(autoreverses: false)) {
-                                        self.isAnimating = true
-                                    }
-                                }
-                                .onDisappear() {
-                                    self.isAnimating = false
-                                }
-                        } // ZStack
-                        .drawingGroup()
-                        
-                        Spacer(minLength: 300)
-                    } else {
-                        Spacer()
-                    }
-                }
+                ScrollView(.vertical, showsIndicators: false) {
+                    LazyVStack(alignment: .leading) {
+                        ForEach(showItems) { item in
+                            CardView(
+                                isEditing: $isEditing,
+                                showAlert: $showAlert,
+                                removeItems: $removeItems,
+                                selectedItem: $selectedItem,
+                                selection: $selection,
+                                input: item)
+                                .frame(height: 180)
+                                .frame(minWidth: 300)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 25)
+                                        .fill(Color.offWhite)
+                                        .frame(height: 180)
+                                        .frame(minWidth: 300)
+                                        .shadow(color: Color.black.opacity(0.2), radius: 10, x: 10, y: 10)
+                                        .shadow(color: Color.white.opacity(0.7), radius: 10, x: -5, y: -5)
+                                )
+                                .padding(.vertical, 10)
+                                .padding(.horizontal)
+                        } // ForEach
+                    } // LazyVStack
+                    .padding(.top, 10)
+                    .padding(.bottom, 90)
+                } // ScrollView
             }
         } //VStack
         .onTapGesture {

@@ -26,7 +26,7 @@ enum TabItem: String, CaseIterable {
         switch self {
         case .scanner: return .calmBlue
         case .search: return .deepPurple
-        case .favorite: return .yellow
+        case .favorite: return .christmasYellow
         case .usage: return .vividGreen
         }
     }

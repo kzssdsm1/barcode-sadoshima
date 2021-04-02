@@ -22,8 +22,6 @@ struct RootView: View {
     @Binding var captureSession: AVCaptureSession
     @Binding var isFirstTime: Bool
     @Binding var showItems: [Item]
-    @Binding var isShowingItems: Bool
-    @Binding var isShowingFavoriteItems: Bool
     
     var body: some View {
         VStack(spacing: 0) {
@@ -62,8 +60,7 @@ struct RootView: View {
                     showItems: $showItems,
                     selectedItem: $selectedItem,
                     selection: $selection,
-                    isShowingKeyboard: $isShowingKeyboard,
-                    isShowingItems: $isShowingItems
+                    isShowingKeyboard: $isShowingKeyboard
                 )
                 .opacity(selection == .search ? 1 : 0)
                 
@@ -73,8 +70,7 @@ struct RootView: View {
                     showAlert: $showAlert,
                     removeItems: $removeItems,
                     selectedItem: $selectedItem,
-                    selection: $selection,
-                    isShowingFavoriteItems: $isShowingFavoriteItems
+                    selection: $selection
                 )
                 .opacity(selection == .favorite ? 1 : 0)
                 

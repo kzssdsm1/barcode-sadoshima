@@ -24,7 +24,7 @@ final class APIService: APIServiceType {
     /// キャッシュが残っていても常にサーバーにリクエストを送るための設定
     private let cachePolicy: NSURLRequest.CachePolicy = .useProtocolCachePolicy
     /// 応答待機時間
-    private let timeInterval: TimeInterval = 8
+    private let timeInterval: TimeInterval = 30
     
     /// APIリクエストを行う関数
     /// - Parameter request: 別途定義したRequestパラメーターを取りまとめた構造体

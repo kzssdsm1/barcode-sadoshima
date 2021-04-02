@@ -32,6 +32,7 @@ struct AppDescriptionView: View {
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 60)
                             .foregroundColor(.calmBlue)
+                            .opacity(0.8)
                             .padding(.trailing, 20)
                         
                         Text("バーコードスキャナーで書籍のバーコードを読み取ります")
@@ -64,6 +65,7 @@ struct AppDescriptionView: View {
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 80)
                             .foregroundColor(.vividGreen)
+                            .opacity(0.8)
                     }
                     .padding(.vertical ,20)
                     .padding(.horizontal, 40)
@@ -84,6 +86,7 @@ struct AppDescriptionView: View {
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 60)
                             .foregroundColor(.deepPurple)
+                            .opacity(0.8)
                             .padding(.trailing, 20)
                         
                         VStack(alignment: .leading) {
@@ -129,7 +132,8 @@ struct AppDescriptionView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 60)
-                            .foregroundColor(.orange)
+                            .foregroundColor(.vividOrange)
+                            .opacity(0.8)
                     }
                     .padding(.vertical ,20)
                     .padding(.horizontal, 40)
@@ -149,7 +153,8 @@ struct AppDescriptionView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 60)
-                            .foregroundColor(.yellow)
+                            .foregroundColor(.christmasYellow)
+                            .opacity(0.8)
                             .padding(.trailing, 20)
                         
                         Text("お気に入り登録した書籍はお気に入りリストからいつでも見返すことが出来ます")

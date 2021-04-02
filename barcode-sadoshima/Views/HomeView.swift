@@ -24,8 +24,6 @@ struct HomeView: View {
     @State private var captureSession = AVCaptureSession()
     @State private var isAnimating = false
     @State private var isFirstTime = false
-    @State private var isShowingItems = false
-    @State private var isShowingFavoriteItems = false
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -41,9 +39,7 @@ struct HomeView: View {
                 onCommitSubject: $viewModel.onCommitSubject,
                 captureSession: $captureSession,
                 isFirstTime: $isFirstTime,
-                showItems: $viewModel.showItems,
-                isShowingItems: $isShowingItems,
-                isShowingFavoriteItems: $isShowingFavoriteItems
+                showItems: $viewModel.showItems
             )
             
             VStack(spacing: 0) {
@@ -86,9 +82,7 @@ struct HomeView: View {
                     selection: $viewModel.selection,
                     isFirstTime: $isFirstTime,
                     captureSession: $captureSession,
-                    isEditing: $isEditing,
-                    isShowingItems: $isShowingItems,
-                    isShowingFavoriteItems: $isShowingFavoriteItems
+                    isEditing: $isEditing
                     )
                     .disabled(viewModel.isLoading)
                     .opacity(!isShowingKeyboard ? 1 : 0)
