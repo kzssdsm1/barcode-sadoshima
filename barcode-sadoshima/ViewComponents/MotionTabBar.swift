@@ -13,6 +13,7 @@ struct MotionTabBar: View {
     @Binding var isFirstTime: Bool
     @Binding var captureSession: AVCaptureSession
     @Binding var isEditing: Bool
+    @Binding var selectedItem: Item?
     
     private let screenWidth = CGFloat(UIScreen.main.bounds.width)
     
@@ -22,24 +23,28 @@ struct MotionTabBar: View {
                 GeometryReader { proxy in
                     Button(action: {
                         if item == .scanner {
+                            selectedItem = nil
                             isFirstTime = false
                             
                             DispatchQueue.global(qos: .userInitiated).async {
                                 startSession()
                             }
                         } else if item == .search {
+                            selectedItem = nil
                             isFirstTime = false
                             
                             DispatchQueue.global(qos: .userInitiated).async {
                                 endSession()
                             }
                         } else if item == .favorite {
+                            selectedItem = nil
                             isFirstTime = false
                             
                             DispatchQueue.global(qos: .userInitiated).async {
                                 endSession()
                             }
                         } else if item == .usage {
+                            selectedItem = nil
                             
                             DispatchQueue.global(qos: .userInitiated).async {
                                 endSession()

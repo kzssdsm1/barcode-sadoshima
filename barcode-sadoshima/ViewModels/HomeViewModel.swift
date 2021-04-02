@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 import Combine
 
 final class HomeViewModel: ObservableObject {
@@ -50,8 +51,10 @@ final class HomeViewModel: ObservableObject {
                 }
                 
                 if self.selection == .scanner {
+                    self.selectedItem = nil
                     self.selectedItem = self.convertToItem(item: item)
                 } else if self.selection == .search {
+                    self.showItems = []
                     self.showItems = self.convertToItems(items: item)
                 }
                 self.isLoading = false
@@ -88,14 +91,22 @@ final class HomeViewModel: ObservableObject {
         let date = formatter.string(from: Date())
         
         let url = URL(string: item[0].largeImageUrl)
-        let data = try! Data(contentsOf: url!)
+        
+        let imageData: Data
+        
+        do {
+            let data = try Data(contentsOf: url!)
+            imageData = data
+        } catch {
+            imageData = UIImage(systemName: "questionmark.circle")!.jpegData(compressionQuality: 1)!
+        }
         
         let price = String(item[0].itemPrice)
         
         return Item(
             author: item[0].author,
             date: date,
-            image: data,
+            image: imageData,
             link: item[0].itemUrl,
             price: price,
             title: item[0].title
@@ -110,7 +121,15 @@ final class HomeViewModel: ObservableObject {
             formatter.timeStyle = .none
             
             let url = URL(string: repo.largeImageUrl)
-            let data = try! Data(contentsOf: url!)
+            
+            let imageData: Data
+            
+            do {
+                let data = try Data(contentsOf: url!)
+                imageData = data
+            } catch {
+                imageData = UIImage(systemName: "questionmark.circle")!.jpegData(compressionQuality: 1)!
+            }
             
             let date = formatter.string(from: Date())
             let price = String(repo.itemPrice)
@@ -118,7 +137,7 @@ final class HomeViewModel: ObservableObject {
             return Item(
                 author: repo.author,
                 date: date,
-                image: data,
+                image: imageData,
                 link: repo.itemUrl,
                 price: price,
                 title: repo.title

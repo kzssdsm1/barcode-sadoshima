@@ -82,7 +82,8 @@ struct HomeView: View {
                     selection: $viewModel.selection,
                     isFirstTime: $isFirstTime,
                     captureSession: $captureSession,
-                    isEditing: $isEditing
+                    isEditing: $isEditing,
+                    selectedItem: $viewModel.selectedItem
                 )
                 .disabled(viewModel.isLoading)
                 .opacity(!isShowingKeyboard ? 1 : 0)
