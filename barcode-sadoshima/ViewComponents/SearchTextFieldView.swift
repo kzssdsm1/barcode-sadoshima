@@ -63,12 +63,12 @@ struct SearchTextFieldView: View {
         )
         .padding(.vertical, 15)
         .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidShowNotification)) { _ in
-            withAnimation {
+            withAnimation(.linear(duration: 0.2)) {
                 isShowingKeyboard = true
             }
         }
         .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidHideNotification)) { _ in
-            withAnimation {
+            withAnimation(.linear(duration: 0.2)) {
                 isShowingKeyboard = false
             }
         }

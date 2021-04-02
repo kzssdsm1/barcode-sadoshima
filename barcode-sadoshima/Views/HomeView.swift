@@ -87,6 +87,7 @@ struct HomeView: View {
                 )
                 .disabled(viewModel.isLoading)
                 .opacity(!isShowingKeyboard ? 1 : 0)
+                .offset(y: !isShowingKeyboard ? 0 : 100)
             } // VStack
         } // ZStack
         .onAppear {
