@@ -13,5 +13,5 @@ enum APIServiceError: Error {
     case requestError(_ statusCode: Int)
     case serverError(_ statusCode: Int)
     case parseError(Error)
-    case unknownError
+    case unknownError(reason: String)
 }

@@ -11,7 +11,7 @@ struct Item: Identifiable {
     let id = UUID()
     let author: String
     let date: String
-    let image: String
+    let image: Data
     let link: String
     let price: String
     let title: String

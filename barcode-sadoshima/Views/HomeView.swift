@@ -83,9 +83,9 @@ struct HomeView: View {
                     isFirstTime: $isFirstTime,
                     captureSession: $captureSession,
                     isEditing: $isEditing
-                    )
-                    .disabled(viewModel.isLoading)
-                    .opacity(!isShowingKeyboard ? 1 : 0)
+                )
+                .disabled(viewModel.isLoading)
+                .opacity(!isShowingKeyboard ? 1 : 0)
             } // VStack
         } // ZStack
         .onAppear {

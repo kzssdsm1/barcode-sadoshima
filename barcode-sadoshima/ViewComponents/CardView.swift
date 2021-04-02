@@ -32,7 +32,7 @@ struct CardView: View {
                 }
             }) {
                 HStack {
-                    if let image = convertStringToUIImage(url: input.image) {
+                    if let image = convertStringToUIImage(data: input.image) {
                         Image(uiImage: image)
                             .renderingMode(.original)
                             .resizable()
@@ -159,12 +159,7 @@ struct CardView: View {
         } // HStack
         .padding(.horizontal, 15)
     } // body
-    private func convertStringToUIImage(url: String) -> UIImage? {
-        guard let url = URL(string: url) else {
-            return nil
-        }
-        let data = try! Data(contentsOf: url)
-        
+    private func convertStringToUIImage(data: Data) -> UIImage? {
         guard let uiImage = UIImage(data: data) else {
             return nil
         }

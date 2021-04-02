@@ -18,7 +18,7 @@ extension FavoriteItem {
 
     @NSManaged public var author: String
     @NSManaged public var date: String
-    @NSManaged public var image: String
+    @NSManaged public var image: Data
     @NSManaged public var link: String
     @NSManaged public var price: String
     @NSManaged public var title: String

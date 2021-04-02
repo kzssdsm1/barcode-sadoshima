@@ -48,21 +48,22 @@ final class HomeViewModel: ObservableObject {
                 guard let self = self else {
                     return
                 }
-                self.isLoading = false
+                
                 if self.selection == .scanner {
                     self.selectedItem = self.convertToItem(item: item)
-                } else {
+                } else if self.selection == .search {
                     self.showItems = self.convertToItems(items: item)
                 }
+                self.isLoading = false
             }
         
         // ストリームが流れるとエラーアラートを出す
         let errorSubscriber = errorSubject
             .sink(receiveValue: { [weak self] (error) in
-                print(error)
                 guard let self = self else {
                     return
                 }
+                
                 self.isLoading = false
                 self.alertItem = AlertContext.invalidURLSession
                 self.showAlert = true
@@ -85,12 +86,16 @@ final class HomeViewModel: ObservableObject {
         formatter.timeStyle = .none
         
         let date = formatter.string(from: Date())
+        
+        let url = URL(string: item[0].largeImageUrl)
+        let data = try! Data(contentsOf: url!)
+        
         let price = String(item[0].itemPrice)
         
         return Item(
             author: item[0].author,
             date: date,
-            image: item[0].largeImageUrl,
+            image: data,
             link: item[0].itemUrl,
             price: price,
             title: item[0].title
@@ -104,13 +109,16 @@ final class HomeViewModel: ObservableObject {
             formatter.dateStyle = .long
             formatter.timeStyle = .none
             
+            let url = URL(string: repo.largeImageUrl)
+            let data = try! Data(contentsOf: url!)
+            
             let date = formatter.string(from: Date())
             let price = String(repo.itemPrice)
             
             return Item(
                 author: repo.author,
                 date: date,
-                image: repo.largeImageUrl,
+                image: data,
                 link: repo.itemUrl,
                 price: price,
                 title: repo.title

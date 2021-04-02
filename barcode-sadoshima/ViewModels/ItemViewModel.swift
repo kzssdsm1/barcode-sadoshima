@@ -40,7 +40,7 @@ final class ItemViewModel: ObservableObject {
         
         newItem.author = item.author
         newItem.date = item.date
-        newItem.image = item.image
+        newItem.image = item.image 
         newItem.link = item.link
         newItem.price = item.price
         newItem.title = item.title

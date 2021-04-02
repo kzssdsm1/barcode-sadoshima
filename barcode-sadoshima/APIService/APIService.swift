@@ -24,7 +24,7 @@ final class APIService: APIServiceType {
     /// キャッシュが残っていても常にサーバーにリクエストを送るための設定
     private let cachePolicy: NSURLRequest.CachePolicy = .useProtocolCachePolicy
     /// 応答待機時間
-    private let timeInterval: TimeInterval = 30
+    private let timeInterval: TimeInterval = 8
     
     /// APIリクエストを行う関数
     /// - Parameter request: 別途定義したRequestパラメーターを取りまとめた構造体
@@ -41,7 +41,7 @@ final class APIService: APIServiceType {
         return URLSession.shared
             // 既に用意されているURLSession用のPublisherを利用する
             .dataTaskPublisher(for: request)
-            .tryMap { data, response in
+            .tryMap { (data, response) in
                 guard let httpResponse = response as? HTTPURLResponse else {
                     throw APIServiceError.invalidResponse
                 }
@@ -58,7 +58,14 @@ final class APIService: APIServiceType {
                 }
                 return data
             }
-            .mapError { $0 as? APIServiceError ?? APIServiceError.unknownError }
+            .mapError { error -> Error in
+                if let error = error as? APIServiceError {
+                    return error
+                } else {
+                    return APIServiceError.unknownError(reason: error.localizedDescription)
+                }
+            }
+            //.mapError { $0 as? APIServiceError ?? APIServiceError.unknownError }
             .decode(type: V.self, decoder: decoder)
             .mapError({ (error) -> APIServiceError in
                 APIServiceError.parseError(error)

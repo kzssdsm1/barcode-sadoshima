@@ -28,7 +28,7 @@ struct ItemView: View {
                         HStack {
                             Spacer()
                             
-                            if let image = convertStringToUIImage(url: input.image) {
+                            if let image = convertStringToUIImage(data: input.image) {
                                 Image(uiImage: image)
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
@@ -154,12 +154,7 @@ struct ItemView: View {
     /// String型のURLからUIImageを取り出す関数
     /// - Parameter url: 親Viewから渡された書籍の画像URL
     /// - Returns: 画像URLから変換されたUIImage
-    private func convertStringToUIImage(url: String) -> UIImage? {
-        guard let url = URL(string: url) else {
-            return nil
-        }
-        let data = try! Data(contentsOf: url)
-        
+    private func convertStringToUIImage(data: Data) -> UIImage? {
         guard let uiImage = UIImage(data: data) else {
             return nil
         }
