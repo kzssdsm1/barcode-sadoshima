@@ -90,7 +90,7 @@ struct MotionTabBar: View {
             }
             
         )
-        .padding(.horizontal, 10)
+        .padding([.bottom, .horizontal], 10)
     } // body
     
     private func startSession() {
