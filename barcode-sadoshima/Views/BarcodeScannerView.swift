@@ -15,7 +15,7 @@ struct BarcodeScannerView: UIViewControllerRepresentable {
     @Binding var isLoading: Bool
     @Binding var onCommitSubject: PassthroughSubject<String, Never>
     @Binding var captureSession: AVCaptureSession
-    @Binding var showAlert: Bool
+    @Binding var isShowingAlert: Bool
     
     private enum ScanError {
         case invalidDeviceInput, invalidSacnnedValue
@@ -70,11 +70,6 @@ struct BarcodeScannerView: UIViewControllerRepresentable {
     
     func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<BarcodeScannerView>) {}
     
-    private func startSession() {
-        guard !captureSession.isRunning else { return }
-        captureSession.startRunning()
-    }
-    
     private func endSession() {
         guard captureSession.isRunning else { return }
         captureSession.stopRunning()
@@ -98,7 +93,7 @@ struct BarcodeScannerView: UIViewControllerRepresentable {
             alertItem = AlertContext.invalidScannedValue
         }
         
-        showAlert = true
+        isShowingAlert = true
     }
     
     /// カメラの検知を範囲を示す枠線を追加する関数

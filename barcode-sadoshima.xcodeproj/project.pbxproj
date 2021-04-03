@@ -43,6 +43,7 @@
 		EB5A445A261347C8000E90F0 /* TabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5A4459261347C8000E90F0 /* TabBarButton.swift */; };
 		EB5A446226138CB1000E90F0 /* CustomRoundedRectangleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5A446126138CB1000E90F0 /* CustomRoundedRectangleButtonStyle.swift */; };
 		EB5CB1092618133900711370 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB5CB1082618133900711370 /* Launch Screen.storyboard */; };
+		EB6A7B9F2618BF1B002FEEA3 /* TrashButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6A7B9E2618BF1B002FEEA3 /* TrashButton.swift */; };
 		EB7063D625FA589C0014650F /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7063D525FA589C0014650F /* TextFieldView.swift */; };
 		EB7063F225FA76A40014650F /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7063F125FA76A40014650F /* CardView.swift */; };
 		EB7063F625FA76C20014650F /* FetchedItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7063F525FA76C20014650F /* FetchedItems.swift */; };
@@ -88,6 +89,7 @@
 		EB5A4459261347C8000E90F0 /* TabBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarButton.swift; sourceTree = "<group>"; };
 		EB5A446126138CB1000E90F0 /* CustomRoundedRectangleButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRoundedRectangleButtonStyle.swift; sourceTree = "<group>"; };
 		EB5CB1082618133900711370 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		EB6A7B9E2618BF1B002FEEA3 /* TrashButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashButton.swift; sourceTree = "<group>"; };
 		EB7063D525FA589C0014650F /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
 		EB7063F125FA76A40014650F /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		EB7063F525FA76C20014650F /* FetchedItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchedItems.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				EB5A446126138CB1000E90F0 /* CustomRoundedRectangleButtonStyle.swift */,
 				EB301D7026144E990082DD51 /* SearchTextFieldView.swift */,
 				EB71A4F32616CDCF007885D6 /* MotionTabBar.swift */,
+				EB6A7B9E2618BF1B002FEEA3 /* TrashButton.swift */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
@@ -331,6 +334,7 @@
 				EB301D7126144E990082DD51 /* SearchTextFieldView.swift in Sources */,
 				EB36332F260E238C00DDF0C0 /* AppDescriptionView.swift in Sources */,
 				EB3D39BD25EA9CB4001BD287 /* Alert.swift in Sources */,
+				EB6A7B9F2618BF1B002FEEA3 /* TrashButton.swift in Sources */,
 				EB3D39AC25EA1491001BD287 /* FavoriteItem+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

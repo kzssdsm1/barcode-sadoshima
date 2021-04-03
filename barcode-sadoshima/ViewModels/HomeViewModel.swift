@@ -11,7 +11,7 @@ import Combine
 
 final class HomeViewModel: ObservableObject {
     @Published var alertItem: AlertItem?
-    @Published var showAlert = false
+    @Published var isShowingAlert = false
     @Published var selectedItem: Item?
     @Published var isLoading = false
     /// BarcodeScannerViewでISBNコードを読み取るとストリームを流すPublisher（値そのものを保持しない）
@@ -56,6 +56,9 @@ final class HomeViewModel: ObservableObject {
                 } else if self.selection == .search {
                     self.showItems = []
                     self.showItems = self.convertToItems(items: item)
+                } else {
+                    self.selectedItem = nil
+                    self.showItems = []
                 }
                 self.isLoading = false
             }
@@ -69,7 +72,7 @@ final class HomeViewModel: ObservableObject {
                 
                 self.isLoading = false
                 self.alertItem = AlertContext.invalidURLSession
-                self.showAlert = true
+                self.isShowingAlert = true
             })
         
         // ストリームを流し続けるとメモリリークを起こすためSubscribeを中止する

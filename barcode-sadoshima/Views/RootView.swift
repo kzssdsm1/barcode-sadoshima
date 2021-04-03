@@ -13,7 +13,7 @@ struct RootView: View {
     @Binding var selection: TabItem
     @Binding var isEditing: Bool
     @Binding var isShowingKeyboard: Bool
-    @Binding var showAlert: Bool
+    @Binding var isShowingAlert: Bool
     @Binding var removeItems: [String]
     @Binding var selectedItem: Item?
     @Binding var alertItem: AlertItem?
@@ -38,12 +38,12 @@ struct RootView: View {
             }
             
             ZStack {
-                BarcodeScannerView(
+                BarcodeScannerView( 
                     alertItem: $alertItem,
                     isLoading: $isLoading,
                     onCommitSubject: $onCommitSubject,
                     captureSession: $captureSession,
-                    showAlert: $showAlert
+                    isShowingAlert: $isShowingAlert
                 )
                 .opacity(selection == .scanner ? 1 : 0)
                 .onAppear {
@@ -67,7 +67,7 @@ struct RootView: View {
                 FavoriteListView(
                     isEditing: $isEditing,
                     isShowingKeyboard: $isShowingKeyboard,
-                    showAlert: $showAlert,
+                    isShowingAlert: $isShowingAlert,
                     removeItems: $removeItems,
                     selectedItem: $selectedItem,
                     selection: $selection
@@ -84,6 +84,7 @@ struct RootView: View {
     
     private func startSession() {
         guard !captureSession.isRunning else { return }
+        
         captureSession.startRunning()
     }
 }

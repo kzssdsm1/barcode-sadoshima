@@ -11,7 +11,7 @@ import CoreData
 struct FavoriteListView: View {
     @Binding var isEditing: Bool
     @Binding var isShowingKeyboard: Bool
-    @Binding var showAlert: Bool
+    @Binding var isShowingAlert: Bool
     @Binding var removeItems: [String]
     @Binding var selectedItem: Item?
     @Binding var selection: TabItem
@@ -40,7 +40,7 @@ struct FavoriteListView: View {
                 if isEditing {
                     EditButtonBar(
                         removeItems: $removeItems,
-                        showAlert: $showAlert,
+                        showAlert: $isShowingAlert,
                         items: items
                     )
                     .transition(AnyTransition.opacity.combined(with: .move(edge: .trailing)))
@@ -63,49 +63,62 @@ struct FavoriteListView: View {
                     ScrollView(.vertical, showsIndicators: false) {
                         LazyVStack(alignment: .leading) {
                             ForEach(items) { item in
-                                CardView(
-                                    isEditing: $isEditing,
-                                    showAlert: $showAlert,
-                                    removeItems: $removeItems,
-                                    selectedItem: $selectedItem,
-                                    selection: $selection,
-                                    input: convertToItem(item: item))
-                                    .frame(height: 180)
-                                    .frame(minWidth: 300)
-                                    .background(
-                                        Group {
-                                            if removeItems.firstIndex(where: {$0 == item.link}) == nil {
-                                                RoundedRectangle(cornerRadius: 25)
-                                                    .fill(Color.offWhite)
-                                                    .frame(height: 180)
-                                                    .frame(minWidth: 300)
-                                                    .shadow(color: Color.black.opacity(0.2), radius: 10, x: 10, y: 10)
-                                                    .shadow(color: Color.white.opacity(0.7), radius: 10, x: -5, y: -5)
-                                                
+                                HStack {
+                                    Button(action: {
+                                        if isEditing {
+                                            if let itemIndex = removeItems.firstIndex(where: {$0 == item.link}) {
+                                                removeItems.remove(at: itemIndex)
                                             } else {
-                                                RoundedRectangle(cornerRadius: 25)
-                                                    .fill(Color.offWhite)
-                                                    .frame(height: 180)
-                                                    .frame(minWidth: 300)
-                                                    .overlay(
-                                                        RoundedRectangle(cornerRadius: 25)
-                                                            .stroke(Color.gray, lineWidth: 4)
-                                                            .blur(radius: 4)
-                                                            .offset(x: 2, y: 2)
-                                                            .mask(RoundedRectangle(cornerRadius: 25).fill(LinearGradient(Color.black, Color.clear)))
-                                                    )
-                                                    .overlay(
-                                                        RoundedRectangle(cornerRadius: 25)
-                                                            .stroke(Color.white, lineWidth: 8)
-                                                            .blur(radius: 4)
-                                                            .offset(x: -2, y: -2)
-                                                            .mask(RoundedRectangle(cornerRadius: 25).fill(LinearGradient(Color.clear, Color.black)))
-                                                    )
+                                                removeItems.append(item.link)
                                             }
+                                        } else {
+                                            selectedItem = convertToItem(item: item)
                                         }
-                                    )
-                                    .padding(.vertical, 10)
-                                    .padding(.horizontal)
+                                    }, label: {
+                                        CardView(selection: $selection, input: convertToItem(item: item))
+                                    })
+                                    
+                                    TrashButtonView(
+                                        isEditing: $isEditing,
+                                        isShowingAlert: $isShowingAlert,
+                                        removeItems: $removeItems,
+                                        removeItem: item.link)
+                                }
+                                .frame(height: 180)
+                                .frame(minWidth: 300)
+                                .background(
+                                    Group {
+                                        if removeItems.firstIndex(where: {$0 == item.link}) != nil {
+                                            RoundedRectangle(cornerRadius: 25)
+                                                .fill(Color.offWhite)
+                                                .frame(height: 180)
+                                                .frame(minWidth: 300)
+                                                .overlay(
+                                                    RoundedRectangle(cornerRadius: 25)
+                                                        .stroke(Color.gray, lineWidth: 4)
+                                                        .blur(radius: 4)
+                                                        .offset(x: 2, y: 2)
+                                                        .mask(RoundedRectangle(cornerRadius: 25).fill(LinearGradient(Color.black, Color.clear)))
+                                                )
+                                                .overlay(
+                                                    RoundedRectangle(cornerRadius: 25)
+                                                        .stroke(Color.white, lineWidth: 8)
+                                                        .blur(radius: 4)
+                                                        .offset(x: -2, y: -2)
+                                                        .mask(RoundedRectangle(cornerRadius: 25).fill(LinearGradient(Color.clear, Color.black)))
+                                                )
+                                        } else {
+                                            RoundedRectangle(cornerRadius: 25)
+                                                .fill(Color.offWhite)
+                                                .frame(height: 180)
+                                                .frame(minWidth: 300)
+                                                .shadow(color: Color.black.opacity(0.2), radius: 10, x: 10, y: 10)
+                                                .shadow(color: Color.white.opacity(0.7), radius: 10, x: -5, y: -5)
+                                        }
+                                    }
+                                )
+                                .padding(.vertical, 10)
+                                .padding(.horizontal)
                             } // ForEach
                         } // LazyVStack
                         .padding(.top, 10)

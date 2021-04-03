@@ -15,12 +15,9 @@ struct HomeView: View {
     
     @StateObject private var viewModel: HomeViewModel = .init(apiService: APIService())
     
-    @State private var tappedItemMidX: CGFloat = 0
     @State private var isEditing = false
     @State private var isShowingKeyboard = false
-    @State private var showAlert = false
     @State private var removeItems = [String]()
-    @State private var selectedItem: Item?
     @State private var captureSession = AVCaptureSession()
     @State private var isAnimating = false
     @State private var isFirstTime = false
@@ -31,7 +28,7 @@ struct HomeView: View {
                 selection: $viewModel.selection,
                 isEditing: $isEditing,
                 isShowingKeyboard: $isShowingKeyboard,
-                showAlert: $viewModel.showAlert,
+                isShowingAlert: $viewModel.isShowingAlert,
                 removeItems: $removeItems,
                 selectedItem: $viewModel.selectedItem,
                 alertItem: $viewModel.alertItem,
@@ -73,7 +70,7 @@ struct HomeView: View {
                                 self.isAnimating = false
                             }
                     } // ZStack
-                    .drawingGroup()
+                    //.drawingGroup()
                     
                     Spacer()
                 }
@@ -82,7 +79,6 @@ struct HomeView: View {
                     selection: $viewModel.selection,
                     isFirstTime: $isFirstTime,
                     captureSession: $captureSession,
-                    isEditing: $isEditing,
                     selectedItem: $viewModel.selectedItem
                 )
                 .disabled(viewModel.isLoading)
@@ -93,7 +89,7 @@ struct HomeView: View {
         .onAppear {
             firstVisitSetup()
         }
-        .alert(isPresented: $viewModel.showAlert) {
+        .alert(isPresented: $viewModel.isShowingAlert) {
             if !removeItems.isEmpty {
                 return Alert(
                     title: Text("削除"),

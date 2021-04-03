@@ -81,25 +81,23 @@ struct SearchView: View {
                 ScrollView(.vertical, showsIndicators: false) {
                     LazyVStack(alignment: .leading) {
                         ForEach(showItems) { item in
-                            CardView(
-                                isEditing: $isEditing,
-                                showAlert: $showAlert,
-                                removeItems: $removeItems,
-                                selectedItem: $selectedItem,
-                                selection: $selection,
-                                input: item)
-                                .frame(height: 180)
-                                .frame(minWidth: 300)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 25)
-                                        .fill(Color.offWhite)
-                                        .frame(height: 180)
-                                        .frame(minWidth: 300)
-                                        .shadow(color: Color.black.opacity(0.2), radius: 10, x: 10, y: 10)
-                                        .shadow(color: Color.white.opacity(0.7), radius: 10, x: -5, y: -5)
-                                )
-                                .padding(.vertical, 10)
-                                .padding(.horizontal)
+                            Button(action: {
+                                selectedItem = item
+                            }, label: {
+                                CardView(selection: $selection, input: item)
+                            })
+                            .frame(height: 180)
+                            .frame(minWidth: 300)
+                            .background(
+                                RoundedRectangle(cornerRadius: 25)
+                                    .fill(Color.offWhite)
+                                    .frame(height: 180)
+                                    .frame(minWidth: 300)
+                                    .shadow(color: Color.black.opacity(0.2), radius: 10, x: 10, y: 10)
+                                    .shadow(color: Color.white.opacity(0.7), radius: 10, x: -5, y: -5)
+                            )
+                            .padding(.vertical, 10)
+                            .padding(.horizontal)
                         } // ForEach
                     } // LazyVStack
                     .padding(.top, 10)
