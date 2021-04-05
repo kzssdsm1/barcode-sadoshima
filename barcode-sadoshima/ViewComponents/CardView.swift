@@ -94,4 +94,4 @@ struct CardView: View {
         
         return uiImage
     }
-} // body
+}

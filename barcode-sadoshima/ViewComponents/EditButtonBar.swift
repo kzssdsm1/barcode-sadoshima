@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct EditButtonBar: View {
+    @Binding var isShowingAlert: Bool
     @Binding var removeItems: [String]
-    @Binding var showAlert: Bool
     
     let items: [FavoriteItem]
     
@@ -43,7 +43,7 @@ struct EditButtonBar: View {
             Spacer(minLength: 0)
             
             Button(action: {
-                showAlert = true
+                isShowingAlert = true
             }) {
                 Text("削除")
                     .foregroundColor((items.isEmpty || removeItems.isEmpty) ? .gray : .accentColor)

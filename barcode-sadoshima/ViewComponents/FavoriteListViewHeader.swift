@@ -9,8 +9,8 @@ import SwiftUI
 
 struct FavoriteListViewHeader: View {
     @Binding var isEditing: Bool
+    @Binding var isItemsEmpty: Bool
     @Binding var removeItems: [String]
-    @Binding var isEmpty: Bool
     
     var body: some View {
         HStack(spacing: 0) {
@@ -31,19 +31,19 @@ struct FavoriteListViewHeader: View {
                         .foregroundColor(.clear)
                         .overlay(
                             Image(systemName: "folder.fill.badge.gear")
-                                .foregroundColor(isEmpty ? .gray : .accentColor)
+                                .foregroundColor(isItemsEmpty ? .gray : .accentColor)
                                 .offset(y: -5)
                         )
                         .background(
                             Text(isEditing ? "終了" : "編集")
                                 .font(.system(size: 12, weight: .medium))
-                                .foregroundColor(isEmpty ? .gray : .accentColor)
+                                .foregroundColor(isItemsEmpty ? .gray : .accentColor)
                                 .offset(y: 12)
                         )
                 }
                 .buttonStyle(CustomButtonStyle())
                 .frame(width: 50, height: 50)
-                .disabled(isEmpty)
+                .disabled(isItemsEmpty)
                 .padding(.trailing, 10)
             } else {
                 Button(action: {

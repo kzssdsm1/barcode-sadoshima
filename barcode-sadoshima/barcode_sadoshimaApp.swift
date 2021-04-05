@@ -13,7 +13,7 @@ struct barcode_sadoshimaApp: App {
 
     var body: some Scene {
         WindowGroup {
-            HomeView()
+            RootView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

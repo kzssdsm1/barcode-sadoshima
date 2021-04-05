@@ -10,16 +10,13 @@ import Combine
 
 struct SearchView: View {
     @Binding var isLoading: Bool
-    @Binding var onCommitSubject: PassthroughSubject<String, Never>
-    @Binding var showItems: [Item]
-    @Binding var selectedItem: Item?
-    @Binding var selection: TabItem
     @Binding var isShowingKeyboard: Bool
+    @Binding var itemDetail: Item?
+    @Binding var onCommitSubject: PassthroughSubject<String, Never>
+    @Binding var searchResults: [Item]
+    @Binding var selection: TabItem
     
     @State private var inputText = ""
-    @State private var isEditing = false
-    @State private var showAlert = false
-    @State private var removeItems = [String]()
     
     var body: some View {
         VStack(spacing: 0) {
@@ -33,7 +30,7 @@ struct SearchView: View {
                     
                     Button(action: {
                         withAnimation {
-                            showItems = []
+                            searchResults = []
                             inputText = ""
                         }
                     }) {
@@ -41,19 +38,19 @@ struct SearchView: View {
                             .foregroundColor(.clear)
                             .overlay(
                                 Image(systemName: "arrow.clockwise")
-                                    .foregroundColor(showItems.isEmpty ? .gray : .accentColor)
+                                    .foregroundColor(searchResults.isEmpty ? .gray : .accentColor)
                                     .offset(y: -5)
                             )
                             .background(
                                 Text("クリア")
                                     .font(.system(size: 12, weight: .medium))
-                                    .foregroundColor(showItems.isEmpty ? .gray : .accentColor)
+                                    .foregroundColor(searchResults.isEmpty ? .gray : .accentColor)
                                     .offset(y: 12)
                             )
                     }
                     .buttonStyle(CustomButtonStyle())
                     .frame(width: 50, height: 50)
-                    .disabled(showItems.isEmpty)
+                    .disabled(searchResults.isEmpty)
                     .padding(.trailing, 10)
                 } // HStack
                 .padding(10)
@@ -63,11 +60,11 @@ struct SearchView: View {
             SearchTextFieldView(
                 inputText: $inputText,
                 isShowingKeyboard: $isShowingKeyboard,
-                onCommitSubject: $onCommitSubject,
-                isLoading: $isLoading
+                isLoading: $isLoading,
+                onCommitSubject: $onCommitSubject
             )
             
-            if (showItems.isEmpty) {
+            if (searchResults.isEmpty) {
                 VStack {
                     Spacer(minLength: 0)
                     
@@ -80,9 +77,9 @@ struct SearchView: View {
             } else {
                 ScrollView(.vertical, showsIndicators: false) {
                     LazyVStack(alignment: .leading) {
-                        ForEach(showItems) { item in
+                        ForEach(searchResults) { item in
                             Button(action: {
-                                selectedItem = item
+                                itemDetail = item
                             }, label: {
                                 CardView(selection: $selection, input: item)
                             })
@@ -105,9 +102,8 @@ struct SearchView: View {
                 } // ScrollView
             }
         } //VStack
-        .onTapGesture {
-            UIApplication.shared.closeKeyboard()
-        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color.offWhite.edgesIgnoringSafeArea(.all))
         .disabled(isLoading)
     } // body
 }

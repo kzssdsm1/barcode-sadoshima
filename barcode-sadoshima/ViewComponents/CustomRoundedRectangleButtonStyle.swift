@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct CustomRoundedRectangleButtonStyle: ButtonStyle {
-    
     func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
             .padding(16)

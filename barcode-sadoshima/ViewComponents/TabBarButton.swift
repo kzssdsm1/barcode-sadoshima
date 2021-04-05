@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct TabBarButton: View {
-    let imageName: String
     let buttonColor: Color
+    let imageName: String
     let proxy: GeometryProxy
     
     var body: some View {

@@ -9,22 +9,24 @@ import SwiftUI
 import CoreData
 
 struct FavoriteListView: View {
-    @Binding var isEditing: Bool
+    @Environment(\.managedObjectContext) private var context
+    
     @Binding var isShowingKeyboard: Bool
-    @Binding var isShowingAlert: Bool
-    @Binding var removeItems: [String]
-    @Binding var selectedItem: Item?
+    @Binding var itemDetail: Item?
     @Binding var selection: TabItem
     
     @State private var inputText = ""
     @State private var isAscending = true
+    @State private var isEditing = false
+    @State private var isItemsEmpty = false
+    @State private var isShowingAlert = false
+    @State private var removeItems = [String]()
     @State private var sortKeyPath = \FavoriteItem.title
-    @State private var isEmpty = false
     
     var body: some View {
         VStack(spacing: 0) {
             if !isShowingKeyboard {
-                FavoriteListViewHeader(isEditing: $isEditing, removeItems: $removeItems, isEmpty: $isEmpty)
+                FavoriteListViewHeader(isEditing: $isEditing, isItemsEmpty: $isItemsEmpty, removeItems: $removeItems)
                 SortButtonBar(isAscending: $isAscending, sortKeyPath: $sortKeyPath)
             }
             if !isEditing {
@@ -39,8 +41,8 @@ struct FavoriteListView: View {
             ) { (items: [FavoriteItem]) in
                 if isEditing {
                     EditButtonBar(
+                        isShowingAlert: $isShowingAlert,
                         removeItems: $removeItems,
-                        showAlert: $isShowingAlert,
                         items: items
                     )
                     .transition(AnyTransition.opacity.combined(with: .move(edge: .trailing)))
@@ -57,7 +59,7 @@ struct FavoriteListView: View {
                         Spacer(minLength: 0)
                     }
                     .onAppear {
-                        isEmpty = true
+                        isItemsEmpty = true
                     }
                 } else {
                     ScrollView(.vertical, showsIndicators: false) {
@@ -72,7 +74,7 @@ struct FavoriteListView: View {
                                                 removeItems.append(item.link)
                                             }
                                         } else {
-                                            selectedItem = convertToItem(item: item)
+                                            itemDetail = convertToItem(item: item)
                                         }
                                     }, label: {
                                         CardView(selection: $selection, input: convertToItem(item: item))
@@ -125,16 +127,24 @@ struct FavoriteListView: View {
                         .padding(.bottom, 90)
                     } // ScrollView
                     .onAppear {
-                        isEmpty = false
+                        isItemsEmpty = false
                     }
                 }
             }
         } // VStack
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.offWhite.edgesIgnoringSafeArea(.all))
-        .onTapGesture {
-            UIApplication.shared.closeKeyboard()
-        }
+        .alert(isPresented: $isShowingAlert) {
+            Alert(
+                title: Text("削除"),
+                message: (isEditing) ? Text("選択した商品を削除しますか？") : Text("お気に入りリストからこの商品を削除しますか？"),
+                primaryButton: .cancel(Text("キャンセル")) {
+                    removeItems = []
+                },
+                secondaryButton: .destructive(Text("削除")) {
+                    removeItem()
+                })
+        } // .alert
     } // body
     
     private func convertToItem(item: FavoriteItem) -> Item {
@@ -146,5 +156,35 @@ struct FavoriteListView: View {
             price: item.price,
             title: item.title
         )
+    }
+    
+    private func removeItem() {
+        removeItems.forEach { link in
+            guard let item = searchItem(link) else {
+                return
+            }
+            context.delete(item[0])
+        }
+        
+        do {
+            try context.save()
+            removeItems = []
+        } catch {
+            fatalError()
+        }
+    }
+    
+    private func searchItem(_ link: String) -> [FavoriteItem]? {
+        
+        let request = NSFetchRequest<FavoriteItem>(entityName: "FavoriteItem")
+        let predicate = NSPredicate(format: "link CONTAINS[C] %@", link)
+        
+        request.predicate = predicate
+        
+        do {
+            return try context.fetch(request)
+        } catch {
+            fatalError()
+        }
     }
 }

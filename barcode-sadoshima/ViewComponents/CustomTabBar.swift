@@ -1,18 +1,17 @@
 //
-//  MotionTabBar.swift
+//  CustomTabBar.swift
 //  barcode-sadoshima
 //
-//  Created by 佐渡島和志 on 2021/04/02.
+//  Created by 佐渡島和志 on 2021/04/03.
 //
 
 import SwiftUI
 import AVFoundation
 
-struct MotionTabBar: View {
-    @Binding var selection: TabItem
-    @Binding var isFirstTime: Bool
+struct CustomTabBar: View {
     @Binding var captureSession: AVCaptureSession
-    @Binding var selectedItem: Item?
+    @Binding var isFirstTime: Bool
+    @Binding var selection: TabItem
     
     private let screenWidth = CGFloat(UIScreen.main.bounds.width)
     
@@ -22,25 +21,24 @@ struct MotionTabBar: View {
                 GeometryReader { proxy in
                     Button(action: {
                         if item == .scanner {
-                            selectedItem = nil
                             isFirstTime = false
+                            
                             DispatchQueue.global(qos: .userInitiated).async {
                                 startSession()
                             }
                         } else if item == .search {
-                            selectedItem = nil
                             isFirstTime = false
+                            
                             DispatchQueue.global(qos: .userInitiated).async {
                                 endSession()
                             }
                         } else if item == .favorite {
-                            selectedItem = nil
                             isFirstTime = false
+                            
                             DispatchQueue.global(qos: .userInitiated).async {
                                 endSession()
                             }
                         } else if item == .usage {
-                            selectedItem = nil
                             DispatchQueue.global(qos: .userInitiated).async {
                                 endSession()
                             }
@@ -52,8 +50,8 @@ struct MotionTabBar: View {
                             .foregroundColor(.clear)
                             .overlay(
                                 TabBarButton(
-                                    imageName: item.imageName,
                                     buttonColor: selection == item ? item.buttonColor.opacity(0.8) : .gray,
+                                    imageName: item.imageName,
                                     proxy: proxy
                                 )
                             )
@@ -98,4 +96,5 @@ struct MotionTabBar: View {
         captureSession.stopRunning()
     }
 }
+
 

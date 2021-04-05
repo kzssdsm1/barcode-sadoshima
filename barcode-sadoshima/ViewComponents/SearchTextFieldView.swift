@@ -11,8 +11,8 @@ import Combine
 struct SearchTextFieldView: View {
     @Binding var inputText: String
     @Binding var isShowingKeyboard: Bool
-    @Binding var onCommitSubject: PassthroughSubject<String, Never>
     @Binding var isLoading: Bool
+    @Binding var onCommitSubject: PassthroughSubject<String, Never>
     
     private let screenWidth = CGFloat(UIScreen.main.bounds.width)
     

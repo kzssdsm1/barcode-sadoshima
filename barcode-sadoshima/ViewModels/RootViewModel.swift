@@ -1,23 +1,21 @@
 //
-//  HomeViewModel.swift
+//  RootViewModel.swift
 //  barcode-sadoshima
 //
-//  Created by 佐渡島和志 on 2021/02/27.
+//  Created by 佐渡島和志 on 2021/04/03.
 //
 
-import Foundation
 import SwiftUI
 import Combine
 
-final class HomeViewModel: ObservableObject {
+final class RootViewModel: ObservableObject {
     @Published var alertItem: AlertItem?
-    @Published var isShowingAlert = false
-    @Published var selectedItem: Item?
+    @Published var itemDetail: Item?
     @Published var isLoading = false
     /// BarcodeScannerViewでISBNコードを読み取るとストリームを流すPublisher（値そのものを保持しない）
     @Published var onCommitSubject = PassthroughSubject<String, Never>()
     @Published var selection: TabItem = .scanner
-    @Published var showItems = [Item]()
+    @Published var searchResults = [Item]()
     
     private let apiService: APIServiceType
     /// エラーが返されるとストリームを流すPublisher
@@ -51,14 +49,14 @@ final class HomeViewModel: ObservableObject {
                 }
                 
                 if self.selection == .scanner {
-                    self.selectedItem = nil
-                    self.selectedItem = self.convertToItem(item: item)
+                    self.itemDetail = nil
+                    self.itemDetail = self.convertToItem(item: item)
                 } else if self.selection == .search {
-                    self.showItems = []
-                    self.showItems = self.convertToItems(items: item)
+                    self.searchResults = []
+                    self.searchResults = self.convertToItems(items: item)
                 } else {
-                    self.selectedItem = nil
-                    self.showItems = []
+                    self.itemDetail = nil
+                    self.searchResults = []
                 }
                 self.isLoading = false
             }
@@ -72,7 +70,6 @@ final class HomeViewModel: ObservableObject {
                 
                 self.isLoading = false
                 self.alertItem = AlertContext.invalidURLSession
-                self.isShowingAlert = true
             })
         
         // ストリームを流し続けるとメモリリークを起こすためSubscribeを中止する

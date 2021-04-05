@@ -111,7 +111,7 @@ struct ItemView: View {
                             Spacer(minLength: 20)
                             
                             Button(action: {
-                                if (viewModel.existsItem) {
+                                if (viewModel.isItemExits) {
                                     showAlert = true
                                 } else {
                                     viewModel.addItem(item: input)
@@ -122,8 +122,8 @@ struct ItemView: View {
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 50, height: 50)
-                                    .foregroundColor((viewModel.existsItem) ? .gold : .gray)
-                                    .opacity((viewModel.existsItem) ? 1.0 : 0.7)
+                                    .foregroundColor((viewModel.isItemExits) ? .gold : .gray)
+                                    .opacity((viewModel.isItemExits) ? 1.0 : 0.7)
                             }) // Button
                             .buttonStyle(CustomButtonStyle())
                             .frame(width: 80, height: 80)

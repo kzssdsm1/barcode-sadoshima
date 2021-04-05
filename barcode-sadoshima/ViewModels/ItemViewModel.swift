@@ -10,7 +10,7 @@ import CoreData
 
 final class ItemViewModel: ObservableObject {
     // 商品が既にお気に入りリストに登録されているかを判定する変数
-    @Published var existsItem = false
+    @Published var isItemExits = false
     
     private var context: NSManagedObjectContext?
     private var link: String?
@@ -25,7 +25,7 @@ final class ItemViewModel: ObservableObject {
         
         // CoreData内に一致する商品があった場合はexistsItemをtrueにする
         if !(searchItem(link)!.isEmpty) {
-            existsItem = true
+            isItemExits = true
         }
     }
     
@@ -51,7 +51,7 @@ final class ItemViewModel: ObservableObject {
         
         do {
             try context.save()
-            existsItem = true
+            isItemExits = true
         } catch {
             fatalError()
         }
@@ -79,7 +79,7 @@ final class ItemViewModel: ObservableObject {
         
         do {
             try context.save()
-            existsItem = false
+            isItemExits = false
         } catch {
             fatalError()
         }

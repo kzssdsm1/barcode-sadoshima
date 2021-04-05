@@ -10,81 +10,129 @@ import Combine
 import AVFoundation
 
 struct RootView: View {
-    @Binding var selection: TabItem
-    @Binding var isEditing: Bool
-    @Binding var isShowingKeyboard: Bool
-    @Binding var isShowingAlert: Bool
-    @Binding var removeItems: [String]
-    @Binding var selectedItem: Item?
-    @Binding var alertItem: AlertItem?
-    @Binding var isLoading: Bool
-    @Binding var onCommitSubject: PassthroughSubject<String, Never>
-    @Binding var captureSession: AVCaptureSession
-    @Binding var isFirstTime: Bool
-    @Binding var showItems: [Item]
+    @StateObject private var viewModel: RootViewModel = .init(apiService: APIService())
+    
+    @State private var captureSession = AVCaptureSession()
+    @State private var isFirstTime = false
+    @State private var isShowingKeyboard = false
+    
+    init() {
+        UITabBar.appearance().isHidden = true
+    }
     
     var body: some View {
-        VStack(spacing: 0) {
-            if selection == .scanner {
-                HStack {
-                    Text("バーコードスキャナー")
-                        .font(.system(size: 22, weight: .heavy))
-                        .foregroundColor(.gray)
-                        .padding(.leading, 10)
-                    
-                    Spacer(minLength: 0)
+        ZStack {
+            VStack(spacing: 0) {
+                if viewModel.selection == .scanner {
+                    HStack {
+                        Text("バーコードスキャナー")
+                            .font(.system(size: 22, weight: .heavy))
+                            .foregroundColor(.gray)
+                            .padding(.leading, 10)
+                        
+                        Spacer(minLength: 0)
+                    } // HStack
+                    .frame(height: 60)
+                    .background(Color.offWhite.edgesIgnoringSafeArea(.all))
                 }
-                .frame(height: 60)
+                
+                ZStack(alignment: .bottom) {
+                    TabView {
+                        ZStack {
+                            BarcodeScannerView(
+                                alertItem: $viewModel.alertItem,
+                                captureSession: $captureSession,
+                                isLoading: $viewModel.isLoading,
+                                onCommitSubject: $viewModel.onCommitSubject
+                            )
+                            .hide(viewModel.selection != TabItem.scanner)
+                            .opacity(viewModel.selection != TabItem.scanner ? 0 : 1)
+                            
+                            SearchView(
+                                isLoading: $viewModel.isLoading,
+                                isShowingKeyboard: $isShowingKeyboard,
+                                itemDetail: $viewModel.itemDetail,
+                                onCommitSubject: $viewModel.onCommitSubject,
+                                searchResults: $viewModel.searchResults,
+                                selection: $viewModel.selection
+                            )
+                            .hide(viewModel.selection != TabItem.search)
+                            .opacity(viewModel.selection != TabItem.search ? 0 : 1)
+                            
+                            FavoriteListView(
+                                isShowingKeyboard: $isShowingKeyboard,
+                                itemDetail: $viewModel.itemDetail,
+                                selection: $viewModel.selection
+                            )
+                            .hide(viewModel.selection != TabItem.favorite)
+                            .opacity(viewModel.selection != TabItem.favorite ? 0 : 1)
+                            
+                            AppDescriptionView()
+                                .hide(viewModel.selection != TabItem.usage)
+                                .opacity(viewModel.selection != TabItem.usage ? 0 : 1)
+                        } // ZStack
+                        .edgesIgnoringSafeArea(.all)
+                    } // TabView
+                    
+                    CustomTabBar(
+                        captureSession: $captureSession,
+                        isFirstTime: $isFirstTime,
+                        selection: $viewModel.selection
+                    )
+                    .opacity(isShowingKeyboard ? 0 : 1)
+                    .offset(y: isShowingKeyboard ? 100 : 0)
+                } // ZStack
+            } // VStack
+            if viewModel.isLoading {
+                LoadingIndicator()
             }
-            
-            ZStack {
-                BarcodeScannerView( 
-                    alertItem: $alertItem,
-                    isLoading: $isLoading,
-                    onCommitSubject: $onCommitSubject,
-                    captureSession: $captureSession,
-                    isShowingAlert: $isShowingAlert
-                )
-                .opacity(selection == .scanner ? 1 : 0)
+        } // ZStack
+        .onAppear() {
+            if !isFirstTime {
+                DispatchQueue.global(qos: .userInitiated).async {
+                    startSession()
+                }
+            }
+        }
+        .disabled(viewModel.isLoading)
+        .sheet(item: $viewModel.itemDetail) { item in
+            ItemView(input: item)
                 .onAppear {
-                    if !isFirstTime {
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        endSession()
+                    }
+                }
+                .onDisappear() {
+                    if viewModel.selection == .scanner {
                         DispatchQueue.global(qos: .userInitiated).async {
                             startSession()
                         }
                     }
                 }
-                
-                SearchView(
-                    isLoading: $isLoading,
-                    onCommitSubject: $onCommitSubject,
-                    showItems: $showItems,
-                    selectedItem: $selectedItem,
-                    selection: $selection,
-                    isShowingKeyboard: $isShowingKeyboard
+        } // sheet
+        .alert(item: $viewModel.alertItem) { alertItem in
+            Alert.init(
+                title: Text(alertItem.title),
+                message: Text(alertItem.message),
+                dismissButton: Alert.Button.default(
+                    Text("OK"),
+                    action: {
+                        DispatchQueue.global(qos: .userInitiated).async {
+                            startSession()
+                        }
+                    }
                 )
-                .opacity(selection == .search ? 1 : 0)
-                
-                FavoriteListView(
-                    isEditing: $isEditing,
-                    isShowingKeyboard: $isShowingKeyboard,
-                    isShowingAlert: $isShowingAlert,
-                    removeItems: $removeItems,
-                    selectedItem: $selectedItem,
-                    selection: $selection
-                )
-                .opacity(selection == .favorite ? 1 : 0)
-                
-                AppDescriptionView()
-                    .opacity(selection == .usage ? 1 : 0)
-            } // ZStack
-            
-        } // VStack
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+            )
+        } // alert
     } // body
     
     private func startSession() {
         guard !captureSession.isRunning else { return }
-        
         captureSession.startRunning()
+    }
+    
+    private func endSession() {
+        guard captureSession.isRunning else { return }
+        captureSession.stopRunning()
     }
 }
