@@ -24,10 +24,10 @@ struct EditButtonBar: View {
                 }
             }) {
                 Text("全てを選択")
-                    .foregroundColor((items.isEmpty) ? .gray : .accentColor)
+                    .foregroundColor(items.isEmpty || items.count == removeItems.count ? .gray : .accentColor)
                     .font(.system(size: 14, weight: .medium))
             }
-            .disabled(items.isEmpty)
+            .disabled(items.isEmpty || items.count == removeItems.count)
             .padding(.trailing, 10)
             
             Button(action: {
@@ -46,7 +46,7 @@ struct EditButtonBar: View {
                 isShowingAlert = true
             }) {
                 Text("削除")
-                    .foregroundColor((items.isEmpty || removeItems.isEmpty) ? .gray : .accentColor)
+                    .foregroundColor(items.isEmpty || removeItems.isEmpty ? .gray : .accentColor)
                     .font(.system(size: 14, weight: .medium))
             }
             .disabled(removeItems.isEmpty || items.isEmpty)
