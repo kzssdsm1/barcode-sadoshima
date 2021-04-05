@@ -10,13 +10,13 @@ import Combine
 
 struct SearchView: View {
     @Binding var isLoading: Bool
-    @Binding var isShowingKeyboard: Bool
     @Binding var itemDetail: Item?
     @Binding var onCommitSubject: PassthroughSubject<String, Never>
     @Binding var searchResults: [Item]
     @Binding var selection: TabItem
     
     @State private var inputText = ""
+    @State private var isShowingKeyboard = false
     
     var body: some View {
         VStack(spacing: 0) {

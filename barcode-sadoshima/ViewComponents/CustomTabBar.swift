@@ -9,9 +9,9 @@ import SwiftUI
 import AVFoundation
 
 struct CustomTabBar: View {
-    @Binding var captureSession: AVCaptureSession
-    @Binding var isFirstTime: Bool
     @Binding var selection: TabItem
+    
+    @State private var isShowingKeyboard = false
     
     private let screenWidth = CGFloat(UIScreen.main.bounds.width)
     
@@ -20,30 +20,6 @@ struct CustomTabBar: View {
             ForEach(TabItem.allCases, id: \.self) { item in
                 GeometryReader { proxy in
                     Button(action: {
-                        if item == .scanner {
-                            isFirstTime = false
-                            
-                            DispatchQueue.global(qos: .userInitiated).async {
-                                startSession()
-                            }
-                        } else if item == .search {
-                            isFirstTime = false
-                            
-                            DispatchQueue.global(qos: .userInitiated).async {
-                                endSession()
-                            }
-                        } else if item == .favorite {
-                            isFirstTime = false
-                            
-                            DispatchQueue.global(qos: .userInitiated).async {
-                                endSession()
-                            }
-                        } else if item == .usage {
-                            DispatchQueue.global(qos: .userInitiated).async {
-                                endSession()
-                            }
-                        }
-                        
                         selection = item
                     }, label: {
                         Rectangle()
@@ -83,18 +59,20 @@ struct CustomTabBar: View {
             }
             
         )
+        .opacity(isShowingKeyboard ? 0 : 1)
+        .offset(y: isShowingKeyboard ? 100 : 0)
         .padding([.bottom, .horizontal], 10)
+        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidShowNotification)) { _ in
+            withAnimation(.linear(duration: 0.2)) {
+                isShowingKeyboard = true
+            }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidHideNotification)) { _ in
+            withAnimation(.linear(duration: 0.2)) {
+                isShowingKeyboard = false 
+            }
+        }
     } // body
-    
-    private func startSession() {
-        guard !captureSession.isRunning else { return }
-        captureSession.startRunning()
-    }
-    
-    private func endSession() {
-        guard captureSession.isRunning else { return }
-        captureSession.stopRunning()
-    }
 }
 
 

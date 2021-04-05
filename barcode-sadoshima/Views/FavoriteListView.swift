@@ -11,7 +11,6 @@ import CoreData
 struct FavoriteListView: View {
     @Environment(\.managedObjectContext) private var context
     
-    @Binding var isShowingKeyboard: Bool
     @Binding var itemDetail: Item?
     @Binding var selection: TabItem
     
@@ -20,6 +19,7 @@ struct FavoriteListView: View {
     @State private var isEditing = false
     @State private var isItemsEmpty = false
     @State private var isShowingAlert = false
+    @State private var isShowingKeyboard = false
     @State private var removeItems = [String]()
     @State private var sortKeyPath = \FavoriteItem.title
     

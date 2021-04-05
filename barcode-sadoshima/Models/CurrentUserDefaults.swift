@@ -8,5 +8,5 @@
 import Foundation
 
 struct CurrentUserDefaults {
-    static let isFirstVisit = "is_first_visit"
+    static let isFirstTime = "is_first_time"
 }

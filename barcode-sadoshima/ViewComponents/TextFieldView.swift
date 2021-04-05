@@ -68,13 +68,3 @@ struct TextFieldView: View {
         }
     } // body
 }
-
-struct CustomTextFieldStyle: TextFieldStyle {
-    
-    func _body(configuration: TextField<Self._Label>) -> some View {
-        configuration
-            .font(.system(size: 18))
-            .foregroundColor(.black)
-            .background(Color.offWhite)
-    }
-}

@@ -8,16 +8,6 @@
 import SwiftUI
 import UIKit
 
-extension View {
-    func hide(_ hide: Bool) -> some View {
-        HideableView(isHidden: .constant(hide), view: self)
-    }
-    
-    func hide(_ isHidden: Binding<Bool>) -> some View {
-        HideableView(isHidden: isHidden, view: self)
-    }
-}
-
 struct HideableView<Content: View>: UIViewRepresentable {
     @Binding var isHidden: Bool
     
@@ -32,8 +22,9 @@ struct HideableView<Content: View>: UIViewRepresentable {
         container.isContentHidden = isHidden
     }
     
-    class ViewContainer<Content: View>: UIView {
-        var child: UIHostingController<Content>
+    final class ViewContainer<Content: View>: UIView {
+        let child: UIHostingController<Content>
+        
         var didShow = false
         var isContentHidden: Bool {
             didSet {

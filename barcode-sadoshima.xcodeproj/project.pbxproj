@@ -49,6 +49,8 @@
 		EB7063D625FA589C0014650F /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7063D525FA589C0014650F /* TextFieldView.swift */; };
 		EB7063F225FA76A40014650F /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7063F125FA76A40014650F /* CardView.swift */; };
 		EB7063F625FA76C20014650F /* FetchedItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7063F525FA76C20014650F /* FetchedItems.swift */; };
+		EBE1197E261B076F00B4B178 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE1197D261B076F00B4B178 /* View+Extension.swift */; };
+		EBE11981261B082E00B4B178 /* CustomTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE11980261B082E00B4B178 /* CustomTextFieldStyle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +98,8 @@
 		EB7063D525FA589C0014650F /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
 		EB7063F125FA76A40014650F /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		EB7063F525FA76C20014650F /* FetchedItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchedItems.swift; sourceTree = "<group>"; };
+		EBE1197D261B076F00B4B178 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
+		EBE11980261B082E00B4B178 /* CustomTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +130,7 @@
 				EB6A7B992618B5CC002FEEA3 /* LoadingIndicator.swift */,
 				EB3E86D026198482000CF459 /* TrashButton.swift */,
 				EB6B2C47261AD20B00F22AF6 /* HideableView.swift */,
+				EBE11980261B082E00B4B178 /* CustomTextFieldStyle.swift */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
@@ -136,6 +141,7 @@
 				EB392C3225EE98D4004D6DEE /* UIAplication+Extension.swift */,
 				EB5A4441261345FC000E90F0 /* Color+Extension.swift */,
 				EB5A44442613462D000E90F0 /* LinearGradient+Extension.swift */,
+				EBE1197D261B076F00B4B178 /* View+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -312,6 +318,7 @@
 				EB4CD53925E93F9F006A0A03 /* Item.swift in Sources */,
 				EB5A44452613462D000E90F0 /* LinearGradient+Extension.swift in Sources */,
 				EB392C3325EE98D4004D6DEE /* UIAplication+Extension.swift in Sources */,
+				EBE1197E261B076F00B4B178 /* View+Extension.swift in Sources */,
 				EB5A443F261345BF000E90F0 /* CustomButtonStyle.swift in Sources */,
 				EB5A44482613467B000E90F0 /* EditButtonBar.swift in Sources */,
 				EB6B2C48261AD20B00F22AF6 /* HideableView.swift in Sources */,
@@ -335,6 +342,7 @@
 				EB5A44502613471E000E90F0 /* SortButtonBar.swift in Sources */,
 				EB3D39AB25EA1491001BD287 /* FavoriteItem+CoreDataClass.swift in Sources */,
 				EB4CD51125E8FD25006A0A03 /* barcode_sadoshimaApp.swift in Sources */,
+				EBE11981261B082E00B4B178 /* CustomTextFieldStyle.swift in Sources */,
 				EB301D7126144E990082DD51 /* SearchTextFieldView.swift in Sources */,
 				EB36332F260E238C00DDF0C0 /* AppDescriptionView.swift in Sources */,
 				EB3D39BD25EA9CB4001BD287 /* Alert.swift in Sources */,

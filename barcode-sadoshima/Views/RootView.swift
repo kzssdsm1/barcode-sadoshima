@@ -14,7 +14,6 @@ struct RootView: View {
     
     @State private var captureSession = AVCaptureSession()
     @State private var isFirstTime = false
-    @State private var isShowingKeyboard = false
     
     init() {
         UITabBar.appearance().isHidden = true
@@ -45,12 +44,23 @@ struct RootView: View {
                                 isLoading: $viewModel.isLoading,
                                 onCommitSubject: $viewModel.onCommitSubject
                             )
+                            .onAppear {
+                                if !isFirstTime {
+                                    DispatchQueue.global(qos: .userInitiated).async {
+                                        startSession()
+                                    }
+                                }
+                            }
+                            .onDisappear() {
+                                DispatchQueue.global(qos: .userInitiated).async {
+                                    endSession()
+                                }
+                            }
                             .hide(viewModel.selection != TabItem.scanner)
                             .opacity(viewModel.selection != TabItem.scanner ? 0 : 1)
                             
                             SearchView(
                                 isLoading: $viewModel.isLoading,
-                                isShowingKeyboard: $isShowingKeyboard,
                                 itemDetail: $viewModel.itemDetail,
                                 onCommitSubject: $viewModel.onCommitSubject,
                                 searchResults: $viewModel.searchResults,
@@ -59,28 +69,23 @@ struct RootView: View {
                             .hide(viewModel.selection != TabItem.search)
                             .opacity(viewModel.selection != TabItem.search ? 0 : 1)
                             
-                            FavoriteListView(
-                                isShowingKeyboard: $isShowingKeyboard,
-                                itemDetail: $viewModel.itemDetail,
-                                selection: $viewModel.selection
-                            )
-                            .hide(viewModel.selection != TabItem.favorite)
-                            .opacity(viewModel.selection != TabItem.favorite ? 0 : 1)
+                            FavoriteListView(itemDetail: $viewModel.itemDetail, selection: $viewModel.selection)
+                                .hide(viewModel.selection != TabItem.favorite)
+                                .opacity(viewModel.selection != TabItem.favorite ? 0 : 1)
                             
                             AppDescriptionView()
+                                .onDisappear() {
+                                    if isFirstTime {
+                                        isFirstTime = false
+                                    }
+                                }
                                 .hide(viewModel.selection != TabItem.usage)
                                 .opacity(viewModel.selection != TabItem.usage ? 0 : 1)
                         } // ZStack
                         .edgesIgnoringSafeArea(.all)
                     } // TabView
                     
-                    CustomTabBar(
-                        captureSession: $captureSession,
-                        isFirstTime: $isFirstTime,
-                        selection: $viewModel.selection
-                    )
-                    .opacity(isShowingKeyboard ? 0 : 1)
-                    .offset(y: isShowingKeyboard ? 100 : 0)
+                    CustomTabBar(selection: $viewModel.selection)
                 } // ZStack
             } // VStack
             if viewModel.isLoading {
@@ -88,11 +93,7 @@ struct RootView: View {
             }
         } // ZStack
         .onAppear() {
-            if !isFirstTime {
-                DispatchQueue.global(qos: .userInitiated).async {
-                    startSession()
-                }
-            }
+            firstTimeSetup()
         }
         .disabled(viewModel.isLoading)
         .sheet(item: $viewModel.itemDetail) { item in
@@ -134,5 +135,17 @@ struct RootView: View {
     private func endSession() {
         guard captureSession.isRunning else { return }
         captureSession.stopRunning()
+    }
+    
+    private func firstTimeSetup(){
+        let userDefalutsKey = UserDefaults.standard.bool(forKey: CurrentUserDefaults.isFirstTime)
+        
+        if userDefalutsKey {
+            isFirstTime = false
+        } else {
+            isFirstTime = true
+            viewModel.selection = .usage
+            UserDefaults.standard.set(true, forKey: CurrentUserDefaults.isFirstTime)
+        }
     }
 }
