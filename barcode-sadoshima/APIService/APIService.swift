@@ -39,18 +39,21 @@ final class APIService: APIServiceType {
         let decoder = JSONDecoder()
         
         return URLSession.shared
-            // 既に用意されているURLSession用のPublisherを利用する
             .dataTaskPublisher(for: request)
             .tryMap { (data, response) in
-                // HTTPステータスコードが200番台なら成功
                 guard let httpResponse = response as? HTTPURLResponse, 200..<300 ~= httpResponse.statusCode else {
                     switch (response as! HTTPURLResponse).statusCode {
                     case (400..<500):
-                        // HTTPステータスコードが400番台(リクエスト送信者に問題が発生している)の場合に返すエラー
-                        throw APIServiceError.requestError(statusCode: (response as! HTTPURLResponse).statusCode)
+                        switch (response as! HTTPURLResponse).statusCode {
+                        case 429: throw APIServiceError.reachTheRequestLimit
+                        default: throw APIServiceError.requestError(statusCode: (response as! HTTPURLResponse).statusCode)
+                        }
                     default:
-                        // HTTPステータスコードがそれ以外(100番台、500番台はサーバー側の問題、300番台は追加の処理を必要とする旨)の場合に返すエラー
-                        throw APIServiceError.serverError(statusCode: (response as! HTTPURLResponse).statusCode)
+                        switch (response as! HTTPURLResponse).statusCode {
+                        case 500: throw APIServiceError.apiServiceError
+                        case 503: throw APIServiceError.reachTheServerLimit
+                        default: throw APIServiceError.serverError(statusCode: (response as! HTTPURLResponse).statusCode)
+                        }
                     }
                 }
                 return data

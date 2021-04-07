@@ -15,6 +15,9 @@ enum APIServiceError: Error {
     case unknownError(reason: Error)
     case invalidNetwork
     case timedOut
+    case reachTheRequestLimit
+    case reachTheServerLimit
+    case apiServiceError
 }
 
 extension APIServiceError {
@@ -22,8 +25,8 @@ extension APIServiceError {
         switch self {
         case .invalidURL: return "URLエラー"
         case .timedOut: return "タイムアウト"
-        case .requestError: return "リクエストエラー"
-        case .serverError: return "サーバーエラー"
+        case .requestError, .reachTheRequestLimit: return "リクエストエラー"
+        case .serverError, .reachTheServerLimit, .apiServiceError: return "サーバーエラー"
         case .parseError: return "データが見つかりませんでした"
         case .invalidNetwork: return "ネットワークが見つかりませんでした"
         default: return "不明なエラー"
@@ -38,6 +41,9 @@ extension APIServiceError {
         case .serverError: return "サーバーに問題が発生しているようです(エラーコード \(getStatusCode(error: self)!))"
         case .parseError: return "楽天ブックスでは現在取り扱っていない書籍のようです"
         case .invalidNetwork: return "インターネットに接続されていないようです"
+        case .reachTheRequestLimit: return "一定時間内に送れるリクエストの上限に達したようです、時間を置いた後に再度お試しください(エラーコード: 429)"
+        case .reachTheServerLimit: return "サーバー全体のリクエスト上限に達したか、現在メンテナンス中です(エラーコード: 503)"
+        case .apiServiceError: return "楽天ウェブサービスに何らかの障害が発生しているようです(エラーコード: 500)"
         default: return "不明なエラーが発生しました"
         }
     }
