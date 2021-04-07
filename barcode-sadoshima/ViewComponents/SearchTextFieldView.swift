@@ -9,6 +9,7 @@ import SwiftUI
 import Combine
 
 struct SearchTextFieldView: View {
+    @Binding var alertItem: AlertItem?
     @Binding var inputText: String
     @Binding var isShowingKeyboard: Bool
     @Binding var isLoading: Bool
@@ -27,8 +28,12 @@ struct SearchTextFieldView: View {
                     .opacity(0.5)
                 
                 TextField("タイトルで検索", text: $inputText, onCommit: {
-                    isLoading = true
-                    onCommitSubject.send(inputText)
+                    if inputText == "" {
+                        alertItem = AlertContext.invalidTextInput
+                    } else {
+                        isLoading = true
+                        onCommitSubject.send(inputText)
+                    }
                 })
                     .textFieldStyle(CustomTextFieldStyle())
             } // HStack

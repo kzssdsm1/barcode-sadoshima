@@ -34,8 +34,8 @@ extension APIServiceError {
         switch self {
         case .invalidURL: return "不正なURLです、再度お試しください"
         case .timedOut: return "通信がタイムアウトしました、通信環境をご確認ください"
-        case .requestError: return "リクエストに問題が発生しているようです(エラーコード \(getStatusCode(error: self)!)"
-        case .serverError: return "サーバーに問題が発生しているようです(エラーコード \(getStatusCode(error: self)!)"
+        case .requestError: return "リクエストに問題が発生しているようです(エラーコード \(getStatusCode(error: self)!))"
+        case .serverError: return "サーバーに問題が発生しているようです(エラーコード \(getStatusCode(error: self)!))"
         case .parseError: return "楽天ブックスでは現在取り扱っていない書籍のようです"
         case .invalidNetwork: return "インターネットに接続されていないようです"
         default: return "不明なエラーが発生しました"

@@ -9,6 +9,7 @@ import SwiftUI
 import Combine
 
 struct SearchView: View {
+    @Binding var alertItem: AlertItem?
     @Binding var isLoading: Bool
     @Binding var itemDetail: Item?
     @Binding var onCommitSubject: PassthroughSubject<String, Never>
@@ -58,6 +59,7 @@ struct SearchView: View {
             }
             
             SearchTextFieldView(
+                alertItem: $alertItem, 
                 inputText: $inputText,
                 isShowingKeyboard: $isShowingKeyboard,
                 isLoading: $isLoading,

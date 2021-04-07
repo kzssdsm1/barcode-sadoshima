@@ -60,6 +60,7 @@ struct RootView: View {
                             .opacity(viewModel.selection != TabItem.scanner ? 0 : 1)
                             
                             SearchView(
+                                alertItem: $viewModel.alertItem,
                                 isLoading: $viewModel.isLoading,
                                 itemDetail: $viewModel.itemDetail,
                                 onCommitSubject: $viewModel.onCommitSubject,
@@ -118,8 +119,10 @@ struct RootView: View {
                 dismissButton: Alert.Button.default(
                     Text("OK"),
                     action: {
-                        DispatchQueue.global(qos: .userInitiated).async {
-                            startSession()
+                        if viewModel.selection == .scanner {
+                            DispatchQueue.global(qos: .userInitiated).async {
+                                startSession()
+                            }
                         }
                     }
                 )
