@@ -42,33 +42,38 @@ final class APIService: APIServiceType {
             // 既に用意されているURLSession用のPublisherを利用する
             .dataTaskPublisher(for: request)
             .tryMap { (data, response) in
-                guard let httpResponse = response as? HTTPURLResponse else {
-                    throw APIServiceError.invalidResponse
-                }
                 // HTTPステータスコードが200番台なら成功
-                guard 200..<300 ~= httpResponse.statusCode else {
-                    switch httpResponse.statusCode {
+                guard let httpResponse = response as? HTTPURLResponse, 200..<300 ~= httpResponse.statusCode else {
+                    switch (response as! HTTPURLResponse).statusCode {
                     case (400..<500):
                         // HTTPステータスコードが400番台(リクエスト送信者に問題が発生している)の場合に返すエラー
-                        throw APIServiceError.requestError(httpResponse.statusCode)
+                        throw APIServiceError.requestError(statusCode: (response as! HTTPURLResponse).statusCode)
                     default:
                         // HTTPステータスコードがそれ以外(100番台、500番台はサーバー側の問題、300番台は追加の処理を必要とする旨)の場合に返すエラー
-                        throw APIServiceError.serverError(httpResponse.statusCode)
+                        throw APIServiceError.serverError(statusCode: (response as! HTTPURLResponse).statusCode)
                     }
                 }
                 return data
             }
-            .mapError { error -> Error in
-                if let error = error as? APIServiceError {
-                    return error
-                } else {
-                    return APIServiceError.unknownError(reason: error.localizedDescription)
-                }
-            }
-            //.mapError { $0 as? APIServiceError ?? APIServiceError.unknownError }
             .decode(type: V.self, decoder: decoder)
             .mapError({ (error) -> APIServiceError in
-                APIServiceError.parseError(error)
+                if let error = error as? APIServiceError {
+                    return error
+                }
+                
+                if let error = error as? URLError {
+                    if error.code == URLError.timedOut {
+                        return APIServiceError.timedOut
+                    } else if error.code == URLError.dataNotAllowed {
+                        return APIServiceError.invalidNetwork
+                    }
+                }
+                
+                if error is DecodingError {
+                    return APIServiceError.parseError
+                }
+                
+                return APIServiceError.unknownError(reason: error)
             })
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()

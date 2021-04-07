@@ -67,9 +67,9 @@ final class RootViewModel: ObservableObject {
                 guard let self = self else {
                     return
                 }
-                
+
                 self.isLoading = false
-                self.alertItem = AlertContext.invalidURLSession
+                self.alertItem = AlertItem(title: error.errorTitle, message: error.errorDesc)
             })
         
         // ストリームを流し続けるとメモリリークを起こすためSubscribeを中止する
