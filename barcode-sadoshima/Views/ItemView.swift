@@ -12,7 +12,7 @@ struct ItemView: View {
     
     @StateObject private var viewModel = ItemViewModel()
     
-    @State private var showAlert = false
+    @State private var isShowingAlert = false
     
     let input: Item
     
@@ -112,7 +112,7 @@ struct ItemView: View {
                             
                             Button(action: {
                                 if (viewModel.isItemExits) {
-                                    showAlert = true
+                                    isShowingAlert = true
                                 } else {
                                     viewModel.addItem(item: input)
                                 }
@@ -140,7 +140,7 @@ struct ItemView: View {
         .onAppear() {
             viewModel.setData(context: context, link: input.link)
         } // .onAppear
-        .alert(isPresented: $showAlert) {
+        .alert(isPresented: $isShowingAlert) {
             Alert(
                 title: Text("削除"),
                 message: Text("お気に入りリストからこの商品を削除しますか？"),
