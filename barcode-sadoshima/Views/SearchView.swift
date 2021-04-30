@@ -19,6 +19,8 @@ struct SearchView: View {
     @State private var inputText = ""
     @State private var isShowingKeyboard = false
     
+    private let screenWidth = CGFloat(UIScreen.main.bounds.width)
+    
     var body: some View {
         VStack(spacing: 0) {
             if !isShowingKeyboard {
@@ -86,7 +88,7 @@ struct SearchView: View {
                                 CardView(selection: $selection, input: item)
                             })
                             .frame(height: 180)
-                            .frame(minWidth: 300)
+                            .frame(minWidth: screenWidth - 30)
                             .background(
                                 RoundedRectangle(cornerRadius: 25)
                                     .fill(Color.offWhite)

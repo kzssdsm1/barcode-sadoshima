@@ -23,6 +23,8 @@ struct FavoriteListView: View {
     @State private var removeItems = [String]()
     @State private var sortKeyPath = \FavoriteItem.title
     
+    private let screenWidth = CGFloat(UIScreen.main.bounds.width)
+    
     var body: some View {
         VStack(spacing: 0) {
             if !isShowingKeyboard {
@@ -94,7 +96,7 @@ struct FavoriteListView: View {
                                             RoundedRectangle(cornerRadius: 25)
                                                 .fill(Color.offWhite)
                                                 .frame(height: 180)
-                                                .frame(minWidth: 300)
+                                                .frame(minWidth: screenWidth - 30)
                                                 .overlay(
                                                     RoundedRectangle(cornerRadius: 25)
                                                         .stroke(Color.gray, lineWidth: 4)

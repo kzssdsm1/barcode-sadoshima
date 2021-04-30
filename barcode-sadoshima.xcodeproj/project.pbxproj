@@ -476,8 +476,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.2;
 				DEVELOPMENT_ASSET_PATHS = "\"barcode-sadoshima/Preview Content\"";
-				DEVELOPMENT_TEAM = PNHDUJ8FZK;
+				DEVELOPMENT_TEAM = R554NC25HH;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "barcode-sadoshima/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -485,10 +486,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "office-meet.barcode-sadoshima20210411";
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.office-meet.barcode";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -498,8 +500,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.2;
 				DEVELOPMENT_ASSET_PATHS = "\"barcode-sadoshima/Preview Content\"";
-				DEVELOPMENT_TEAM = PNHDUJ8FZK;
+				DEVELOPMENT_TEAM = R554NC25HH;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "barcode-sadoshima/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -507,10 +510,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "office-meet.barcode-sadoshima20210411";
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.office-meet.barcode";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
