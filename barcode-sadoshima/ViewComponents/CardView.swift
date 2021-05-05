@@ -58,6 +58,19 @@ struct CardView: View {
                 
                 Spacer(minLength: 0)
                 
+                Text("著者：")
+                    .foregroundColor(.gray)
+                    .opacity(0.9)
+                    .font(.system(size: 12, weight: .regular))
+                
+                Text(input.author)
+                    .foregroundColor(.gray)
+                    .font(.system(size: 14, weight: .semibold))
+                    .lineLimit(2)
+                    .fixedSize(horizontal: false, vertical: true)
+                
+                Spacer(minLength: 0)
+                
                 if selection == .favorite {
                     Text("追加日時：")
                         .foregroundColor(.gray)
@@ -67,17 +80,6 @@ struct CardView: View {
                     Text(input.date)
                         .foregroundColor(.gray)
                         .font(.system(size: 14, weight: .semibold))
-                } else {
-                    Text("著者：")
-                        .foregroundColor(.gray)
-                        .opacity(0.9)
-                        .font(.system(size: 12, weight: .regular))
-                    
-                    Text(input.author)
-                        .foregroundColor(.gray)
-                        .font(.system(size: 14, weight: .semibold))
-                        .lineLimit(2)
-                        .fixedSize(horizontal: false, vertical: true)
                 }
             } // VStack
             .padding(.horizontal, 15)

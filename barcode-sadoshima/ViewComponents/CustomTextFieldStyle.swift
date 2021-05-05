@@ -21,7 +21,7 @@ struct CustomTextFieldStyle: TextFieldStyle {
                     Color.offWhite
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                     
-                    Text(isSearchView ? "キーワードを入力(タイトル、著者名等)" : "タイトルで絞り込み")
+                    Text(isSearchView ? "キーワードを入力(タイトル、著者名等)" : "タイトルか著者名で絞り込み")
                         .font(.system(size: 16))
                         .foregroundColor(.black)
                         .opacity(!isEditing && inputText == "" ? 0.3 : 0)

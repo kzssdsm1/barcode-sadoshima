@@ -33,7 +33,7 @@ struct FetchedItems<T, Content>: View where T: NSManagedObject, Content: View {
             self.request = FetchRequest(
                 entity: FavoriteItem.entity(),
                 sortDescriptors: [NSSortDescriptor(keyPath: sortKeyPath, ascending: isAscending)],
-                predicate: NSPredicate(format: "title CONTAINS[C] %@", inputText)
+                predicate: NSPredicate(format: "title CONTAINS[C] %@ OR author CONTAINS[C] %@", inputText, inputText)
             )
         }
     }
