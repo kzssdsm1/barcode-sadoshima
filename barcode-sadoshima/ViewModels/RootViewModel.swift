@@ -117,40 +117,4 @@ final class RootViewModel: ObservableObject {
             title: item.title
         )
     }
-    
-//    private func convertToItems(items: [Items]) -> [Item] {
-//        return items.compactMap { (repo) -> Item in
-//            let formatter       = DateFormatter()
-//            formatter.locale    = Locale(identifier: "ja_JP")
-//            formatter.dateStyle = .long
-//            formatter.timeStyle = .none
-//
-//            let url = URL(string: repo.largeImageUrl)
-//
-//            let imageData: Data
-//
-//            do {
-//                let data = try Data(contentsOf: url!)
-//                imageData = data
-//            } catch {
-//                imageData = UIImage(systemName: "questionmark.circle")!.jpegData(compressionQuality: 1)!
-//            }
-//
-//            let date = formatter.string(from: Date())
-//            let price = String(repo.itemPrice)
-//
-//            return Item(
-//                author: repo.author,
-//                caption: repo.itemCaption,
-//                date: date,
-//                image: imageData,
-//                isbn: repo.isbn,
-//                link: repo.itemUrl,
-//                price: price,
-//                publisherName: repo.publisherName,
-//                salesDate: repo.salesDate,
-//                title: repo.title
-//            )
-//        }
-//    }
 }
