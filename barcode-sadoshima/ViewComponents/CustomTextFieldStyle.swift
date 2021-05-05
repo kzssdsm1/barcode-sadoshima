@@ -7,11 +7,25 @@
 
 import SwiftUI
 
-struct CustomTextFieldStyle: TextFieldStyle { 
+struct CustomTextFieldStyle: TextFieldStyle {
+    @Binding var isEditing: Bool
+    @Binding var inputText: String
+    
+    let isSearchView: Bool
+    
     func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
-            .font(.system(size: 18))
             .foregroundColor(.black)
-            .background(Color.offWhite)
+            .background(
+                ZStack(alignment: .leading) {
+                    Color.offWhite
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    
+                    Text(isSearchView ? "キーワードを入力(タイトル、著者名等)" : "タイトルで絞り込み")
+                        .font(.system(size: 16))
+                        .foregroundColor(.black)
+                        .opacity(!isEditing && inputText == "" ? 0.3 : 0)
+                }
+            )
     }
 }

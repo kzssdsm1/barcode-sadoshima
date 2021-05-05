@@ -61,7 +61,7 @@ struct SearchView: View {
             }
             
             SearchTextFieldView(
-                alertItem: $alertItem, 
+                alertItem: $alertItem,
                 inputText: $inputText,
                 isShowingKeyboard: $isShowingKeyboard,
                 isLoading: $isLoading,

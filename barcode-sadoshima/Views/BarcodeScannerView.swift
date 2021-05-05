@@ -107,29 +107,6 @@ struct BarcodeScannerView: UIViewControllerRepresentable {
         
         return borderline
     }
-    
-    /// ean8及びean13をISBNに変換する関数
-    /// - Parameter value: カメラで読み取ったEAN-8、及びEAN-16
-    /// - Returns: ISBNコード
-    private func convertISBN(value: String) -> String? {
-        let v = NSString(string: value).longLongValue
-        let prefix: Int64 = Int64(v / 10000000000)
-        guard prefix == 978 || prefix == 979 else { return nil }
-        let isbn9: Int64 = (v % 10000000000) / 10
-        var sum: Int64 = 0
-        var tmpISBN = isbn9
-        
-        var i = 10
-        while i > 0 && tmpISBN > 0 {
-            let divisor: Int64 = Int64(pow(10, Double(i - 2)))
-            sum += (tmpISBN / divisor) * Int64(i)
-            tmpISBN %= divisor
-            i -= 1
-        }
-        
-        let checkdigit = 11 - (sum % 11)
-        return String(format: "%lld%@", isbn9, (checkdigit == 10) ? "X" : String(format: "%lld", checkdigit % 11))
-    }
 }
 
 extension BarcodeScannerView {
@@ -156,12 +133,8 @@ extension BarcodeScannerView {
                 parent.didSurface(error: .invalidSacnnedValue)
                 return
             }
-            guard let isbn = parent.convertISBN(value: stringValue) else {
-                parent.didSurface(error: .invalidSacnnedValue)
-                return
-            }
             
-            parent.didFind(barcode: isbn)
+            parent.didFind(barcode: stringValue)
         }
     }
 }

@@ -24,5 +24,7 @@ struct Items: Codable {
     let itemUrl: String
     let largeImageUrl: String
     let salesDate: String
+    let label: String
+    let artistName: String
     let itemPrice: Int
 }

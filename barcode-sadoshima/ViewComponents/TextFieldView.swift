@@ -11,6 +11,8 @@ struct TextFieldView: View {
     @Binding var inputText: String
     @Binding var isShowingKeyboard: Bool
     
+    @State private var isEditing = false
+    
     private let screenWidth = CGFloat(UIScreen.main.bounds.width)
     
     var body: some View {
@@ -23,8 +25,11 @@ struct TextFieldView: View {
                     .foregroundColor(.gray)
                     .opacity(0.5)
                 
-                TextField("タイトルで検索", text: $inputText)
-                    .textFieldStyle(CustomTextFieldStyle())
+                TextField("", text: $inputText
+                          ,onEditingChanged: { edit in
+                            isEditing = edit
+                          })
+                    .textFieldStyle(CustomTextFieldStyle(isEditing: $isEditing, inputText: $inputText, isSearchView: false))
             } // HStack
             .padding(3)
             .frame(maxWidth: screenWidth - 50)

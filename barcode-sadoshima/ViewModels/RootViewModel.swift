@@ -43,17 +43,21 @@ final class RootViewModel: ObservableObject {
                     }
             }
             .map { $0.items }
-            .sink { [weak self] (item) in
+            .sink { [weak self] (items) in
                 guard let self = self else {
                     return
                 }
                 
                 if self.selection == .scanner {
                     self.itemDetail = nil
-                    self.itemDetail = self.convertToItem(item: item)
+                    self.itemDetail = self.convertToItem(item: items[0])
                 } else if self.selection == .search {
                     self.searchResults = []
-                    self.searchResults = self.convertToItems(items: item)
+                    for item in items {
+                        if item.artistName == "" && item.label == "" {
+                            self.searchResults.append(self.convertToItem(item: item))
+                        }
+                    }
                 } else {
                     self.itemDetail = nil
                     self.searchResults = []
@@ -78,11 +82,8 @@ final class RootViewModel: ObservableObject {
             errorSubscriber
         ]
     }
-    
-    /// APIサーバーから返ってきたJSON構造体をItem型の構造体に変換する関数
-    /// - Parameter item: JSONのResponseModel
-    /// - Returns:
-    private func convertToItem(item: [Items]) -> Item {
+
+    private func convertToItem(item: Items) -> Item {
         let formatter       = DateFormatter()
         formatter.locale    = Locale(identifier: "ja_JP")
         formatter.dateStyle = .long
@@ -90,7 +91,7 @@ final class RootViewModel: ObservableObject {
         
         let date = formatter.string(from: Date())
         
-        let url = URL(string: item[0].largeImageUrl)
+        let url = URL(string: item.largeImageUrl)
         
         let imageData: Data
         
@@ -101,55 +102,55 @@ final class RootViewModel: ObservableObject {
             imageData = UIImage(systemName: "questionmark.circle")!.jpegData(compressionQuality: 1)!
         }
         
-        let price = String(item[0].itemPrice)
+        let price = String(item.itemPrice)
         
         return Item(
-            author: item[0].author,
-            caption: item[0].itemCaption,
+            author: item.author,
+            caption: item.itemCaption,
             date: date,
             image: imageData,
-            isbn: item[0].isbn,
-            link: item[0].itemUrl,
+            isbn: item.isbn,
+            link: item.itemUrl,
             price: price,
-            publisherName: item[0].publisherName,
-            salesDate: item[0].salesDate,
-            title: item[0].title
+            publisherName: item.publisherName,
+            salesDate: item.salesDate,
+            title: item.title
         )
     }
     
-    private func convertToItems(items: [Items]) -> [Item] {
-        return items.compactMap { (repo) -> Item in
-            let formatter       = DateFormatter()
-            formatter.locale    = Locale(identifier: "ja_JP")
-            formatter.dateStyle = .long
-            formatter.timeStyle = .none
-            
-            let url = URL(string: repo.largeImageUrl)
-            
-            let imageData: Data
-            
-            do {
-                let data = try Data(contentsOf: url!)
-                imageData = data
-            } catch {
-                imageData = UIImage(systemName: "questionmark.circle")!.jpegData(compressionQuality: 1)!
-            }
-            
-            let date = formatter.string(from: Date())
-            let price = String(repo.itemPrice)
-            
-            return Item(
-                author: repo.author,
-                caption: repo.itemCaption,
-                date: date,
-                image: imageData,
-                isbn: repo.isbn,
-                link: repo.itemUrl,
-                price: price,
-                publisherName: repo.publisherName,
-                salesDate: repo.salesDate,
-                title: repo.title
-            )
-        }
-    }
+//    private func convertToItems(items: [Items]) -> [Item] {
+//        return items.compactMap { (repo) -> Item in
+//            let formatter       = DateFormatter()
+//            formatter.locale    = Locale(identifier: "ja_JP")
+//            formatter.dateStyle = .long
+//            formatter.timeStyle = .none
+//
+//            let url = URL(string: repo.largeImageUrl)
+//
+//            let imageData: Data
+//
+//            do {
+//                let data = try Data(contentsOf: url!)
+//                imageData = data
+//            } catch {
+//                imageData = UIImage(systemName: "questionmark.circle")!.jpegData(compressionQuality: 1)!
+//            }
+//
+//            let date = formatter.string(from: Date())
+//            let price = String(repo.itemPrice)
+//
+//            return Item(
+//                author: repo.author,
+//                caption: repo.itemCaption,
+//                date: date,
+//                image: imageData,
+//                isbn: repo.isbn,
+//                link: repo.itemUrl,
+//                price: price,
+//                publisherName: repo.publisherName,
+//                salesDate: repo.salesDate,
+//                title: repo.title
+//            )
+//        }
+//    }
 }

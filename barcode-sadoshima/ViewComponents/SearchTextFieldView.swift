@@ -15,6 +15,8 @@ struct SearchTextFieldView: View {
     @Binding var isLoading: Bool
     @Binding var onCommitSubject: PassthroughSubject<String, Never>
     
+    @State private var isEditing = false
+    
     private let screenWidth = CGFloat(UIScreen.main.bounds.width)
     
     var body: some View {
@@ -27,15 +29,19 @@ struct SearchTextFieldView: View {
                     .foregroundColor(.gray)
                     .opacity(0.5)
                 
-                TextField("タイトルで検索", text: $inputText, onCommit: {
-                    if inputText == "" {
-                        alertItem = AlertContext.invalidTextInput
-                    } else {
-                        isLoading = true
-                        onCommitSubject.send(inputText)
-                    }
-                })
-                    .textFieldStyle(CustomTextFieldStyle())
+                TextField("", text: $inputText,
+                          onEditingChanged: { edit in
+                            isEditing = edit
+                          },
+                          onCommit: {
+                            if inputText == "" {
+                                alertItem = AlertContext.invalidTextInput
+                            } else {
+                                isLoading = true
+                                onCommitSubject.send(inputText)
+                            }
+                          })
+                    .textFieldStyle(CustomTextFieldStyle(isEditing: $isEditing, inputText: $inputText, isSearchView: true))
             } // HStack
             .padding(3)
             .frame(maxWidth: screenWidth - 50)

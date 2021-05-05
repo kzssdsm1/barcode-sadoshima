@@ -17,14 +17,14 @@ struct ItemsRequest: APIRequestType {
     }
     
     var pathString: String {
-        return "/services/api/BooksBook/Search/20170404"
+        return "services/api/BooksTotal/Search/20170404"
     }
     
     var queryItems: [URLQueryItem] {
         if useISBN {
             return [
-                .init(name: "isbn", value: query),
-                .init(name: "elements", value: "title,author,publisherName,isbn,itemCaption,salesDate,itemPrice,itemUrl,largeImageUrl"),
+                .init(name: "isbnjan", value: query),
+                .init(name: "elements", value: "title,author,publisherName,isbn,itemCaption,salesDate,itemPrice,itemUrl,largeImageUrl,artistName,label"),
                 .init(name: "formatVersion", value: "2"),
                 .init(name: "hits", value: "1"),
                 .init(name: "outOfStockFlag", value: "1"),
@@ -32,8 +32,8 @@ struct ItemsRequest: APIRequestType {
             ]
         } else {
             return [
-                .init(name: "title", value: query),
-                .init(name: "elements", value: "title,author,publisherName,isbn,itemCaption,salesDate,itemPrice,itemUrl,largeImageUrl"),
+                .init(name: "keyword", value: query),
+                .init(name: "elements", value: "title,author,publisherName,isbn,itemCaption,salesDate,itemPrice,itemUrl,largeImageUrl,artistName,label"),
                 .init(name: "formatVersion", value: "2"),
                 .init(name: "hits", value: "30"),
                 .init(name: "outOfStockFlag", value: "1"),

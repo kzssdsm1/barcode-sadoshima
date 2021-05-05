@@ -120,7 +120,7 @@ struct AppDescriptionView: View {
                         .overlay(
                             HStack {
                                 VStack(alignment: .leading) {
-                                    Text("検索タブからタイトルで書籍を探すことも出来ます")
+                                    Text("検索タブからキーワードで書籍を探すことも出来ます")
                                         .font(.system(size: 20, weight: .medium))
                                         .foregroundColor(.gray)
                                         .fixedSize(horizontal: false, vertical: true)
