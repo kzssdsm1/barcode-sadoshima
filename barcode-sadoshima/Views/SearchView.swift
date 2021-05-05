@@ -25,7 +25,7 @@ struct SearchView: View {
         VStack(spacing: 0) {
             if !isShowingKeyboard {
                 HStack {
-                    Text("タイトルで検索")
+                    Text("キーワードで検索")
                         .font(.system(size: 22, weight: .heavy))
                         .foregroundColor(.gray)
                     
