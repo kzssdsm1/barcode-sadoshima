@@ -39,7 +39,7 @@ extension APIServiceError {
         case .timedOut: return "通信がタイムアウトしました、通信環境をご確認ください"
         case .requestError: return "リクエストに問題が発生しているようです(エラーコード \(getStatusCode(error: self)!))"
         case .serverError: return "サーバーに問題が発生しているようです(エラーコード \(getStatusCode(error: self)!))"
-        case .parseError: return "楽天ブックスでは現在取り扱っていない書籍のようです"
+        case .parseError: return "楽天ブックス書籍検索APIにデータが存在しません"
         case .invalidNetwork: return "インターネットに接続されていないようです"
         case .reachTheRequestLimit: return "一定時間内に送れるリクエストの上限に達したようです、時間を置いた後に再度お試しください(エラーコード: 429)"
         case .reachTheServerLimit: return "サーバー全体のリクエスト上限に達したか、現在メンテナンス中です(エラーコード: 503)"

@@ -60,7 +60,7 @@ struct AppDescriptionView: View {
                         .shadow(color: Color.white.opacity(0.7), radius: 10, x: -5, y: -5)
                         .overlay(
                             HStack {
-                                Text("バーコードの読み取りに成功すると自動で楽天ブックスで書籍データが検索されます")
+                                Text("バーコードの読み取りに成功すると自動で楽天ブックスAPIを使用して書籍データが検索されます")
                                     .font(.system(size: 20, weight: .medium))
                                     .foregroundColor(.gray)
                                     .fixedSize(horizontal: false, vertical: true)

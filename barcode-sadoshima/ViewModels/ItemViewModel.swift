@@ -39,10 +39,14 @@ final class ItemViewModel: ObservableObject {
         let newItem = FavoriteItem(context: context)
         
         newItem.author = item.author
+        newItem.caption = item.caption
         newItem.date = item.date
-        newItem.image = item.image 
+        newItem.image = item.image
+        newItem.isbn = item.isbn
         newItem.link = item.link
         newItem.price = item.price
+        newItem.publisherName = item.publisherName
+        newItem.salesDate = item.salesDate
         newItem.title = item.title
         
         guard context.hasChanges else {

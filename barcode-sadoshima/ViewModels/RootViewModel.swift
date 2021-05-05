@@ -105,10 +105,14 @@ final class RootViewModel: ObservableObject {
         
         return Item(
             author: item[0].author,
+            caption: item[0].itemCaption,
             date: date,
             image: imageData,
+            isbn: item[0].isbn,
             link: item[0].itemUrl,
             price: price,
+            publisherName: item[0].publisherName,
+            salesDate: item[0].salesDate,
             title: item[0].title
         )
     }
@@ -136,10 +140,14 @@ final class RootViewModel: ObservableObject {
             
             return Item(
                 author: repo.author,
+                caption: repo.itemCaption,
                 date: date,
                 image: imageData,
+                isbn: repo.isbn,
                 link: repo.itemUrl,
                 price: price,
+                publisherName: repo.publisherName,
+                salesDate: repo.salesDate,
                 title: repo.title
             )
         }

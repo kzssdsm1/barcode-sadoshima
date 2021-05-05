@@ -18,7 +18,11 @@ struct ItemsResponse: Codable {
 struct Items: Codable {
     let author: String
     let title: String
-    let largeImageUrl: String
-    let itemPrice: Int
+    let itemCaption: String
+    let publisherName: String
+    let isbn: String
     let itemUrl: String
+    let largeImageUrl: String
+    let salesDate: String
+    let itemPrice: Int
 }

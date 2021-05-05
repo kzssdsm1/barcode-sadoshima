@@ -25,7 +25,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>アプリがカメラの使用の許可を求めています</string>
+	<string>アプリがカメラの使用の許可を求めています、撮影されたデータはバーコード読み取り機能にのみ使用されます</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

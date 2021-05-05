@@ -24,17 +24,19 @@ struct ItemsRequest: APIRequestType {
         if useISBN {
             return [
                 .init(name: "isbn", value: query),
-                .init(name: "elements", value: "author,title,largeImageUrl,itemPrice,itemUrl"),
+                .init(name: "elements", value: "title,author,publisherName,isbn,itemCaption,salesDate,itemPrice,itemUrl,largeImageUrl"),
                 .init(name: "formatVersion", value: "2"),
                 .init(name: "hits", value: "1"),
+                .init(name: "outOfStockFlag", value: "1"),
                 .init(name: "applicationId", value: getAppID())
             ]
         } else {
             return [
                 .init(name: "title", value: query),
-                .init(name: "elements", value: "author,title,largeImageUrl,itemPrice,itemUrl"),
+                .init(name: "elements", value: "title,author,publisherName,isbn,itemCaption,salesDate,itemPrice,itemUrl,largeImageUrl"),
                 .init(name: "formatVersion", value: "2"),
                 .init(name: "hits", value: "30"),
+                .init(name: "outOfStockFlag", value: "1"),
                 .init(name: "applicationId", value: getAppID())
             ]
         }

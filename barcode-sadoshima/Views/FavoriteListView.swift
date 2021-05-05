@@ -152,10 +152,14 @@ struct FavoriteListView: View {
     private func convertToItem(item: FavoriteItem) -> Item {
         return Item(
             author: item.author,
+            caption: item.caption,
             date: item.date,
             image: item.image,
+            isbn: item.isbn,
             link: item.link,
             price: item.price,
+            publisherName: item.publisherName,
+            salesDate: item.salesDate,
             title: item.title
         )
     }

@@ -2,13 +2,17 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20C69" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="FavoriteItem" representedClassName="FavoriteItem" syncable="YES">
         <attribute name="author" optional="YES" attributeType="String"/>
+        <attribute name="caption" optional="YES" attributeType="String"/>
         <attribute name="date" optional="YES" attributeType="String"/>
         <attribute name="image" optional="YES" attributeType="Binary"/>
+        <attribute name="isbn" optional="YES" attributeType="String"/>
         <attribute name="link" optional="YES" attributeType="String"/>
         <attribute name="price" optional="YES" attributeType="String"/>
+        <attribute name="publisherName" optional="YES" attributeType="String"/>
+        <attribute name="salesDate" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="FavoriteItem" positionX="-63" positionY="-18" width="128" height="119"/>
+        <element name="FavoriteItem" positionX="-63" positionY="-18" width="128" height="179"/>
     </elements>
 </model>
