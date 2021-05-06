@@ -146,7 +146,7 @@ struct ItemView: View {
                                                 .fixedSize(horizontal: false, vertical: true)
                                                 .padding(.bottom, 20)
                                         }
-                                        .padding(.trailing, 50)
+                                        .padding(.trailing, 10)
                                         
                                         Button(action: {
                                             UIPasteboard.general.setValue(input.isbn, forPasteboardType: kUTTypePlainText as String)

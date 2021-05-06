@@ -14,6 +14,7 @@ struct RootView: View {
     
     @State private var captureSession = AVCaptureSession()
     @State private var isFirstTime = false
+    @State private var needCameraUsage = false
     
     init() {
         UITabBar.appearance().isHidden = true
@@ -45,10 +46,25 @@ struct RootView: View {
                                 onCommitSubject: $viewModel.onCommitSubject
                             )
                             .onAppear {
-                                if !isFirstTime {
+                                switch AVCaptureDevice.authorizationStatus(for: .video) {
+                                case .notDetermined:
+                                    AVCaptureDevice.requestAccess(for: .video) { granted in
+                                        if granted {
+                                            DispatchQueue.global(qos: .userInitiated).async {
+                                                startSession()
+                                            }
+                                        }
+                                    }
+                                case .restricted:
+                                    needCameraUsage = true
+                                case .denied:
+                                    needCameraUsage = true
+                                case .authorized:
                                     DispatchQueue.global(qos: .userInitiated).async {
                                         startSession()
                                     }
+                                @unknown default:
+                                    viewModel.alertItem = AlertContext.unknownDeviceError
                                 }
                             }
                             .onDisappear() {
@@ -58,6 +74,14 @@ struct RootView: View {
                             }
                             .hide(viewModel.selection != TabItem.scanner)
                             .opacity(viewModel.selection != TabItem.scanner ? 0 : 1)
+                            .alert(isPresented: $needCameraUsage) {
+                                Alert(
+                                    title: Text("カメラの使用許可がありません"),
+                                    message: Text("カメラの使用許可がない為バーコードの読み取りを開始できません。必要な場合は設定→書籍管理アプリよりカメラの使用の許可を行ってください"),
+                                    primaryButton: .default(Text("設定へ"), action: {if let url = URL(string: UIApplication.openSettingsURLString) {
+                                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                                    }}), secondaryButton: .cancel(Text("キャンセル")))
+                            }
                             
                             SearchView(
                                 alertItem: $viewModel.alertItem,

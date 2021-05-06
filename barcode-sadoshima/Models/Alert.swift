@@ -19,6 +19,11 @@ struct AlertContext {
         message: "不明なエラーによりバーコードが読み取れませんでした"
     )
     
+    static let unknownDeviceError = AlertItem(
+        title: "不明なカメラエラー",
+        message: "不明なエラーがカメラに発生しました"
+    )
+    
     static let invalidScannedValue = AlertItem(
         title: "無効なバーコード形式",
         message: "このアプリはEAN-8、EAN-13以外のバーコード形式には対応しておりません"
